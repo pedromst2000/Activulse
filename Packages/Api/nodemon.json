@@ -1,0 +1,13 @@
+{
+    "watch": [
+        "./src"
+    ],
+    "ext": "js, json, yml",
+    "exec": "node ./src/server.js",
+    "ignore": [
+        "node_modules",
+        "**/.vscode/*",
+        "**/.git/*",
+        "database"
+    ]
+}
