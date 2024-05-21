@@ -1,8 +1,8 @@
 {
-  "name": "active-pulse-api",
+  "name": "active-vulse-api",
   "version": "1.0.0",
   "private": true,
-  "description": "API for ActivePulse app",
+  "description": "API for Activulse app",
   "main": "./src/server.js",
   "scripts": {
     "start": "node src/server.js",
@@ -30,7 +30,8 @@
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.9.3",
     "sequelize": "^6.37.2",
-    "swagger-ui-express": "^5.0.0"
+    "swagger-ui-express": "^5.0.0",
+    "yaml": "^2.4.2"
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
