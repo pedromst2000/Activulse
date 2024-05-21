@@ -1,0 +1,21 @@
+summary: Hello World
+description: Hello World
+tags:
+  - "Default"
+responses:
+  "200":
+    description: Success
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Success:
+            value:
+              success: true
+              message: Hello World!
