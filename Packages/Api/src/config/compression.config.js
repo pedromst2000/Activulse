@@ -1,3 +1,5 @@
+const compression = require("compression");
+
 /**
  * @description Custom compression filter function
  * @param {import("express").Request} req - The Express Request object.
