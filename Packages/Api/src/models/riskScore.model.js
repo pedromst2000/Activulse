@@ -13,6 +13,13 @@ const RiskScoreModel = (sequelize) => {
 				allowNull: false,
 				primaryKey: true,
 			},
+			typeRisk: {
+				type: DataTypes.STRING,
+				allowNull: false,
+				validate: {
+					isIn: [["low", "moderate", "high"]],
+				},
+			},
 			score: {
 				type: DataTypes.FLOAT,
 				allowNull: false,

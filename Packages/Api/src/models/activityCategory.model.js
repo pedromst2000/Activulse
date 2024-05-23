@@ -17,7 +17,7 @@ const ActivityCategoryModel = (sequelize) => {
 				type: DataTypes.STRING(255),
 				allowNull: false,
 				validate: {
-					isIn: [["All", "Cardio", "Yoga", "Muscles", "Premium"]],
+					isIn: [["Cardio", "Yoga", "Muscles"]],
 				},
 			},
 		},

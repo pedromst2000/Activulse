@@ -23,12 +23,17 @@ const BuyerModel = (sequelize) => {
 			},
 			banner_id: {
 				type: DataTypes.INTEGER,
-				allowNull: true
+				allowNull: true,
 			},
-			buyer_id: {
+			// Foreign Key
+			user_id: {
 				type: DataTypes.INTEGER,
 				allowNull: false,
-			},
+				references: {
+					model: "user",
+					key: "user_ID",
+				},
+			},	
 		},
 		{
 			sequelize,
@@ -57,9 +62,9 @@ const BuyerModel = (sequelize) => {
 					fields: [{ name: "banner_id" }],
 				},
 				{
-					name: "buyer_id",
+					name: "user_id",
 					using: "BTREE",
-					fields: [{ name: "buyer_id" }],
+					fields: [{ name: "user_id" }],
 				},
 			],
 		},

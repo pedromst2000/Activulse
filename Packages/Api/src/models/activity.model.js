@@ -27,14 +27,14 @@ const ActivityModel = (sequelize) => {
 			},
 			duration: {
 				type: DataTypes.INTEGER,
-				allowNull: false,
+				allowNull: true,
 				validate: {
 					min: 0,
 				},
 			},
 			description: {
-				type: DataTypes.STRING(255),
-				allowNull: false,
+				type: DataTypes.STRING(600),
+				allowNull: true,
 			},
 			isPremium: {
 				type: DataTypes.BOOLEAN,
@@ -53,6 +53,10 @@ const ActivityModel = (sequelize) => {
 				validate: {
 					min: 0,
 				},
+			},
+			tag: {
+				type: DataTypes.STRING(255),
+				allowNull: false,
 			},
 			category_id: {
 				type: DataTypes.INTEGER,
@@ -94,6 +98,11 @@ const ActivityModel = (sequelize) => {
 					name: "video_time",
 					using: "BTREE",
 					fields: [{ name: "video_time" }],
+				},
+				{
+					name: "tag",
+					using: "BTREE",
+					fields: [{ name: "tag" }],
 				},
 			],
 		},

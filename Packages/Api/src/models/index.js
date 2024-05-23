@@ -59,13 +59,13 @@ function init(sequelize) {
 		foreignKey: "user_id",
 	});
 
-	// User - Diet => N:1 1:N
-	User.hasMany(Diet, {
-		foreignKey: "user_id",
+	// Diet - User => 1:N N:1
+	Diet.hasMany(User, {
+		foreignKey: "diet_id",
 		onDelete: "CASCADE",
 	});
-	Diet.belongsTo(User, {
-		foreignKey: "user_id",
+	User.belongsTo(Diet, {
+		foreignKey: "diet_id",
 	});
 
 	// User - User Badge => N:N N:N
@@ -89,13 +89,39 @@ function init(sequelize) {
 		foreignKey: "user_id",
 	});
 
-	// User - Buyer  => 1:N N:1
-	User.hasMany(Buyer, {
+	// User - Buyer  => N:N N:N
+	User.belongsToMany(Banner, {
+		through: Buyer,
 		foreignKey: "user_id",
-		onDelete: "CASCADE",
+		otherKey: "banner_id",
 	});
-	Buyer.belongsTo(User, {
+	Banner.belongsToMany(User, {
+		through: Buyer,
+		foreignKey: "banner_id",
+		otherKey: "user_id",
+	});
+
+	User.belongsToMany(Activity, {
+		through: Buyer,
 		foreignKey: "user_id",
+		otherKey: "activity_id",
+	});
+	Activity.belongsToMany(User, {
+		through: Buyer,
+		foreignKey: "activity_id",
+		otherKey: "user_id",
+	});
+
+	User.belongsToMany(Recipe, {
+		through: Buyer,
+		foreignKey: "user_id",
+		otherKey: "recipe_id",
+	});
+
+	Recipe.belongsToMany(User, {
+		through: Buyer,
+		foreignKey: "recipe_id",
+		otherKey: "user_id",
 	});
 
 	// User - Challenge Progress => 1:N  N:1
@@ -154,25 +180,26 @@ function init(sequelize) {
 	Ingredient.belongsTo(Recipe, {
 		foreignKey: "recipe_id",
 	});
-	// Recipe - Diet => N:1 1:N
-	Recipe.hasMany(Diet, {
-		foreignKey: "recipe_id",
+	// Diet - Recipe => 1:N N:1
+	Diet.hasMany(Recipe, {
+		foreignKey: "diet_id",
 		onDelete: "CASCADE",
 	});
-	Diet.belongsTo(Recipe, {
-		foreignKey: "recipe_id",
+	Recipe.belongsTo(Diet, {
+		foreignKey: "diet_id",
 	});
-	// Recipe - Buyer => N:N N:N
-	Recipe.belongsToMany(Buyer, {
-		foreignKey: "recipe_id",
-		otherKey: "buyer_id",
-		through: Buyer,
-	});
-	Buyer.belongsToMany(Recipe, {
-		foreignKey: "buyer_id",
-		otherKey: "recipe_id",
-		through: Buyer,
-	});
+
+	// // Recipe - Buyer => N:N N:N
+	// Recipe.belongsToMany(Buyer, {
+	// 	foreignKey: "recipe_id",
+	// 	otherKey: "user_id",
+	// 	through: Buyer,
+	// });
+	// Buyer.belongsToMany(Recipe, {
+	// 	foreignKey: "user_id",
+	// 	otherKey: "recipe_id",
+	// 	through: Buyer,
+	// });
 	// Recipe - Recipe Category => N:1 1:N
 	Recipe.belongsTo(RecipeCategory, {
 		foreignKey: "category_id",
@@ -217,17 +244,17 @@ function init(sequelize) {
 	Workout.belongsTo(Activity, {
 		foreignKey: "activity_id",
 	});
-	// Activity - Buyer => N:N N:N
-	Activity.belongsToMany(Buyer, {
-		foreignKey: "activity_id",
-		otherKey: "buyer_id",
-		through: Buyer,
-	});
-	Buyer.belongsToMany(Activity, {
-		foreignKey: "buyer_id",
-		otherKey: "activity_id",
-		through: Buyer,
-	});
+	// // Activity - Buyer => N:N N:N
+	// Activity.belongsToMany(Buyer, {
+	// 	foreignKey: "activity_id",
+	// 	otherKey: "user_id",
+	// 	through: Buyer,
+	// });
+	// Buyer.belongsToMany(Activity, {
+	// 	foreignKey: "user_id",
+	// 	otherKey: "activity_id",
+	// 	through: Buyer,
+	// });
 	// ------------------------------------------------------
 	// Picture
 	// Picture - Challenge => 1:1 1:1
@@ -267,14 +294,13 @@ function init(sequelize) {
 	});
 
 	// Picture - Diet => 1:1 1:1
-    Picture.belongsTo(Diet, {
-        foreignKey: "diet_id",
-        onDelete: "CASCADE",
-    });
-    Diet.hasOne(Picture, {
-        foreignKey: "diet_id",
-    });
-
+	Picture.belongsTo(Diet, {
+		foreignKey: "diet_id",
+		onDelete: "CASCADE",
+	});
+	Diet.hasOne(Picture, {
+		foreignKey: "diet_id",
+	});
 
 	// Picture - User => 1:1 1:1
 	Picture.belongsTo(User, {
@@ -296,16 +322,16 @@ function init(sequelize) {
 	// ------------------------------------------------------
 	// Buyer
 	// Buyer - Banner => N:N N:N
-	Buyer.belongsToMany(Banner, {
-		foreignKey: "buyer_id",
-		otherKey: "banner_id",
-		through: Buyer,
-	});
-	Banner.belongsToMany(Buyer, {
-		foreignKey: "banner_id",
-		otherKey: "buyer_id",
-		through: Buyer,
-	});
+	// Buyer.belongsToMany(Banner, {
+	// 	foreignKey: "user_id",
+	// 	otherKey: "banner_id",
+	// 	through: Buyer,
+	// });
+	// Banner.belongsToMany(Buyer, {
+	// 	foreignKey: "banner_id",
+	// 	otherKey: "user_id",
+	// 	through: Buyer,
+	// });
 
 	return {
 		User,

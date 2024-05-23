@@ -43,12 +43,73 @@ const dbData = require("../data/db");
 		// Populate the tables with data
 		console.log(loggingPrefix + colors.cyan("Populating the tables with data...\n"));
 
-        // 
+		console.log(loggingPrefix + colors.cyan("Inserting activities..."));
 
+		// Activity Categories data
+		await db.mysql.ActivityCategory.bulkCreate(dbData.activityCategory);
+		console.log(
+			loggingPrefix + colors.green("Successfully inserted activity categories!\n"),
+		);
+
+		// Activities data
+		await db.mysql.Activity.bulkCreate(dbData.activities);
+		console.log(loggingPrefix + colors.green("Successfully inserted activities!\n"));
+
+		console.log(loggingPrefix + colors.cyan("Inserting activity categories..."));
+
+		console.log(loggingPrefix + colors.cyan("Inserting badges..."));
+
+		// Workouts data
+		console.log(loggingPrefix + colors.cyan("Inserting workouts..."));
+
+		await db.mysql.Workout.bulkCreate(dbData.workouts);
+		console.log(loggingPrefix + colors.green("Successfully inserted workouts!\n"));
+
+		// Badges data
+		await db.mysql.Badge.bulkCreate(dbData.badges);
+		console.log(loggingPrefix + colors.green("Successfully inserted badges!\n"));
 
 		console.log(
 			loggingPrefix + colors.green("Successfully populated the tables with data!\n"),
 		);
+
+		// Banners data
+		console.log(loggingPrefix + colors.cyan("Inserting banners..."));
+
+		await db.mysql.Banner.bulkCreate(dbData.banners);
+		console.log(loggingPrefix + colors.green("Successfully inserted banners!\n"));
+
+		// Diets data
+		console.log(loggingPrefix + colors.cyan("Inserting diets..."));
+
+		await db.mysql.Diet.bulkCreate(dbData.diets);
+		console.log(loggingPrefix + colors.green("Successfully inserted diets!\n"));
+
+		// Recipe Categories data
+		console.log(loggingPrefix + colors.cyan("Inserting recipe categories..."));
+
+		await db.mysql.RecipeCategory.bulkCreate(dbData.recipecategory);
+		console.log(
+			loggingPrefix + colors.green("Successfully inserted recipe categories!\n"),
+		);
+
+		// Recipes data
+		console.log(loggingPrefix + colors.cyan("Inserting recipes..."));
+
+		await db.mysql.Recipe.bulkCreate(dbData.recipes);
+		console.log(loggingPrefix + colors.green("Successfully inserted recipes!\n"));
+
+		// Ingredients data
+		console.log(loggingPrefix + colors.cyan("Inserting ingredients..."));
+
+		await db.mysql.Ingredient.bulkCreate(dbData.ingredients);
+		console.log(loggingPrefix + colors.green("Successfully inserted ingredients!\n"));
+
+		// Instructions data
+		console.log(loggingPrefix + colors.cyan("Inserting instructions..."));
+
+		await db.mysql.Instruction.bulkCreate(dbData.instructions);
+		console.log(loggingPrefix + colors.green("Successfully inserted instructions!\n"));
 
 		// Disconnect from the database
 		console.log(loggingPrefix + colors.cyan("Disconnecting from the database..."));

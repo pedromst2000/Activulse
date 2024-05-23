@@ -9,11 +9,9 @@ const router = Router();
 router.use("/docs", swaggerUi.serve);
 router.get("/docs", swaggerUi.setup(config.docs, { explorer: true }));
 
-
 // Default Route
 router.route("/").get((_req, res) => {
 	utils.handleResponse(res, utils.http.StatusOK, "Hello World!");
 });
-
 
 module.exports = router;

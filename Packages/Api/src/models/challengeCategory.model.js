@@ -17,7 +17,7 @@ const ChallengeCategoryModel = (sequelize) => {
 				type: DataTypes.STRING(255),
 				allowNull: false,
 				validate: {
-					isIn: [["All", "Walk", "Jogging", "Run", "Marathone"]],
+					isIn: [["Walk", "Jogging", "Run", "Marathone"]],
 				},
 			},
 		},

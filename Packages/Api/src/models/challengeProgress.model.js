@@ -39,7 +39,7 @@ const ChallengeProgressModel = (sequelize) => {
 				type: DataTypes.STRING(255),
 				allowNull: true,
 				validate: {
-					isIn: [["All", "Started", "In Progress", "Completed"]],
+					isIn: [["Started", "In Progress", "Completed"]],
 				},
 			},
 			user_id: {

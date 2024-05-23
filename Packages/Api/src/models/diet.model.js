@@ -17,10 +17,6 @@ const DietModel = (sequelize) => {
 				type: DataTypes.STRING(50),
 				allowNull: false,
 			},
-			diet_description: {
-				type: DataTypes.STRING(255),
-				allowNull: false,
-			},
 		},
 		{
 			sequelize,

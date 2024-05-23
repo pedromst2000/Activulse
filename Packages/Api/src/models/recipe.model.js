@@ -19,23 +19,22 @@ const RecipeModel = (sequelize) => {
 			},
 			duration_conf: {
 				type: DataTypes.INTEGER,
-				allowNull: false,
+				allowNull: true,
 				validate: {
 					min: 0,
 				},
 			},
 			description: {
-				type: DataTypes.STRING(255),
+				type: DataTypes.STRING(600),
 				allowNull: false,
 			},
 			isPremium: {
 				type: DataTypes.BOOLEAN,
 				defaultValue: false,
-				allowNull: false,
 			},
 			price: {
 				type: DataTypes.INTEGER,
-				allowNull: false,
+				allowNull: true,
 				validate: {
 					min: 0,
 				},

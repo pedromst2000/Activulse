@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "cross-env NODE_ENV=development nodemon",
-    "reset-db": "cross-env NODE_ENV=development node src/db/reset.js",
+    "reset-db": "cross-env NODE_ENV=development node src/db/resetDB.js",
     "prettier": "prettier --write ./src",
     "prettier-check": "prettier --check ./src",
     "eslint-check": "eslint ./src --ext .js",
