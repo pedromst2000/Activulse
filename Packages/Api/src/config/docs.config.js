@@ -17,7 +17,7 @@ const swaggerDefinition = {
 	paths: {
 		// DEFAULT
 		"/": {
-			get: routeDocs.default.getHelloWorld,
+			get: routeDocs.default.getWelcomeApi,
 		},
 		"/{any*}": {
 			get: routeDocs.default.notFound,

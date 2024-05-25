@@ -32,7 +32,7 @@ app.use(
 	 * @param {express.Response} res
 	 */
 	(_req, res) => {
-		utils.handleResponse(res, utils.http.StatusNotFound, "Not Found");
+		utils.handleResponse(res, utils.http.StatusNotFound, "Invalid route");
 	},
 );
 

@@ -11,7 +11,7 @@ router.get("/docs", swaggerUi.setup(config.docs, { explorer: true }));
 
 // Default Route
 router.route("/").get((_req, res) => {
-	utils.handleResponse(res, utils.http.StatusOK, "Hello World!");
+	utils.handleResponse(res, utils.http.StatusOK, "Welcome to the Activulse API !");
 });
 
 module.exports = router;

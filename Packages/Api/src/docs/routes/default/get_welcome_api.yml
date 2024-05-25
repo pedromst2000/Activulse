@@ -1,5 +1,5 @@
-summary: Hello World
-description: Hello World
+summary: Welcome API
+description: Endpoint to get a welcome message from the API
 tags:
   - "Default"
 responses:
@@ -18,4 +18,4 @@ responses:
           Success:
             value:
               success: true
-              message: Hello World!
+              message: Welcome to the Activulse API !
