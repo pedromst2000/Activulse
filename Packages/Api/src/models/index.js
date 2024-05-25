@@ -293,14 +293,14 @@ function init(sequelize) {
 		foreignKey: "banner_id",
 	});
 
-	// Picture - Diet => 1:1 1:1
-	Picture.belongsTo(Diet, {
-		foreignKey: "diet_id",
-		onDelete: "CASCADE",
-	});
-	Diet.hasOne(Picture, {
-		foreignKey: "diet_id",
-	});
+	// // Picture - Diet => 1:1 1:1
+	// Picture.belongsTo(Diet, {
+	// 	foreignKey: "diet_id",
+	// 	onDelete: "CASCADE",
+	// });
+	// Diet.hasOne(Picture, {
+	// 	foreignKey: "diet_id",
+	// });
 
 	// Picture - User => 1:1 1:1
 	Picture.belongsTo(User, {

@@ -33,7 +33,7 @@ const ActivityModel = (sequelize) => {
 				},
 			},
 			description: {
-				type: DataTypes.STRING(600),
+				type: DataTypes.STRING(255),
 				allowNull: true,
 			},
 			isPremium: {

@@ -33,7 +33,7 @@ const BuyerModel = (sequelize) => {
 					model: "user",
 					key: "user_ID",
 				},
-			},	
+			},
 		},
 		{
 			sequelize,

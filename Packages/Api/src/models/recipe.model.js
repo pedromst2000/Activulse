@@ -25,7 +25,7 @@ const RecipeModel = (sequelize) => {
 				},
 			},
 			description: {
-				type: DataTypes.STRING(600),
+				type: DataTypes.STRING(255),
 				allowNull: false,
 			},
 			isPremium: {

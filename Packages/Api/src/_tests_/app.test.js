@@ -2,7 +2,6 @@ require("dotenv").config({ path: __dirname + "/../tests.env" });
 const supertest = require("supertest");
 const app = require("../app");
 
-
 // default route
 describe("GET /api/v1", () => {
 	it("should return 200 OK", async () => {

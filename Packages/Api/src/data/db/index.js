@@ -8,6 +8,8 @@ const instructions = require("./instructions");
 const recipecategory = require("./recipecategory");
 const recipes = require("./recipes");
 const workouts = require("./workouts");
+const challengeCategory = require("./challengeCategory");
+const challenges = require("./challenges");
 
 module.exports = {
 	activities,
@@ -20,4 +22,6 @@ module.exports = {
 	recipecategory,
 	recipes,
 	workouts,
+	challengeCategory,
+	challenges,
 };

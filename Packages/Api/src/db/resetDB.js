@@ -111,6 +111,20 @@ const dbData = require("../data/db");
 		await db.mysql.Instruction.bulkCreate(dbData.instructions);
 		console.log(loggingPrefix + colors.green("Successfully inserted instructions!\n"));
 
+		// Challenge Categories data
+		console.log(loggingPrefix + colors.cyan("Inserting challenge categories..."));
+
+		await db.mysql.ChallengeCategory.bulkCreate(dbData.challengeCategory);
+		console.log(
+			loggingPrefix + colors.green("Successfully inserted challenge categories!\n"),
+		);
+
+		// Challenges data
+		// console.log(loggingPrefix + colors.cyan("Inserting challenges..."));
+
+		// await db.mysql.Challenge.bulkCreate(dbData.challenges);
+		// console.log(loggingPrefix + colors.green("Successfully inserted challenges!\n"));
+
 		// Disconnect from the database
 		console.log(loggingPrefix + colors.cyan("Disconnecting from the database..."));
 

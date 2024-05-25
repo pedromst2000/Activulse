@@ -29,10 +29,10 @@ const PictureModel = (sequelize) => {
 				type: DataTypes.INTEGER,
 				allowNull: true,
 			},
-			diet_id: {
-				type: DataTypes.INTEGER,
-				allowNull: true,
-			},
+			// diet_id: {
+			// 	type: DataTypes.INTEGER,
+			// 	allowNull: true,
+			// },
 			user_id: {
 				type: DataTypes.INTEGER,
 				allowNull: true,
@@ -86,11 +86,11 @@ const PictureModel = (sequelize) => {
 					using: "BTREE",
 					fields: [{ name: "banner_id" }],
 				},
-				{
-					name: "diet_id",
-					using: "BTREE",
-					fields: [{ name: "diet_id" }],
-				},
+				// {
+				// 	name: "diet_id",
+				// 	using: "BTREE",
+				// 	fields: [{ name: "diet_id" }],
+				// },
 				{
 					name: "user_id",
 					using: "BTREE",

@@ -219,7 +219,7 @@ module.exports = [
 		title: "Mediterranean Fruit Salad Delight",
 		duration_conf: 10,
 		description:
-			"Dive into a refreshing bowl of Mediterranean Fruit Salad Delight, a symphony of flavors that celebrates the vibrant essence of the region. This colorful ensemble blends the sweetness of ripe fruits with a hint of aromatic herbs, creating a dessert that's as nutritious as it is delightful.",
+			"Indulge in our Mediterranean Fruit Salad Delight, a vibrant blend of sweet, ripe fruits and aromatic herbs. A refreshing symphony of flavors celebrating the essence of the region.",
 		category_id: 4,
 		diet_id: 2,
 	},
@@ -227,7 +227,7 @@ module.exports = [
 		title: "Nutty Banana Yogurt Parfait",
 		duration_conf: 5,
 		description:
-			" Indulge in the creamy goodness of Nutty Banana Yogurt Parfait, a guilt-free treat that satisfies your sweet cravings while nourishing your body. Layers of velvety Greek yogurt, ripe bananas, and crunchy nuts create a harmonious blend of textures and flavors that will leave you wanting more.",
+			"Savor the creamy Nutty Banana Yogurt Parfait, a guilt-free delight satisfying sweet cravings while nourishing your body. Layers of Greek yogurt, ripe bananas, and crunchy nuts offer a harmonious blend of textures and flavors.",
 		category_id: 4,
 		diet_id: 2,
 	},
@@ -235,7 +235,7 @@ module.exports = [
 		title: "Grilled Peaches with Honey and Yogurt",
 		duration_conf: 10,
 		description:
-			"Indulge in the sweet simplicity of Grilled Peaches with Honey and Yogurt, a delightful dessert that highlights the natural sweetness of ripe peaches. Grilling caramelizes the fruit, enhancing its flavor, while a drizzle of honey and a dollop of yogurt add a touch of decadence to this elegant dish.",
+			"Savor Grilled Peaches with Honey and Yogurt a delightful dessert. Grilling enhances the fruit's natural sweetness, complemented by honey and yogurt for decadence.",
 		category_id: 4,
 		diet_id: 2,
 	},
@@ -243,7 +243,7 @@ module.exports = [
 		title: "Creamy Mushroom and Almond Soup",
 		duration_conf: 25,
 		description:
-			" Indulge in a bowl of comfort with this velvety mushroom soup enriched with the nutty goodness of almonds. A harmonious blend of earthy mushrooms, fragrant onions, and creamy almonds, this soup is a delightful treat for your taste buds and a nourishing hug for your body.",
+			"Savor a bowl of comforting mushroom soup, enriched with the nutty goodness of almonds. A harmonious blend of earthy mushrooms, fragrant onions, and creamy almonds, this soup is a delightful treat for your taste buds and a nourishing hug for your body.",
 		category_id: 1,
 		diet_id: 3,
 	},
@@ -251,7 +251,7 @@ module.exports = [
 		title: "Hearty Bean and Vegetable Soup",
 		duration_conf: 30,
 		description:
-			"Dive into a hearty bowl of goodness with this wholesome bean and vegetable soup. Packed with protein-rich beans, vibrant vegetables, and flavorful herbs, this soup is not only nutritious but also incredibly satisfying. Let each spoonful warm your soul and nourish your body.",
+			"Enjoy a hearty bowl of wholesome bean and vegetable soup, packed with protein-rich beans, vibrant veggies, and flavorful herbs. It's satisfying and nutritious—perfect for warming your soul and nourishing your body.",
 		category_id: 1,
 		diet_id: 3,
 	},
@@ -267,7 +267,7 @@ module.exports = [
 		title: "Nutty Almond and Flaxseed Soup",
 		duration_conf: 30,
 		description:
-			"Indulge in the wholesome goodness of this nutty almond and flaxseed soup. With its creamy texture and nutty flavor, this soup is a delightful way to nourish your body and tantalize your taste buds. Savor each spoonful and feel the warmth spreading from within.",
+			"Indulge in the wholesome goodness of this nutty almond and flaxseed soup. With its creamy texture and nutty flavor, this soup is a delightful way to nourish your body and tantalize your taste buds.",
 		category_id: 1,
 		diet_id: 3,
 	},
@@ -307,7 +307,7 @@ module.exports = [
 		title: "Crunchy Rainbow Salad",
 		duration_conf: 15,
 		description:
-			"Dive into a vibrant explosion of flavors with this Crunchy Rainbow Salad. Packed with nutrient-rich ingredients, it's not just a feast for the eyes but also a powerhouse for your health. Each bite is a symphony of textures and tastes, making it an irresistible addition to your vegetarian repertoire.",
+			"Dive into vibrant flavors with Crunchy Rainbow Salad. Packed with nutrients, it's a feast for the eyes and a health powerhouse. Each bite is a symphony of textures and tastes—an irresistible addition to your vegetarian repertoire.",
 		category_id: 3,
 		diet_id: 3,
 	},
@@ -323,7 +323,7 @@ module.exports = [
 		title: "Summer Veggie and Couscous Salad",
 		duration_conf: 15,
 		description:
-			"Embrace the flavors of summer with this vibrant Summer Veggie and Couscous Salad. Bursting with seasonal vegetables and fluffy couscous, it's a light and refreshing dish that's perfect for picnics, barbecues, or any outdoor gathering. Each bite is a celebration of the season's bounty.",
+			"Embrace the flavors of summer with this vibrant Summer Veggie and Couscous Salad. Bursting with seasonal vegetables and fluffy couscous, it's a light and refreshing dish that's perfect for picnics, barbecues, or any outdoor gathering.",
 		category_id: 3,
 		diet_id: 3,
 	},
@@ -331,7 +331,7 @@ module.exports = [
 		title: "Noodle Salad with Peanut Dressing",
 		duration_conf: 20,
 		description:
-			"Treat your taste buds to a burst of Asian flavors with this Noodle Salad with Peanut Dressing. Tender noodles, crisp vegetables, and a creamy peanut dressing come together in a harmony of textures and tastes. Whether served as a main dish or a side, it's sure to be a hit at any meal.",
+			"Enjoy a burst of Asian flavors with our Noodle Salad with Peanut Dressing. Tender noodles, crisp veggies, and creamy peanut dressing create a harmony of textures and tastes. Perfect as a main or side dish, it's sure to be a hit at any meal.",
 		category_id: 3,
 		diet_id: 3,
 	},
@@ -390,9 +390,9 @@ module.exports = [
 	{
 		title: "Vegan Caramel Cheesecake",
 		description:
-			"We are thrilled to share this divine vegan caramel cheesecake with you! It's an ideal addition to your vegan Thanksgiving feast. Not only is it a delectable gluten-free vegan treat, but its velvety texture and rich flavor will captivate even non-vegan palates. Plus, it's creamy, smooth, and naturally free from gluten, dairy, and paleo-friendly too. Imagine indulging in a luscious, guilt-free dessert, generously adorned with irresistibly decadent salted caramel sauce. Get ready to savor every blissful bite!",
+			"Thrilled to share our divine vegan caramel cheesecake an ideal addition to your Thanksgiving. Delectable, gluten-free, captivates all palates. Creamy, smooth, and guilt-free, with irresistibly decadent salted caramel sauce. Savor every blissful bite!",
 		isPremium: true,
-		price: 250,
+		price: 5250,
 		video_time: 5,
 		category_id: 3,
 		diet_id: 3,
@@ -402,7 +402,7 @@ module.exports = [
 		description:
 			"This Turkish pide recipe, sometimes called Turkish pizza, is a flatbread stuffed with many different fillings. This recipe for vegetarian pide is made with feta cheese, spinach, red peppers and mushrooms. You'll love this Turkish flatbread recipe!",
 		isPremium: true,
-		price: 450,
+		price: 6450,
 		video_time: 9,
 		category_id: 2,
 		diet_id: 2,
@@ -412,7 +412,7 @@ module.exports = [
 		description:
 			"Wrapped in tender grape leaves, this Mediterranean delight boasts a savory filling of seasoned rice, pine nuts, and aromatic herbs. Each bite unfolds a burst of vibrant flavors, reminiscent of sun-soaked terraces overlooking the azure sea.",
 		isPremium: true,
-		price: 1100,
+		price: 7100,
 		video_time: 9,
 		category_id: 3,
 		diet_id: 2,
@@ -420,9 +420,9 @@ module.exports = [
 	{
 		title: "Tabouli Salad",
 		description:
-			"Tabouli Salad is a refreshing Mediterranean dish featuring a vibrant mix of finely chopped parsley, ripe tomatoes, crisp cucumbers, and tangy onions, all tossed with nutty bulgur wheat and dressed in a zesty lemon vinaigrette. Every forkful offers a symphony of fresh flavors and satisfying textures, transporting you to sun-drenched coastlines with each bite.",
+			"Indulge in Tabouli Salad a refreshing Mediterranean dish. Finely chopped parsley, tomatoes, cucumbers, onions, mixed with bulgur wheat, and lemon vinaigrette. Fresh flavors and satisfying textures, a taste of sun-drenched coastlines!",
 		isPremium: true,
-		price: 540,
+		price: 2540,
 		video_time: 8,
 		category_id: 3,
 		diet_id: 2,
@@ -430,9 +430,9 @@ module.exports = [
 	{
 		title: "Baked Brie",
 		description:
-			"Baked Brie is an exquisite indulgence that transforms creamy brie cheese into a gooey, decadent delight. Encased in a flaky puff pastry shell and baked to golden perfection, this elegant appetizer is a harmonious blend of savory and sweet. With each luscious slice, the warm, melty cheese oozes out, tantalizing your taste buds with its rich, buttery flavor. Enjoy it with a drizzle of honey, a dollop of jam, or a sprinkle of toasted nuts for an irresistible culinary experience",
+			"Savor Baked Brie an exquisite indulgence. Creamy brie cheese in a flaky puff pastry, golden-baked. A harmonious blend of savory and sweet, with warm, melty cheese oozing richness. Enjoy with honey, jam, or toasted nuts for culinary bliss!",
 		isPremium: true,
-		price: 370,
+		price: 4200,
 		video_time: 5,
 		category_id: 2,
 		diet_id: 2,
@@ -440,9 +440,9 @@ module.exports = [
 	{
 		title: "Slow Cooker White Bean Chicken Chili",
 		description:
-			"This recipe is a hearty and comforting dish that combines tender chunks of chicken with creamy white beans in a flavorful broth. Infused with aromatic spices like cumin, chili powder, and garlic, this soul-warming chili is a delicious twist on the classic. Each spoonful delivers a perfect balance of protein-rich beans, succulent chicken, and a hint of heat, making it a satisfying meal for any occasion. Garnish with fresh cilantro, shredded cheese, and a squeeze of lime for an extra burst of flavor.",
+			"Enjoy this hearty chicken and white bean chili a comforting dish with aromatic spices like cumin and garlic. Protein-rich beans, succulent chicken, and a hint of heat make it satisfying. Garnish with cilantro, cheese, and lime for extra flavor.",
 		isPremium: true,
-		price: 1370,
+		price: 8370,
 		video_time: 9,
 		category_id: 2,
 		diet_id: 1,
@@ -450,9 +450,9 @@ module.exports = [
 	{
 		title: "Baked Honey Garlic Salmon",
 		description:
-			"This recipe is a mouthwatering dish that tantalizes the taste buds with its perfect balance of sweet and savory flavors. Fresh salmon fillets are glazed with a luscious mixture of honey, garlic, and soy sauce, then baked to tender perfection. The result is a succulent and flaky salmon that's bursting with rich umami goodness and a subtle hint of sweetness. With each forkful, you'll savor the delicate texture of the fish and the irresistible aroma of caramelized garlic. Serve this delectable dish with steamed vegetables and rice for a wholesome and satisfying meal that's sure to impress.",
+			"Enjoy succulent salmon glazed with honey, garlic, and soy sauce perfectly balanced sweet and savory flavors. Serve with steamed vegetables and rice for a delicious meal.",
 		isPremium: true,
-		price: 1650,
+		price: 9650,
 		video_time: 10,
 		category_id: 2,
 		diet_id: 1,
@@ -462,7 +462,7 @@ module.exports = [
 		description:
 			"This recipe is a divine dessert featuring fresh berries soaked in liqueur, enhancing their natural sweetness. Paired with fluffy whipped cream, each spoonful is a blissful burst of flavor and texture.",
 		isPremium: true,
-		price: 450,
+		price: 950,
 		video_time: 3,
 		category_id: 3,
 		diet_id: 1,
