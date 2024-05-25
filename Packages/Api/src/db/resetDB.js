@@ -120,10 +120,10 @@ const dbData = require("../data/db");
 		);
 
 		// Challenges data
-		// console.log(loggingPrefix + colors.cyan("Inserting challenges..."));
+		console.log(loggingPrefix + colors.cyan("Inserting challenges..."));
 
-		// await db.mysql.Challenge.bulkCreate(dbData.challenges);
-		// console.log(loggingPrefix + colors.green("Successfully inserted challenges!\n"));
+		await db.mysql.Challenge.bulkCreate(dbData.challenges);
+		console.log(loggingPrefix + colors.green("Successfully inserted challenges!\n"));
 
 		// Disconnect from the database
 		console.log(loggingPrefix + colors.cyan("Disconnecting from the database..."));

@@ -154,7 +154,7 @@ module.exports = [
 		intensity: 2,
 		earn_points: 330,
 		description:
-			"Escape the hustle and bustle of city life as you follow the tranquil path along a winding riverside. Let the soothing sound of flowing water accompany your every step as you lose yourself in the beauty of nature. Join this challenge to rejuvenate your spirit amidst the calming embrace of the riverside retreat.",
+			"Escape the city hustle on a tranquil riverside path. Let the soothing sound of flowing water guide you as you immerse in nature's beauty. Join this challenge to rejuvenate your spirit amidst the calming embrace of the riverside retreat.",
 		challenge_steps: 13780,
 		challenge_distance: 10500,
 		category_id: 2,
