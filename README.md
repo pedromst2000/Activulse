@@ -172,7 +172,7 @@ npm start
 
 ## :link: Contact
 
-Created by [Pedro Teixeira](www.linkedin.com/in/pedromst2000)
+Created by Pedro Teixeira
 
 LinkedIn: [https://www.linkedin.com/in/pedromst2000](https://www.linkedin.com/in/pedromst2000)
 
