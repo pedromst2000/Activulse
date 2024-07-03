@@ -78,7 +78,6 @@ chmod +x ./scripts/setup-project.sh && ./scripts/setup-project.sh
 
 - `/packages/api`
 - `/packages/app`
-- `/packages/web`
 
 And follow the `.env.example` file in each directory to fill in the required environment variables.
 
@@ -129,15 +128,12 @@ chmod +x ./scripts/macos-start-project.sh && ./scripts/macos-start-project.sh
   cd ../app
   npm install
 
-  cd ../web
-  npm install
 ```
 
 3. Create a `.env` file in the following directories:
 
 - `/packages/api`
 - `/packages/app`
-- `/packages/web`
 
 And follow the `.env.example` file in each directory to fill in the required environment variables.
 
