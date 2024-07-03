@@ -14,12 +14,12 @@
 
 ## Table of Contents
 
-- [:bulb: About](#About)
-- [:computer: Tech Stack](#Teck-Stack)
-- [:rocket: Getting Started](#Getting-Started)
-- [👷‍♀️ Architecture](#Architecture)
-- [✍️ Documentation](#Documentation)
-- [🔗phone Contact](#Contact)
+- [:bulb: About](#bulb-about)
+- [:computer: Tech Stack](#computer-tech-stack)
+- [:rocket: Getting Started](#rocket-getting-started)
+- [:construction_worker_man: Architecture](#construction_worker_man-architecture)
+- [:writing_hand: Documentation](#writing_hand-documentation)
+- [:link: phone Contact](#link-contact)
 
 ## :bulb: About
 Pawshare is a mobile app empowering heart health and wellness in every step with Activulse. With Activulse, you can track your distance traveled and daily steps, providing a clear and motivating view of your progress. Beyond just a fitness tracker, Activulse offers a variety of resources to support your heart health, including tailored exercise routines, nutrition advice, and yoga techniques to balance your mind and body.
@@ -162,15 +162,15 @@ cd packages/app
 npm start
 ```
 
-## :architecture: Architecture
+## :construction_worker_man: Architecture
 
 *will be updated soon*
 
-## :documentation: Documentation
+## :writing_hand: Documentation
 
 *will be added the english version and the portuguese version of the report developed for the project soon*
 
-## :contact: Contact
+## :link: Contact
 
 Created by [Pedro Teixeira](www.linkedin.com/in/pedromst2000)
 
