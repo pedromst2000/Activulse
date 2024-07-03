@@ -17,9 +17,9 @@
 - [:bulb: About](#about)
 - [:computer: Tech Stack](#tech-stack)
 - [:rocket: Getting Started](#getting-started)
-- [:architecture: Architecture](#architecture)
-- [:documentation: Documentation](#documentation)
-- [:contact: Contact](#contact)
+- [👷‍♀️ Architecture](#architecture)
+- [✍️ Documentation](#documentation)
+- [🔗phone Contact](#contact)
 
 ## :bulb: About
 Pawshare is a mobile app empowering heart health and wellness in every step with Activulse. With Activulse, you can track your distance traveled and daily steps, providing a clear and motivating view of your progress. Beyond just a fitness tracker, Activulse offers a variety of resources to support your heart health, including tailored exercise routines, nutrition advice, and yoga techniques to balance your mind and body.
