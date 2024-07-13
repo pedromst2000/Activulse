@@ -22,6 +22,7 @@
 - [:link: phone Contact](#link-contact)
 
 ## :bulb: About
+
 Pawshare is a mobile app empowering heart health and wellness in every step with Activulse. With Activulse, you can track your distance traveled and daily steps, providing a clear and motivating view of your progress. Beyond just a fitness tracker, Activulse offers a variety of resources to support your heart health, including tailored exercise routines, nutrition advice, and yoga techniques to balance your mind and body.
 
 Set and tackle physical activity goals aligned with WHO guidelines, pushing your limits to achieve new levels of fitness. Earn points and rewards by meeting daily goals, completing challenges, and unlocking achievements, making your journey to well-being both fun and rewarding. Additionally, delve into extensive cardiovascular health guides to understand symptoms, adopt heart-friendly habits, and gain the insights you need to take control of your heart health.
@@ -46,13 +47,12 @@ The following Frameworks and Libraries were used in the development of this proj
 
 ## :rocket: Getting Started
 
-
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/en/)* (at least 18.18.0)
-- [NPM](https://www.npmjs.com/)*
+- [Node.js](https://nodejs.org/en/)\* (at least 18.18.0)
+- [NPM](https://www.npmjs.com/)\*
 
-To run locally, you will need to have a MySQL database running on your machine or remotely on port 3306  (be sure to update the credientials in the `.env` file).
+To run locally, you will need to have a MySQL database running on your machine or remotely on port 3306 (be sure to update the credientials in the `.env` file).
 
 ### Installation
 
@@ -124,7 +124,7 @@ chmod +x ./scripts/macos-start-project.sh && ./scripts/macos-start-project.sh
 ```sh
   cd packages/api
   npm install
- 
+
   cd ../app
   npm install
 
@@ -160,11 +160,11 @@ npm start
 
 ## :construction_worker_man: Architecture
 
-*will be updated soon*
+![Architecture](./images/Arquitetura.png)
 
 ## :writing_hand: Documentation
 
-*will be added the english version and the portuguese version of the report developed for the project soon*
+_will be added the english version and the portuguese version of the report developed for the project soon_
 
 ## :link: Contact
 
