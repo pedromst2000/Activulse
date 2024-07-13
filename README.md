@@ -22,6 +22,7 @@
 - [:link: Contact](#link-contact)
 
 ## :bulb: About
+
 Activulse is a mobile app empowering heart health and wellness in every step with Activulse. With Activulse, you can track your distance traveled and daily steps, providing a clear and motivating view of your progress. Beyond just a fitness tracker, Activulse offers a variety of resources to support your heart health, including tailored exercise routines, nutrition advice, and yoga techniques to balance your mind and body.
 
 Set and tackle physical activity goals aligned with WHO guidelines, pushing your limits to achieve new levels of fitness. Earn points and rewards by meeting daily goals, completing challenges, and unlocking achievements, making your journey to well-being both fun and rewarding. Additionally, delve into extensive cardiovascular health guides to understand symptoms, adopt heart-friendly habits, and gain the insights you need to take control of your heart health.
@@ -49,9 +50,20 @@ The following Frameworks and Libraries were used in the development of this proj
 ### Prerequisites
 
 - [Node.js](https://nodejs.org/en/)\* (at least 18.18.0)
-- [NPM](https://www.npmjs.com/)\*
+- [NPM](https://www.npmjs.com/)\* (at least 10.8.2)
+- [Expo CLI](https://docs.expo.dev/workflow/expo-cli/)\*
 
-To run locally, you will need to have a MySQL database running on your machine or remotely on port 3306 (be sure to update the credientials in the `.env` file).
+* To run locally, you will need to have a MySQL database running on your machine or remotely on port 3306 (be sure to update the credientials in the `.env` file).
+
+* You need `Expo CLI` installed on your machine. You can install it by running the following command:
+
+```sh
+npm install -g expo-cli
+```
+
+- To run the app on your phone, you will need to have the `Expo Go` app installed on your phone. You can download it from the [App Store](https://apps.apple.com/us/app/expo-go/id982107779) or [Google Play](https://play.google.com/store/apps/details?id=host.exp.exponent&hl=en&gl=US).
+
+- To run the app on an emulator, you will need to have the Android Studio installed on your machine. You can download it from the [Android Studio website](https://developer.android.com/studio). Check out [React Native Setup](https://reactnative.dev/docs/set-up-your-environment) for more information on how to set up your environment to run the app on an emulator.
 
 ### Installation
 
@@ -161,9 +173,11 @@ npm start
 
 ![Architecture](./images/Arquitetura.png)
 
-## :writing_hand: Documentation
+## :writing_hand: Documentation (Report and Rest API)
 
 _will be added the english version and the portuguese version of the report developed for the project soon_
+
+_The Rest API documentation will be added soon (working in progress developed with Swagger UI )_
 
 ## :link: Contact
 
