@@ -17,7 +17,7 @@ const ChallengeModel = (sequelize) => {
 				type: DataTypes.STRING(255),
 				allowNull: false,
 			},
-			intensity: {
+			difficulty: {
 				type: DataTypes.INTEGER,
 				allowNull: false,
 				validate: {
@@ -77,9 +77,9 @@ const ChallengeModel = (sequelize) => {
 					fields: [{ name: "title" }],
 				},
 				{
-					name: "intensity",
+					name: "difficulty",
 					using: "BTREE",
-					fields: [{ name: "intensity" }],
+					fields: [{ name: "difficulty" }],
 				},
 				{
 					name: "earn_points",

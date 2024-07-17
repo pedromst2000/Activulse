@@ -2,21 +2,21 @@ const config = {
 	challenges: {
 		feed: {
 			defaultPage: 1,
-			defaultLimit: 3,
+			defaultLimit: 6,
 			maxLimit: 10,
 		},
 	},
 	activities: {
 		feed: {
 			defaultPage: 1,
-			defaultLimit: 4,
+			defaultLimit: 6,
 			maxLimit: 10,
 		},
 	},
 	recipes: {
 		feed: {
 			defaultPage: 1,
-			defaultLimit: 3,
+			defaultLimit: 6,
 			maxLimit: 10,
 		},
 	},

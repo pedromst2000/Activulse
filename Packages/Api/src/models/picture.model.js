@@ -25,7 +25,8 @@ const PictureModel = (sequelize) => {
 				type: DataTypes.INTEGER,
 				allowNull: true,
 			},
-			banner_id: {
+
+			badge_id: {
 				type: DataTypes.INTEGER,
 				allowNull: true,
 			},
@@ -33,15 +34,11 @@ const PictureModel = (sequelize) => {
 			// 	type: DataTypes.INTEGER,
 			// 	allowNull: true,
 			// },
-			user_id: {
+			banner_id: {
 				type: DataTypes.INTEGER,
 				allowNull: true,
 			},
 
-			badge_id: {
-				type: DataTypes.INTEGER,
-				allowNull: true,
-			},
 			provider_id: {
 				type: DataTypes.STRING(255),
 				allowNull: false,
@@ -49,10 +46,6 @@ const PictureModel = (sequelize) => {
 			provider_url: {
 				type: DataTypes.STRING(255),
 				allowNull: false,
-			},
-			user_avatar: {
-				type: DataTypes.STRING(255),
-				allowNull: true,
 			},
 		},
 		{
@@ -82,6 +75,11 @@ const PictureModel = (sequelize) => {
 					fields: [{ name: "activity_id" }],
 				},
 				{
+					name: "badge_id",
+					using: "BTREE",
+					fields: [{ name: "badge_id" }],
+				},
+				{
 					name: "banner_id",
 					using: "BTREE",
 					fields: [{ name: "banner_id" }],
@@ -91,16 +89,6 @@ const PictureModel = (sequelize) => {
 				// 	using: "BTREE",
 				// 	fields: [{ name: "diet_id" }],
 				// },
-				{
-					name: "user_id",
-					using: "BTREE",
-					fields: [{ name: "user_id" }],
-				},
-				{
-					name: "badge_id",
-					using: "BTREE",
-					fields: [{ name: "badge_id" }],
-				},
 			],
 		},
 	);

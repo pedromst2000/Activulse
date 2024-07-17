@@ -17,7 +17,7 @@ const RiskScoreModel = (sequelize) => {
 				type: DataTypes.STRING,
 				allowNull: false,
 				validate: {
-					isIn: [["low", "moderate", "high"]],
+					isIn: [["Low Risk", "Moderate Risk", "High Risk"]],
 				},
 			},
 			score: {

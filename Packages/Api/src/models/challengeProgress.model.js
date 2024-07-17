@@ -38,8 +38,9 @@ const ChallengeProgressModel = (sequelize) => {
 			status: {
 				type: DataTypes.STRING(255),
 				allowNull: true,
+				defaultValue: "In Progress",
 				validate: {
-					isIn: [["Started", "In Progress", "Completed"]],
+					isIn: [["In Progress", "Completed"]],
 				},
 			},
 			user_id: {

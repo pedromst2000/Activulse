@@ -27,7 +27,7 @@ const UserActivityModel = (sequelize) => {
 					min: 0,
 				},
 			},
-			total_time_workout: {
+			weekly_total_time_workout: {
 				type: DataTypes.INTEGER,
 				allowNull: true,
 				validate: {

@@ -35,7 +35,6 @@ const UserModel = (sequelize) => {
 			change_password_expires_at: {
 				type: DataTypes.DATE,
 				allowNull: true,
-				defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
 			},
 			OTP_token: {
 				type: DataTypes.STRING(4),
@@ -44,11 +43,10 @@ const UserModel = (sequelize) => {
 			OTP_expires_at: {
 				type: DataTypes.DATE,
 				allowNull: true,
-				defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
 			},
 			verify_user_token: {
 				type: DataTypes.STRING(255),
-				allowNull: false,
+				allowNull: true,
 			},
 			is_verified: {
 				type: DataTypes.BOOLEAN,
@@ -92,10 +90,6 @@ const UserModel = (sequelize) => {
 				type: DataTypes.INTEGER,
 				allowNull: false,
 			},
-			weigth: {
-				type: DataTypes.INTEGER,
-				allowNull: false,
-			},
 			stress_status: {
 				type: DataTypes.STRING(255),
 				allowNull: false,
@@ -127,6 +121,10 @@ const UserModel = (sequelize) => {
 				allowNull: true,
 			},
 			selected_banner_ID: {
+				type: DataTypes.INTEGER,
+				allowNull: false,
+			},
+			selected_avatar_ID: {
 				type: DataTypes.INTEGER,
 				allowNull: false,
 			},
@@ -181,6 +179,11 @@ const UserModel = (sequelize) => {
 					name: "selected_banner_ID",
 					using: "BTREE",
 					fields: [{ name: "selected_banner_ID" }],
+				},
+				{
+					name: "selected_avatar_ID",
+					using: "BTREE",
+					fields: [{ name: "selected_avatar_ID" }],
 				},
 			],
 		},

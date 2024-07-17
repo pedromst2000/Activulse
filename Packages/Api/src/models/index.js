@@ -11,6 +11,7 @@ function init(sequelize) {
 	const ActivityCategory = require("./activityCategory.model")(sequelize);
 	const Badge = require("./badge.model")(sequelize);
 	const Banner = require("./banner.model")(sequelize);
+	const Avatar = require("./avatar.model")(sequelize);
 	const Buyer = require("./buyer.model")(sequelize);
 	const Challenge = require("./challenge.model")(sequelize);
 	const ChallengeCategory = require("./challengeCategory.model")(sequelize);
@@ -27,6 +28,7 @@ function init(sequelize) {
 	const User = require("./user.model")(sequelize);
 	const UserActivity = require("./userActivity.model")(sequelize);
 	const UserBadge = require("./userBadge.model")(sequelize);
+	const UserAvatar = require("./userAvatar.model")(sequelize);
 	const Workout = require("./workout.model")(sequelize);
 
 	//* Associations / Relationships
@@ -78,6 +80,16 @@ function init(sequelize) {
 		through: UserBadge,
 		foreignKey: "badge_id",
 		otherKey: "user_id",
+	});
+
+	// User - User Avatar => 1:N N:1
+	User.hasMany(UserAvatar, {
+		foreignKey: "user_id",
+		onDelete: "CASCADE",
+	});
+
+	UserAvatar.belongsTo(User, {
+		foreignKey: "user_id",
 	});
 
 	// User - Favorite  => 1:N N:1
@@ -302,15 +314,6 @@ function init(sequelize) {
 	// 	foreignKey: "diet_id",
 	// });
 
-	// Picture - User => 1:1 1:1
-	Picture.belongsTo(User, {
-		foreignKey: "user_id",
-		onDelete: "CASCADE",
-	});
-	User.hasOne(Picture, {
-		foreignKey: "user_id",
-	});
-
 	// Picture - Badge => 1:1 1:1
 	Picture.belongsTo(Badge, {
 		foreignKey: "badge_id",
@@ -333,6 +336,36 @@ function init(sequelize) {
 	// 	through: Buyer,
 	// });
 
+	// User - banner => *FK selected_banner_ID
+	User.belongsTo(Banner, {
+		foreignKey: "selected_banner_ID",
+		onDelete: "CASCADE",
+	});
+
+	Banner.hasMany(User, {
+		foreignKey: "selected_banner_ID",
+	});
+
+	// User - Avatar => 1:1 1:1
+	User.belongsTo(Avatar, {
+		foreignKey: "selected_avatar_ID",
+		onDelete: "CASCADE",
+	});
+
+	Avatar.hasOne(User, {
+		foreignKey: "selected_avatar_ID",
+	});
+
+	// User Avatar - User => 1:N N:1
+	UserAvatar.belongsTo(User, {
+		foreignKey: "user_id",
+		onDelete: "CASCADE",
+	});
+
+	User.hasMany(UserAvatar, {
+		foreignKey: "user_id",
+	});
+
 	return {
 		User,
 		DailyGoals,
@@ -340,6 +373,7 @@ function init(sequelize) {
 		Diet,
 		UserActivity,
 		UserBadge,
+		UserAvatar,
 		Favorite,
 		Buyer,
 		ChallengeProgress,
@@ -355,6 +389,7 @@ function init(sequelize) {
 		Picture,
 		Banner,
 		Badge,
+		Avatar,
 	};
 }
 

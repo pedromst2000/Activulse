@@ -3,58 +3,49 @@ const { Sequelize, DataTypes } = require("sequelize");
 /**
  * @param {Sequelize} sequelize
  */
-const BadgeModel = (sequelize) => {
+const UserAvatarModel = (sequelize) => {
 	return sequelize.define(
-		"badge",
+		"user_avatar",
 		{
-			badge_ID: {
+			user_avatar_ID: {
 				autoIncrement: true,
 				type: DataTypes.INTEGER,
 				allowNull: false,
 				primaryKey: true,
 			},
-			title: {
-				type: DataTypes.STRING(255),
-				allowNull: false,
-			},
-			description: {
-				type: DataTypes.STRING(255),
-				allowNull: false,
-			},
-			earn_points: {
+			user_id: {
 				type: DataTypes.INTEGER,
 				allowNull: false,
-			},	
+			},
+			avatar_id: {
+				type: DataTypes.INTEGER,
+				allowNull: false,
+			},
 		},
 		{
 			sequelize,
-			tableName: "badge",
+			tableName: "user_avatar",
 			timestamps: true,
 			indexes: [
 				{
 					name: "PRIMARY",
 					unique: true,
 					using: "BTREE",
-					fields: [{ name: "badge_ID" }],
+					fields: [{ name: "user_avatar_ID" }],
 				},
 				{
-					name: "title",
+					name: "user_id",
 					using: "BTREE",
-					fields: [{ name: "title" }],
+					fields: [{ name: "user_id" }],
 				},
 				{
-					name: "description",
+					name: "avatar_id",
 					using: "BTREE",
-					fields: [{ name: "description" }],
-				},
-				{
-					name: "earn_points",
-					using: "BTREE",
-					fields: [{ name: "earn_points" }],
+					fields: [{ name: "avatar_id" }],
 				},
 			],
 		},
 	);
 };
 
-module.exports = BadgeModel;
+module.exports = UserAvatarModel;

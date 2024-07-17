@@ -25,14 +25,9 @@ const BuyerModel = (sequelize) => {
 				type: DataTypes.INTEGER,
 				allowNull: true,
 			},
-			// Foreign Key
 			user_id: {
 				type: DataTypes.INTEGER,
 				allowNull: false,
-				references: {
-					model: "user",
-					key: "user_ID",
-				},
 			},
 		},
 		{
