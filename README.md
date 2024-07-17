@@ -18,7 +18,7 @@
 - [:computer: Tech Stack](#computer-tech-stack)
 - [:rocket: Getting Started](#rocket-getting-started)
 - [:construction_worker_man: Architecture](#construction_worker_man-architecture)
-- [:writing_hand: Documentation](#writing_hand-documentation)
+- [:writing_hand: Documentation](#writing_hand-documentation-report-and-rest-api)
 - [:link: Contact](#link-contact)
 
 ## :bulb: About
