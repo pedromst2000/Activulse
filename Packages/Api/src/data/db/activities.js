@@ -337,7 +337,7 @@ module.exports = [
 	},
 	{
 		title: "Arms Workout I",
-		intensity: 2,
+		intensity: 4,
 		description:
 			"Tone and strengthen your arms with beginner-friendly exercises. From curls to dips, we'll guide you step by step. Shape lean, sculpted arms and gain confidence in your fitness journey. Let's start!",
 		isPremium: true,
@@ -348,7 +348,7 @@ module.exports = [
 	},
 	{
 		title: "Arms Workout II",
-		intensity: 2,
+		intensity: 4,
 		description:
 			"Dive into our Beginner's Arms Workout! Target your arms with curls to overhead presses. Perfect for newcomers, build strength and definition with proper form every step. Feel the burn and see results on your path to stronger, toned arms!",
 		isPremium: true,
@@ -359,7 +359,7 @@ module.exports = [
 	},
 	{
 		title: "Legs Workout I",
-		intensity: 2,
+		intensity: 4,
 		description:
 			"Target your legs with beginner-friendly exercises like squats, lunges, and calf raises. Whether new or building strength, develop stability, balance, and power. Follow along for clear instructions and proper form tips. Let's sculpt those legs!",
 		isPremium: true,

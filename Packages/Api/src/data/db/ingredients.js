@@ -144,7 +144,15 @@ module.exports = [
 		recipe_id: 5,
 	},
 	{
-		ingredient: "Mixed vegetables (bell peppers, zucchini, cherry tomatoes): 500g",
+		ingredient: "bell peppers: 2 medium, sliced",
+		recipe_id: 5,
+	},
+	{
+		ingredient: "Zucchini: 1 medium, sliced",
+		recipe_id: 5,
+	},
+	{
+		ingredient: "Cherry tomatoes: 200g",
 		recipe_id: 5,
 	},
 	{
@@ -208,7 +216,7 @@ module.exports = [
 		recipe_id: 7,
 	},
 	{
-		ingredient: "Bell peppers (assorted colors), sliced: 1 cup",
+		ingredient: "Bell peppers sliced: 1 cup",
 		recipe_id: 7,
 	},
 	{
@@ -244,10 +252,6 @@ module.exports = [
 		recipe_id: 7,
 	},
 	{
-		ingredient: "Cooked brown rice or quinoa for serving",
-		recipe_id: 7,
-	},
-	{
 		ingredient: "Quinoa: 150g",
 		recipe_id: 8,
 	},
@@ -265,6 +269,14 @@ module.exports = [
 	},
 	{
 		ingredient: "Red onion: 1/4, finely chopped",
+		recipe_id: 8,
+	},
+	{
+		ingredient: "bell peppers: 2 medium, diced",
+		recipe_id: 8,
+	},
+	{
+		ingredient: "zucchini: 1 medium, diced",
 		recipe_id: 8,
 	},
 	{
@@ -420,7 +432,15 @@ module.exports = [
 		recipe_id: 13,
 	},
 	{
-		ingredient: "Mixed fruits (mango, pineapple, kiwi): 300g",
+		ingredient: "mango: 1 ripe, diced",
+		recipe_id: 13,
+	},
+	{
+		ingredient: "Pineapple: 100g, diced",
+		recipe_id: 13,
+	},
+	{
+		ingredient: "Kiwi: 2, peeled and sliced",
 		recipe_id: 13,
 	},
 	{
@@ -436,7 +456,15 @@ module.exports = [
 		recipe_id: 14,
 	},
 	{
-		ingredient: "Mixed berries (blueberries, raspberries, blackberries): 200g",
+		ingredient: "blueberries: 200g",
+		recipe_id: 14,
+	},
+	{
+		ingredient: "Raspberries: 200g",
+		recipe_id: 14,
+	},
+	{
+		ingredient: "Blackberries: 200g",
 		recipe_id: 14,
 	},
 	{
@@ -561,7 +589,7 @@ module.exports = [
 		recipe_id: 18,
 	},
 	{
-		ingredient: "Pasta (such as ditalini or small shells): 100g",
+		ingredient: "Pasta: 100g",
 		recipe_id: 18,
 	},
 	{
@@ -569,7 +597,7 @@ module.exports = [
 		recipe_id: 18,
 	},
 	{
-		ingredient: "Parmesan cheese (optional for garnish)",
+		ingredient: "Parmesan cheese: 50g, grated",
 		recipe_id: 18,
 	},
 	{
@@ -593,7 +621,7 @@ module.exports = [
 		recipe_id: 19,
 	},
 	{
-		ingredient: "Bread (stale or toasted): 2 slices, crust removed",
+		ingredient: "Bread: 2 slices, crust removed",
 		recipe_id: 19,
 	},
 	{
@@ -606,10 +634,6 @@ module.exports = [
 	},
 	{
 		ingredient: "Water: 250ml",
-		recipe_id: 19,
-	},
-	{
-		ingredient: "Optional garnishes: diced cucumber, bell pepper, and croutons",
 		recipe_id: 19,
 	},
 	{
@@ -689,15 +713,15 @@ module.exports = [
 		recipe_id: 21,
 	},
 	{
-		ingredient: "Grated Parmesan cheese (optional, for topping)",
+		ingredient: "Grated Parmesan cheese: for topping",
 		recipe_id: 21,
 	},
 	{
-		ingredient: "300g whole grain spaghetti",
+		ingredient: "whole grain spaghetti: 300g",
 		recipe_id: 22,
 	},
 	{
-		ingredient: "400g shrimp, peeled and deveined",
+		ingredient: "shrimp, peeled and deveined: 400g",
 		recipe_id: 22,
 	},
 	{
@@ -853,7 +877,7 @@ module.exports = [
 		recipe_id: 25,
 	},
 	{
-		ingredient: "1 tablespoon fresh herbs (such as basil, parsley, or thyme), chopped",
+		ingredient: "1 tablespoon basil, chopped",
 		recipe_id: 25,
 	},
 	{
@@ -925,7 +949,15 @@ module.exports = [
 		recipe_id: 27,
 	},
 	{
-		ingredient: "200g mixed berries (strawberries, blueberries, raspberries)",
+		ingredient: "strawberries: 100g, hulled and halved",
+		recipe_id: 28,
+	},
+	{
+		ingredient: "blueberries: 100g",
+		recipe_id: 28,
+	},
+	{
+		ingredient: "raspberries: 100g",
 		recipe_id: 28,
 	},
 	{
@@ -957,7 +989,15 @@ module.exports = [
 		recipe_id: 29,
 	},
 	{
-		ingredient: "30g mixed nuts (almonds, walnuts, pistachios), chopped",
+		ingredient: "almomd butter: 2 tablespoons",
+		recipe_id: 29,
+	},
+	{
+		ingredient: "walnuts: 50g, chopped",
+		recipe_id: 29,
+	},
+	{
+		ingredient: "pisatchios: 50g, chopped",
 		recipe_id: 29,
 	},
 	{
@@ -1025,7 +1065,15 @@ module.exports = [
 		recipe_id: 31,
 	},
 	{
-		ingredient: "Mixed beans (kidney beans, black beans, chickpeas): 250g, cooked",
+		ingredient: "kidney beans: 250g, cooked",
+		recipe_id: 32,
+	},
+	{
+		ingredient: "Black beans: 250g, cooked",
+		recipe_id: 32,
+	},
+	{
+		ingredient: "Chickpeas: 250g, cooked",
 		recipe_id: 32,
 	},
 	{
@@ -1213,7 +1261,7 @@ module.exports = [
 		recipe_id: 36,
 	},
 	{
-		ingredient: "Black beans: 1 can (400g), drained and rinsed",
+		ingredient: "Black beans: 400g",
 		recipe_id: 36,
 	},
 	{
@@ -1429,7 +1477,7 @@ module.exports = [
 		recipe_id: 40,
 	},
 	{
-		ingredient: "Bell peppers (any color), quartered: 2 medium",
+		ingredient: "Bell peppers, quartered: 2 medium",
 		recipe_id: 40,
 	},
 	{
@@ -1569,9 +1617,11 @@ module.exports = [
 		recipe_id: 42,
 	},
 	{
-		ingredient: "Mixed berries (strawberries, blueberries, raspberries): 200g",
+		ingredient: "strawberries: 100g, hulled and halved",
 		recipe_id: 43,
 	},
+	{ ingredient: "blueberries: 100g", recipe_id: 43 },
+	{ ingredient: "raspberries: 100g", recipe_id: 43 },
 	{
 		ingredient: "Rolled oats: 100g",
 		recipe_id: 43,

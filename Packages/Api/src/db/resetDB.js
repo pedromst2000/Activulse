@@ -1,5 +1,5 @@
 const colors = require("colors");
-const loggingPrefix = colors.yellow("[db/reset/index.js] ");
+const loggingPrefix = colors.yellow(`[db/resetDB.js]`);
 
 if (process.env.NODE_ENV === "production") {
 	console.error(
@@ -124,6 +124,74 @@ const dbData = require("../data/db");
 
 		await db.mysql.Challenge.bulkCreate(dbData.challenges);
 		console.log(loggingPrefix + colors.green("Successfully inserted challenges!\n"));
+
+		// Pictures data
+		console.log(loggingPrefix + colors.cyan("Inserting pictures..."));
+
+		await db.mysql.Picture.bulkCreate(dbData.pictures);
+		console.log(loggingPrefix + colors.green("Successfully inserted pictures!\n"));
+
+		// Avatars data
+		console.log(loggingPrefix + colors.cyan("Inserting avatars..."));
+
+		await db.mysql.Avatar.bulkCreate(dbData.avatars);
+		console.log(loggingPrefix + colors.green("Successfully inserted avatars!\n"));
+
+		// Users data
+		console.log(loggingPrefix + colors.cyan("Inserting users..."));
+
+		await db.mysql.User.bulkCreate(dbData.users);
+		console.log(loggingPrefix + colors.green("Successfully inserted users!\n"));
+
+		// User Avatars data
+		await db.mysql.UserAvatar.bulkCreate(dbData.userAvatar);
+		console.log(loggingPrefix + colors.green("Successfully inserted user avatars!\n"));
+
+		// Buyers data
+		console.log(loggingPrefix + colors.cyan("Inserting buyers..."));
+
+		await db.mysql.Buyer.bulkCreate(dbData.buyers);
+		console.log(loggingPrefix + colors.green("Successfully inserted buyers!\n"));
+
+		// User Badges data
+		console.log(loggingPrefix + colors.cyan("Inserting user badges..."));
+
+		await db.mysql.UserBadge.bulkCreate(dbData.userBadge);
+		console.log(loggingPrefix + colors.green("Successfully inserted user badges!\n"));
+
+		// Challenges Progress data
+		console.log(loggingPrefix + colors.cyan("Inserting challenges progress..."));
+
+		await db.mysql.ChallengeProgress.bulkCreate(dbData.challengeProgress);
+		console.log(
+			loggingPrefix + colors.green("Successfully inserted challenges progress!\n"),
+		);
+
+		// Favorites data
+		console.log(loggingPrefix + colors.cyan("Inserting favorites..."));
+
+		await db.mysql.Favorite.bulkCreate(dbData.favorites);
+		console.log(loggingPrefix + colors.green("Successfully inserted favorites!\n"));
+
+		// Risk Scores data
+		console.log(loggingPrefix + colors.cyan("Inserting risk scores..."));
+
+		await db.mysql.RiskScore.bulkCreate(dbData.riskScores);
+		console.log(loggingPrefix + colors.green("Successfully inserted risk scores!\n"));
+
+		// Daily Goals data
+		console.log(loggingPrefix + colors.cyan("Inserting daily goals..."));
+
+		await db.mysql.DailyGoals.bulkCreate(dbData.dailyGoals);
+		console.log(loggingPrefix + colors.green("Successfully inserted daily goals!\n"));
+
+		// User Activities data
+		console.log(loggingPrefix + colors.cyan("Inserting user activities..."));
+
+		await db.mysql.UserActivity.bulkCreate(dbData.userActivity);
+		console.log(loggingPrefix + colors.green("Successfully inserted user activities!\n"));
+
+		// -----------------------------------------------------------------------------------------
 
 		// Disconnect from the database
 		console.log(loggingPrefix + colors.cyan("Disconnecting from the database..."));

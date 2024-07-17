@@ -9,6 +9,6 @@ module.exports = [
 		category: "Run",
 	},
 	{
-		category: "Marathone",
+		category: "Marathon",
 	},
 ];

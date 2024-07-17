@@ -6,7 +6,7 @@ module.exports = [
 		category: "Main Dishes",
 	},
 	{
-		category: "Salades",
+		category: "Salads",
 	},
 	{
 		category: "Desserts",

@@ -114,7 +114,8 @@ module.exports = [
 		recipe_id: 5,
 	},
 	{
-		instruction: "Arrange the mixed vegetables around the salmon on the baking sheet.",
+		instruction:
+			"Arrange the mixed vegetables (bell peppers, zucchini, cherry tomatoes) around the salmon on the baking sheet.",
 		recipe_id: 5,
 	},
 	{
@@ -326,7 +327,8 @@ module.exports = [
 		recipe_id: 13,
 	},
 	{
-		instruction: "Serve quinoa pudding in bowls, topped with mixed fruits.",
+		instruction:
+			"Serve quinoa pudding in bowls, topped with mixed fruits (mango, pineapple, kiwi).",
 		recipe_id: 13,
 	},
 	{
@@ -358,7 +360,8 @@ module.exports = [
 		recipe_id: 14,
 	},
 	{
-		instruction: "Before serving, top with mixed berries.",
+		instruction:
+			"Before serving, top with mixed berries (blueberries, raspberries, blackberries).",
 		recipe_id: 14,
 	},
 	{
@@ -725,7 +728,7 @@ module.exports = [
 	},
 	{
 		instruction:
-			"In a large bowl, combine the mixed berries, diced mango, and segmented orange.",
+			"In a large bowl, combine the mixed berries (strawberries, blueberries, raspberries), diced mango, and segmented orange.",
 		recipe_id: 28,
 	},
 	{
@@ -750,7 +753,7 @@ module.exports = [
 	},
 	{
 		instruction:
-			"In a glass or serving dish, layer Greek yogurt, sliced bananas, and chopped nuts.",
+			"In a glass or serving dish, layer Greek yogurt, sliced bananas, and chopped nuts (almomd butter, walnuts, pisatchios).",
 		recipe_id: 29,
 	},
 	{
@@ -852,7 +855,7 @@ module.exports = [
 	},
 	{
 		instruction:
-			"Stir in cooked mixed beans, vegetable broth, bay leaf, paprika, and cumin. Bring to a simmer and let it cook for 15-20 minutes.",
+			"Stir in cooked mixed beans (kidney, black, chickpeas), vegetable broth, bay leaf, paprika, and cumin. Bring to a simmer and let it cook for 15-20 minutes.",
 		recipe_id: 32,
 	},
 	{
@@ -1218,7 +1221,7 @@ module.exports = [
 	},
 	{
 		instruction:
-			"Just before serving, layer the oat mixture with mixed berries in serving glasses or bowls.",
+			"Just before serving, layer the oat mixture with mixed berries (strawberries, blueberries, raspberries) in serving glasses or bowls.",
 		recipe_id: 43,
 	},
 	{

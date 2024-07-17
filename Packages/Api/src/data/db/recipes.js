@@ -394,7 +394,7 @@ module.exports = [
 		isPremium: true,
 		price: 5250,
 		video_time: 5,
-		category_id: 3,
+		category_id: 4,
 		diet_id: 3,
 	},
 	{
@@ -464,7 +464,7 @@ module.exports = [
 		isPremium: true,
 		price: 950,
 		video_time: 3,
-		category_id: 3,
+		category_id: 4,
 		diet_id: 1,
 	},
 ];

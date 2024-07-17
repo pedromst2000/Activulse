@@ -1,5 +1,8 @@
 module.exports = [
 	{
+		price: 0,
+	},
+	{
 		price: 350,
 	},
 	{
