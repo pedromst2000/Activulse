@@ -23,7 +23,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 // Enable Routes
-app.use("/api/v1", routes);
+app.use("/api-activulse/v1", routes);
 
 app.use(
 	/**
