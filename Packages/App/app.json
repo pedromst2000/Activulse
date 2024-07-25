@@ -18,11 +18,11 @@
       "adaptiveIcon": {
         "foregroundImage": "src/assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      },
-      "package": "com.android.activulse"
+      }
     },
-    "plugins":["expo-font"],
-
+    "plugins": [
+      "expo-font"
+    ],
     "web": {
       "favicon": "src/assets/images/favicon.png"
     }

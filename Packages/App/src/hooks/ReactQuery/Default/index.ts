@@ -14,9 +14,6 @@ const getDefault = async (): Promise<DefaultData> => {
 	return data;
 };
 
-console.log(getDefault());
-
-
 const useDefault = (): UseQueryResult<DefaultData, Error> => {
 	return useQuery({
 		queryKey:['default'],
