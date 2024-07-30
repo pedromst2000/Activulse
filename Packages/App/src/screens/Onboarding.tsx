@@ -1,14 +1,24 @@
-// import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useState, useRef } from 'react';
 import { Text, View, FlatList, Animated } from 'react-native';
 import AnimatedComponent from '../components/Animated';
 import Button from '../components/Button';
-import LastSlideButton from '../components/Onboarding/Button';
+import LastSlideButton from '../components/Onboarding';
 import slides from '../data/Onboarding';
 import OnboardingItem from '../components/Onboarding/Item';
 import Paginator from '../components/Onboarding/Paginator';
 
+type RootStackParamList = {
+	Auth: {
+		screen: string;
+	};
+};
+
+type OnboardingScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Auth'>;
+
 const Onboarding: React.FC = (): React.JSX.Element => {
+	const navigation = useNavigation<OnboardingScreenNavigationProp>();
 	const [currentIndex, setCurrentIndex] = useState<number>(0);
 	const scrollX = useRef(new Animated.Value(0)).current;
 	const slidesRef = useRef<any>(null);
@@ -26,7 +36,7 @@ const Onboarding: React.FC = (): React.JSX.Element => {
 
 	return (
 		<AnimatedComponent animation="FadeIn">
-			<View className="flex-1 py-5 justify-center items-center">
+			<View className="flex-1 py-5 justify-center items-center bg-primary-50 ">
 				{/* Skip Onboarding */}
 				<View className="flex flex-row">
 					{currentIndex < slides.length - 1 ? (
@@ -85,14 +95,14 @@ const Onboarding: React.FC = (): React.JSX.Element => {
 							<LastSlideButton
 								text="Sign In"
 								onPress={() => {
-									console.log('Sign In');
+									navigation.navigate('Auth', { screen: 'SignIn' });
 								}}
 								className="bg-primary-50 border-2 border-accent-500"
 							/>
 							<LastSlideButton
 								text="Join Now"
 								onPress={() => {
-									console.log('Join Now');
+									navigation.navigate('Auth', { screen: 'SignUp' });
 								}}
 								className="bg-accent-500"
 							/>

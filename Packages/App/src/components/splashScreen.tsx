@@ -1,5 +1,5 @@
 import LottieView from 'lottie-react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 
 type SplashScreenProps = {
@@ -16,6 +16,12 @@ const styles = StyleSheet.create({
 const SplashScreen: React.FC<SplashScreenProps> = ({
 	onAnimationFinish,
 }): React.JSX.Element => {
+	useEffect(() => {
+		setTimeout(() => {
+			onAnimationFinish();
+		}, 3800);
+	}, [onAnimationFinish]);
+
 	return (
 		<View
 			className="items-center justify-center flex-1 bg-primary-50

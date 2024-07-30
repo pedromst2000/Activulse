@@ -5,7 +5,7 @@ const options = {
 			primary: '#F8F5FF',
 			background: '#F8F5FF',
 			card: '#F8F5FF',
-			text: '#000000',
+			text: '#0C2C7E',
 			border: '#F8F5FF',
 			notification: '#F8F5FF',
 		},
@@ -20,6 +20,7 @@ const options = {
 		paddingBottom: 7,
 		paddingTop: 7,
 	},
+	// Todo: Add Options for TopBar Navigation
 };
 
 export default options;

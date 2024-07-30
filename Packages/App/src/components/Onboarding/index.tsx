@@ -16,7 +16,7 @@ const LastSlideButton: React.FC<Props> = ({
 	return (
 		<TouchableOpacity
 			// dynamic style where
-			className={`flex flex-row items-center justify-center px-[40px] py-[10px] 
+			className={`flex flex-row items-center justify-center px-[45px] py-[10px] 
 				rounded-md  rounded-[30px] ${className}`}
 			activeOpacity={activeOpacity || 0.75}
 			{...props}
