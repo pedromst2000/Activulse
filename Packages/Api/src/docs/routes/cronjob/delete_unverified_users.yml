@@ -1,0 +1,66 @@
+summary: Delete Unverified Users
+description: Delete all unverified users
+tags:
+  - "Cronjob"
+security:
+  - bearerAuth: []
+parameters:
+  - in: header
+    name: x-auth-key
+    schema:
+      type: string
+    required: true
+    description: Authorization key
+responses:
+  "200":
+    description: Success
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Deleted 0 unverified users successfully.:
+            value:
+              success: true
+              message: Deleted 0 unverified users successfully.
+          Deleted 2 unverified users successfully.:
+            value:
+              success: true
+              message: Deleted 2 unverified users successfully.
+  "401":
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Unauthorized:
+            value:
+              success: false
+              message: Unauthorized
+  "500":
+    description: Internal Server Error
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Internal Server Error:
+            value:
+              success: false
+              message: Something went wrong!

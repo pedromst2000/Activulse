@@ -19,8 +19,13 @@ const swaggerDefinition = {
 		"/": {
 			get: routeDocs.default.getWelcomeApi,
 		},
+		// Not Found Routes
 		"/{any*}": {
 			get: routeDocs.default.notFound,
+		},
+		// CRONJOB
+		"/cronjob/unverified-users": {
+			delete: routeDocs.cronjob.deleteUnverifiedUsers,
 		},
 	},
 };

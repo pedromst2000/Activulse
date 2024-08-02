@@ -1,9 +1,5 @@
-// const users = require("./users");
-// const auth = require("./auth");
-// const cronjob = require("./cronjob");
+const cronjob = require("./cronjob");
 
-// module.exports = {
-// 	users,
-// 	auth,
-// 	cronjob,
-// };
+module.exports = {
+	cronjob,
+};

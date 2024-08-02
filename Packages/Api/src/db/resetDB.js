@@ -204,12 +204,12 @@ const dbData = require("../data/db");
 
 		console.log(loggingPrefix + colors.green("Successfully reset the database!"));
 
-		process.exit(0);
+		// process.exit(0);
 	} catch (error) {
 		console.error(
 			loggingPrefix + colors.red("An error occurred while resetting the database!"),
 		);
 		console.error(loggingPrefix + colors.red(error));
-		process.exit(1);
+		// process.exit(1);
 	}
 })();
