@@ -27,6 +27,11 @@ const swaggerDefinition = {
 		"/cronjob/unverified-users": {
 			delete: routeDocs.cronjob.deleteUnverifiedUsers,
 		},
+
+		// AUTH
+		"/auth/register": {
+			post: routeDocs.auth.postRegister,
+		},
 	},
 };
 

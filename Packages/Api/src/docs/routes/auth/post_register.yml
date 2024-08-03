@@ -1,0 +1,129 @@
+summary: Register
+description: Create a new user (not verified)
+tags:
+  - "Auth"
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          username:
+            type: string
+            required: true
+            example: John Doe
+          email:
+            type: string
+            required: true
+            example: john.doe@gmail.com
+          password:
+            type: string
+            required: true
+            example: 123456Aa
+responses:
+  "201":
+    description: Success
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Success:
+            value:
+              success: true
+              message: A confirmation email has been sent
+  "400":
+    description: Bad Request
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Invalid Username:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: "jo"
+                  msg: "Display name must be at least 3 characters long"
+                  path: "username"
+                  location: "body"
+          Invalid Email:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: "john.doe"
+                  msg: "Email must be a valid email address"
+                  path: "email"
+                  location: "body"
+          Invalid Email Domain:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: "johndoe@outlook.com"
+                  msg: "Email must be a gmail account"
+                  path: "email"
+                  location: "body"
+          Invalid Password:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: "123"
+                  msg: "Password must contain at least one lowercase letter, one uppercase letter, one digit and be at least 8 characters long"
+                  path: "password"
+                  location: "body"
+  "409":
+    description: Conflict
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Username already in use:
+            value:
+              success: false
+              message: The username already exists
+          Email already in use:
+            value:
+              success: false
+              message: There's already a user with the same email   
+        
+  "500":
+    description: Internal Server Error
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Internal Server Error:
+            value:
+              success: false
+              message: Something went wrong!
