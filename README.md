@@ -87,8 +87,9 @@ chmod +x ./scripts/setup-project.sh && ./scripts/setup-project.sh
 
 3. Create a `.env` file in the following directories:
 
-- `/packages/api`
-- `/packages/app`
+- `/packages/Api`
+- `/packages/App`
+- `/packages/Web`
 
 And follow the `.env.example` file in each directory to fill in the required environment variables.
 
@@ -133,7 +134,7 @@ chmod +x ./scripts/macos-start-project.sh && ./scripts/macos-start-project.sh
 2. Install NPM packages
 
 ```sh
-  cd packages/api
+  cd packages/Api
   npm install
 
   cd ../app
@@ -143,31 +144,40 @@ chmod +x ./scripts/macos-start-project.sh && ./scripts/macos-start-project.sh
 
 3. Create a `.env` file in the following directories:
 
-- `/packages/api`
-- `/packages/app`
+- `/packages/Api`
+- `/packages/App`
+- `/packages/Web`
 
 And follow the `.env.example` file in each directory to fill in the required environment variables.
 
 4. Start the database
 
 ```sh
-cd packages/api
+cd packages/Api
 npm run db
 ```
 
 5. Start the API
 
 ```sh
-cd packages/api
+cd packages/Api
 npm run dev
 ```
 
 6. Start the app
 
 ```sh
-cd packages/app
+cd packages/App
 npm start
 ```
+
+6. Start the Web Client
+
+```sh
+cd packages/Web
+npm run dev
+```
+
 
 ## :construction_worker_man: Architecture
 
