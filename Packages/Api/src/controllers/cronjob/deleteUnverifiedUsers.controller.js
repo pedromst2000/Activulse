@@ -15,7 +15,7 @@ async function deleteUnverifiedUsers(_req, res) {
 	try {
 		const result = await db.mysql.User.destroy({
 			where: {
-				is_verified: false,
+				is_verifiedn: false,
 				createdAt: {
 					[Op.lt]: new Date(new Date() - TIME_INTERVAL),
 				},

@@ -32,7 +32,7 @@ const UserModel = (sequelize) => {
 				type: DataTypes.STRING(255),
 				allowNull: true,
 			},
-			change_password_expires_at: {
+			change_password_token_generated_at: {
 				type: DataTypes.DATE,
 				allowNull: true,
 			},
@@ -40,7 +40,7 @@ const UserModel = (sequelize) => {
 				type: DataTypes.STRING(4),
 				allowNull: true,
 			},
-			OTP_expires_at: {
+			OTP_token_generated_at: {
 				type: DataTypes.DATE,
 				allowNull: true,
 			},
@@ -54,52 +54,52 @@ const UserModel = (sequelize) => {
 			},
 			gender: {
 				type: DataTypes.STRING(255),
-				allowNull: false,
+				allowNull: true,
 				validate: {
 					isIn: [["Male", "Female"]],
 				},
 			},
 			age: {
 				type: DataTypes.INTEGER,
-				allowNull: false,
+				allowNull: true,
 				validate: {
 					min: 30,
 				},
 			},
 			is_smoker: {
 				type: DataTypes.BOOLEAN,
-				allowNull: false,
+				allowNull: true,
 			},
 			is_diabetic: {
 				type: DataTypes.BOOLEAN,
-				allowNull: false,
+				allowNull: true,
 			},
 			is_treatment_hypertension: {
 				type: DataTypes.BOOLEAN,
-				allowNull: false,
+				allowNull: true,
 			},
 			systolic_blood_pressure: {
 				type: DataTypes.INTEGER,
-				allowNull: false,
+				allowNull: true,
 			},
 			HDL_Cholesterol: {
 				type: DataTypes.INTEGER,
-				allowNull: false,
+				allowNull: true,
 			},
 			Total_Cholesterol: {
 				type: DataTypes.INTEGER,
-				allowNull: false,
+				allowNull: true,
 			},
 			stress_status: {
 				type: DataTypes.STRING(255),
-				allowNull: false,
+				allowNull: true,
 				validate: {
 					isIn: [["Rare", "Sometimes", "Frequently"]],
 				},
 			},
 			know_diet: {
 				type: DataTypes.BOOLEAN,
-				allowNull: false,
+				allowNull: true,
 			},
 			fast_food_status: {
 				type: DataTypes.STRING(255),
@@ -122,11 +122,12 @@ const UserModel = (sequelize) => {
 			},
 			selected_banner_ID: {
 				type: DataTypes.INTEGER,
-				allowNull: false,
+				allowNull: true,
 			},
 			selected_avatar_ID: {
 				type: DataTypes.INTEGER,
-				allowNull: false,
+				allowNull: true,
+		
 			},
 		},
 		{
