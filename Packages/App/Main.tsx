@@ -5,6 +5,7 @@ import SplashScreen from './src/components/splashScreen';
 import Onboarding from './src/screens/Onboarding';
 import { StatusBar } from 'react-native';
 import Navigation from './src/navigation';
+import { useUserContext } from './src/context/user';
 
 const MainApp: React.FC = (): React.JSX.Element => {
 	const [animationComplete, setAnimationComplete] = useState<boolean>(false);
