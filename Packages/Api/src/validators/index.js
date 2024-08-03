@@ -1,7 +1,7 @@
 const { validationResult } = require("express-validator");
 const utils = require("../utils");
 const auth = require("./auth");
-// const users = require("./users");
+const users = require("./users");
 
 /**
  * Validates the result of a request and sends an error response if there are any validation errors.
@@ -29,5 +29,5 @@ const validateResult = (req, res, next) => {
 module.exports = {
 	validateResult,
 	auth,
-	// users,
+	users,
 };

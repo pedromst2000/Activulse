@@ -4,6 +4,7 @@ const swaggerUi = require("swagger-ui-express");
 const config = require("../config");
 const cronjobRoutes = require("./cronjob.routes");
 const authRoutes = require("./auth.routes");
+const userRoutes = require("./users.routes");
 
 const router = Router();
 
@@ -21,5 +22,8 @@ router.use("/cronjob", cronjobRoutes);
 
 // Auth Routes
 router.use("/auth", authRoutes);
+
+// User Routes
+router.use("/users", userRoutes);
 
 module.exports = router;
