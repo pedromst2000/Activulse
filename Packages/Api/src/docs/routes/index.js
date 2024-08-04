@@ -2,6 +2,7 @@ const fs = require("fs");
 const YAML = require("yaml");
 const cronjob = require("./cronjob");
 const auth = require("./auth");
+const users = require("./users");
 
 const getWelcomeApi = YAML.parse(
 	fs.readFileSync("./src/docs/routes/default/get_welcome_api.yml", "utf8"),
@@ -14,4 +15,5 @@ module.exports = {
 	default: { getWelcomeApi, notFound },
 	cronjob,
 	auth,
+	users,
 };

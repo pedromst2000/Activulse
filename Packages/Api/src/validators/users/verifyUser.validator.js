@@ -1,4 +1,4 @@
-const { param } = require("express-validator");
+const { param, body } = require("express-validator");
 
 /**
  * Returns an array of validation rules for the verify user route.

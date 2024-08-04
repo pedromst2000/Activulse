@@ -1,6 +1,5 @@
 const utils = require("../../utils");
 const db = require("../../db");
-const { Op } = require("sequelize");
 const services = require("../../services");
 const templates = require("../../templates");
 

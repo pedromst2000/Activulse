@@ -32,6 +32,11 @@ const swaggerDefinition = {
 		"/auth/register": {
 			post: routeDocs.auth.postRegister,
 		},
+
+		// USERS
+		"/users/verify/{token}": {
+			patch: routeDocs.users.patchVerifyUser,
+		},
 	},
 };
 

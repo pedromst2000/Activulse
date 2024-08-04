@@ -1,0 +1,83 @@
+summary: Verify a user
+description: Verify the user account using the token sent to the user's email
+tags:
+  - "Users"
+parameters:
+  - name: token
+    in: path
+    description: Verification token sent to the user's email
+    required: true
+    schema:
+      type: string
+      example: OTFiZmVmMWUtZWU1Ni00MmI0LWFhNDMtZDUxZDIxZTQ1OWQz
+responses:
+  "200":
+    description: Success
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          User Verified:
+            value:
+              success: true
+              message: Verifified with success
+  "400":
+    description: Bad Request
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Invalid Token:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: "123"
+                  msg: "Invalid token"
+                  path: "token"
+                  location: "params"
+  "404":
+    description: User or token not found
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          User or token not found:
+            value:
+              success: false
+              message: User or token not found
+  "500":
+    description: Internal Server Error
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Internal Server Error:
+            value:
+              success: false
+              message: Something went wrong!
