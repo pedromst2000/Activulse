@@ -18,7 +18,7 @@ async function verifyUser(req, res) {
 		});
 
 		if (!user) {
-			utils.handleResponse(res, utils.http.StatusNotFound, "User not found");
+			utils.handleResponse(res, utils.http.StatusNotFound, "User or Token not found");
 			return;
 		}
 
@@ -27,7 +27,7 @@ async function verifyUser(req, res) {
 			verify_user_token: null,
 		});
 
-		utils.handleResponse(res, utils.http.StatusOK, "Verifified with success");
+		utils.handleResponse(res, utils.http.StatusOK, "User verified");
 	} catch (error) {
 		utils.handleError(res, error, __filename);
 	}
