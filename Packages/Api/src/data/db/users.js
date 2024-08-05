@@ -46,7 +46,7 @@ module.exports = [
 		selected_avatar_ID: 2,
 	},
 	{
-		email: "Avsa@hotmail.com",
+		email: "Avsa@gmail.com",
 		username: "Avsa",
 		password: utils.tokens.generateRandomBase64Token(),
 		verify_user_token: utils.tokens.generateRandomBase64Token(),
@@ -68,7 +68,7 @@ module.exports = [
 		selected_avatar_ID: 2,
 	},
 	{
-		email: "pedroK@hotmail.com",
+		email: "pedroK@gmail.com",
 		username: "pedroK",
 		password: utils.tokens.generateRandomBase64Token(),
 		verify_user_token: utils.tokens.generateRandomBase64Token(),
