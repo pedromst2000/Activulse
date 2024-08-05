@@ -13,4 +13,12 @@ router.patch(
 	controllers.users.verifyUser,
 );
 
+// Verify Confirmation
+router.get(
+	"/verify/:email",
+	validators.users.verifyConfirm(),
+	validators.validateResult,
+	controllers.users.verifyConfirm,
+);
+
 module.exports = router;
