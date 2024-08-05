@@ -8,14 +8,17 @@ function validator() {
 	return [
 		body("email").isEmail().withMessage("Email must be a valid email address"),
 
-		body("password")
-			.isString()
-			.matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[a-zA-Z\d\W_]{8,}$/)
-			.withMessage(
-				"Password must contain at least one lowercase letter, one uppercase letter, one digit and be at least 8 characters long",
-			),
+		body("password").isString().withMessage("Password must be a string"),
 
-		body("remember_me").isBoolean().withMessage("Remember me must be a boolean"),
+		body("remember_me").custom((value) => {
+
+			if(value === true || value === false) {
+				return true;
+			}
+
+			throw new Error("Remember me must be a boolean");
+
+		})
 	];
 }
 
