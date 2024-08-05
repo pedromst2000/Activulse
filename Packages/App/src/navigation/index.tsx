@@ -18,6 +18,8 @@ import Auth from '../screens/Auth';
 import OnBoarding from '../screens/Onboarding';
 import Profile from '../screens/Profile';
 import Store from '../screens/Store';
+import { useUserContext } from '../context/user';
+import utils from '../navigation/utils';
 
 type RootStackParamList = {
 	OnBoarding: undefined;
@@ -49,7 +51,7 @@ const Tab = createBottomTabNavigator<RootStackParamList>();
 
 const Navigation: React.FC = (): React.JSX.Element => {
 	const navigation = useNavigation();
-	// const { loggedUser } = useUserContext();
+	const { loggedUser } = useUserContext();
 
 	const [currentScreen, setCurrentScreen] = useState<string>('');
 	const [orientation, setOrientation] = useState<'PORTRAIT' | 'LANDSCAPE'>('PORTRAIT');
@@ -154,13 +156,12 @@ const Navigation: React.FC = (): React.JSX.Element => {
 			{/* Lifestyle */}
 			<Tab.Screen
 				name="Lifestyle"
-				// component={utils.guardClause(true, AdoptionFeed, loggedUser)}
+				// component={utils.guardClause(true, Lifestyle, loggedUser)}
 				component={Lifestyle}
-				options={{
+					options={{
 					tabBarIcon: ({ focused }) => {
 						return focused ? LifestyleIconSelected() : LifestyleIconNotSelected();
 					},
-					// tabBarItemStyle: config.navigator.tabItemStyle(currentScreen, 'Lifestyle'),
 				}}
 			/>
 
@@ -169,13 +170,12 @@ const Navigation: React.FC = (): React.JSX.Element => {
 			{/* Store */}
 			<Tab.Screen
 				name="Store"
-				// component={utils.guardClause(true, SittingFeed, loggedUser)}
-				component={Store}
+				// component={utils.guardClause(true, Store, loggedUser)}
+				component={Store}				
 				options={{
 					tabBarIcon: ({ focused }) => {
 						return focused ? StoreIconSelected() : StoreIconNotSelected();
 					},
-					// tabBarItemStyle: config.navigator.tabItemStyle(currentScreen, 'SittingFeed'),
 				}}
 			/>
 
@@ -190,7 +190,6 @@ const Navigation: React.FC = (): React.JSX.Element => {
 					tabBarIcon: ({ focused }) => {
 						return focused ? ProfileIconSelected() : ProfileIconNotSelected();
 					},
-					// tabBarItemStyle: config.navigator.tabItemStyle(current
 				}}
 			/>
 

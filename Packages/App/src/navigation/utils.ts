@@ -1,4 +1,4 @@
-// import { LoggedUser } from '../context/user/types';
+import { LoggedUser } from '../context/user/types';
 import Home from '../screens/Home';
 import OnBoarding from '../screens/Onboarding';
 
@@ -15,15 +15,16 @@ import OnBoarding from '../screens/Onboarding';
 const guardClause = (
 	mustBeLogged: boolean,
 	destiny: React.FC<any>,
-	// loggedUser: LoggedUser | null,
+	loggedUser: LoggedUser 
+ | null,
 ): React.FC => {
-	// if (mustBeLogged && !loggedUser) {
-	// 	return OnBoarding; // FallBack if not logged
-	// }
+	if (mustBeLogged && !loggedUser) {
+		return OnBoarding; // FallBack if not logged
+	}
 
-	// if (!mustBeLogged && loggedUser) {
-	// 	return AdoptionFeed; // FallBack if logged
-	// }
+	if (!mustBeLogged && loggedUser) {
+		return Home; // FallBack if logged
+	}
 
 	return destiny;
 };
