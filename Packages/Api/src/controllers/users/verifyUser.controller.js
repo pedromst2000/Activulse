@@ -27,7 +27,7 @@ async function verifyUser(req, res) {
 			verify_user_token: null,
 		});
 
-		utils.handleResponse(res, utils.http.StatusOK, "User verified");
+		utils.handleResponse(res, utils.http.StatusOK, "Verified with success");
 	} catch (error) {
 		utils.handleError(res, error, __filename);
 	}
