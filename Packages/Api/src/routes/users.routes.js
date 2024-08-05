@@ -21,4 +21,12 @@ router.get(
 	controllers.users.verifyConfirm,
 );
 
+// Resend Verification Email
+router.post(
+	"/resend-verify/:email",
+	validators.users.resendVerify(),
+	validators.validateResult,
+	controllers.users.resendVerify,
+);
+
 module.exports = router;
