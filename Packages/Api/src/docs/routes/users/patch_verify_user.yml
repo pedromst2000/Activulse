@@ -50,7 +50,7 @@ responses:
                   path: "token"
                   location: "params"
   "404":
-    description: User or token not found
+    description: Not Found
     content:
       application/json:
         schema:

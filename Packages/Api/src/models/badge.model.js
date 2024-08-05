@@ -24,7 +24,7 @@ const BadgeModel = (sequelize) => {
 			earn_points: {
 				type: DataTypes.INTEGER,
 				allowNull: false,
-			},	
+			},
 		},
 		{
 			sequelize,

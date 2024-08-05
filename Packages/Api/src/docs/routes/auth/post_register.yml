@@ -109,8 +109,8 @@ responses:
           Email already in use:
             value:
               success: false
-              message: There's already a user with the same email   
-        
+              message: There's already a user with the same email
+
   "500":
     description: Internal Server Error
     content:

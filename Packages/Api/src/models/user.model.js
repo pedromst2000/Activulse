@@ -127,7 +127,6 @@ const UserModel = (sequelize) => {
 			selected_avatar_ID: {
 				type: DataTypes.INTEGER,
 				allowNull: true,
-		
 			},
 		},
 		{

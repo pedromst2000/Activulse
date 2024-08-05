@@ -50,7 +50,7 @@ async function register(req, res) {
 			change_password_token_generated_at: db.mysql.sequelize.literal("CURRENT_TIMESTAMP"),
 			verify_user_token: utils.tokens.generateRandomBase64Token(),
 		});
-		
+
 		// Sending the confirmation email
 		await services.sendEmail({
 			from: "Activulse Team",

@@ -27,7 +27,6 @@ function validator() {
 			.matches(/@gmail.com$/)
 			.withMessage("Email must be a gmail account"),
 
-
 		body("password")
 			.exists()
 			.withMessage("Password is required")

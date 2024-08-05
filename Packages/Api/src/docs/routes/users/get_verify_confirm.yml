@@ -54,7 +54,7 @@ responses:
                   path: "email"
                   location: "params"
   "404":
-    description: User not found
+    description: Not Found
     content:
       application/json:
         schema:
