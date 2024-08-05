@@ -171,7 +171,7 @@ cd packages/App
 npm start
 ```
 
-6. Start the Web Client
+7. Start the Web Client
 
 ```sh
 cd packages/Web
