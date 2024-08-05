@@ -1,0 +1,99 @@
+summary: Resend verification email
+description: Resend the verification email to the user account.
+tags:
+  - "Users"
+parameters:
+  - name: email
+    in: path
+    description: Email that was resent the verification token.
+    required: true
+    schema:
+      type: string
+      example: "pedromst@gmail.com"
+responses:
+  "202":
+    description: Accepted
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Resend Verification Email:
+            value:
+              success: true
+              message: A confirmation email has been resent to your email address.
+  "400":
+    description: Bad Request
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Invalid Email:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: "pedrogmail"
+                  msg: "Email must be a valid email address"
+                  path: "email"
+                  location: "params"
+  "404":
+    description: Not Found
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          User not found:
+            value:
+              success: false
+              message: User not found
+  "409":
+    description: Conflict
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          User already verified:
+            value:
+              success: false
+              message: User already verified!
+  "500":
+    description: Internal Server Error
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Internal Server Error:
+            value:
+              success: false
+              message: Something went wrong!
