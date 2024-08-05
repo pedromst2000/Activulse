@@ -73,7 +73,7 @@ const VerifyUser: React.FC = () => {
 
 								text-secondary-700"
 							>
-								Enjoy our App and start boost your heart health!
+								You can now Sign In! Enjoy our App and start boost your heart health!
 							</p>
 						</>
 					) : (
@@ -89,9 +89,8 @@ const VerifyUser: React.FC = () => {
 							text-secondary-700"
 							>
 								{status}! Try to resend the verification email from the app or confirm the
-								verification on the App to {" "}
-								<b>check if you are already verified.</b>
-								{" "} If you login successfully, ignore this message. 
+								verification on the App to <b>check if you are already verified.</b> If you
+								login successfully, ignore this message.
 							</p>
 						</>
 					)}
