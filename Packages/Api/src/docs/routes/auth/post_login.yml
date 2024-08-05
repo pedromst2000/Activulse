@@ -1,0 +1,150 @@
+summary: Login
+description: Generates a Auth JWT Token and a Refresh JWT Token for the user.
+tags:
+  - "Auth"
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          email:
+            type: string
+            required: true
+            example: pedromst@gmail.com
+          password:
+            type: string
+            required: true
+            example: Hello_World123
+          remember_me:
+            type: boolean
+            required: true
+            example: true
+responses:
+  "200":
+    description: Success
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+            data:
+              type: object
+              properties:
+                authToken:
+                  type: string
+                refreshToken:
+                  type: string
+        examples:
+          Success:
+            value:
+              success: true
+              message: Login with success
+              data:
+                type: object
+                properties:
+                  authToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJlbWVtYmVyTWUiOmZhbHNlLCJpYXQiOjE2OTg0MDU4ODIsImV4cCI6MTY5ODQwOTQ4Mn0.o_k5yMX1w-y6Vnicscdcyd2BacFitBiExx5OreezMnM
+                  refreshToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJlbWVtYmVyTWUiOmZhbHNlLCJpYXQiOjE2OTg0MDU4ODIsImV4cCI6MTY5ODQ5MjI4Mn0.VMkxKbQBopfJBnOITugBHbM_D0JxhmH_AL7O0tDaV4E
+                  user:
+                    id: 5
+                    username: pedromst
+                    points: 0
+  "400":
+    description: Bad Request
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Invalid Email:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: "invalid email pedrogmailsadcom"
+                  msg: "Email must be a valid email address"
+                  path: "email"
+                  location: "body"
+          Invalid Password:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: 123
+                  msg: "Password must be a string"
+                  path: "password"
+                  location: "body"
+          Invalid Remember Me:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: "asd"
+                  msg: "Remember me must be a boolean"
+                  path: "remember_me"
+                  location: "body"
+  "401":
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Wrong Password:
+            value:
+              success: false
+              message: Wrong password
+          User Not Verified:
+            value:
+              success: false
+              message: An email has been sent to you to verify your account
+  "404":
+    description: Not Found
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          User Not Found:
+            value:
+              success: false
+              message: There's no user with that email
+  "500":
+    description: Internal Server Error
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Internal Server Error:
+            value:
+              success: false
+              message: Something went wrong!
