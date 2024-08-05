@@ -1,0 +1,87 @@
+summary: Verify confirm user
+description: Verify if the user account is verified or not.
+tags:
+  - "Users"
+parameters:
+  - name: email
+    in: path
+    description: Email that was sent the verification token.
+    required: true
+    schema:
+      type: string
+      example: "pedromst@gmail.com"
+responses:
+  "200":
+    description: Success
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          User Verified:
+            value:
+              success: true
+              message: User verified
+          User Not Verified:
+            value:
+              success: true
+              message: User not verified
+  "400":
+    description: Bad Request
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Invalid Email:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: "pedrogmail"
+                  msg: "Email must be a valid email address"
+                  path: "email"
+                  location: "params"
+  "404":
+    description: User not found
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          User not found:
+            value:
+              success: false
+              message: User not found
+  "500":
+    description: Internal Server Error
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Internal Server Error:
+            value:
+              success: false
+              message: Something went wrong!

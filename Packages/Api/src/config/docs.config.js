@@ -37,6 +37,10 @@ const swaggerDefinition = {
 		"/users/verify/{token}": {
 			patch: routeDocs.users.patchVerifyUser,
 		},
+
+		"/users/verify/{email}": {
+			get: routeDocs.users.getVerifyConfirm,
+		},
 	},
 };
 
