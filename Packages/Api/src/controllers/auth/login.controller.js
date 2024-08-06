@@ -45,7 +45,7 @@ async function login(req, res) {
 				from: "Activulse Team",
 				to: [{ Email: user.email, Name: user.display_name }],
 				subject: "Welcome to Activulse!",
-				content: templates.verifyEmail(user.verify_user_token),
+				content: templates.verifyEmail(user.verify_user_token, user.username),
 			});
 
 			utils.handleResponse(
