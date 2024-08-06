@@ -178,10 +178,25 @@ cd packages/Web
 npm run dev
 ```
 
-
 ## :construction_worker_man: Architecture
 
-![Architecture](./images/Arquitetura.png)
+<ul>
+  <li>
+    Adapted MVC Architecture With the following layers:
+  </li>
+  <br>
+  <ul>
+    <li>Models (Sequelize ORM)
+    </li>
+    <li>Controllers (Express + Logic Layer)
+    </li>
+      <li>Views (React Native UI Views)
+    </li>
+</ul>
+
+  <br>
+
+![Architecture](./images/Architecture.png)
 
 ## :writing_hand: Documentation (Report and Rest API)
 
