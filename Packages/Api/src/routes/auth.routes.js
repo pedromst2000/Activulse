@@ -21,4 +21,12 @@ router.post(
 	controllers.auth.register,
 );
 
+// Request reset password
+router.post(
+	"/request-reset-password",
+	validators.auth.requestResetPassword(),
+	validators.validateResult,
+	controllers.auth.requestResetPassword,
+);
+
 module.exports = router;

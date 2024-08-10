@@ -1,7 +1,7 @@
 const verifyEmail = require("./verifyEmail.template");
-// const requestResetPassword = require("./requestResetPassword.template");
+const verifyOTP = require("./verifyOTP.template");
 
 module.exports = {
 	verifyEmail,
-	// requestResetPassword,
+	verifyOTP,
 };
