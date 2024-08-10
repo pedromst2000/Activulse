@@ -28,11 +28,11 @@ const UserModel = (sequelize) => {
 				type: DataTypes.STRING(255),
 				allowNull: false,
 			},
-			OTP_token: {
-				type: DataTypes.STRING(4),
+			OTP: {
+				type: DataTypes.STRING(255),
 				allowNull: true,
 			},
-			OTP_token_generated_at: {
+			OTP_generated_at: {
 				type: DataTypes.DATE,
 				allowNull: true,
 			},

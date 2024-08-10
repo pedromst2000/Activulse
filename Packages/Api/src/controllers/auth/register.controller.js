@@ -16,7 +16,7 @@ const templates = require("../../templates");
  * @param {import("express").Response} res - The Express Response object.
  * @returns {Promise<void>}
  */
-
+  
 async function register(req, res) {
 	try {
 		/**  @type {RegisterRequest} */
@@ -38,7 +38,8 @@ async function register(req, res) {
 		if (findEmail) {
 			utils.handleResponse(res, utils.http.StatusConflict, "The email already exists");
 			return;
-		}
+		}		
+		
 
 		const hashedPassword = await utils.password.hash(password);
 

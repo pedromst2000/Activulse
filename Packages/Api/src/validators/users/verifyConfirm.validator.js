@@ -1,7 +1,7 @@
 const { param } = require("express-validator");
 
 /**
- * Returns an array of validation rules for the login route.
+ * Returns an array of validation rules for the resend verify route.
  * @returns {Array} An array of validation rules.
  */
 function validator() {
