@@ -137,8 +137,12 @@ chmod +x ./scripts/macos-start-project.sh && ./scripts/macos-start-project.sh
   cd packages/Api
   npm install
 
-  cd ../app
+  cd packages/app
   npm install
+
+  cd packages/web
+  npm install
+
 
 ```
 
@@ -150,11 +154,11 @@ chmod +x ./scripts/macos-start-project.sh && ./scripts/macos-start-project.sh
 
 And follow the `.env.example` file in each directory to fill in the required environment variables.
 
-4. Start the database
+4. Reset the database
 
 ```sh
 cd packages/Api
-npm run db
+npm run reset-db
 ```
 
 5. Start the API
