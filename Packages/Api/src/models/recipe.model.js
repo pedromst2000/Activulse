@@ -66,36 +66,6 @@ const RecipeModel = (sequelize) => {
 					using: "BTREE",
 					fields: [{ name: "recipe_ID" }],
 				},
-				{
-					name: "category_id",
-					using: "BTREE",
-					fields: [{ name: "category_id" }],
-				},
-				{
-					name: "title",
-					using: "BTREE",
-					fields: [{ name: "title" }],
-				},
-				{
-					name: "isPremium",
-					using: "BTREE",
-					fields: [{ name: "isPremium" }],
-				},
-				{
-					name: "price",
-					using: "BTREE",
-					fields: [{ name: "price" }],
-				},
-				{
-					name: "video_time",
-					using: "BTREE",
-					fields: [{ name: "video_time" }],
-				},
-				{
-					name: "diet_id",
-					using: "BTREE",
-					fields: [{ name: "diet_id" }],
-				},
 			],
 		},
 	);

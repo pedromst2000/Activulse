@@ -41,26 +41,6 @@ const BuyerModel = (sequelize) => {
 					using: "BTREE",
 					fields: [{ name: "buy_ID" }],
 				},
-				{
-					name: "activity_id",
-					using: "BTREE",
-					fields: [{ name: "activity_id" }],
-				},
-				{
-					name: "recipe_id",
-					using: "BTREE",
-					fields: [{ name: "recipe_id" }],
-				},
-				{
-					name: "banner_id",
-					using: "BTREE",
-					fields: [{ name: "banner_id" }],
-				},
-				{
-					name: "user_id",
-					using: "BTREE",
-					fields: [{ name: "user_id" }],
-				},
 			],
 		},
 	);

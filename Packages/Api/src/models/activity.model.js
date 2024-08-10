@@ -74,36 +74,6 @@ const ActivityModel = (sequelize) => {
 					using: "BTREE",
 					fields: [{ name: "activity_ID" }],
 				},
-				{
-					name: "category_id",
-					using: "BTREE",
-					fields: [{ name: "category_id" }],
-				},
-				{
-					name: "title",
-					using: "BTREE",
-					fields: [{ name: "title" }],
-				},
-				{
-					name: "isPremium",
-					using: "BTREE",
-					fields: [{ name: "isPremium" }],
-				},
-				{
-					name: "price",
-					using: "BTREE",
-					fields: [{ name: "price" }],
-				},
-				{
-					name: "video_time",
-					using: "BTREE",
-					fields: [{ name: "video_time" }],
-				},
-				{
-					name: "tag",
-					using: "BTREE",
-					fields: [{ name: "tag" }],
-				},
 			],
 		},
 	);

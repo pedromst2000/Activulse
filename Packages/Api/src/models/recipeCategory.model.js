@@ -32,11 +32,6 @@ const RecipeCategoryModel = (sequelize) => {
 					using: "BTREE",
 					fields: [{ name: "recipe_category_ID" }],
 				},
-				{
-					name: "category",
-					using: "BTREE",
-					fields: [{ name: "category" }],
-				},
 			],
 		},
 	);

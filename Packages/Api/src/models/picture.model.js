@@ -59,36 +59,6 @@ const PictureModel = (sequelize) => {
 					using: "BTREE",
 					fields: [{ name: "picture_ID" }],
 				},
-				{
-					name: "challenge_id",
-					using: "BTREE",
-					fields: [{ name: "challenge_id" }],
-				},
-				{
-					name: "recipe_id",
-					using: "BTREE",
-					fields: [{ name: "recipe_id" }],
-				},
-				{
-					name: "activity_id",
-					using: "BTREE",
-					fields: [{ name: "activity_id" }],
-				},
-				{
-					name: "badge_id",
-					using: "BTREE",
-					fields: [{ name: "badge_id" }],
-				},
-				{
-					name: "banner_id",
-					using: "BTREE",
-					fields: [{ name: "banner_id" }],
-				},
-				// {
-				// 	name: "diet_id",
-				// 	using: "BTREE",
-				// 	fields: [{ name: "diet_id" }],
-				// },
 			],
 		},
 	);

@@ -28,14 +28,6 @@ const UserModel = (sequelize) => {
 				type: DataTypes.STRING(255),
 				allowNull: false,
 			},
-			change_password_token: {
-				type: DataTypes.STRING(255),
-				allowNull: true,
-			},
-			change_password_token_generated_at: {
-				type: DataTypes.DATE,
-				allowNull: true,
-			},
 			OTP_token: {
 				type: DataTypes.STRING(4),
 				allowNull: true,
@@ -139,51 +131,6 @@ const UserModel = (sequelize) => {
 					unique: true,
 					using: "BTREE",
 					fields: [{ name: "user_ID" }],
-				},
-				{
-					name: "email",
-					unique: true,
-					using: "BTREE",
-					fields: [{ name: "email" }],
-				},
-				{
-					name: "username",
-					unique: true,
-					using: "BTREE",
-					fields: [{ name: "username" }],
-				},
-				{
-					name: "change_password_token",
-					unique: true,
-					using: "BTREE",
-					fields: [{ name: "change_password_token" }],
-				},
-				{
-					name: "OTP_token",
-					unique: true,
-					using: "BTREE",
-					fields: [{ name: "OTP_token" }],
-				},
-				{
-					name: "verify_user_token",
-					unique: true,
-					using: "BTREE",
-					fields: [{ name: "verify_user_token" }],
-				},
-				{
-					name: "diet_id",
-					using: "BTREE",
-					fields: [{ name: "diet_id" }],
-				},
-				{
-					name: "selected_banner_ID",
-					using: "BTREE",
-					fields: [{ name: "selected_banner_ID" }],
-				},
-				{
-					name: "selected_avatar_ID",
-					using: "BTREE",
-					fields: [{ name: "selected_avatar_ID" }],
 				},
 			],
 		},

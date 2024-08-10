@@ -38,22 +38,6 @@ const FavoriteModel = (sequelize) => {
 					using: "BTREE",
 					fields: [{ name: "favorite_ID" }],
 				},
-				{
-					name: "recipe_id",
-					using: "BTREE",
-					fields: [{ name: "recipe_id" }],
-				},
-
-				{
-					name: "activity_id",
-					using: "BTREE",
-					fields: [{ name: "activity_id" }],
-				},
-				{
-					name: "user_id",
-					using: "BTREE",
-					fields: [{ name: "user_id" }],
-				},
 			],
 		},
 	);

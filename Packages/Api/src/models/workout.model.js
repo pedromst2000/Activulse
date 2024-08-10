@@ -33,17 +33,6 @@ const WorkoutModel = (sequelize) => {
 					using: "BTREE",
 					fields: [{ name: "workout_ID" }],
 				},
-				{
-					name: "workout",
-					using: "BTREE",
-					fields: [{ name: "workout" }],
-				},
-
-				{
-					name: "activity_id",
-					using: "BTREE",
-					fields: [{ name: "activity_id" }],
-				},
 			],
 		},
 	);

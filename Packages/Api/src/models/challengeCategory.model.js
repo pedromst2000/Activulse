@@ -32,11 +32,6 @@ const ChallengeCategoryModel = (sequelize) => {
 					using: "BTREE",
 					fields: [{ name: "challenge_category_ID" }],
 				},
-				{
-					name: "category",
-					using: "BTREE",
-					fields: [{ name: "category" }],
-				},
 			],
 		},
 	);

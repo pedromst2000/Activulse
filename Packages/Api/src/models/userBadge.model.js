@@ -33,16 +33,6 @@ const UserBadgeModel = (sequelize) => {
 					using: "BTREE",
 					fields: [{ name: "user_badge_ID" }],
 				},
-				{
-					name: "user_id",
-					using: "BTREE",
-					fields: [{ name: "user_id" }],
-				},
-				{
-					name: "badge_id",
-					using: "BTREE",
-					fields: [{ name: "badge_id" }],
-				},
 			],
 		},
 	);

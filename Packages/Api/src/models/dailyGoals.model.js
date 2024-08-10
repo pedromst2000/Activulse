@@ -65,11 +65,6 @@ const DailyGoalsModel = (sequelize) => {
 					using: "BTREE",
 					fields: [{ name: "daily_goal_ID" }],
 				},
-				{
-					name: "user_id",
-					using: "BTREE",
-					fields: [{ name: "user_id" }],
-				},
 			],
 		},
 	);

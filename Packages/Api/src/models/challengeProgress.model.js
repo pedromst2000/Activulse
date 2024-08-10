@@ -63,16 +63,6 @@ const ChallengeProgressModel = (sequelize) => {
 					using: "BTREE",
 					fields: [{ name: "challenge_progress_ID" }],
 				},
-				{
-					name: "user_id",
-					using: "BTREE",
-					fields: [{ name: "user_id" }],
-				},
-				{
-					name: "challenge_id",
-					using: "BTREE",
-					fields: [{ name: "challenge_id" }],
-				},
 			],
 		},
 	);

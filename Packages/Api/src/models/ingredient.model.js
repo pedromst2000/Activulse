@@ -33,16 +33,6 @@ const IngredientModel = (sequelize) => {
 					using: "BTREE",
 					fields: [{ name: "ingredient_ID" }],
 				},
-				{
-					name: "ingredient",
-					using: "BTREE",
-					fields: [{ name: "ingredient" }],
-				},
-				{
-					name: "recipe_id",
-					using: "BTREE",
-					fields: [{ name: "recipe_id" }],
-				},
 			],
 		},
 	);

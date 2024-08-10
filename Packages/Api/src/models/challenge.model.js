@@ -66,26 +66,6 @@ const ChallengeModel = (sequelize) => {
 					using: "BTREE",
 					fields: [{ name: "challenge_ID" }],
 				},
-				{
-					name: "category_id",
-					using: "BTREE",
-					fields: [{ name: "category_id" }],
-				},
-				{
-					name: "title",
-					using: "BTREE",
-					fields: [{ name: "title" }],
-				},
-				{
-					name: "difficulty",
-					using: "BTREE",
-					fields: [{ name: "difficulty" }],
-				},
-				{
-					name: "earn_points",
-					using: "BTREE",
-					fields: [{ name: "earn_points" }],
-				},
 			],
 		},
 	);

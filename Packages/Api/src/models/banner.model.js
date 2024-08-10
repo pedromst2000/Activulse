@@ -29,11 +29,6 @@ const BannerModel = (sequelize) => {
 					using: "BTREE",
 					fields: [{ name: "banner_ID" }],
 				},
-				{
-					name: "price",
-					using: "BTREE",
-					fields: [{ name: "price" }],
-				},
 			],
 		},
 	);

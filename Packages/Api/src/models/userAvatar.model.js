@@ -33,16 +33,6 @@ const UserAvatarModel = (sequelize) => {
 					using: "BTREE",
 					fields: [{ name: "user_avatar_ID" }],
 				},
-				{
-					name: "user_id",
-					using: "BTREE",
-					fields: [{ name: "user_id" }],
-				},
-				{
-					name: "avatar_id",
-					using: "BTREE",
-					fields: [{ name: "avatar_id" }],
-				},
 			],
 		},
 	);
