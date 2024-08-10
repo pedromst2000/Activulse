@@ -137,8 +137,12 @@ chmod +x ./scripts/macos-start-project.sh && ./scripts/macos-start-project.sh
   cd packages/Api
   npm install
 
-  cd ../app
+  cd packages/app
   npm install
+
+  cd packages/web
+  npm install
+
 
 ```
 
