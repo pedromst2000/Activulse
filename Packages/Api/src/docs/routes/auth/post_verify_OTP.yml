@@ -1,0 +1,144 @@
+summary: Verify OTP code
+description: Verify the OTP code sent to the user's email for changing the password
+tags:
+  - "Auth"
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          OTP:
+            type: string
+            required: true
+            example: 123456
+parameters:
+  - name: email
+    in: path
+    description: Email that was sent the verification OTP code.
+    required: true
+    schema:
+      type: string
+      example: pedromst@gmail.com
+responses:
+  "200":
+    description: Success
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          OTP Verified:
+            value:
+              success: true
+              message: OTP verified successfully
+  "400":
+    description: Bad Request
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Invalid Email:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: "pedrogmail"
+                  msg: "Email must be a valid email address"
+                  path: "email"
+                  location: "params"
+          Invalid OTP:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: "1234"
+                  msg: "OTP must be 6 digits long"
+                  path: "OTP"
+                  location: "body"
+          Expired OTP:
+            value:
+              success: false
+              message: OTP expired
+  "401":
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          OTP Not Match:
+            value:
+              success: false
+              message: Invalid OTP!
+  "404":
+    description: Not Found
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          User Not Found:
+            value:
+              success: false
+              message: User not found
+          OTP not generated:
+            value:
+              success: false
+              message: OTP not generated yet!
+  "409":
+    description: Conflict
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Already Verified:
+            value:
+              success: false
+              message: Already verified!         
+  "500":
+    description: Internal Server Error
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Internal Server Error:
+            value:
+              success: false
+              message: Something went wrong!

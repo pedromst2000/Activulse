@@ -27,7 +27,7 @@ async function verifyOTP(req, res) {
 			user.OTP_generated_at === null &&
 			user.OTP_verified === false
 		) {
-			utils.handleResponse(res, utils.http.StatusBadRequest, "OTP not generated yet!");
+			utils.handleResponse(res, utils.http.StatusNotFound, "OTP not generated yet!");
 			return;
 		}
 
