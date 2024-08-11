@@ -67,6 +67,7 @@ const ChallengeModel = (sequelize) => {
 					fields: [{ name: "challenge_ID" }],
 				},
 			],
+			logging: false,
 		},
 	);
 };

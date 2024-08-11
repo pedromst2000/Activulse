@@ -28,4 +28,12 @@ router.post(
 	controllers.auth.requestResetPassword,
 );
 
+// Verify OTP for reset password
+router.post(
+	"/verify-OTP/:email",
+	validators.auth.verifyOTP(),
+	validators.validateResult,
+	controllers.auth.verifyOTP,
+);
+
 module.exports = router;

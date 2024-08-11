@@ -5,7 +5,10 @@ const { param } = require("express-validator");
  * @returns {Array} An array of validation rules.
  */
 function validator() {
-	return [param("token").isString().isLength({ min: 10 }).withMessage("Invalid token")];
+	return [
+		param("token").exists().withMessage("Token is required"),
+		param("token").isString().isLength({ min: 10 }).withMessage("Invalid token"),
+	];
 }
 
 module.exports = validator;

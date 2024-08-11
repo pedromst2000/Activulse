@@ -61,6 +61,10 @@ const ActivityModel = (sequelize) => {
 			category_id: {
 				type: DataTypes.INTEGER,
 				allowNull: false,
+				references: {
+					model: "activity_category",
+					key: "activity_category_ID",
+				},
 			},
 		},
 		{
@@ -75,6 +79,7 @@ const ActivityModel = (sequelize) => {
 					fields: [{ name: "activity_ID" }],
 				},
 			],
+			logging: false,
 		},
 	);
 };

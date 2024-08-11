@@ -26,17 +26,15 @@ async function requestResetPassword(req, res) {
 
 		await user.update({
 			OTP: await utils.password.hash(OTP),
-			OTP_generated_at: db.mysql.sequelize.literal(
-				"CONVERT_TZ(CURRENT_TIMESTAMP, '+00:00', '+01:00')",
-			),
+			OTP_generated_at: db.mysql.sequelize.literal("CURRENT_TIMESTAMP"),
 		});
 
 		await services.sendEmail({
-			from: "Activulse Team",  
+			from: "Activulse Team",
 			to: [{ Email: user.email, Name: user.username }],
 			subject: "Activulse - Request to reset password",
 			content: templates.verifyOTP(OTP),
-		})
+		});
 
 		utils.handleResponse(
 			res,

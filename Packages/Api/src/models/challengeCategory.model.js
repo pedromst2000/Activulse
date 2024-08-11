@@ -33,6 +33,7 @@ const ChallengeCategoryModel = (sequelize) => {
 					fields: [{ name: "challenge_category_ID" }],
 				},
 			],
+			logging: false,
 		},
 	);
 };

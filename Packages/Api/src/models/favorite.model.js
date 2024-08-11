@@ -39,6 +39,7 @@ const FavoriteModel = (sequelize) => {
 					fields: [{ name: "favorite_ID" }],
 				},
 			],
+			logging: false,
 		},
 	);
 };

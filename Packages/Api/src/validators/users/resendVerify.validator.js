@@ -5,7 +5,10 @@ const { param } = require("express-validator");
  * @returns {Array} An array of validation rules.
  */
 function validator() {
-	return [param("email").isEmail().withMessage("Email must be a valid email address")];
+	return [
+		param("email").exists().withMessage("Email is required"),
+		param("email").isEmail().withMessage("Email must be a valid email address"),
+	];
 }
 
 module.exports = validator;

@@ -30,6 +30,7 @@ const DietModel = (sequelize) => {
 					fields: [{ name: "diet_ID" }],
 				},
 			],
+			logging: false,
 		},
 	);
 };

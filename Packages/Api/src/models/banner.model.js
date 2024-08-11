@@ -30,6 +30,7 @@ const BannerModel = (sequelize) => {
 					fields: [{ name: "banner_ID" }],
 				},
 			],
+			logging: false,
 		},
 	);
 };

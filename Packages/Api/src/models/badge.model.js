@@ -38,6 +38,7 @@ const BadgeModel = (sequelize) => {
 					fields: [{ name: "badge_ID" }],
 				},
 			],
+			logging: false,
 		},
 	);
 };

@@ -67,6 +67,7 @@ const RecipeModel = (sequelize) => {
 					fields: [{ name: "recipe_ID" }],
 				},
 			],
+			logging: false,
 		},
 	);
 };

@@ -60,6 +60,7 @@ const PictureModel = (sequelize) => {
 					fields: [{ name: "picture_ID" }],
 				},
 			],
+			logging: false,
 		},
 	);
 };

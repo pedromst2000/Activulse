@@ -34,7 +34,9 @@ const IngredientModel = (sequelize) => {
 					fields: [{ name: "ingredient_ID" }],
 				},
 			],
+			logging: false,
 		},
+			
 	);
 };
 

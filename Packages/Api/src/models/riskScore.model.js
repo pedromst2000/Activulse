@@ -50,6 +50,7 @@ const RiskScoreModel = (sequelize) => {
 					fields: [{ name: "user_id" }],
 				},
 			],
+			logging: false,
 		},
 	);
 };

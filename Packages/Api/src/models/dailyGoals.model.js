@@ -66,6 +66,7 @@ const DailyGoalsModel = (sequelize) => {
 					fields: [{ name: "daily_goal_ID" }],
 				},
 			],
+			logging: false,
 		},
 	);
 };

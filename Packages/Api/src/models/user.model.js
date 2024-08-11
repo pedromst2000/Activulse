@@ -36,6 +36,10 @@ const UserModel = (sequelize) => {
 				type: DataTypes.DATE,
 				allowNull: true,
 			},
+			OTP_verified: {
+				type: DataTypes.BOOLEAN,
+				defaultValue: false,
+			},
 			verify_user_token: {
 				type: DataTypes.STRING(255),
 				allowNull: true,
@@ -133,6 +137,7 @@ const UserModel = (sequelize) => {
 					fields: [{ name: "user_ID" }],
 				},
 			],
+			logging: false,
 		},
 	);
 };

@@ -64,6 +64,7 @@ const ChallengeProgressModel = (sequelize) => {
 					fields: [{ name: "challenge_progress_ID" }],
 				},
 			],
+			logging: false,
 		},
 	);
 };

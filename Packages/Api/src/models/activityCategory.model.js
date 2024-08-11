@@ -38,6 +38,7 @@ const ActivityCategoryModel = (sequelize) => {
 					fields: [{ name: "category" }],
 				},
 			],
+			logging: false,
 		},
 	);
 };

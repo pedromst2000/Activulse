@@ -42,6 +42,7 @@ const BuyerModel = (sequelize) => {
 					fields: [{ name: "buy_ID" }],
 				},
 			],
+			logging: false,
 		},
 	);
 };

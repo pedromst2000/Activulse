@@ -34,6 +34,7 @@ const InstructionModel = (sequelize) => {
 					fields: [{ name: "instruction_ID" }],
 				},
 			],
+			logging: false,
 		},
 	);
 };

@@ -34,6 +34,7 @@ const WorkoutModel = (sequelize) => {
 					fields: [{ name: "workout_ID" }],
 				},
 			],
+			logging: false,
 		},
 	);
 };

@@ -56,6 +56,7 @@ const UserActivityModel = (sequelize) => {
 					fields: [{ name: "user_id" }],
 				},
 			],
+			logging: false,
 		},
 	);
 };

@@ -20,10 +20,10 @@ const sequelize = new Sequelize(
 );
 
 // HARD RESET (DROP ALL TABLES)
-const forceSync = () => sequelize.sync({ force: true });
+const forceSync = () => sequelize.sync({ force: true, logging: false });
 
 // Sync all the models (create the tables and add the foreign keys)
-const alterSync = () => sequelize.sync({ alter: true });
+const alterSync = () => sequelize.sync({ alter: true, logging: false });
 
 const mysql = { sequelize, ...models.init(sequelize), forceSync, alterSync };
 

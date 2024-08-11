@@ -33,6 +33,7 @@ const RecipeCategoryModel = (sequelize) => {
 					fields: [{ name: "recipe_category_ID" }],
 				},
 			],
+			logging: false,
 		},
 	);
 };

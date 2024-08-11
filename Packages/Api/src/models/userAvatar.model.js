@@ -34,6 +34,7 @@ const UserAvatarModel = (sequelize) => {
 					fields: [{ name: "user_avatar_ID" }],
 				},
 			],
+			logging: false,
 		},
 	);
 };
