@@ -9,7 +9,13 @@ const postLogin = YAML.parse(
 	fs.readFileSync("./src/docs/routes/auth/post_login.yml", "utf8"),
 );
 
+const postRequestResetPassword = YAML.parse(
+	fs.readFileSync("./src/docs/routes/auth/post_request_reset_password.yml", "utf8"),
+);
+
+
 module.exports = {
 	postRegister,
 	postLogin,
+	postRequestResetPassword,
 };

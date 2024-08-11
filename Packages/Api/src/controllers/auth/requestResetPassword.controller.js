@@ -32,11 +32,11 @@ async function requestResetPassword(req, res) {
 		});
 
 		await services.sendEmail({
-			from: "Activulse Team",
+			from: "Activulse Team",  
 			to: [{ Email: user.email, Name: user.username }],
 			subject: "Activulse - Request to reset password",
 			content: templates.verifyOTP(OTP),
-		});
+		})
 
 		utils.handleResponse(
 			res,

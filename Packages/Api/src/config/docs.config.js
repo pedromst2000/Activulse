@@ -37,6 +37,10 @@ const swaggerDefinition = {
 			post: routeDocs.auth.postLogin,
 		},
 
+		"/auth/request-reset-password": {
+			post: routeDocs.auth.postRequestResetPassword,
+		},
+
 		// USERS
 		"/users/verify/{token}": {
 			patch: routeDocs.users.patchVerifyUser,
