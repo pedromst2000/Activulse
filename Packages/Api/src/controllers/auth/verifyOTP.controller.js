@@ -31,27 +31,23 @@ async function verifyOTP(req, res) {
 			return;
 		}
 
-		if (
-			user.OTP === null &&
-			user.OTP_generated_at === null &&
-			user.OTP_verified === true
-		) {
+		const doOTPMatch = await utils.password.compare(OTP, user.OTP);
+
+		// Check if the OTP is expired
+		const currentTime = new Date();
+		const OTPTime = new Date(user.OTP_generated_at);
+		const diff = currentTime.getTime() - OTPTime.getTime();
+
+		if (user.OTP_verified === true && doOTPMatch && diff <= 180000) {
 			utils.handleResponse(res, utils.http.StatusConflict, "Already verified!");
 			return;
 		}
 
 		if (user.OTP !== null && user.OTP_generated_at !== null) {
-			const doOTPMatch = await utils.password.compare(OTP, user.OTP);
-
 			if (!doOTPMatch) {
 				utils.handleResponse(res, utils.http.StatusUnauthorized, "Invalid OTP!");
 				return;
 			}
-
-			// Check if the OTP is expired
-			const currentTime = new Date();
-			const OTPTime = new Date(user.OTP_generated_at);
-			const diff = currentTime.getTime() - OTPTime.getTime();
 
 			if (diff > 180000) {
 				// 180000 milliseconds = 3 minutes
@@ -62,8 +58,6 @@ async function verifyOTP(req, res) {
 
 			await db.mysql.User.update(
 				{
-					OTP: null,
-					OTP_generated_at: null,
 					OTP_verified: true,
 				},
 				{
