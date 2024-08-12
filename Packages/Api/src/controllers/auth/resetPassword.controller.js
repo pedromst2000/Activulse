@@ -40,6 +40,11 @@ async function resetPassword(req, res) {
 				return;
 			}
 
+			if(user.OTP_verified === false) {
+				utils.handleResponse(res, utils.http.StatusUnauthorized, "OTP not verified");
+				return;
+			}
+
 			const hashedPassword = await utils.password.hash(new_password);
 
 			await user.update({
