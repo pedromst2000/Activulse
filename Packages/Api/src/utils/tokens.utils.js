@@ -23,7 +23,7 @@ const generateToken = (userId, type, rememberMe) => {
 			: jwtConfig.refreshExpiresIn;
 	}
 
-	const payload = { userId, rememberMe };
+	const payload = { userId: userId, remember_me: rememberMe };
 
 	const token = jwt.sign(payload, secret, {
 		expiresIn,

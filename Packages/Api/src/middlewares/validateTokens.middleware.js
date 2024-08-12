@@ -44,6 +44,7 @@ async function validateTokens(req, res, next) {
 		}
 
 		const decodedAuthToken = utils.tokens.decodeToken(authToken, "authToken");
+
 		const decodedRefreshToken = utils.tokens.decodeToken(refreshToken, "refreshToken");
 
 		// Check if the refresh token is about to expire (less than config.tokens.refreshGenerateIn seconds left)

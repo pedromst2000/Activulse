@@ -57,8 +57,13 @@ async function login(req, res) {
 		}
 
 		// Generate the jwt auth token and the refresh token
-		const authToken = utils.tokens.generateToken(user.id, "authToken");
-		const refreshToken = utils.tokens.generateToken(user.id, "refreshToken", remember_me);
+		const authToken = utils.tokens.generateToken(user.user_ID, "authToken");
+
+		const refreshToken = utils.tokens.generateToken(
+			user.user_ID,
+			"refreshToken",
+			remember_me,
+		);
 
 		utils.handleResponse(res, utils.http.StatusOK, "Login with success", {
 			authToken,
