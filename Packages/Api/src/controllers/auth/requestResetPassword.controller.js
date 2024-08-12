@@ -13,7 +13,8 @@ const templates = require("../../templates");
 async function requestResetPassword(req, res) {
 	try {
 		const { email } = req.body;
-		const OTP = Math.random().toString().slice(2, 8); // Generate a random 6-digit OTP
+
+		const OTP = Math.floor(100000 + Math.random() * 900000).toString(); // Generate a random 6-digit OTP digits different
 
 		const user = await db.mysql.User.findOne({
 			where: { email: email },

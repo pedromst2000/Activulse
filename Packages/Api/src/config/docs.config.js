@@ -37,11 +37,11 @@ const swaggerDefinition = {
 			post: routeDocs.auth.postLogin,
 		},
 
-		"/auth/request-reset-password": {
+		"/auth/users/request-reset-password": {
 			post: routeDocs.auth.postRequestResetPassword,
 		},
 
-		"/auth/verify-otp/{email}": {
+		"/auth/users/verify-otp/{email}": {
 			post: routeDocs.auth.postVerifyOTP,
 		},
 
