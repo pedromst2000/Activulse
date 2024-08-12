@@ -22,7 +22,7 @@ router.post(
 
 // Request reset password
 router.post(
-	"/request-reset-password",
+	"/users/request-reset-password",
 	validators.auth.requestResetPassword(),
 	validators.validateResult,
 	controllers.auth.requestResetPassword,
@@ -30,10 +30,18 @@ router.post(
 
 // Verify OTP for reset password
 router.post(
-	"/verify-OTP/:email",
+	"/users/verify-OTP/:email",
 	validators.auth.verifyOTP(),
 	validators.validateResult,
 	controllers.auth.verifyOTP,
+);
+
+// Reset Password
+router.patch(
+	"/users/reset-password/:email",
+	validators.auth.resetPassword(),
+	validators.validateResult,
+	controllers.auth.resetPassword,
 );
 
 module.exports = router;
