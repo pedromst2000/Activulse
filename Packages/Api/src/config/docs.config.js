@@ -45,6 +45,10 @@ const swaggerDefinition = {
 			post: routeDocs.auth.postVerifyOTP,
 		},
 
+		"/auth/users/reset-password/{email}": {
+			patch: routeDocs.auth.patchResetPassword,
+		},
+
 		// USERS
 		"/users/verify/{token}": {
 			patch: routeDocs.users.patchVerifyUser,
