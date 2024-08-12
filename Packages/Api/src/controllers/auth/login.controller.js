@@ -65,8 +65,8 @@ async function login(req, res) {
 			refreshToken,
 			user: {
 				id: user.user_ID,
-                username: user.username,
-                points: user.points,
+				username: user.username,
+				points: user.points,
 			},
 		});
 	} catch (error) {

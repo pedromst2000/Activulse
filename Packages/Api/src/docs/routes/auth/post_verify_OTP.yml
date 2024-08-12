@@ -125,7 +125,7 @@ responses:
           Already Verified:
             value:
               success: false
-              message: Already verified!         
+              message: Already verified!
   "500":
     description: Internal Server Error
     content:

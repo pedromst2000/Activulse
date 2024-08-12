@@ -36,7 +36,6 @@ const IngredientModel = (sequelize) => {
 			],
 			logging: false,
 		},
-			
 	);
 };
 
