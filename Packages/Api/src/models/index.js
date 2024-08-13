@@ -70,16 +70,14 @@ function init(sequelize) {
 		foreignKey: "diet_id",
 	});
 
-	// User - User Badge => N:N N:N
-	User.belongsToMany(Badge, {
-		through: UserBadge,
+	// User - User Badge => 1:N N:1
+	User.hasMany(UserBadge, {
 		foreignKey: "user_id",
-		otherKey: "badge_id",
+		onDelete: "CASCADE",
 	});
-	Badge.belongsToMany(User, {
-		through: UserBadge,
-		foreignKey: "badge_id",
-		otherKey: "user_id",
+
+	UserBadge.belongsTo(User, {
+		foreignKey: "user_id",
 	});
 
 	// User - User Avatar => 1:N N:1
@@ -101,39 +99,44 @@ function init(sequelize) {
 		foreignKey: "user_id",
 	});
 
-	// User - Buyer  => N:N N:N
-	User.belongsToMany(Banner, {
-		through: Buyer,
+	// User - Buyer => 1:N N:1
+	User.hasMany(Buyer, {
 		foreignKey: "user_id",
-		otherKey: "banner_id",
+		onDelete: "CASCADE",
 	});
-	Banner.belongsToMany(User, {
-		through: Buyer,
+
+	Buyer.belongsTo(User, {
+		foreignKey: "user_id",
+	});
+
+	// Banner - Buyer => 1:N N:1
+	Banner.hasMany(Buyer, {
 		foreignKey: "banner_id",
-		otherKey: "user_id",
+		onDelete: "CASCADE",
 	});
 
-	User.belongsToMany(Activity, {
-		through: Buyer,
-		foreignKey: "user_id",
-		otherKey: "activity_id",
-	});
-	Activity.belongsToMany(User, {
-		through: Buyer,
-		foreignKey: "activity_id",
-		otherKey: "user_id",
+	Buyer.belongsTo(Banner, {
+		foreignKey: "banner_id",
 	});
 
-	User.belongsToMany(Recipe, {
-		through: Buyer,
-		foreignKey: "user_id",
-		otherKey: "recipe_id",
-	});
-
-	Recipe.belongsToMany(User, {
-		through: Buyer,
+	// Recipe - Buyer => 1:N N:1
+	Recipe.hasMany(Buyer, {
 		foreignKey: "recipe_id",
-		otherKey: "user_id",
+		onDelete: "CASCADE",
+	});
+
+	Buyer.belongsTo(Recipe, {
+		foreignKey: "recipe_id",
+	});
+
+	// Activity - Buyer => 1:N N:1
+	Activity.hasMany(Buyer, {
+		foreignKey: "activity_id",
+		onDelete: "CASCADE",
+	});
+
+	Buyer.belongsTo(Activity, {
+		foreignKey: "activity_id",
 	});
 
 	// User - Challenge Progress => 1:N  N:1
@@ -201,17 +204,6 @@ function init(sequelize) {
 		foreignKey: "diet_id",
 	});
 
-	// // Recipe - Buyer => N:N N:N
-	// Recipe.belongsToMany(Buyer, {
-	// 	foreignKey: "recipe_id",
-	// 	otherKey: "user_id",
-	// 	through: Buyer,
-	// });
-	// Buyer.belongsToMany(Recipe, {
-	// 	foreignKey: "user_id",
-	// 	otherKey: "recipe_id",
-	// 	through: Buyer,
-	// });
 	// Recipe - Recipe Category => N:1 1:N
 	Recipe.belongsTo(RecipeCategory, {
 		foreignKey: "category_id",
@@ -256,17 +248,7 @@ function init(sequelize) {
 	Workout.belongsTo(Activity, {
 		foreignKey: "activity_id",
 	});
-	// // Activity - Buyer => N:N N:N
-	// Activity.belongsToMany(Buyer, {
-	// 	foreignKey: "activity_id",
-	// 	otherKey: "user_id",
-	// 	through: Buyer,
-	// });
-	// Buyer.belongsToMany(Activity, {
-	// 	foreignKey: "user_id",
-	// 	otherKey: "activity_id",
-	// 	through: Buyer,
-	// });
+
 	// ------------------------------------------------------
 	// Picture
 	// Picture - Challenge => 1:1 1:1
@@ -305,15 +287,6 @@ function init(sequelize) {
 		foreignKey: "banner_id",
 	});
 
-	// // Picture - Diet => 1:1 1:1
-	// Picture.belongsTo(Diet, {
-	// 	foreignKey: "diet_id",
-	// 	onDelete: "CASCADE",
-	// });
-	// Diet.hasOne(Picture, {
-	// 	foreignKey: "diet_id",
-	// });
-
 	// Picture - Badge => 1:1 1:1
 	Picture.belongsTo(Badge, {
 		foreignKey: "badge_id",
@@ -323,18 +296,6 @@ function init(sequelize) {
 		foreignKey: "badge_id",
 	});
 	// ------------------------------------------------------
-	// Buyer
-	// Buyer - Banner => N:N N:N
-	// Buyer.belongsToMany(Banner, {
-	// 	foreignKey: "user_id",
-	// 	otherKey: "banner_id",
-	// 	through: Buyer,
-	// });
-	// Banner.belongsToMany(Buyer, {
-	// 	foreignKey: "banner_id",
-	// 	otherKey: "user_id",
-	// 	through: Buyer,
-	// });
 
 	// User - banner => *FK selected_banner_ID
 	User.belongsTo(Banner, {
@@ -364,6 +325,16 @@ function init(sequelize) {
 
 	User.hasMany(UserAvatar, {
 		foreignKey: "user_id",
+	});
+
+	// User Avatar - Avatar => 1:N N:1
+	UserAvatar.belongsTo(Avatar, {
+		foreignKey: "avatar_id",
+		onDelete: "CASCADE",
+	});
+
+	Avatar.hasMany(UserAvatar, {
+		foreignKey: "avatar_id",
 	});
 
 	return {

@@ -29,4 +29,13 @@ router.post(
 	controllers.users.resendVerify,
 );
 
+// Get Logged User data
+router.get(
+	"/:id",
+	validators.users.getUser(),
+	validators.validateResult,
+	middlewares.validateTokens,
+	controllers.users.getUser,
+);
+
 module.exports = router;
