@@ -38,6 +38,8 @@ responses:
               type: boolean
             message:
               type: string
+            data:
+              type: array
         examples:
           Invalid Email:
             value:

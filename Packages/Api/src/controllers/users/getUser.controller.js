@@ -270,7 +270,6 @@ async function getUser(req, res) {
 					updatedAt: user.updatedAt,
 				};
 
-				
 		utils.handleResponse(
 			res,
 			utils.http.StatusOK,

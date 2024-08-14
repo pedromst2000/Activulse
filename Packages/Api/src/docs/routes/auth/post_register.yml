@@ -49,6 +49,8 @@ responses:
               type: boolean
             message:
               type: string
+            data:
+              type: array
         examples:
           Invalid Username:
             value:
@@ -110,7 +112,6 @@ responses:
             value:
               success: false
               message: There's already a user with the same email
-
   "500":
     description: Internal Server Error
     content:
