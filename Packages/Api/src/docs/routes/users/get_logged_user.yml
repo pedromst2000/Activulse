@@ -1,0 +1,224 @@
+summary: Get the logged user
+description: Get the logged user by the auth token provided in the header
+tags:
+  - "Users"
+security:
+  - bearerAuth: []
+parameters:
+  - in: header
+    name: x-auth-token
+    schema:
+      type: string
+    required: true
+    description: Authorization token
+  - in: header
+    name: x-refresh-token
+    schema:
+      type: string
+    required: true
+    description: Authorization token
+responses:
+  "200":
+    description: Success
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+              example: true
+            message:
+              type: string
+              example: "User data retrieved successfully"
+            data:
+              type: object
+              properties:
+                user_id:
+                  type: number
+                  example: 5
+                username:
+                  type: string
+                  example: pedromst2000
+                email:
+                  type: string
+                  example: pedromst@email.com
+                points:
+                  type: number
+                  example: 100
+                risk_score:
+                  type: object
+                  properties:
+                    score:
+                      type: number
+                      example: 4.8
+                    type_risk:
+                      type: string
+                      example: "Low Risk"
+                tag:
+                  type: string
+                  example: "Cardio Beginner"
+                total_steps:
+                  type: number
+                  example: 10000
+                total_distance:
+                  type: number
+                  example: 7620
+                diet:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      example: 3
+                    name:
+                      type: string
+                      example: "Vegan"
+                gender:
+                  type: string
+                  example: "Male"
+                age:
+                  type: number
+                  example: 39
+                is_smoker:
+                  type: boolean
+                  example: true
+                is_diabetic:
+                  type: boolean
+                  example: false
+                is_treatment_hypertension:
+                  type: boolean
+                  example: false
+                systolic_blood_pressure:
+                  type: number
+                  example: 130
+                HDL_cholesterol:
+                  type: number
+                  example: 58
+                Total_cholesterol:
+                  type: number
+                  example: 150
+                selected_banner:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      example: 1
+                    banner:
+                      type: string
+                      example: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399555/activevulse/dev/banners/banner_default_xb8m7l.jpg"
+                selected_avatar:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      example: 3
+                    avatar:
+                      type: string
+                      example: "https://res.cloudinary.com/dvthg2763/image/upload/v1716397591/activevulse/dev/avatars/male_default_avatar_h6oh4l.pngs"
+                avatars:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                        example: 1
+                      is_selected:
+                        type: boolean
+                        example: true
+                      avatar:
+                        type: string
+                        example: "https://res.cloudinary.com/dvthg2763/image/upload/v1716397591/activevulse/dev/avatars/male_default_avatar_h6oh4l.png"
+                banners:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                        example: 1
+                      is_selected:
+                        type: boolean
+                        example: false
+                      banner:
+                        type: string
+                        example: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399555/activevulse/dev/banners/banner_default_xb8m7l.jpg"
+                badges:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                        example: 1
+                      title:
+                        type: string
+                        example: "Strider Pro"
+                      description:
+                        type: string
+                        example: "Total 25K Steps"
+                      badge:
+                        type: string
+                        example: "https://res.cloudinary.com/dvthg2763/image/upload/v1721142427/activevulse/dev/badges/Strider_Pro_kzzlta.svg"
+                createdAt:
+                  type: string
+                  example: "2024-08-13T16:23:19.000Z"
+                updatedAt:
+                  type: string
+                  example: "2024-08-13T16:23:19.000Z"
+  "401":
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Missing token:
+            value:
+              success: false
+              message: Missing auth token or refresh token
+          Invalid token:
+            value:
+              success: false
+              message: Invalid auth token or refresh token
+          Refresh token expired:
+            value:
+              success: false
+              message: Refresh token has expired
+  "404":
+    description: User not found
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          User not found:
+            value:
+              success: false
+              message: User not found
+  "500":
+    description: Internal server error
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Internal server error:
+            value:
+              success: false
+              message: Internal server error

@@ -1,0 +1,177 @@
+summary: Get a user profile
+description: Get a user profile by the id provided in the path parameter
+tags:
+  - "Users"
+security:
+  - bearerAuth: []
+parameters:
+  - in: header
+    name: x-auth-token
+    schema:
+      type: string
+    required: true
+    description: Authorization token
+  - in: header
+    name: x-refresh-token
+    schema:
+      type: string
+    required: true
+    description: Authorization token
+  - name: id
+    in: path
+    description: Id of the user
+    required: true
+    schema:
+      type: number
+      example: 1
+responses:
+  "200":
+    description: Success
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+              example: true
+            message:
+              type: string
+              example: "User data retrieved successfully"
+            data:
+              type: object
+              properties:
+                user_id:
+                  type: number
+                  example: 1
+                username:
+                  type: string
+                  example: Rita Pereira
+                tag:
+                  type: string
+                  example: "Welness Warrior"
+                total_steps:
+                  type: number
+                  example: 34000
+                total_distance:
+                  type: number
+                  example: 25908
+                selected_banner:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      example: 1
+                    banner:
+                      type: string
+                      example: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399555/activevulse/dev/banners/banner_default_xb8m7l.jpg"
+                selected_avatar:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      example: 1
+                    avatar:
+                      type: string
+                      example: "https://res.cloudinary.com/dvthg2763/image/upload/v1716397591/activevulse/dev/avatars/male_default_avatar_h6oh4l.png"
+                badges:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                        example: 8
+                      title:
+                        type: string
+                        example: "Road Runner"
+                      description:
+                        type: string
+                        example: "Total 10Km distance"
+                      badge:
+                        type: string
+                        example: "https://res.cloudinary.com/dvthg2763/image/upload/v1721140650/activevulse/dev/badges/Road_Runner_vemhsb.svg"
+                createdAt:
+                  type: string
+                  example: "2024-08-13T16:23:19.000Z"
+                updatedAt:
+                  type: string
+                  example: "2024-08-13T16:23:19.000Z"
+  "400":
+    description: Bad Request
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Invalid Id:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: "abc"
+                  msg: "Invalid user id"
+                  path: "id"
+                  location: "params"
+  "401":
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Missing token:
+            value:
+              success: false
+              message: Missing auth token or refresh token
+          Invalid token:
+            value:
+              success: false
+              message: Invalid auth token or refresh token
+          Refresh token expired:
+            value:
+              success: false
+              message: Refresh token has expired
+  "404":
+    description: User not found
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          User not found:
+            value:
+              success: false
+              message: User not found
+  "500":
+    description: Internal server error
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Internal server error:
+            value:
+              success: false
+              message: Internal server error

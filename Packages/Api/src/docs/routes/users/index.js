@@ -13,8 +13,18 @@ const postResendVerify = YAML.parse(
 	fs.readFileSync("./src/docs/routes/users/post_resend_verify.yml", "utf8"),
 );
 
+const getLoggedUser = YAML.parse(
+	fs.readFileSync("./src/docs/routes/users/get_logged_user.yml", "utf8"),
+);
+
+const getUserProfile = YAML.parse(
+	fs.readFileSync("./src/docs/routes/users/get_user_profile.yml", "utf8"),
+);
+
 module.exports = {
 	patchVerifyUser,
 	getVerifyConfirm,
 	postResendVerify,
+	getLoggedUser,
+	getUserProfile,
 };

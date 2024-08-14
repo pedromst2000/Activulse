@@ -61,6 +61,14 @@ const swaggerDefinition = {
 		"/users/resend-verify/{email}": {
 			post: routeDocs.users.postResendVerify,
 		},
+
+		"/users/me": {
+			get: routeDocs.users.getLoggedUser,
+		},
+
+		"/users/{id}": {
+			get: routeDocs.users.getUserProfile,
+		},
 	},
 };
 
