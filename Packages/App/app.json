@@ -21,7 +21,8 @@
       }
     },
     "plugins": [
-      "expo-font"
+      "expo-font",
+      "expo-secure-store"
     ],
     "web": {
       "favicon": "src/assets/images/favicon.png"

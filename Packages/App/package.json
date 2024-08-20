@@ -22,9 +22,9 @@
     "@react-navigation/stack": "^6.4.1",
     "@tanstack/react-query": "^5.51.11",
     "axios": "^1.7.2",
-    "expo": "51.0.23",
+    "expo": "51.0.28",
     "expo-font": "~12.0.9",
-    "expo-image": "~1.12.13",
+    "expo-image": "1.12.14",
     "expo-splash-screen": "~0.27.5",
     "expo-status-bar": "~1.12.1",
     "expo-system-ui": "~3.0.7",
@@ -32,7 +32,7 @@
     "nativewind": "^2.0.11",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-native": "0.74.3",
+    "react-native": "0.74.5",
     "react-native-gesture-handler": "~2.16.1",
     "react-native-image-picker": "^7.1.2",
     "react-native-intersection-observer": "^0.2.0",
@@ -46,7 +46,8 @@
     "react-native-tab-view": "^3.5.2",
     "react-native-view-shot": "^3.8.0",
     "react-native-web": "~0.19.10",
-    "@expo/metro-runtime": "~3.2.1"
+    "@expo/metro-runtime": "3.2.3",
+    "expo-secure-store": "~13.0.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.24.8",
