@@ -21,7 +21,7 @@ async function requestResetPassword(req, res) {
 		});
 
 		if (!user) {
-			utils.handleResponse(res, utils.http.StatusNotFound, "User not found");
+			utils.handleResponse(res, utils.http.StatusNotFound, "Email not found");
 			return;
 		}
 
