@@ -11,7 +11,7 @@ const storage: Storage = {
 		try {
 			await AsyncStorage.setItem(key, value);
 		} catch (e) {
-			console.error('Failed to save the data to the storage', e);
+			console.error(`Failed to save ${key} to storage`, e);
 		}
 	},
 	getItem: async (key: string): Promise<string | null> => {
@@ -19,15 +19,16 @@ const storage: Storage = {
 			const value = await AsyncStorage.getItem(key);
 			return value;
 		} catch (e) {
-			console.error('Failed to fetch the data from storage', e);
+			console.error(`Failed to fetch ${key} from storage`, e);
 			return null;
 		}
 	},
 	removeItem: async (key: string): Promise<void> => {
 		try {
 			await AsyncStorage.removeItem(key);
+			console.log(`Removed ${key} from storage`);
 		} catch (e) {
-			console.error('Failed to remove the data from storage', e);
+			console.error(`Failed to remove ${key} from storage`, e);
 		}
 	},
 };
