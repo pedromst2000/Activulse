@@ -5,6 +5,7 @@ import utils from '../../utils';
 
 export type Animation =
 	| 'FadeIn'
+	| 'FadeOut'
 	| 'SlideInFromLeft'
 	| 'SlideInFromRight'
 	| 'SlideInFromTop'
@@ -13,6 +14,7 @@ export type Animation =
 interface Props extends PropsWithChildren {
 	animation?: Animation;
 	dontAnimateOnMount?: boolean;
+	animatedOnUnmount?: boolean;
 }
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -22,6 +24,7 @@ const AnimatedComponent: React.FC<Props> = ({
 	children,
 	animation,
 	dontAnimateOnMount,
+	animatedOnUnmount = false,
 }): React.JSX.Element => {
 	const fadeAnim = useRef(new Animated.Value(0)).current;
 	const [mounted, setMounted] = useState<boolean>(false);
@@ -30,7 +33,11 @@ const AnimatedComponent: React.FC<Props> = ({
 		useCallback(() => {
 			let anim: Animated.CompositeAnimation;
 
-			if (animation === 'SlideInFromBottom' || animation === 'SlideInFromTop') {
+			if (animation === 'FadeIn') {
+				anim = utils.animation.getFadeIn(fadeAnim);
+			} else if (animation === 'FadeOut') {
+				anim = utils.animation.getFadeOut(fadeAnim);
+			} else if (animation === 'SlideInFromBottom' || animation === 'SlideInFromTop') {
 				anim = utils.animation.getVerticalSlide(fadeAnim);
 			} else if (animation === 'SlideInFromLeft' || animation === 'SlideInFromRight') {
 				anim = utils.animation.getHorizontalSlide(fadeAnim);
@@ -38,13 +45,23 @@ const AnimatedComponent: React.FC<Props> = ({
 				anim = utils.animation.getFadeIn(fadeAnim);
 			}
 
-			anim.start();
+			anim.start(() => {
+				// For 'FadeOut' animation
+				if (animation === 'FadeOut' && animatedOnUnmount) {
+					anim = utils.animation.getFadeOut(fadeAnim);
+					anim.start();
+				}
+			});
+
+			setMounted(true);
 
 			return () => {
-				anim.reset();
-				setMounted(true);
+				if (animation === 'FadeOut' && animatedOnUnmount) {
+					anim.stop();
+				}
+				setMounted(false);
 			};
-		}, [animation, fadeAnim]),
+		}, [animation, fadeAnim, animatedOnUnmount]),
 	);
 
 	return (
