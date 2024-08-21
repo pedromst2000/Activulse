@@ -1,5 +1,12 @@
-import React from 'react';
-import { View, Text, Image, ImageSourcePropType, useWindowDimensions } from 'react-native';
+import React, { useMemo } from 'react';
+import {
+	View,
+	Text,
+	Image,
+	useWindowDimensions,
+	ImageSourcePropType,
+	StyleSheet,
+} from 'react-native';
 
 type SlideProps = {
 	id: number;
@@ -7,65 +14,85 @@ type SlideProps = {
 	description: string;
 };
 
-const OnboardingItem: React.FC<SlideProps> = ({ ...SlideProps }): React.JSX.Element => {
+const OnboardingItem: React.FC<SlideProps> = React.memo(({ id, title, description }) => {
 	const { width } = useWindowDimensions();
 
-	const getIllustrationSource = (index: number): ImageSourcePropType => {
-		switch (index) {
-			case 0:
-				return require('../../assets/images/Onboarding/Onboarding01.png');
-			case 1:
-				return require('../../assets/images/Onboarding/Onboarding02.png');
-			case 2:
-				return require('../../assets/images/Onboarding/Onboarding03.png');
-			case 3:
-				return require('../../assets/images/Onboarding/Onboarding04.png');
-			case 4:
-				return require('../../assets/images/Onboarding/Onboarding05.png');
-			case 5:
-				return require('../../assets/images/Onboarding/Onboarding06.png');
-			case 6:
-				return require('../../assets/images/Onboarding/OnboardingLast.png');
-			default:
-				return require('../../assets/images/Onboarding/Onboarding01.png');
-		}
-	};
+	// Memoize the image source to avoid re-calculating on every render
+	const illustrationSource: ImageSourcePropType = useMemo(() => {
+		const sources: ImageSourcePropType[] = [
+			require('../../assets/images/Onboarding/Onboarding01.webp'),
+			require('../../assets/images/Onboarding/Onboarding02.webp'),
+			require('../../assets/images/Onboarding/Onboarding03.webp'),
+			require('../../assets/images/Onboarding/Onboarding04.webp'),
+			require('../../assets/images/Onboarding/Onboarding05.webp'),
+			require('../../assets/images/Onboarding/Onboarding06.webp'),
+			require('../../assets/images/Onboarding/OnboardingLast.webp'),
+		];
+		return sources[id] || sources[0];
+	}, [id]);
 
 	return (
-		<View className="flex-1 justify-center items-center" style={{ width }}>
-			{/* Ilustration */}
-			<View
-				className='flex justify-center items-center'
-			>
+		<View style={[styles.container, { width }]}>
+			{/* Illustration */}
+			<View style={styles.imageContainer}>
 				<Image
-					className='mt-2'
-				source={getIllustrationSource(SlideProps.id)} />
+					source={illustrationSource}
+					resizeMode="contain"
+					style={[styles.image, { width: width * 0.8, height: width * 0.6 }]}
+				/>
 			</View>
-			{/* title & Description Container */}
-			<View className="flex justify-center align-center gap-[20px] mt-9">
+			{/* Title & Description Container */}
+			<View style={styles.textContainer}>
 				{/* Title */}
-				<View className="flex-row justify-center items-center">
-					<Text
-						className="
-						font-merriweather-bold text-secondary-700 text-[25.6px] text-center
-					"
-					>
-						{SlideProps.title}
-					</Text>
+				<View style={styles.titleContainer}>
+					<Text style={styles.title}>{title}</Text>
 				</View>
-				{/* description */}
+				{/* Description */}
 				<View>
-					<Text
-						className="font-quicksand-medium text-secondary-700 text-[14.22px] text-center
-					w-[315px]
-					"
-					>
-						{SlideProps.description}
-					</Text>
+					<Text style={styles.description}>{description}</Text>
 				</View>
 			</View>
 		</View>
 	);
-};
+});
 
 export default OnboardingItem;
+
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	imageContainer: {
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	image: {
+		marginTop: 8,
+	},
+	textContainer: {
+		justifyContent: 'center',
+		alignItems: 'center',
+		marginTop: 36,
+		gap: 20,
+	},
+	titleContainer: {
+		flexDirection: 'row',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	title: {
+		fontFamily: 'Merriweather-Bold',
+		color: '#0C2C7E',
+		fontSize: 25.6,
+		textAlign: 'center',
+	},
+	description: {
+		fontFamily: 'Quicksand-Medium',
+		color: '#0C2C7E',
+		fontSize: 14.22,
+		textAlign: 'center',
+		width: 315,
+	},
+});

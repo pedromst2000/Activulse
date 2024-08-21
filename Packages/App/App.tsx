@@ -1,4 +1,5 @@
 import FontsProvider from './src/context/FontsProvider';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { UserProvider } from './src/context/user';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { NavigationContainer } from '@react-navigation/native';
@@ -10,15 +11,17 @@ const queryClient = new QueryClient();
 
 const App: React.FC = (): React.JSX.Element => {
 	return (
-		<NavigationContainer theme={config.navigator.theme}>
-			<QueryClientProvider client={queryClient}>
-				<FontsProvider>
+		<GestureHandlerRootView style={{ flex: 1 }}>
+			<NavigationContainer theme={config.navigator.theme}>
+				<QueryClientProvider client={queryClient}>
 					<UserProvider>
-						<MainApp />
+						<FontsProvider>
+							<MainApp />
+						</FontsProvider>
 					</UserProvider>
-				</FontsProvider>
-			</QueryClientProvider>
-		</NavigationContainer>
+				</QueryClientProvider>
+			</NavigationContainer>
+		</GestureHandlerRootView>
 	);
 };
 
