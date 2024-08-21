@@ -1,10 +1,20 @@
-import { Animated } from 'react-native';
+import { Animated, Easing } from 'react-native';
 
 const getFadeIn = (ref: Animated.Value): Animated.CompositeAnimation => {
 	return Animated.timing(ref, {
 		toValue: 1,
-		duration: 300,
+		duration: 500,
 		useNativeDriver: true,
+		easing: Easing.inOut(Easing.ease),
+	});
+};
+
+const getFadeOut = (ref: Animated.Value): Animated.CompositeAnimation => {
+	return Animated.timing(ref, {
+		toValue: 0,
+		duration: 500,
+		useNativeDriver: true,
+		easing: Easing.inOut(Easing.ease),
 	});
 };
 
@@ -70,4 +80,10 @@ const getStyleOptions = (
 	}
 };
 
-export default { getFadeIn, getVerticalSlide, getHorizontalSlide, getStyleOptions };
+export default {
+	getFadeIn,
+	getFadeOut,
+	getVerticalSlide,
+	getHorizontalSlide,
+	getStyleOptions,
+};
