@@ -1,8 +1,8 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { useNavigation } from '@react-navigation/native';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Dimensions } from 'react-native';
-import config from '../config';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
 import Icon from '../components/Icon';
 import HomeIS from '../assets/svg/icons/BottomTab/HomeIcon_Selected.svg';
 import HomeINS from '../assets/svg/icons/BottomTab/HomeIcon_N_Selected.svg';
@@ -14,49 +14,33 @@ import ProfileIS from '../assets/svg/icons/BottomTab/ProfileIcon_Selected.svg';
 import ProfileINS from '../assets/svg/icons/BottomTab/ProfileIcon_N_Selected.svg';
 import Home from '../screens/Home';
 import Lifestyle from '../screens/Lifestyle';
-import Auth from '../screens/Auth';
-import OnBoarding from '../screens/Onboarding';
 import Profile from '../screens/Profile';
 import Store from '../screens/Store';
+import { AuthStackParamList } from './Auth/index';
+import OnBoarding from '../screens/Onboarding';
 import { useUserContext } from '../context/user';
+import AuthStack from '../navigation/Auth/index';
 import utils from '../navigation/utils';
+import config from '../config';
 
-type RootStackParamList = {
-	OnBoarding: undefined;
-	Auth: undefined;
+export type RootStackParamList = {
 	Home: undefined;
 	Lifestyle: undefined;
 	Store: undefined;
-	// Profile: { id: number | 'me' }; // User ID'
 	Profile: undefined;
-	// OwnProfile: undefined;
-	// EditGoals: undefined;
-	// Leaderboard: undefined;
-	// Education: undefined;
-	// ChallengesFeed: undefined;
-	// ChallengeDetails: { id: number }; // Challenge ID
-	// FilterChallenges: undefined;
-	// FitnessFeed: undefined;
-	// FitnessDetails: { id: number }; // Fitness ID
-	// FilterFitness: undefined;
-	// NutritionFeed: {diet: string}; // type of diet for the feed
-	// NutritionDetails: { id: number }; // Nutrition ID
-	// Dashboard: undefined;
-	// Achievments: undefined;
-	// EditProfile: undefined;
-	// Favorites: undefined;
+	Onboarding: undefined;
+	AuthStack: {
+		screen: keyof AuthStackParamList; // 'SignIn' | 'JoinNow' | 'ForgotPassword';
+	};
+	MainTabs: undefined;
 };
 
+const Stack = createStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator<RootStackParamList>();
 
-const Navigation: React.FC = (): React.JSX.Element => {
-	const navigation = useNavigation();
-	const { loggedUser } = useUserContext();
-
-	const [currentScreen, setCurrentScreen] = useState<string>('');
+const MainTabNavigator: React.FC = () => {
 	const [orientation, setOrientation] = useState<'PORTRAIT' | 'LANDSCAPE'>('PORTRAIT');
 
-	// Navbar icons - selected and not selected
 	const HomeIconSelected = useCallback(
 		() => <Icon icon={HomeIS} width={30} height={30} />,
 		[],
@@ -91,32 +75,10 @@ const Navigation: React.FC = (): React.JSX.Element => {
 	);
 
 	useEffect(() => {
-		return navigation.addListener('state', (e) => {
-			// Set the current route name
-			setCurrentScreen(e.data.state.routes[e.data.state.index].name);
-		});
-	});
-
-	useEffect(() => {
 		Dimensions.addEventListener('change', ({ window: { width, height } }) => {
 			setOrientation(width < height ? 'PORTRAIT' : 'LANDSCAPE');
 		});
 	}, []);
-
-	// if (!loggedUser) {
-	// 	return (
-	// 		<Tab.Navigator
-	// 			initialRouteName="OnBoarding"
-	// 			screenOptions={{ headerShown: false, tabBarStyle: { display: 'none' } }}
-	// 		>
-	// 			<Tab.Screen
-	// 				name="OnBoarding"
-	// 				component={utils.guardClause(false, OnBoarding, loggedUser)}
-	// 			/>
-	// 			<Tab.Screen name="Auth" component={utils.guardClause(false, Auth, loggedUser)} />
-	// 		</Tab.Navigator>
-	// 	);
-	// }
 
 	return (
 		<Tab.Navigator
@@ -132,70 +94,60 @@ const Navigation: React.FC = (): React.JSX.Element => {
 				},
 			}}
 		>
-			{/* _________________________________________________________________________________ */}
-
-			{/* OnBoarding */}
-			{/* <Tab.Screen
-				name="OnBoarding"
-				component={OnBoarding}
-			/> */}
-
-			{/* Home */}
 			<Tab.Screen
 				name="Home"
-				// component={utils.guardClause(true, Home, loggedUser)}
-				component={Home}
+				component={utils.guardClause(true, Home, useUserContext().loggedUser)}
 				options={{
-					tabBarIcon: ({ focused }) => {
-						return focused ? HomeIconSelected() : HomeIconNotSelected();
-					},
+					tabBarIcon: ({ focused }) => (focused ? HomeIconSelected() : HomeIconNotSelected()),
 					tabBarItemStyle: config.navigator.tabItemStyle,
 				}}
 			/>
 
-			{/* Lifestyle */}
 			<Tab.Screen
 				name="Lifestyle"
-				// component={utils.guardClause(true, Lifestyle, loggedUser)}
-				component={Lifestyle}
-					options={{
-					tabBarIcon: ({ focused }) => {
-						return focused ? LifestyleIconSelected() : LifestyleIconNotSelected();
-					},
+				component={utils.guardClause(true, Lifestyle, useUserContext().loggedUser)}
+				options={{
+					tabBarIcon: ({ focused }) =>
+						focused ? LifestyleIconSelected() : LifestyleIconNotSelected(),
 				}}
 			/>
 
-			{/* _________________________________________________________________________________ */}
-
-			{/* Store */}
 			<Tab.Screen
 				name="Store"
-				// component={utils.guardClause(true, Store, loggedUser)}
-				component={Store}				
+				component={utils.guardClause(true, Store, useUserContext().loggedUser)}
 				options={{
-					tabBarIcon: ({ focused }) => {
-						return focused ? StoreIconSelected() : StoreIconNotSelected();
-					},
+					tabBarIcon: ({ focused }) =>
+						focused ? StoreIconSelected() : StoreIconNotSelected(),
 				}}
 			/>
 
-			{/* _________________________________________________________________________________ */}
-
-			{/* Profile */}
 			<Tab.Screen
 				name="Profile"
-				// component={utils.guardClause(true, Profile, loggedUser)}
-				component={Profile}
+				component={utils.guardClause(true, Profile, useUserContext().loggedUser)}
 				options={{
-					tabBarIcon: ({ focused }) => {
-						return focused ? ProfileIconSelected() : ProfileIconNotSelected();
-					},
+					tabBarIcon: ({ focused }) =>
+						focused ? ProfileIconSelected() : ProfileIconNotSelected(),
 				}}
 			/>
-
-			{/* _________________________________________________________________________________ */}
 		</Tab.Navigator>
 	);
 };
 
-export default Navigation;
+const AppNavigator: React.FC = () => {
+	const { loggedUser } = useUserContext();
+
+	return (
+		<Stack.Navigator screenOptions={{ headerShown: false }}>
+			{!loggedUser ? (
+				<>
+					<Stack.Screen name="Onboarding" component={OnBoarding} />
+					<Stack.Screen name="AuthStack" component={AuthStack} />
+				</>
+			) : (
+				<Stack.Screen name="MainTabs" component={MainTabNavigator} />
+			)}
+		</Stack.Navigator>
+	);
+};
+
+export default AppNavigator;
