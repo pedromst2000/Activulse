@@ -15,8 +15,7 @@ import OnBoarding from '../screens/Onboarding';
 const guardClause = (
 	mustBeLogged: boolean,
 	destiny: React.FC<any>,
-	loggedUser: LoggedUser 
- | null,
+	loggedUser: LoggedUser | null,
 ): React.FC => {
 	if (mustBeLogged && !loggedUser) {
 		return OnBoarding; // FallBack if not logged

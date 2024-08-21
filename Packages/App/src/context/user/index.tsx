@@ -1,7 +1,6 @@
 import React, { PropsWithChildren, createContext, useMemo, useState } from 'react';
 import { LoggedUser, UserContextProps } from './types';
 
-
 const UserContext = createContext<UserContextProps | undefined>(undefined);
 
 const UserProvider: React.FC<PropsWithChildren> = ({ children }): React.JSX.Element => {
