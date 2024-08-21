@@ -4,10 +4,10 @@ const getMessage = (error: any): string => {
 			? error.response.data.data[0].msg
 			: error.response.data.message;
 	} else {
+		console.log('Error:', error);
 		return 'An error occurred';
 	}
 };
-
 const returnError = (error: any): any => {
 	return (
 		{ ...error?.response?.data, status: error?.response?.status } || {

@@ -3,30 +3,39 @@ import utils from '../../utils';
 
 export default (api: AxiosInstance): void => {
 	api.interceptors.response.use(
-		(res: AxiosResponse): AxiosResponse => {
-			// Check if the tokens have been updated and update in the storage
-			const authToken: string | undefined = res.headers['x-auth-token'];
-			const refreshToken: string | undefined = res.headers['x-refresh-token'];
+		async (response: AxiosResponse): Promise<AxiosResponse> => {
+			try {
+				const authToken: string | undefined = response.headers['x-auth-token'];
 
-			if (authToken) {
-				utils.storage.setItem('authToken', authToken);
+				const refreshToken: string | undefined = response.headers['x-refresh-token'];
+
+				if (authToken) {
+					await utils.storage.setItem('authToken', authToken);
+				}
+
+				if (refreshToken) {
+					await utils.storage.setItem('refreshToken', refreshToken);
+				}
+			} catch (error) {
+				console.error('Error in response interceptor:', error);
 			}
 
-			if (refreshToken) {
-				utils.storage.setItem('refreshToken', refreshToken);
-			}
-
-			return res;
+			return response;
 		},
-
-		(err: any) => {
-			if (err.response?.status === 401) {
-				utils.storage.removeItem('authToken');
-				utils.storage.removeItem('refreshToken');
+		async (error) => {
+			try {
+				// Handle 401 Unauthorized errors
+				if (error.response?.status === 401) {
+					await utils.storage.removeItem('authToken');
+					await utils.storage.removeItem('refreshToken');
+					console.log('Removed authToken and refreshToken from storage due to 401 error');
+				}
+			} catch (err) {
+				console.error('Error handling 401 response:', err);
 			}
 
-			console.log(`Error`, err.message);
-			return Promise.reject(err);
+			// console.error('Response error:', error.message);
+			return Promise.reject(error);
 		},
 	);
 };

@@ -1,21 +1,31 @@
 import { AxiosInstance, InternalAxiosRequestConfig } from 'axios';
 import utils from '../../utils';
 
-
 export default (api: AxiosInstance): void => {
-	// Add the authentification tokens to the headers
 	api.interceptors.request.use(
-		(res: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
-			
-			const authToken = utils.storage.getItem('authToken');
-			const refreshToken = utils.storage.getItem('refreshToken');
+		async (config: InternalAxiosRequestConfig): Promise<InternalAxiosRequestConfig> => {
+			try {
+				// Retrieve tokens from storage
+				const authToken = await utils.storage.getItem('authToken');
 
-			if (authToken && refreshToken) {
-				res.headers['x-auth-token'] = authToken;
-				res.headers['x-refresh-token'] = refreshToken;
+				const refreshToken = await utils.storage.getItem('refreshToken');
+
+				// Add tokens to request headers if they exist
+				if (authToken) {
+					config.headers['x-auth-token'] = authToken;
+				}
+
+				if (refreshToken) {
+					config.headers['x-refresh-token'] = refreshToken;
+				}
+			} catch (error) {
+				console.error('Error in request interceptor:', error);
 			}
 
-			return res;
+			return config;
+		},
+		(error) => {
+			return Promise.reject(error);
 		},
 	);
 };
