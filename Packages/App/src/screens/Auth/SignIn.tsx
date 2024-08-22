@@ -33,6 +33,7 @@ const SignIn: React.FC = (): React.JSX.Element => {
 	const [showError, setShowError] = useState<boolean>(false);
 	const [showSuccess, setShowSuccess] = useState<boolean>(false);
 	const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+	const scrollViewRef = useRef<ScrollView>(null);
 
 	const { status, mutateAsync, data } = useLogin({
 		email: email.trim(),
@@ -66,7 +67,7 @@ const SignIn: React.FC = (): React.JSX.Element => {
 							setPassword('');
 							setShowError(true); // Show error message
 							timeoutRef.current = setTimeout(() => {
-								setShowError(false); // Hide error message after 5 seconds
+								setShowError(false); // Hide error message after 2.6 seconds
 							}, 2600);
 						}
 					},
@@ -75,7 +76,7 @@ const SignIn: React.FC = (): React.JSX.Element => {
 						setValidationError(errorMessage);
 						setShowError(true); // Show error message
 						timeoutRef.current = setTimeout(() => {
-							setShowError(false); // Hide error message after 5 seconds
+							setShowError(false); // Hide error message after 2.6 seconds
 						}, 2600);
 					},
 				},
@@ -95,6 +96,13 @@ const SignIn: React.FC = (): React.JSX.Element => {
 		};
 	}, []);
 
+	// To scroll to the top when the error message is shown
+	useEffect(() => {
+		if ((showError || showSuccess) && scrollViewRef.current) {
+			scrollViewRef.current.scrollTo({ y: 0, animated: true }); // Scroll to the top
+		}
+	}, [showError, showSuccess]);
+
 	return (
 		<AnimatedComponent animation="FadeIn">
 			<KeyboardAvoidingView
@@ -102,7 +110,11 @@ const SignIn: React.FC = (): React.JSX.Element => {
 				behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
 				keyboardVerticalOffset={Platform.OS === 'ios' ? 80 : 0}
 			>
-				<ScrollView keyboardShouldPersistTaps="handled" className="bg-primary-50">
+				<ScrollView
+					ref={scrollViewRef}
+					keyboardShouldPersistTaps="handled"
+					className="bg-primary-50"
+				>
 					<View className="p-4 sm:p-8 justify-between flex-1 bg-primary-50">
 						<View className="absolute top-3 left-2 mt-6 ml-4">
 							<GoBackBtn onPress={() => navigation.goBack()} isRounded={true} />
@@ -161,6 +173,15 @@ const SignIn: React.FC = (): React.JSX.Element => {
 									Forgot Password{' '}
 								</Text>
 							</View>
+							<View className="flex flex-row justify-between items-center pt-[40px]">
+								<Text
+									onPress={() => navigation.navigate('JoinNow' as never)}
+									className="font-quicksand-semi-bold text-secondary-700 underline "
+								>
+									Don´t have an account?{' '}
+									<Text className="font-quicksand-bold">Join Now</Text>
+								</Text>
+							</View>
 
 							<View className="flex flex-row justify-between items-center pt-[55px]">
 								<Button
@@ -177,7 +198,7 @@ const SignIn: React.FC = (): React.JSX.Element => {
 								</Button>
 							</View>
 							<View className="flex-1 w-full items-center pb-[40px] pt-[35px]">
-								<Ilustration ilustration={LogoIlus} width={150} height={156} />
+								<Ilustration ilustration={LogoIlus} width={150} height={56} />
 							</View>
 						</View>
 					</View>
