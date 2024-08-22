@@ -38,18 +38,13 @@ async function verifyOTP(req, res) {
 		const OTPTime = new Date(user.OTP_generated_at);
 		const diff = currentTime.getTime() - OTPTime.getTime();
 
-		if (user.OTP_verified === true && doOTPMatch && diff <= 180000) {
-			utils.handleResponse(res, utils.http.StatusConflict, "Already verified!");
-			return;
-		}
-
 		if (user.OTP !== null && user.OTP_generated_at !== null) {
 			if (!doOTPMatch) {
 				utils.handleResponse(res, utils.http.StatusUnauthorized, "Invalid OTP!");
 				return;
 			}
 
-			if (doOTPMatch && diff > 180000) {
+			if (diff > 180000) {
 				// 180000 milliseconds = 3 minutes
 
 				await db.mysql.User.update(
@@ -62,6 +57,11 @@ async function verifyOTP(req, res) {
 				);
 
 				utils.handleResponse(res, utils.http.StatusBadRequest, "OTP expired!");
+				return;
+			}
+
+			if (user.OTP_verified === true && doOTPMatch && diff <= 180000) {
+				utils.handleResponse(res, utils.http.StatusConflict, "Already verified!");
 				return;
 			}
 

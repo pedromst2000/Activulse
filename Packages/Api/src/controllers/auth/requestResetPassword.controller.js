@@ -26,6 +26,7 @@ async function requestResetPassword(req, res) {
 		}
 
 		await user.update({
+			OTP_verified: user.OTP_verified === true ? false : user.OTP_verified,
 			OTP: await utils.password.hash(OTP),
 			OTP_generated_at: db.mysql.sequelize.literal("CURRENT_TIMESTAMP"),
 		});
