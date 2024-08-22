@@ -49,7 +49,7 @@ async function verifyOTP(req, res) {
 				return;
 			}
 
-			if (diff > 180000) {
+			if (doOTPMatch && diff > 180000) {
 				// 180000 milliseconds = 3 minutes
 
 				await db.mysql.User.update(
