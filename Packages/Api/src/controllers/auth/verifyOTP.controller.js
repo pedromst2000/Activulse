@@ -52,6 +52,15 @@ async function verifyOTP(req, res) {
 			if (diff > 180000) {
 				// 180000 milliseconds = 3 minutes
 
+				await db.mysql.User.update(
+					{
+						OTP_verified: false, // Reseting the OTP_verified flag since the OTP has expired
+					},
+					{
+						where: { email: email },
+					},
+				);
+
 				utils.handleResponse(res, utils.http.StatusBadRequest, "OTP expired!");
 				return;
 			}
