@@ -87,7 +87,6 @@ const VerifyOTP: React.FC = (): React.JSX.Element => {
 			setErrorCode(statusCode);
 
 			if (statusCode === 409 && errorMessage === 'Already verified!') {
-				// Handle the specific case where the OTP is already verified
 				setSuccessMessage('Already verified!');
 				setShowSuccess(true);
 
@@ -97,7 +96,6 @@ const VerifyOTP: React.FC = (): React.JSX.Element => {
 					navigation.navigate('ChangePassword', { email: route.params.email });
 				}, 2000);
 			} else {
-				// Show other error messages
 				setValidationError(errorMessage);
 				setShowError(true);
 				timeoutRef.current = setTimeout(() => {
@@ -149,10 +147,10 @@ const VerifyOTP: React.FC = (): React.JSX.Element => {
 
 	// Scroll to the top when the error message is shown
 	useEffect(() => {
-		if (showError && scrollViewRef.current) {
+		if ((showError || showSuccess) && scrollViewRef.current) {
 			scrollViewRef.current.scrollTo({ y: 0, animated: true });
 		}
-	}, [showError]);
+	}, [showError, showSuccess]);
 
 	return (
 		<AnimatedComponent animation="FadeIn">

@@ -54,7 +54,7 @@ const ForgotPassword: React.FC = (): React.JSX.Element => {
 					onSuccess: (resData: APIResponse): void => {
 						if (resData.success) {
 							setEmail(''); // Clear the email input
-							  navigation.navigate('VerifyOTP', { email: email.trim() });
+							navigation.navigate('VerifyOTP', { email: email.trim() });
 						}
 					},
 					onError: (error: Error): void => {
