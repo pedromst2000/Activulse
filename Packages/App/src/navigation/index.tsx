@@ -38,7 +38,7 @@ export type RootStackParamList = {
 const Stack = createStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator<RootStackParamList>();
 
-const MainTabNavigator: React.FC = () => {
+const MainTabNavigator: React.FC = (): React.JSX.Element => {
 	const [orientation, setOrientation] = useState<'PORTRAIT' | 'LANDSCAPE'>('PORTRAIT');
 
 	const HomeIconSelected = useCallback(
@@ -133,7 +133,7 @@ const MainTabNavigator: React.FC = () => {
 	);
 };
 
-const AppNavigator: React.FC = () => {
+const AppNavigator: React.FC = (): React.JSX.Element => {
 	const { loggedUser } = useUserContext();
 
 	return (

@@ -5,11 +5,11 @@ import {
 	ScrollView,
 	KeyboardAvoidingView,
 	Platform,
-	Image,
 	ActivityIndicator,
 } from 'react-native';
 import { APIResponse } from '../../api/types';
 import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import useRequestResetPassword from '@/src/hooks/ReactQuery/auth/requestResetPassword';
 import EmailI from '../../assets/svg/icons/EmailIcon.svg';
 import ForgotPasswordIlus from '../../assets/svg/ilustrations/ForgetPassword.svg';
@@ -22,9 +22,15 @@ import AnimatedComponent from '../../components/Animated/index';
 import Message from '../../components/Message';
 import utils from '../../utils';
 import Ilustration from '../../components/Ilustration';
+import { AuthStackParamList } from '@/src/navigation/Auth';
+
+type ForgotPasswordNavigationProp = NativeStackNavigationProp<
+	AuthStackParamList,
+	'ForgotPassword'
+>;
 
 const ForgotPassword: React.FC = (): React.JSX.Element => {
-	const navigation = useNavigation();
+	const navigation = useNavigation<ForgotPasswordNavigationProp>();
 	const [email, setEmail] = useState<string>('');
 	const [validationError, setValidationError] = useState<string>('');
 	const [showError, setShowError] = useState<boolean>(false);
@@ -48,7 +54,7 @@ const ForgotPassword: React.FC = (): React.JSX.Element => {
 					onSuccess: (resData: APIResponse): void => {
 						if (resData.success) {
 							setEmail(''); // Clear the email input
-							console.log('Navigate to Verify OTP screen');
+							  navigation.navigate('VerifyOTP', { email: email.trim() });
 						}
 					},
 					onError: (error: Error): void => {
@@ -57,7 +63,7 @@ const ForgotPassword: React.FC = (): React.JSX.Element => {
 						setShowError(true); // Show error message
 						timeoutRef.current = setTimeout(() => {
 							setShowError(false); // Hide error message after 5 seconds
-						}, 2600);
+						}, 3000);
 					},
 				},
 			);
@@ -66,7 +72,7 @@ const ForgotPassword: React.FC = (): React.JSX.Element => {
 			setShowError(true);
 			timeoutRef.current = setTimeout(() => {
 				setShowError(false);
-			}, 2600);
+			}, 3000);
 		}
 	};
 

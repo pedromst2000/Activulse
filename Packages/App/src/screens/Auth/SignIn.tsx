@@ -5,7 +5,6 @@ import {
 	ScrollView,
 	KeyboardAvoidingView,
 	Platform,
-	Image,
 	ActivityIndicator,
 } from 'react-native';
 import { useUserContext } from '../../context/user';
@@ -54,7 +53,6 @@ const SignIn: React.FC = (): React.JSX.Element => {
 					onSuccess: async (resData: LoginData): Promise<void> => {
 						if (resData.success && resData.data) {
 							setShowSuccess(true);
-							// Update the global state
 							timeoutRef.current = setTimeout(() => {
 								setLoggedUser(resData.data.user);
 							}, 2000); // delaying the navigation for 3 seconds after navigating to the home screen
