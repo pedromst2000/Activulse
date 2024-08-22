@@ -3,7 +3,7 @@ module.exports = [
 		id: 1,
 		title: 'Welcome to Activulse',
 		description:
-			"Get ready for an exciting journey toward better heart health! With Activulse, you will be in complete control of your cardiovascular well-being. Let's start?",
+			"Unlock the full picture of your heart's health! With Activulse, you can assess your heart risk and take proactive steps to protect your cardiovascular future. Ready to dive into a healthier life? Let's get started!",
 	},
 	{
 		id: 2,
