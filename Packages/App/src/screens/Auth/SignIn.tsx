@@ -56,7 +56,7 @@ const SignIn: React.FC = (): React.JSX.Element => {
 							setShowSuccess(true);
 							timeoutRef.current = setTimeout(() => {
 								setLoggedUser(resData.data.user);
-							}, 2000); // delaying the navigation for 3 seconds after navigating to the home screen
+							}, 2000); // delaying the navigation for 2 seconds after navigating to the home screen
 
 							// Save the tokens on the device storage
 							await utils.storage.setItem('authToken', resData.data.authToken);
@@ -67,8 +67,8 @@ const SignIn: React.FC = (): React.JSX.Element => {
 							setPassword('');
 							setShowError(true); // Show error message
 							timeoutRef.current = setTimeout(() => {
-								setShowError(false); // Hide error message after 2.6 seconds
-							}, 2600);
+								setShowError(false); // Hide error message after 5 seconds
+							}, 5000);
 						}
 					},
 					onError: (error) => {
@@ -76,8 +76,8 @@ const SignIn: React.FC = (): React.JSX.Element => {
 						setValidationError(errorMessage);
 						setShowError(true); // Show error message
 						timeoutRef.current = setTimeout(() => {
-							setShowError(false); // Hide error message after 2.6 seconds
-						}, 2600);
+							setShowError(false); // Hide error message after 5 seconds
+						}, 5000);
 					},
 				},
 			);
@@ -86,7 +86,7 @@ const SignIn: React.FC = (): React.JSX.Element => {
 			setShowError(true);
 			timeoutRef.current = setTimeout(() => {
 				setShowError(false);
-			}, 2600);
+			}, 5000);
 		}
 	};
 
@@ -178,8 +178,7 @@ const SignIn: React.FC = (): React.JSX.Element => {
 									onPress={() => navigation.navigate('JoinNow' as never)}
 									className="font-quicksand-semi-bold text-secondary-700 underline "
 								>
-									Don´t have an account?{' '}
-									<Text className="font-quicksand-bold">Join Now</Text>
+									Don´t have an account? <Text className="font-quicksand-bold">Join Now</Text>
 								</Text>
 							</View>
 

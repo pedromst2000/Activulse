@@ -44,6 +44,8 @@ const ChangePassword: React.FC = (): React.JSX.Element => {
 	const [longErrorMessage, setLongErrorMessage] = useState<string | null>(null);
 
 	const { status, mutateAsync } = useResetPassword({
+		new_password: newPassword,
+		confirm_password: confirmPassword,
 		email: route.params.email,
 	});
 
@@ -60,6 +62,7 @@ const ChangePassword: React.FC = (): React.JSX.Element => {
 				{
 					new_password: newPassword,
 					confirm_password: confirmPassword,
+					email: route.params.email,
 				},
 				{
 					onSuccess: (resData: APIResponse): void => {

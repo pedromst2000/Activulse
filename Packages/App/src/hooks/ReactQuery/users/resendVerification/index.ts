@@ -3,24 +3,23 @@ import { AxiosResponse } from 'axios';
 import { APIResponse } from '../../../../api/types';
 import api from '../../../../api';
 
-export type BodyData = {
-	OTP: string;
+type BodyData = {
 	email: string;
 };
 
-const verifyOTP = async (bodyData: BodyData): Promise<APIResponse> => {
+const resendVerification = async (bodyData: BodyData): Promise<APIResponse> => {
 	const { data }: AxiosResponse<APIResponse> = await api.post(
-		`/auth/users/verify-OTP`,
+		`/users/resend-verify`,
 		bodyData,
 	);
 
 	return data;
 };
 
-const useVerifyOTP = (bodyData: BodyData): UseMutationResult<APIResponse, Error> => {
+const useResendVerification = (bodyData: BodyData): UseMutationResult<APIResponse, Error> => {
 	return useMutation({
-		mutationFn: () => verifyOTP(bodyData),
+		mutationFn: async () => await resendVerification(bodyData),
 	});
 };
 
-export default useVerifyOTP;
+export default useResendVerification;

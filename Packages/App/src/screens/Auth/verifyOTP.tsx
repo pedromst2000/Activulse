@@ -39,7 +39,7 @@ const VerifyOTP: React.FC = (): React.JSX.Element => {
 	const [countDigit, setCountDigit] = useState<number>(0);
 	const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 	const scrollViewRef = useRef<ScrollView>(null);
-	const { status, mutateAsync } = useVerifyOTP({ email: route.params.email });
+	const { status, mutateAsync } = useVerifyOTP({ OTP, email: route.params.email });
 	const { mutateAsync: resendMutate } = useRequestResetPassword({ email: route.params.email });
 
 	// Reset states when component is focused
@@ -70,9 +70,9 @@ const VerifyOTP: React.FC = (): React.JSX.Element => {
 			setShowError(false);
 
 			// Send the OTP verification request
-			const resData = await mutateAsync({ OTP });
+			const resData = await mutateAsync({ OTP, email: route.params.email });
 			if (resData.success) {
-				setSuccessMessage('OTP Verified Successfully');
+				setSuccessMessage(resData.message);
 				setShowSuccess(true);
 
 				// Navigate to ChangePassword screen after 2 seconds
@@ -90,17 +90,16 @@ const VerifyOTP: React.FC = (): React.JSX.Element => {
 				setSuccessMessage('Already verified!');
 				setShowSuccess(true);
 
-				// Navigate directly to the ChangePassword screen after 2 seconds
 				timeoutRef.current = setTimeout(() => {
 					setShowSuccess(false);
 					navigation.navigate('ChangePassword', { email: route.params.email });
-				}, 2000);
+				}, 2000); // Navigate to ChangePassword screen after 2 seconds
 			} else {
 				setValidationError(errorMessage);
 				setShowError(true);
 				timeoutRef.current = setTimeout(() => {
 					setShowError(false);
-				}, 2600);
+				}, 2600); // Hide the error message after 2.6 seconds
 			}
 		}
 	};

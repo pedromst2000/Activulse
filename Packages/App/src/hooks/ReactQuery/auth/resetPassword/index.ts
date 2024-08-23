@@ -3,27 +3,24 @@ import { AxiosResponse } from 'axios';
 import { APIResponse } from '../../../../api/types';
 import api from '../../../../api';
 
-type Params = {
-	email: string;
-};
-
 export type BodyData = {
 	new_password: string;
 	confirm_password: string;
+	email: string;
 };
 
-const resetPassword = async (params: Params, bodyData: BodyData): Promise<APIResponse> => {
+const resetPassword = async (bodyData: BodyData): Promise<APIResponse> => {
 	const { data }: AxiosResponse<APIResponse> = await api.patch(
-		`/auth/users/reset-password/${params.email}`,
+		`/auth/users/reset-password`,
 		bodyData,
 	);
 
 	return data;
 };
 
-const useResetPassword = (params: Params): UseMutationResult<APIResponse, Error, BodyData> => {
+const useResetPassword = (bodyData: BodyData): UseMutationResult<APIResponse, Error> => {
 	return useMutation({
-		mutationFn: (bodyData: BodyData) => resetPassword(params, bodyData),
+		mutationFn: () => resetPassword(bodyData),
 	});
 };
 

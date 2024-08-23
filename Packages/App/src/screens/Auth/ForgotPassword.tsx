@@ -62,7 +62,7 @@ const ForgotPassword: React.FC = (): React.JSX.Element => {
 						setValidationError(errorMessage);
 						setShowError(true); // Show error message
 						timeoutRef.current = setTimeout(() => {
-							setShowError(false); // Hide error message after 5 seconds
+							setShowError(false); // Hide error message after 3 seconds
 						}, 3000);
 					},
 				},
