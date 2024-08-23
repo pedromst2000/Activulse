@@ -39,7 +39,7 @@ async function resendVerify(req, res) {
 		utils.handleResponse(
 			res,
 			utils.http.StatusAccepted,
-			"A confirmation email has been resent to your email address.",
+			"A confirmation email has been resent.",
 		);
 	} catch (error) {
 		utils.handleError(res, error, __filename);

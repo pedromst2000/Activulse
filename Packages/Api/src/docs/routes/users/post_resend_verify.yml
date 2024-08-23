@@ -30,7 +30,7 @@ responses:
           Resend Verification Email:
             value:
               success: true
-              message: A confirmation email has been resent to your email address.
+              message: A confirmation email has been resent.
   "400":
     description: Bad Request
     content:
