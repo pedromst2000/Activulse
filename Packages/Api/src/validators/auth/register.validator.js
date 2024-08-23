@@ -19,6 +19,8 @@ function validator() {
 			.isLength({ min: 3 })
 			.withMessage("Username must be at least 3 characters long"),
 
+		body("username").matches(/^[a-zA-Z0-9_]*$/).withMessage("Username must contain only letters, numbers and underscores"),
+
 		body("email")
 			.exists()
 			.withMessage("Email is required")

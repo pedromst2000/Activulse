@@ -62,6 +62,16 @@ responses:
                   msg: "Display name must be at least 3 characters long"
                   path: "username"
                   location: "body"
+          Invalid Format Username:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: "pedromst2000@gmail."
+                  msg: "Username must contain only letters, numbers and underscores"
+                  path: "username"
+                  location: "body"
           Invalid Email:
             value:
               success: false
