@@ -51,7 +51,7 @@ async function login(req, res) {
 			utils.handleResponse(
 				res,
 				utils.http.StatusUnauthorized,
-				"An email has been sent to you to verify your account",
+				"Check your email to verify your account",
 			);
 			return;
 		}

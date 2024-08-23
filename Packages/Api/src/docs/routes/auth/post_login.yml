@@ -115,7 +115,7 @@ responses:
           User Not Verified:
             value:
               success: false
-              message: An email has been sent to you to verify your account
+              message: Check your email to verify your account
   "404":
     description: Not Found
     content:
