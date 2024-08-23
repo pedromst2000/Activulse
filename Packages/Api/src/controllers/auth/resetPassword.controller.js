@@ -10,8 +10,7 @@ const bcrypt = require("bcryptjs");
  */
 async function resetPassword(req, res) {
 	try {
-		const { email } = req.params;
-		const { new_password, confirm_password } = req.body;
+		const { new_password, confirm_password, email } = req.body;
 
 		const user = await db.mysql.User.findOne({
 			where: {

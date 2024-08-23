@@ -10,7 +10,7 @@ const utils = require("../../utils");
 
 async function verifyConfirm(req, res) {
 	try {
-		const { email } = req.params;
+		const { email } = req.body;
 
 		const user = await db.mysql.User.findOne({
 			where: { email: email },

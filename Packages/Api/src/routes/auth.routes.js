@@ -30,7 +30,7 @@ router.post(
 
 // Verify OTP for reset password
 router.post(
-	"/users/verify-OTP/:email",
+	"/users/verify-OTP",
 	validators.auth.verifyOTP(),
 	validators.validateResult,
 	controllers.auth.verifyOTP,
@@ -38,7 +38,7 @@ router.post(
 
 // Reset Password
 router.patch(
-	"/users/reset-password/:email",
+	"/users/reset-password",
 	validators.auth.resetPassword(),
 	validators.validateResult,
 	controllers.auth.resetPassword,

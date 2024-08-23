@@ -1,4 +1,4 @@
-const { param } = require("express-validator");
+const { body } = require("express-validator");
 
 /**
  * Returns an array of validation rules for the resend verify route.
@@ -6,8 +6,17 @@ const { param } = require("express-validator");
  */
 function validator() {
 	return [
-		param("email").exists().withMessage("Email is required"),
-		param("email").isEmail().withMessage("Email must be a valid email address"),
+		body().custom((value, { req }) => {
+			if (Object.keys(req.body).length === 0) {
+				throw new Error("Body is empty");
+			}
+			return true;
+		}),
+		body("email")
+			.exists()
+			.withMessage("Email is required")
+			.isEmail()
+			.withMessage("Email must be a valid email address"),
 	];
 }
 

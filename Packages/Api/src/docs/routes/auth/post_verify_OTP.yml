@@ -4,6 +4,7 @@ tags:
   - "Auth"
 requestBody:
   required: true
+  description: OTP code sent to the user's email in requested body (For security reasons)!
   content:
     application/json:
       schema:
@@ -13,14 +14,10 @@ requestBody:
             type: string
             required: true
             example: 123456
-parameters:
-  - name: email
-    in: path
-    description: Email that was sent the verification OTP code.
-    required: true
-    schema:
-      type: string
-      example: pedromst@gmail.com
+          email:
+            type: string
+            required: true
+            example: JohnDoe@gmail.com
 responses:
   "200":
     description: Success
@@ -61,7 +58,7 @@ responses:
                   value: "pedrogmail"
                   msg: "Email must be a valid email address"
                   path: "email"
-                  location: "params"
+                  location: "body"
           Invalid OTP:
             value:
               success: false

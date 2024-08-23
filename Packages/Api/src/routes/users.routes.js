@@ -14,8 +14,8 @@ router.patch(
 );
 
 // Verify Confirmation
-router.get(
-	"/verify/:email",
+router.post(
+	"/verify",
 	validators.users.verifyConfirm(),
 	validators.validateResult,
 	controllers.users.verifyConfirm,
@@ -23,7 +23,7 @@ router.get(
 
 // Resend Verification Email
 router.post(
-	"/resend-verify/:email",
+	"/resend-verify",
 	validators.users.resendVerify(),
 	validators.validateResult,
 	controllers.users.resendVerify,

@@ -2,14 +2,18 @@ summary: Verify confirm user
 description: Verify if the user account is verified or not.
 tags:
   - "Users"
-parameters:
-  - name: email
-    in: path
-    description: Email that was sent the verification token.
-    required: true
-    schema:
-      type: string
-      example: "pedromst@gmail.com"
+requestBody:
+  required: true
+  description: Checking if the user (email) account is verified or not for the confirmation of the verification.
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          email:
+            type: string
+            required: true
+            example: JohnDoe@gmail.com
 responses:
   "200":
     description: Success

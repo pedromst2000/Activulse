@@ -1,15 +1,19 @@
 summary: Resend verification email
-description: Resend the verification email to the user account.
+description: Resend the verification email to the user account in case the user did not receive the email.
 tags:
   - "Users"
-parameters:
-  - name: email
-    in: path
-    description: Email that was resent the verification token.
-    required: true
-    schema:
-      type: string
-      example: "pedromst@gmail.com"
+requestBody:
+  required: true
+  description: Resend the verification email (requested body) to the user account.
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          email:
+            type: string
+            required: true
+            example: pedromst@gmail.com
 responses:
   "202":
     description: Accepted
@@ -50,7 +54,7 @@ responses:
                   value: "pedrogmail"
                   msg: "Email must be a valid email address"
                   path: "email"
-                  location: "params"
+                  location: "body"
   "404":
     description: Not Found
     content:

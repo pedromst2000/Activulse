@@ -41,11 +41,11 @@ const swaggerDefinition = {
 			post: routeDocs.auth.postRequestResetPassword,
 		},
 
-		"/auth/users/verify-otp/{email}": {
+		"/auth/users/verify-otp": {
 			post: routeDocs.auth.postVerifyOTP,
 		},
 
-		"/auth/users/reset-password/{email}": {
+		"/auth/users/reset-password": {
 			patch: routeDocs.auth.patchResetPassword,
 		},
 
@@ -54,11 +54,11 @@ const swaggerDefinition = {
 			patch: routeDocs.users.patchVerifyUser,
 		},
 
-		"/users/verify/{email}": {
-			get: routeDocs.users.getVerifyConfirm,
+		"/users/verify": {
+			post: routeDocs.users.postVerifyConfirm,
 		},
 
-		"/users/resend-verify/{email}": {
+		"/users/resend-verify": {
 			post: routeDocs.users.postResendVerify,
 		},
 

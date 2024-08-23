@@ -1,4 +1,4 @@
-const { param, body } = require("express-validator");
+const { body } = require("express-validator");
 
 /**
  * Returns an array of validation rules for the resend verify route.
@@ -29,8 +29,11 @@ function validator() {
 			.withMessage(
 				"confirm_password must contain at least one lowercase letter, one uppercase letter, one digit and be at least 8 characters long",
 			),
-		param("email").exists().withMessage("Email is required"),
-		param("email").isEmail().withMessage("Email must be a valid email address"),
+		body("email")
+			.exists()
+			.withMessage("email is required")
+			.isEmail()
+			.withMessage("email must be a valid email"),
 	];
 }
 

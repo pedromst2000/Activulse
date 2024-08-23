@@ -10,8 +10,7 @@ const utils = require("../../utils");
 
 async function verifyOTP(req, res) {
 	try {
-		const { email } = req.params;
-		const { OTP } = req.body;
+		const { OTP, email } = req.body;
 
 		const user = await db.mysql.User.findOne({
 			where: { email: email },

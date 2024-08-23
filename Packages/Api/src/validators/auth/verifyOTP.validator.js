@@ -1,4 +1,4 @@
-const { param, body } = require("express-validator");
+const { body } = require("express-validator");
 
 /**
  * Returns an array of validation rules for the resend verify route.
@@ -19,8 +19,11 @@ function validator() {
 			.withMessage("OTP must be a string")
 			.isLength({ min: 6, max: 6 })
 			.withMessage("OTP must be 6 digits long"),
-		param("email").exists().withMessage("Email is required"),
-		param("email").isEmail().withMessage("Email must be a valid email address"),
+		body("email")
+			.exists()
+			.withMessage("Email is required")
+			.isEmail()
+			.withMessage("Email is invalid"),
 	];
 }
 
