@@ -19,18 +19,24 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 import AnimatedComponent from '../../components/Animated/index';
 import Message from '../../components/Message';
+import AuthModal from '@/src/components/Modal/Auth';
 import utils from '../../utils';
 import Ilustration from '@/src/components/Ilustration';
 import { APIResponse } from '@/src/api/types';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { AuthStackParamList } from '@/src/navigation/Auth';
+
+type JoinNowNavigationProp = NativeStackNavigationProp<AuthStackParamList, 'JoinNow'>;
 
 const JoinNow: React.FC = (): React.JSX.Element => {
-	const navigation = useNavigation();
+	const navigation = useNavigation<JoinNowNavigationProp>();
 	const [username, setUsername] = useState<string>('');
 	const [email, setEmail] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
 	const [validationError, setValidationError] = useState<string>('');
 	const [showError, setShowError] = useState<boolean>(false);
 	const [longErrorMessage, setLongErrorMessage] = useState<string | null>(null);
+	const [modalVisible, setModalVisible] = useState<boolean>(false);
 	const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 	const scrollViewRef = useRef<ScrollView>(null);
 
@@ -39,6 +45,10 @@ const JoinNow: React.FC = (): React.JSX.Element => {
 		email: email.trim(),
 		password,
 	});
+
+	const toogleModal = (): void => {
+		setModalVisible(!modalVisible);
+	};
 
 	const handleRegister = async (): Promise<void> => {
 		try {
@@ -53,7 +63,7 @@ const JoinNow: React.FC = (): React.JSX.Element => {
 				{
 					onSuccess: async (resData: APIResponse): Promise<void> => {
 						if (resData.success) {
-							console.log('Modal Success');
+							setModalVisible(true); // Show the modal on success
 						} else {
 							// Handle failure
 							setValidationError(resData.message);
@@ -69,6 +79,7 @@ const JoinNow: React.FC = (): React.JSX.Element => {
 						// Determine whether the message is long or short
 						if (
 							errorMessage.includes('Username must be at least 3 characters long') ||
+							errorMessage.includes('Username must contain only letters') ||
 							errorMessage.includes('must contain at least one lowercase letter') ||
 							errorMessage.includes('must contain at least one uppercase letter') ||
 							errorMessage.includes('must contain at least one digit') ||
@@ -92,6 +103,7 @@ const JoinNow: React.FC = (): React.JSX.Element => {
 			// Handle the error similar to the onError method above
 			if (
 				errorMessage.includes('Username must be at least 3 characters long') ||
+				errorMessage.includes('Username must contain only letters') ||
 				errorMessage.includes('must contain at least one lowercase letter') ||
 				errorMessage.includes('must contain at least one uppercase letter') ||
 				errorMessage.includes('must contain at least one digit') ||
@@ -223,6 +235,16 @@ const JoinNow: React.FC = (): React.JSX.Element => {
 								<Ilustration ilustration={LogoIlus} width={140} height={96} />
 							</View>
 						</View>
+						{/* Auth Modal */}
+						<AuthModal
+							toogleModal={toogleModal}
+							isModalVisible={modalVisible}
+							setModalVisible={setModalVisible}
+							onPressModalBtn={() => {
+								setModalVisible(false);
+								navigation.navigate('VerifyEmail', { email: email.trim() });
+							}}
+						/>
 					</View>
 				</ScrollView>
 			</KeyboardAvoidingView>
