@@ -22,11 +22,11 @@ async function verifyConfirm(req, res) {
 		}
 
 		if (user.is_verified) {
-			utils.handleResponse(res, utils.http.StatusOK, "User verified");
+			utils.handleResponse(res, utils.http.StatusOK, 'Email verified successfully');
 			return;
 		}
 
-		utils.handleResponse(res, utils.http.StatusForbidden, "User not verified");
+		utils.handleResponse(res, utils.http.StatusForbidden, "Email not verified yet");
 	} catch (error) {
 		utils.handleError(res, error, __filename);
 	}

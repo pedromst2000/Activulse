@@ -30,7 +30,7 @@ responses:
           User Verified:
             value:
               success: true
-              message: User verified
+              message: Email verified successfully
   "403":
     description: Forbidden
     content:
@@ -46,7 +46,7 @@ responses:
           User not verified:
             value:
               success: false
-              message: User not verified
+              message: Email not verified yet
   "400":
     description: Bad Request
     content:
