@@ -2,7 +2,6 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { Dimensions } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import { useNavigation } from '@react-navigation/native';
 import Icon from '../components/Icon';
 import HomeIS from '../assets/svg/icons/BottomTab/HomeIcon_Selected.svg';
 import HomeINS from '../assets/svg/icons/BottomTab/HomeIcon_N_Selected.svg';
@@ -16,27 +15,33 @@ import Home from '../screens/Home';
 import Lifestyle from '../screens/Lifestyle';
 import Profile from '../screens/Profile';
 import Store from '../screens/Store';
-import { AuthStackParamList } from './Auth/index';
+import AuthStack, { AuthStackParamList } from './Auth/index';
 import OnBoarding from '../screens/Onboarding';
 import { useUserContext } from '../context/user';
-import AuthStack from '../navigation/Auth/index';
+import AssessmentRiskStack, { AssessmentRiskStackParamList } from './AssessmentRisk';
 import utils from '../navigation/utils';
 import config from '../config';
 
-export type RootStackParamList = {
+export type MainTabParamList = {
 	Home: undefined;
 	Lifestyle: undefined;
 	Store: undefined;
 	Profile: undefined;
+};
+
+export type RootStackParamList = {
 	Onboarding: undefined;
+	MainTabs: undefined;
 	AuthStack: {
 		screen: keyof AuthStackParamList; // 'SignIn' | 'JoinNow' | 'ForgotPassword';
 	};
-	MainTabs: undefined;
+	AssessmentRiskStack: {
+		screen: keyof AssessmentRiskStackParamList; // 'Assessment' | 'Result' | 'HowItWorks';
+	};
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
-const Tab = createBottomTabNavigator<RootStackParamList>();
+const Tab = createBottomTabNavigator<MainTabParamList>();
 
 const MainTabNavigator: React.FC = (): React.JSX.Element => {
 	const [orientation, setOrientation] = useState<'PORTRAIT' | 'LANDSCAPE'>('PORTRAIT');
@@ -142,6 +147,7 @@ const AppNavigator: React.FC = (): React.JSX.Element => {
 				<>
 					<Stack.Screen name="Onboarding" component={OnBoarding} />
 					<Stack.Screen name="AuthStack" component={AuthStack} />
+					<Stack.Screen name="AssessmentRiskStack" component={AssessmentRiskStack} />
 				</>
 			) : (
 				<Stack.Screen name="MainTabs" component={MainTabNavigator} />
