@@ -27,9 +27,21 @@ responses:
             value:
               success: true
               message: User verified
-          User Not Verified:
+  "403":
+    description: Forbidden
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          User not verified:
             value:
-              success: true
+              success: false
               message: User not verified
   "400":
     description: Bad Request

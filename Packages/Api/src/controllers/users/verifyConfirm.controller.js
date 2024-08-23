@@ -26,7 +26,7 @@ async function verifyConfirm(req, res) {
 			return;
 		}
 
-		utils.handleResponse(res, utils.http.StatusOK, "User not verified");
+		utils.handleResponse(res, utils.http.StatusForbidden, "User not verified");
 	} catch (error) {
 		utils.handleError(res, error, __filename);
 	}
