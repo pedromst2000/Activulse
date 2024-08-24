@@ -65,11 +65,16 @@ async function login(req, res) {
 			remember_me,
 		);
 
+		const isNewUser = await db.mysql.RiskScore.findOne({
+			where: { user_id: user.user_ID },
+		});
+
 		utils.handleResponse(res, utils.http.StatusOK, "Login with success", {
 			authToken,
 			refreshToken,
 			user: {
 				id: user.user_ID,
+				isNewUser: !isNewUser,
 				username: user.username,
 				points: user.points,
 			},

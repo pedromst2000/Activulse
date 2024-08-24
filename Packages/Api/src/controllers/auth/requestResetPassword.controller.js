@@ -4,6 +4,11 @@ const services = require("../../services");
 const templates = require("../../templates");
 
 /**
+ * @typedef RequestResetPasswordRequest
+ * @property {string} email - The user's email
+ */
+
+/**
  * Resends the SMS verification code to the user.
  * @param {import("express").Request} req - The Express Request object.
  * @param {import("express").Response} res - The Express Response object.
@@ -12,6 +17,7 @@ const templates = require("../../templates");
 
 async function requestResetPassword(req, res) {
 	try {
+		/**  @type {RequestResetPasswordRequest} */
 		const { email } = req.body;
 
 		const OTP = Math.floor(100000 + Math.random() * 900000).toString(); // Generate a random 6-digit OTP digits different

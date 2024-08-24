@@ -1,6 +1,12 @@
 const utils = require("../../utils");
 const db = require("../../db");
-const bcrypt = require("bcryptjs");
+
+/**
+ * @typedef ResetPasswordRequest
+ * @property {string} new_password - The user's new password
+ * @property {string} confirm_password - The user's new password confirmation
+ * @property {string} email - The user's email
+ */
 
 /**
  * Reset password controller
@@ -10,6 +16,7 @@ const bcrypt = require("bcryptjs");
  */
 async function resetPassword(req, res) {
 	try {
+		/**  @type {ResetPasswordRequest} */
 		const { new_password, confirm_password, email } = req.body;
 
 		const user = await db.mysql.User.findOne({

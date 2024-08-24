@@ -2,6 +2,12 @@ const db = require("../../db");
 const utils = require("../../utils");
 
 /**
+ * @typedef VerifyOTPRequest
+ * @property {string} OTP - The OTP to verify
+ * @property {string} email - The user's email
+ */
+
+/**
  * Verifies the OTP for resetting the password.
  * @param {import("express").Request} req - The Express Request object.
  * @param {import("express").Response} res - The Express Response object.
@@ -10,6 +16,7 @@ const utils = require("../../utils");
 
 async function verifyOTP(req, res) {
 	try {
+		/**  @type {VerifyOTPRequest} */
 		const { OTP, email } = req.body;
 
 		const user = await db.mysql.User.findOne({
