@@ -3,6 +3,11 @@ const utils = require("../../utils");
 const { Op } = require("sequelize");
 
 /**
+ * @typedef GetUserParams
+ * @property {string} id - The user's id
+ */
+
+/**
  * Returns the logged user data or the user data by id
  * @param {import("express").Request} req - The Express Request object.
  * @param {import("express").Response} res - The Express Response object.
@@ -11,6 +16,7 @@ const { Op } = require("sequelize");
 
 async function getUser(req, res) {
 	try {
+		/** @type {GetUserParams} */
 		const { id } = req.params;
 
 		// Checking if the user is trying to fetch his own data.

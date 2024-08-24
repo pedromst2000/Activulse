@@ -2,6 +2,11 @@ const db = require("../../db");
 const utils = require("../../utils");
 
 /**
+ * @typedef VerifyConfirmRequest
+ * @property {string} email - The user's email
+ */
+
+/**
  * Verifies if the user has confirmed the email.
  * @param {import("express").Request} req - The Express Request object.
  * @param {import("express").Response} res - The Express Response object.
@@ -10,6 +15,7 @@ const utils = require("../../utils");
 
 async function verifyConfirm(req, res) {
 	try {
+		/**  @type {VerifyConfirmRequest} */
 		const { email } = req.body;
 
 		const user = await db.mysql.User.findOne({
@@ -22,7 +28,7 @@ async function verifyConfirm(req, res) {
 		}
 
 		if (user.is_verified) {
-			utils.handleResponse(res, utils.http.StatusOK, 'Email verified successfully');
+			utils.handleResponse(res, utils.http.StatusOK, "Email verified successfully");
 			return;
 		}
 

@@ -4,6 +4,11 @@ const services = require("../../services");
 const templates = require("../../templates");
 
 /**
+ * @typedef ResendVerifyRequest
+ * @property {string} email - The user's email
+ */
+
+/**
  * Resends other verification email to the user.
  * @param {import("express").Request} req - The Express Request object.
  * @param {import("express").Response} res - The Express Response object.
@@ -12,6 +17,7 @@ const templates = require("../../templates");
 
 async function resendVerify(req, res) {
 	try {
+		/**  @type {ResendVerifyRequest} */
 		const { email } = req.body;
 
 		const user = await db.mysql.User.findOne({

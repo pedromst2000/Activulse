@@ -75,6 +75,11 @@ async function login(req, res) {
 			user: {
 				id: user.user_ID,
 				isNewUser: !isNewUser,
+				isAssessmentDone:
+					user.stress_status !== null && user.know_diet !== null ? true : false,
+				fastFoodStatus:
+					user.fast_food_status === null ? "Unknown" : user.fast_food_status,
+				stressStatus: user.stress_status === null ? "Unknown" : user.stress_status,
 				username: user.username,
 				points: user.points,
 			},

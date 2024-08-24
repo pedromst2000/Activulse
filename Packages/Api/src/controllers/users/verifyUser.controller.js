@@ -2,6 +2,11 @@ const db = require("../../db");
 const utils = require("../../utils");
 
 /**
+ * @typedef VerifyUserParams
+ * @property {string} token - The user's verification token to verify
+ */
+
+/**
  * Verifies a user account.
  * @param {import("express").Request} req - The Express Request object.
  * @param {import("express").Response} res - The Express Response object.
@@ -10,6 +15,7 @@ const utils = require("../../utils");
 
 async function verifyUser(req, res) {
 	try {
+		/** @type {VerifyUserParams} */
 		const { token } = req.params;
 
 		// Check if there's a user with that token
