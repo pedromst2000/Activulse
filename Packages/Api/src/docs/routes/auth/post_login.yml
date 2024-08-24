@@ -40,6 +40,23 @@ responses:
                   type: string
                 refreshToken:
                   type: string
+                user:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    isNewUser:
+                      type: boolean
+                    isAssessmentDone:
+                      type: boolean
+                    fastFoodStatus:
+                      type: string
+                    stressStatus:
+                      type: string
+                    username:
+                      type: string
+                    points:
+                      type: integer
         examples:
           Success:
             value:
@@ -52,6 +69,10 @@ responses:
                   refreshToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJlbWVtYmVyTWUiOmZhbHNlLCJpYXQiOjE2OTg0MDU4ODIsImV4cCI6MTY5ODQ5MjI4Mn0.VMkxKbQBopfJBnOITugBHbM_D0JxhmH_AL7O0tDaV4E
                   user:
                     id: 5
+                    isNewUser: true
+                    isAssessmentDone: false
+                    fastFoodStatus: Sometimes
+                    stressStatus: Frequently
                     username: pedromst
                     points: 0
   "400":
