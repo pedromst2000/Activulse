@@ -35,17 +35,17 @@ async function assessmentHeartRisk(req, res) {
 			total_cholesterol,
 		} = req.body;
 
-		const loggedUser = req.userId;
+		const loggedUserId = req.userId;
 
 		const user = await db.mysql.User.findOne({
 			where: {
-				user_ID: loggedUser,
+				user_ID: loggedUserId,
 			},
 		});
 
 		const havesRiskScore = await db.mysql.RiskScore.findOne({
 			where: {
-				user_id: loggedUser,
+				user_id: loggedUserId,
 			},
 		});
 
@@ -96,19 +96,19 @@ async function assessmentHeartRisk(req, res) {
 				},
 				{
 					where: {
-						user_ID: loggedUser,
+						user_ID: loggedUserId,
 					},
 				},
 			);
 
 			await db.mysql.RiskScore.create({
-				user_id: loggedUser,
+				user_id: loggedUserId,
 				score: assessmentRisk.score,
 				typeRisk: assessmentRisk.risk,
 			});
 
 			await db.mysql.UserAvatar.create({
-				user_id: loggedUser,
+				user_id: loggedUserId,
 				avatar_id: user.gender === "Female" ? 2 : 1,
 			});
 
