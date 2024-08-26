@@ -1,0 +1,299 @@
+summary: Cardiovascular Risk Assessment based on user's answers and Framingham Risk Score (FRS) Algorithm
+description: >
+  This endpoint calculates the cardiovascular risk score for a user based on the FRS algorithm. 
+  The 10-year risk of developing cardiovascular disease is assessed using this algorithm, which considers various health parameters, including:
+
+    - Age
+    - Gender
+    - Lipid levels (Total cholesterol, HDL cholesterol)
+    - Blood pressure
+    - Hypertension treatment
+    - Smoking status
+    - Diabetes status
+
+  The algorithm used is detailed in the following resources:
+
+    - FRS Official Web Site: [Framingham Risk Score](https://www.framinghamheartstudy.org/fhs-risk-functions/cardiovascular-disease-10-year-risk/)
+    - AHA/ACC General Cardiovascular Risk Profile: [Circulation](https://www.ahajournals.org/doi/10.1161/circulationaha.107.699579#d1e386)
+    - 2024 Update on Framingham Risk Score: [Thieme Connect](https://www.thieme-connect.de/products/ejournals/abstract/10.1055/s-0044-1782528)
+
+  The type of risk is classified as follows:
+
+    - Low Risk: < 10%
+    - Moderate Risk:  >= 10% and <= 20% 
+    - High Risk: Risk score > 20%
+
+   note: If the patient has diabetes the typeRisk will be "High Risk" regardless of the risk score.
+
+tags:
+  - "Users"
+security:
+  - bearerAuth: []
+parameters:
+  - in: header
+    name: x-auth-token
+    schema:
+      type: string
+    required: true
+    description: Authorization token
+  - in: header
+    name: x-refresh-token
+    schema:
+      type: string
+    required: true
+    description: Authorization token
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          gender:
+            type: string
+            required: true
+            description: Gender of the user
+            example: Male
+          age:
+            type: integer
+            required: true
+            description: Age of the user in years
+            example: 53
+          smoker:
+            type: boolean
+            required: true
+            description: Smoking status of the user
+            example: false
+          diabetes:
+            type: boolean
+            required: true
+            description: Diabetes status of the user
+            example: true
+          treatment_for_hypertension:
+            type: boolean
+            required: true
+            description: Hypertension treatment status of the user
+            example: true
+          systolic_blood_pressure:
+            type: integer
+            required: true
+            description: Systolic blood pressure of the user in mmHg
+            example: 125
+          HDL_cholesterol:
+            type: integer
+            required: true
+            description: HDL cholesterol level of the user in mg/dL
+            example: 55
+          total_cholesterol:
+            type: integer
+            required: true
+            description: Total cholesterol level of the user in mg/dL
+            example: 161
+responses:
+  201:
+    description: Cardiovascular risk assessment calculated successfully
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+            data:
+              type: object
+              properties:
+                riskScore:
+                  type: number
+                  format: float
+                typeRisk:
+                  type: string
+                health_data:
+                  type: object
+                  properties:
+                    gender:
+                      type: string
+                    age:
+                      type: integer
+                    smoker:
+                      type: string
+                    diabetes:
+                      type: string
+                    treatment_for_hypertension:
+                      type: string
+                    systolic_blood_pressure:
+                      type: integer
+                    HDL_cholesterol:
+                      type: integer
+                    total_cholesterol:
+                      type: integer
+        examples:
+          Success:
+            value:
+              success: true
+              message: Risk assessment done!
+              data:
+                riskScore: 15.6
+                typeRisk: High Risk
+                health_data:
+                  gender: Male
+                  age: 53
+                  smoker: No
+                  diabetes: Yes
+                  treatment_for_hypertension: Yes
+                  systolic_blood_pressure: 125
+                  HDL_cholesterol: 55
+                  total_cholesterol: 161
+  400:
+    description: Bad request
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Invalid Gender:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: "Masad"
+                  msg: "gender must be a valid gender"
+                  path: "gender"
+                  location: "body"
+          Invalid Age:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: 16
+                  msg: "age must be an number between 30 and 99"
+                  path: "age"
+                  location: "body"
+          Invalid Smoker Status:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: "asdasd"
+                  msg: "smoker must be a boolean"
+                  path: "smoker"
+                  location: "body"
+          Invalid diabetes Status:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: "No"
+                  msg: "diabetes must be a boolean"
+                  path: "diabetes"
+                  location: "body"
+          Invalid hypertension Status:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: "No"
+                  msg: "treatment for_hypertension must be a boolean"
+                  path: "treatment_for_hypertension"
+                  location: "body"
+          Invalid Systolic Blood Pressure:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: 350
+                  msg: "systolic blood pressure must be between 70 and 230"
+                  path: "systolic_blood_pressure"
+                  location: "body"
+          Invalid HDL Cholesterol:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: 5
+                  msg: "HDL cholesterol must be between 20 and 100"
+                  path: "HDL_cholesterol"
+                  location: "body"
+          Invalid Total Cholesterol:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: 400
+                  msg: "total cholesterol must be between 100 and 300 "
+                  path: "total_cholesterol"
+                  location: "body"
+  "401":
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Missing token:
+            value:
+              success: false
+              message: Missing auth token or refresh token
+          Invalid token:
+            value:
+              success: false
+              message: Invalid auth token or refresh token
+          Refresh token expired:
+            value:
+              success: false
+              message: Refresh token has expired
+  403:
+    description: Forbidden
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Not Registered:
+            value:
+              success: false
+              message: You are not registered!
+          Not Verified:
+            value:
+              success: false
+              message: You are not verified!
+  500:
+    description: Internal server error
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Internal server error:
+            value:
+              success: false
+              message: Internal server error

@@ -69,6 +69,10 @@ const swaggerDefinition = {
 		"/users/{id}": {
 			get: routeDocs.users.getUserProfile,
 		},
+
+		"/users/heart-risk-assessment": {
+			post: routeDocs.users.postRiskAssessment,
+		},
 	},
 };
 
