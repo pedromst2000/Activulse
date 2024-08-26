@@ -51,7 +51,7 @@ requestBody:
             havesDiet: true
             diet: "DASH"
         When does not have Diet:
-          summary: With Optional Fields
+          summary: When the user does not have a diet
           value:
             stress: "Rare"
             havesDiet: false
