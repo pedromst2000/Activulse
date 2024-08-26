@@ -281,6 +281,25 @@ responses:
             value:
               success: false
               message: You are not verified!
+  409:
+    description: Conflict
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Already Assessed:
+            value:
+              success: false
+              message: You have already done the assessment risk!
+              data:
+                riskScore: 15.6
+                typeRisk: High Risk
   500:
     description: Internal server error
     content:
