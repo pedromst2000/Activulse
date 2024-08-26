@@ -38,4 +38,13 @@ router.get(
 	controllers.users.getUser,
 );
 
+// Assessment Heart Risk
+router.post(
+	"/heart-risk-assessment",
+	validators.users.assessmentHeartRisk(),
+	validators.validateResult,
+	middlewares.validateTokens,
+	controllers.users.assessmentHeartRisk,
+);
+
 module.exports = router;

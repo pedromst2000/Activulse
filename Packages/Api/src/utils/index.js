@@ -6,6 +6,7 @@ const password = require("./hashPassword.utils");
 const http = require("./http.utils");
 const validateData = require("./validateData.utils");
 const formatData = require("./formatData.utils");
+const CVDriskScore = require("./riskScore.utils");
 
 module.exports = {
 	checkEnvs,
@@ -16,4 +17,5 @@ module.exports = {
 	http,
 	validateData,
 	formatData,
+	CVDriskScore,
 };
