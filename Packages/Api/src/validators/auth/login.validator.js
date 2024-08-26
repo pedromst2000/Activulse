@@ -24,15 +24,11 @@ function validator() {
 			.isString()
 			.withMessage("Password must be a string"),
 
-		body("remember_me").exists().withMessage("Remember me is required"),
-
-		body("remember_me").custom((value) => {
-			if (value === true || value === false) {
-				return true;
-			}
-
-			throw new Error("Remember me must be a boolean");
-		}),
+		body("remember_me")
+			.exists()
+			.withMessage("Remember me is required")
+			.isBoolean({ strict: true })
+			.withMessage("Remember me must be a boolean"),
 	];
 }
 
