@@ -1,0 +1,239 @@
+summary: Extra Assessment based on stress nevels and diet habits for a personalized feedback and recommendations
+description: Extra Assessment based on stress nevels and diet habits for a personalized feedback and recommendations
+tags:
+  - "Users"
+security:
+  - bearerAuth: []
+parameters:
+  - in: header
+    name: x-auth-token
+    schema:
+      type: string
+    required: true
+    description: Authorization token
+  - in: header
+    name: x-refresh-token
+    schema:
+      type: string
+    required: true
+    description: Authorization token
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - stress
+          - havesDiet
+        properties:
+          stress:
+            type: string
+            description: Stress level of the user (Rare, Sometimes, Frequently)
+            example: Sometimes
+          havesDiet:
+            type: boolean
+            description: If the user has a diet or not
+            example: true
+          fastFoodStatus:
+            type: string
+            description: Fast food consumption status of the user (Rare, Sometimes, Frequently) if the user does not have a diet
+            example: Rare
+          diet:
+            type: string
+            description: Diet Type of the user (DASH, Mediterranean, Vegan) if the user has a diet
+            example: DASH
+      examples:
+        When haves Diet:
+          summary: When the user has a diet
+          value:
+            stress: "Sometimes"
+            havesDiet: true
+            diet: "DASH"
+        When does not have Diet:
+          summary: With Optional Fields
+          value:
+            stress: "Rare"
+            havesDiet: false
+            fastFoodStatus: "Sometimes"
+responses:
+  200:
+    description: Success
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Success:
+            value:
+              success: true
+              message: Extra assessment completed successfully!
+  400:
+    description: Bad Request
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Invalid Stress Level:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: "asd"
+                  msg: "stress must be one of Rare, Sometimes, Frequently"
+                  path: "stress"
+                  location: "body"
+          Invalid havesDiet Status:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: "asdasd"
+                  msg: "havesDiet must be a boolean"
+                  path: "havesDiet"
+                  location: "body"
+          Invalid Diet Type:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: "asdasd"
+                  msg: "diet must be one of DASH, Mediterranean, Vegan"
+                  path: "diet"
+                  location: "body"
+          Missing Diet when required:
+            description: Diet should be present when havesDiet is true
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: "asdasd"
+                  msg: "diet is required when havesDiet is true"
+                  path: "diet"
+                  location: "body"
+          Fast Food Status not required:
+            description: Fast Food Status should not be present when havesDiet is true
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: "asdasd"
+                  msg: "fastFoodStatus is not required when havesDiet is true"
+                  path: "fastFoodStatus"
+                  location: "body"
+          Diet not required:
+            description: Diet should not be present when havesDiet is false
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: "asdasd"
+                  msg: "diet is not required when haveDiet is false"
+          Invalid Fast Food Status:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: "asdasd"
+                  msg: "fastFoodStatus must be one of Rare, Sometimes, Frequently"
+                  path: "fastFoodStatus"
+                  location: "body"
+  401:
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Missing token:
+            value:
+              success: false
+              message: Missing auth token or refresh token
+          Invalid token:
+            value:
+              success: false
+              message: Invalid auth token or refresh token
+          Refresh token expired:
+            value:
+              success: false
+              message: Refresh token has expired
+  403:
+    description: Forbidden
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Not Registered:
+            value:
+              success: false
+              message: You are not registered!
+          Not Verified:
+            value:
+              success: false
+              message: You are not verified!
+  409:
+    description: Conflict
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Already Extra Assessed:
+            value:
+              success: false
+              message: You have already done the extra assessment!
+              data:
+                stress: Rare
+                havesDiet: Yes
+                fastFoodStatus: Unknown
+                diet: DASH
+  500:
+    description: Internal server error
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Internal server error:
+            value:
+              success: false
+              message: Internal server error

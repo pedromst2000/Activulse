@@ -47,4 +47,13 @@ router.post(
 	controllers.users.assessmentHeartRisk,
 );
 
+// Extra Assessment
+router.patch(
+	"/extra-assessment",
+	validators.users.extraAssessment(),
+	validators.validateResult,
+	middlewares.validateTokens,
+	controllers.users.extraAssessment,
+);
+
 module.exports = router;

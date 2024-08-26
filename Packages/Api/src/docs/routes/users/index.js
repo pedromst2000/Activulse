@@ -25,6 +25,10 @@ const postRiskAssessment = YAML.parse(
 	fs.readFileSync("./src/docs/routes/users/post_risk_assessment.yml", "utf8"),
 );
 
+const patchExtraAssessment = YAML.parse(
+	fs.readFileSync("./src/docs/routes/users/patch_extra_assessment.yml", "utf8"),
+);
+
 module.exports = {
 	patchVerifyUser,
 	postVerifyConfirm,
@@ -32,4 +36,5 @@ module.exports = {
 	getLoggedUser,
 	getUserProfile,
 	postRiskAssessment,
+	patchExtraAssessment,
 };

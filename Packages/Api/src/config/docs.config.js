@@ -28,7 +28,8 @@ const swaggerDefinition = {
 			delete: routeDocs.cronjob.deleteUnverifiedUsers,
 		},
 
-		// AUTH
+		//---------------------------AUTH---------------------------------------------------
+
 		"/auth/register": {
 			post: routeDocs.auth.postRegister,
 		},
@@ -49,7 +50,8 @@ const swaggerDefinition = {
 			patch: routeDocs.auth.patchResetPassword,
 		},
 
-		// USERS
+		//---------------------------USERS---------------------------------------------------
+
 		"/users/verify/{token}": {
 			patch: routeDocs.users.patchVerifyUser,
 		},
@@ -72,6 +74,10 @@ const swaggerDefinition = {
 
 		"/users/heart-risk-assessment": {
 			post: routeDocs.users.postRiskAssessment,
+		},
+
+		"/users/extra-assessment": {
+			patch: routeDocs.users.patchExtraAssessment,
 		},
 	},
 };

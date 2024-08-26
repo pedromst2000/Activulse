@@ -93,7 +93,7 @@ const UserModel = (sequelize) => {
 					isIn: [["Rare", "Sometimes", "Frequently"]],
 				},
 			},
-			know_diet: {
+			haves_diet: {
 				type: DataTypes.BOOLEAN,
 				allowNull: true,
 			},
