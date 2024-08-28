@@ -3,11 +3,11 @@ const { Sequelize, DataTypes } = require("sequelize");
 /**
  * @param {Sequelize} sequelize
  */
-const PictureModel = (sequelize) => {
+const AssetModel = (sequelize) => {
 	return sequelize.define(
-		"picture",
+		"asset",
 		{
-			picture_ID: {
+			Asset_ID: {
 				autoIncrement: true,
 				type: DataTypes.INTEGER,
 				allowNull: false,
@@ -30,11 +30,11 @@ const PictureModel = (sequelize) => {
 				type: DataTypes.INTEGER,
 				allowNull: true,
 			},
-			// diet_id: {
-			// 	type: DataTypes.INTEGER,
-			// 	allowNull: true,
-			// },
 			banner_id: {
+				type: DataTypes.INTEGER,
+				allowNull: true,
+			},
+			avatar_id: {
 				type: DataTypes.INTEGER,
 				allowNull: true,
 			},
@@ -50,14 +50,14 @@ const PictureModel = (sequelize) => {
 		},
 		{
 			sequelize,
-			tableName: "picture",
+			tableName: "asset",
 			timestamps: true,
 			indexes: [
 				{
 					name: "PRIMARY",
 					unique: true,
 					using: "BTREE",
-					fields: [{ name: "picture_ID" }],
+					fields: [{ name: "Asset_ID" }],
 				},
 			],
 			logging: false,
@@ -65,4 +65,4 @@ const PictureModel = (sequelize) => {
 	);
 };
 
-module.exports = PictureModel;
+module.exports = AssetModel;

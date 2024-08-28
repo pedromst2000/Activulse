@@ -13,14 +13,6 @@ const AvatarModel = (sequelize) => {
 				allowNull: false,
 				primaryKey: true,
 			},
-			provider_id: {
-				type: DataTypes.STRING(255),
-				allowNull: false,
-			},
-			provider_url: {
-				type: DataTypes.STRING(255),
-				allowNull: false,
-			},
 		},
 		{
 			sequelize,

@@ -7,11 +7,11 @@ const { Sequelize } = require("sequelize");
 
 function init(sequelize) {
 	// all models files
+	const Avatar = require("./avatar.model")(sequelize);
 	const Activity = require("./activity.model")(sequelize);
 	const ActivityCategory = require("./activityCategory.model")(sequelize);
 	const Badge = require("./badge.model")(sequelize);
 	const Banner = require("./banner.model")(sequelize);
-	const Avatar = require("./avatar.model")(sequelize);
 	const Buyer = require("./buyer.model")(sequelize);
 	const Challenge = require("./challenge.model")(sequelize);
 	const ChallengeCategory = require("./challengeCategory.model")(sequelize);
@@ -21,7 +21,7 @@ function init(sequelize) {
 	const Favorite = require("./favorite.model")(sequelize);
 	const Ingredient = require("./ingredient.model")(sequelize);
 	const Instruction = require("./instruction.model")(sequelize);
-	const Picture = require("./picture.model")(sequelize);
+	const Asset = require("./asset.model")(sequelize);
 	const Recipe = require("./recipe.model")(sequelize);
 	const RecipeCategory = require("./recipeCategory.model")(sequelize);
 	const RiskScore = require("./riskScore.model")(sequelize);
@@ -250,51 +250,62 @@ function init(sequelize) {
 	});
 
 	// ------------------------------------------------------
-	// Picture
-	// Picture - Challenge => 1:1 1:1
-	Picture.belongsTo(Challenge, {
+	// Asset
+	// Asset - Challenge => 1:1 1:1
+	Asset.belongsTo(Challenge, {
 		foreignKey: "challenge_id",
 		onDelete: "CASCADE",
 	});
-	Challenge.hasOne(Picture, {
+	Challenge.hasOne(Asset, {
 		foreignKey: "challenge_id",
 	});
 
-	// Picture - Recipe => 1:1 1:1
-	Picture.belongsTo(Recipe, {
+	// Asset - Recipe => 1:1 1:1
+	Asset.belongsTo(Recipe, {
 		foreignKey: "recipe_id",
 		onDelete: "CASCADE",
 	});
-	Recipe.hasOne(Picture, {
+	Recipe.hasOne(Asset, {
 		foreignKey: "recipe_id",
 	});
 
-	// Picture - Activity => 1:1 1:1
-	Picture.belongsTo(Activity, {
+	// Asset - Activity => 1:1 1:1
+	Asset.belongsTo(Activity, {
 		foreignKey: "activity_id",
 		onDelete: "CASCADE",
 	});
-	Activity.hasOne(Picture, {
+	Activity.hasOne(Asset, {
 		foreignKey: "activity_id",
 	});
 
-	// Picture - Banner => 1:1 1:1
-	Picture.belongsTo(Banner, {
+	// Asset - Banner => 1:1 1:1
+	Asset.belongsTo(Banner, {
 		foreignKey: "banner_id",
 		onDelete: "CASCADE",
 	});
-	Banner.hasOne(Picture, {
+	Banner.hasOne(Asset, {
 		foreignKey: "banner_id",
 	});
 
-	// Picture - Badge => 1:1 1:1
-	Picture.belongsTo(Badge, {
+	// Asset - Badge => 1:1 1:1
+	Asset.belongsTo(Badge, {
 		foreignKey: "badge_id",
 		onDelete: "CASCADE",
 	});
-	Badge.hasOne(Picture, {
+	Badge.hasOne(Asset, {
 		foreignKey: "badge_id",
 	});
+
+	// Asset - Avatar => 1:1 1:1
+	Asset.belongsTo(Avatar, {
+		foreignKey: "avatar_id",
+		onDelete: "CASCADE",
+	});
+
+	Avatar.hasOne(Asset, {
+		foreignKey: "avatar_id",
+	});
+
 	// ------------------------------------------------------
 
 	// User - banner => *FK selected_banner_ID
@@ -307,16 +318,6 @@ function init(sequelize) {
 		foreignKey: "selected_banner_ID",
 	});
 
-	// User - Avatar => 1:1 1:1
-	User.belongsTo(Avatar, {
-		foreignKey: "selected_avatar_ID",
-		onDelete: "CASCADE",
-	});
-
-	Avatar.hasOne(User, {
-		foreignKey: "selected_avatar_ID",
-	});
-
 	// User Avatar - User => 1:N N:1
 	UserAvatar.belongsTo(User, {
 		foreignKey: "user_id",
@@ -327,7 +328,7 @@ function init(sequelize) {
 		foreignKey: "user_id",
 	});
 
-	// User Avatar - Avatar => 1:N N:1
+	// User avatar - avatar => 1:N N:1
 	UserAvatar.belongsTo(Avatar, {
 		foreignKey: "avatar_id",
 		onDelete: "CASCADE",
@@ -354,13 +355,13 @@ function init(sequelize) {
 		RecipeCategory,
 		Ingredient,
 		Instruction,
+		Avatar,
 		Activity,
 		ActivityCategory,
 		Workout,
-		Picture,
+		Asset,
 		Banner,
 		Badge,
-		Avatar,
 	};
 }
 

@@ -12,7 +12,7 @@ const workouts = require("./workouts");
 const challengeCategory = require("./challengeCategory");
 const challengeProgress = require("./challengeProgress");
 const challenges = require("./challenges");
-const pictures = require("./pictures");
+const assets = require("./assets");
 const users = require("./users");
 const userAvatar = require("./userAvatar");
 const userBadge = require("./userBadge");
@@ -37,7 +37,7 @@ module.exports = {
 	challengeCategory,
 	challengeProgress,
 	challenges,
-	pictures,
+	assets,
 	users,
 	userAvatar,
 	userBadge,

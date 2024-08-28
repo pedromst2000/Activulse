@@ -43,35 +43,34 @@ const dbData = require("../data/db");
 		// Populate the tables with data
 		console.log(loggingPrefix + colors.cyan("Populating the tables with data...\n"));
 
-		console.log(loggingPrefix + colors.cyan("Inserting activities..."));
-
 		// Activity Categories data
+
+		console.log(loggingPrefix + colors.cyan("Inserting activity categories..."));
+
 		await db.mysql.ActivityCategory.bulkCreate(dbData.activityCategory);
 		console.log(
 			loggingPrefix + colors.green("Successfully inserted activity categories!\n"),
 		);
 
 		// Activities data
+
+		console.log(loggingPrefix + colors.cyan("Inserting activities..."));
+
 		await db.mysql.Activity.bulkCreate(dbData.activities);
 		console.log(loggingPrefix + colors.green("Successfully inserted activities!\n"));
 
-		console.log(loggingPrefix + colors.cyan("Inserting activity categories..."));
+		// Badges data
 
 		console.log(loggingPrefix + colors.cyan("Inserting badges..."));
+
+		await db.mysql.Badge.bulkCreate(dbData.badges);
+		console.log(loggingPrefix + colors.green("Successfully inserted badges!\n"));
 
 		// Workouts data
 		console.log(loggingPrefix + colors.cyan("Inserting workouts..."));
 
 		await db.mysql.Workout.bulkCreate(dbData.workouts);
 		console.log(loggingPrefix + colors.green("Successfully inserted workouts!\n"));
-
-		// Badges data
-		await db.mysql.Badge.bulkCreate(dbData.badges);
-		console.log(loggingPrefix + colors.green("Successfully inserted badges!\n"));
-
-		console.log(
-			loggingPrefix + colors.green("Successfully populated the tables with data!\n"),
-		);
 
 		// Banners data
 		console.log(loggingPrefix + colors.cyan("Inserting banners..."));
@@ -125,27 +124,27 @@ const dbData = require("../data/db");
 		await db.mysql.Challenge.bulkCreate(dbData.challenges);
 		console.log(loggingPrefix + colors.green("Successfully inserted challenges!\n"));
 
-		// Pictures data
-		console.log(loggingPrefix + colors.cyan("Inserting pictures..."));
-
-		await db.mysql.Picture.bulkCreate(dbData.pictures);
-		console.log(loggingPrefix + colors.green("Successfully inserted pictures!\n"));
-
-		// Avatars data
-		console.log(loggingPrefix + colors.cyan("Inserting avatars..."));
-
-		await db.mysql.Avatar.bulkCreate(dbData.avatars);
-		console.log(loggingPrefix + colors.green("Successfully inserted avatars!\n"));
-
 		// Users data
 		console.log(loggingPrefix + colors.cyan("Inserting users..."));
 
 		await db.mysql.User.bulkCreate(dbData.users);
 		console.log(loggingPrefix + colors.green("Successfully inserted users!\n"));
 
-		// User Avatars data
+		// Avatars Data
+		console.log(loggingPrefix + colors.cyan("Inserting avatars..."));
+
+		await db.mysql.Avatar.bulkCreate(dbData.avatars);
+		console.log(loggingPrefix + colors.green("Successfully inserted avatars!\n"));
+
+		// // User Avatars data
 		await db.mysql.UserAvatar.bulkCreate(dbData.userAvatar);
 		console.log(loggingPrefix + colors.green("Successfully inserted user avatars!\n"));
+
+		// Assets data
+		console.log(loggingPrefix + colors.cyan("Inserting Assets..."));
+
+		await db.mysql.Asset.bulkCreate(dbData.assets);
+		console.log(loggingPrefix + colors.green("Successfully inserted assets!\n"));
 
 		// Buyers data
 		console.log(loggingPrefix + colors.cyan("Inserting buyers..."));
@@ -190,6 +189,10 @@ const dbData = require("../data/db");
 
 		await db.mysql.UserActivity.bulkCreate(dbData.userActivity);
 		console.log(loggingPrefix + colors.green("Successfully inserted user activities!\n"));
+
+		console.log(
+			loggingPrefix + colors.green("Successfully populated the tables with data!\n"),
+		);
 
 		// -----------------------------------------------------------------------------------------
 
