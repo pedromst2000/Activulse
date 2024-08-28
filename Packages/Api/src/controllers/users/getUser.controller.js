@@ -49,18 +49,8 @@ async function getUser(req, res) {
 			],
 			include: [
 				{
-					model: db.mysql.Avatar,
-					attributes: ["provider_url"],
-				},
-				{
 					model: db.mysql.Banner,
 					attributes: ["banner_ID"],
-					include: [
-						{
-							model: db.mysql.Picture,
-							attributes: ["provider_url"],
-						},
-					],
 					required: false,
 				},
 				{
@@ -73,9 +63,16 @@ async function getUser(req, res) {
 					include: [
 						{
 							model: db.mysql.Avatar,
-							attributes: ["provider_url"],
+							attributes: ["avatar_ID"],
+							include: [
+								{
+									model: db.mysql.Asset,
+									attributes: ["provider_url"],
+								},
+							],
 						},
 					],
+
 					required: false,
 				},
 				{
@@ -92,7 +89,7 @@ async function getUser(req, res) {
 							attributes: ["Banner_ID"],
 							include: [
 								{
-									model: db.mysql.Picture,
+									model: db.mysql.Asset,
 									attributes: ["banner_id", "provider_url"],
 								},
 							],
@@ -109,7 +106,7 @@ async function getUser(req, res) {
 							attributes: ["badge_ID", "title", "description"],
 							include: [
 								{
-									model: db.mysql.Picture,
+									model: db.mysql.Asset,
 									attributes: ["badge_id", "provider_url"],
 								},
 							],
@@ -133,6 +130,8 @@ async function getUser(req, res) {
 			utils.handleResponse(res, utils.http.StatusNotFound, "User not found");
 			return;
 		}
+
+		console.log(JSON.stringify(user, null, 2));
 
 		const responseData = isLoggedUser
 			? {
@@ -185,14 +184,20 @@ async function getUser(req, res) {
 						user.selected_banner_ID !== null
 							? {
 									id: user.selected_banner_ID,
-									banner: user.banner.picture.provider_url,
+									banner: user.buyers
+										.filter((banner) => banner.banner_id === user.selected_banner_ID)
+										.map((banner) => banner.banner.asset.provider_url)
+										.toString(),
 								}
 							: null,
 					selected_avatar:
 						user.selected_avatar_ID !== null
 							? {
 									id: user.selected_avatar_ID,
-									avatar: user.avatar.provider_url,
+									avatar: user.user_avatars
+										.filter((avatar) => avatar.avatar_id === user.selected_avatar_ID)
+										.map((avatar) => avatar.avatar.asset.provider_url)
+										.toString(),
 								}
 							: null,
 					avatars:
@@ -200,7 +205,7 @@ async function getUser(req, res) {
 							? user.user_avatars.map((avatar) => ({
 									id: avatar.avatar_id,
 									is_selected: avatar.avatar_id === user.selected_avatar_ID,
-									avatar: avatar.avatar.provider_url,
+									avatar: avatar.avatar.asset.provider_url,
 								}))
 							: [],
 
@@ -209,7 +214,7 @@ async function getUser(req, res) {
 							? user.buyers.map((banner) => ({
 									id: banner.banner_id,
 									is_selected: banner.banner_id === user.selected_banner_ID,
-									banner: banner.banner.picture.provider_url,
+									banner: banner.banner.asset.provider_url,
 								}))
 							: [],
 					badges:
@@ -218,7 +223,7 @@ async function getUser(req, res) {
 									id: badge.badge.badge_ID,
 									title: badge.badge.title,
 									description: badge.badge.description,
-									badge: badge.badge.picture.provider_url,
+									badge: badge.badge.asset.provider_url,
 								}))
 							: [],
 					createdAt: user.createdAt,
@@ -252,14 +257,20 @@ async function getUser(req, res) {
 						user.selected_banner_ID !== null
 							? {
 									id: user.selected_banner_ID,
-									banner: user.banner.picture.provider_url,
+									banner: user.buyers
+										.filter((banner) => banner.banner_id === user.selected_banner_ID)
+										.map((banner) => banner.banner.asset.provider_url)
+										.toString(),
 								}
 							: null,
 					selected_avatar:
 						user.selected_avatar_ID !== null
 							? {
 									id: user.selected_avatar_ID,
-									avatar: user.avatar.provider_url,
+									avatar: user.user_avatars
+										.filter((avatar) => avatar.avatar_id === user.selected_avatar_ID)
+										.map((avatar) => avatar.avatar.asset.provider_url)
+										.toString(),
 								}
 							: null,
 
@@ -269,7 +280,7 @@ async function getUser(req, res) {
 									id: badge.badge.badge_ID,
 									title: badge.badge.title,
 									description: badge.badge.description,
-									badge: badge.badge.picture.provider_url,
+									badge: badge.badge.asset.provider_url,
 								}))
 							: [],
 					createdAt: user.createdAt,

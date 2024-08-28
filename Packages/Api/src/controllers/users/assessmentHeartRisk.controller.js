@@ -109,7 +109,12 @@ async function assessmentHeartRisk(req, res) {
 
 			await db.mysql.UserAvatar.create({
 				user_id: loggedUserId,
-				avatar_id: user.gender === "Female" ? 2 : 1,
+				avatar_id: gender === "Female" ? 2 : 1,
+			});
+
+			await db.mysql.Buyer.create({
+				banner_id: 1,
+				user_id: loggedUserId,
 			});
 
 			return utils.handleResponse(
