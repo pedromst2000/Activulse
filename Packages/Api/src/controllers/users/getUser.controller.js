@@ -67,7 +67,7 @@ async function getUser(req, res) {
 							include: [
 								{
 									model: db.mysql.Asset,
-									attributes: ["provider_url"],
+									attributes: ["provider_image_url"],
 								},
 							],
 						},
@@ -90,7 +90,7 @@ async function getUser(req, res) {
 							include: [
 								{
 									model: db.mysql.Asset,
-									attributes: ["banner_id", "provider_url"],
+									attributes: ["banner_id", "provider_image_url"],
 								},
 							],
 						},
@@ -107,7 +107,7 @@ async function getUser(req, res) {
 							include: [
 								{
 									model: db.mysql.Asset,
-									attributes: ["badge_id", "provider_url"],
+									attributes: ["badge_id", "provider_image_url"],
 								},
 							],
 						},
@@ -186,7 +186,7 @@ async function getUser(req, res) {
 									id: user.selected_banner_ID,
 									banner: user.buyers
 										.filter((banner) => banner.banner_id === user.selected_banner_ID)
-										.map((banner) => banner.banner.asset.provider_url)
+										.map((banner) => banner.banner.asset.provider_image_url)
 										.toString(),
 								}
 							: null,
@@ -196,7 +196,7 @@ async function getUser(req, res) {
 									id: user.selected_avatar_ID,
 									avatar: user.user_avatars
 										.filter((avatar) => avatar.avatar_id === user.selected_avatar_ID)
-										.map((avatar) => avatar.avatar.asset.provider_url)
+										.map((avatar) => avatar.avatar.asset.provider_image_url)
 										.toString(),
 								}
 							: null,
@@ -205,7 +205,7 @@ async function getUser(req, res) {
 							? user.user_avatars.map((avatar) => ({
 									id: avatar.avatar_id,
 									is_selected: avatar.avatar_id === user.selected_avatar_ID,
-									avatar: avatar.avatar.asset.provider_url,
+									avatar: avatar.avatar.asset.provider_image_url,
 								}))
 							: [],
 
@@ -214,7 +214,7 @@ async function getUser(req, res) {
 							? user.buyers.map((banner) => ({
 									id: banner.banner_id,
 									is_selected: banner.banner_id === user.selected_banner_ID,
-									banner: banner.banner.asset.provider_url,
+									banner: banner.banner.asset.provider_image_url,
 								}))
 							: [],
 					badges:
@@ -223,7 +223,7 @@ async function getUser(req, res) {
 									id: badge.badge.badge_ID,
 									title: badge.badge.title,
 									description: badge.badge.description,
-									badge: badge.badge.asset.provider_url,
+									badge: badge.badge.asset.provider_image_url,
 								}))
 							: [],
 					createdAt: user.createdAt,
@@ -259,7 +259,7 @@ async function getUser(req, res) {
 									id: user.selected_banner_ID,
 									banner: user.buyers
 										.filter((banner) => banner.banner_id === user.selected_banner_ID)
-										.map((banner) => banner.banner.asset.provider_url)
+										.map((banner) => banner.banner.asset.provider_image_url)
 										.toString(),
 								}
 							: null,
@@ -269,7 +269,7 @@ async function getUser(req, res) {
 									id: user.selected_avatar_ID,
 									avatar: user.user_avatars
 										.filter((avatar) => avatar.avatar_id === user.selected_avatar_ID)
-										.map((avatar) => avatar.avatar.asset.provider_url)
+										.map((avatar) => avatar.avatar.asset.provider_image_url)
 										.toString(),
 								}
 							: null,
@@ -280,7 +280,7 @@ async function getUser(req, res) {
 									id: badge.badge.badge_ID,
 									title: badge.badge.title,
 									description: badge.badge.description,
-									badge: badge.badge.asset.provider_url,
+									badge: badge.badge.asset.provider_image_url,
 								}))
 							: [],
 					createdAt: user.createdAt,

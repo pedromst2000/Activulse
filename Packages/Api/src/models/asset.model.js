@@ -39,13 +39,21 @@ const AssetModel = (sequelize) => {
 				allowNull: true,
 			},
 
-			provider_id: {
+			provider_image_id: {
 				type: DataTypes.STRING(255),
-				allowNull: false,
+				allowNull: true,
 			},
-			provider_url: {
+			provider_image_url: {
 				type: DataTypes.STRING(255),
-				allowNull: false,
+				allowNull: true,
+			},
+			provider_video_id: {
+				type: DataTypes.STRING(255),
+				allowNull: true,
+			},
+			provider_video_url: {
+				type: DataTypes.STRING(255),
+				allowNull: true,
 			},
 		},
 		{
