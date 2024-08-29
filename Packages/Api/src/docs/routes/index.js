@@ -3,6 +3,7 @@ const YAML = require("yaml");
 const cronjob = require("./cronjob");
 const auth = require("./auth");
 const users = require("./users");
+const recipes = require("./recipes");
 
 const getWelcomeApi = YAML.parse(
 	fs.readFileSync("./src/docs/routes/default/get_welcome_api.yml", "utf8"),
@@ -16,4 +17,5 @@ module.exports = {
 	cronjob,
 	auth,
 	users,
+	recipes,
 };

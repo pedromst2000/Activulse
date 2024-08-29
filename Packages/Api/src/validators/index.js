@@ -2,6 +2,8 @@ const { validationResult } = require("express-validator");
 const utils = require("../utils");
 const auth = require("./auth");
 const users = require("./users");
+const recipes = require("./recipes");
+const activities = require("./activities");
 
 /**
  * Validates the result of a request and sends an error response if there are any validation errors.
@@ -30,4 +32,6 @@ module.exports = {
 	validateResult,
 	auth,
 	users,
+	recipes,
+	activities,
 };
