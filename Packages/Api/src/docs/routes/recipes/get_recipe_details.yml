@@ -1,0 +1,296 @@
+summary: Get one recipe details
+description: Get one recipe details available from a Diet Plan (DASH, Mediterranean, Vegetarian)
+tags:
+  - "Recipes"
+security:
+  - bearerAuth: []
+parameters:
+  - in: header
+    name: x-auth-token
+    schema:
+      type: string
+    required: true
+    description: Authorization token
+  - in: header
+    name: x-refresh-token
+    schema:
+      type: string
+    required: true
+    description: Authorization token
+  - name: id
+    in: path
+    description: ID of the recipe
+    required: true
+    schema:
+      type: number
+      example: 10
+responses:
+  200:
+    description: Success
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+            data:
+              type: object
+              properties:
+                recipe_id:
+                  type: number
+                isPremium:
+                  type: boolean
+                isMyFavorite:
+                  type: boolean
+                title:
+                  type: string
+                description:
+                  type: string
+                category:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    name:
+                      type: string
+                durationConf:
+                  type: number
+                image:
+                  type: object
+                  properties:
+                    url:
+                      type: string
+                ingredients:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      ingredient:
+                        type: string
+                instructions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      instruction:
+                        type: string
+                video:
+                  type: object
+                  properties:
+                    url:
+                      type: string
+                diet:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    name:
+                      type: string
+                price:
+                  type: number
+                videoTime:
+                  type: number
+                createdAt:
+                  type: string
+                  format: date-time
+                updatedAt:
+                  type: string
+                  format: date-time
+        examples:
+          Normal Recipe:
+            value:
+              success: true
+              message: User data retrieved successfully
+              data:
+                recipe_id: 10
+                isPremium: false
+                isMyFavorite: true
+                title: "Lentil Kale Salad"
+                description: "Get ready for a burst of flavors and textures with this hearty salad. Nutrient-rich lentils, crunchy kale, and creamy avocado come together with a zesty lemon dressing to create a satisfying dish that's as delicious as it is nutritious."
+                category:
+                  id: 3
+                  name: "Salads"
+                durationConf: 25
+                image:
+                  url: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399653/activevulse/dev/recipes/Lentil_Kale_Salad_hhli6e.png"
+                ingredients:
+                  - id: 82
+                    ingredient: "Green lentils: 200g, cooked"
+                  - id: 83
+                    ingredient: "Kale: 100g, chopped"
+                  - id: 84
+                    ingredient: "Avocado: 1, diced"
+                  - id: 85
+                    ingredient: "Red bell pepper: 1, diced"
+                  - id: 86
+                    ingredient: "Red cabbage: 100g, shredded"
+                  - id: 87
+                    ingredient: "Pumpkin seeds: 2 tbsp"
+                  - id: 88
+                    ingredient: "Lemon juice: 2 tbsp"
+                  - id: 89
+                    ingredient: "Dijon mustard: 1 tsp"
+                  - id: 90
+                    ingredient: "Olive oil: 2 tbsp"
+                  - id: 91
+                    ingredient: "Garlic: 1 clove, minced"
+                instructions:
+                  - id: 55
+                    instruction: "In a large bowl, combine cooked green lentils, chopped kale, diced avocado, diced red bell pepper, shredded red cabbage, and pumpkin seeds."
+                  - id: 56
+                    instruction: "In a small bowl, whisk together lemon juice, Dijon mustard, olive oil, minced garlic, salt, and pepper to make the dressing."
+                  - id: 57
+                    instruction: "Drizzle the dressing over the salad and toss gently to coat."
+                  - id: 58
+                    instruction: "Let the salad marinate for a few minutes to allow the flavors to meld together."
+                  - id: 59
+                    instruction: "Serve chilled and enjoy the hearty goodness!"
+                createdAt: "2024-08-28T22:07:26.000Z"
+                updatedAt: "2024-08-28T22:07:26.000Z"
+          Premium Recipe Buyed:
+            value:
+              success: true
+              message: User data retrieved successfully
+              data:
+                recipe_id: 53
+                isPremium: true
+                isMyPremium: true
+                isMyFavorite: false
+                title: "Baked Brie"
+                description: "Savor Baked Brie an exquisite indulgence. Creamy brie cheese in a flaky puff pastry, golden-baked. A harmonious blend of savory and sweet, with warm, melty cheese oozing richness. Enjoy with honey, jam, or toasted nuts for culinary bliss!"
+                video:
+                  url: "https://res.cloudinary.com/dvthg2763/video/upload/v1716455747/activevulse/dev/recipes-premium/premium_Baked_Brie_rbqazb.mp4"
+                diet:
+                  id: 2
+                  name: "Mediterranean"
+                category:
+                  id: 2
+                  name: "Main Dishes"
+                videoTime: 5
+                createdAt: "2024-08-28T22:07:26.000Z"
+                updatedAt: "2024-08-28T22:07:26.000Z"
+          Premium Recipe Not Buyed:
+            value:
+              success: true
+              message: User data retrieved successfully
+              data:
+                recipe_id: 49
+                isPremium: true
+                isMyPremium: false
+                title: "Vegan Caramel Cheesecake"
+                description: "Thrilled to share our divine vegan caramel cheesecake an ideal addition to your Thanksgiving. Delectable, gluten-free, captivates all palates. Creamy, smooth, and guilt-free, with irresistibly decadent salted caramel sauce. Savor every blissful bite!"
+                diet:
+                  id: 3
+                  name: "Vegan"
+                price: 5250
+                videoTime: 5
+                image:
+                  url: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399664/activevulse/dev/recipes/premium_VEGAN_CARAMEL_CHEESECAKE_a7rw6y.png"
+                createdAt: "2024-08-28T22:07:26.000Z"
+                updatedAt: "2024-08-28T22:07:26.000Z"
+
+  400:
+    description: Bad Request
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+            data:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  value:
+                     oneOf:
+                       - type: string
+                       - type: integer
+                       - type: boolean
+                  msg:
+                    type: string
+                  path:
+                    type: string
+                  location:
+                    type: string
+        examples:
+          Invalid Activity ID:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: "asd"
+                  msg: "Invalid recipe id"
+                  path: "id"
+                  location: "params"
+  401:
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Missing token:
+            value:
+              success: false
+              message: Missing auth token or refresh token
+          Invalid token:
+            value:
+              success: false
+              message: Invalid auth token or refresh token
+          Refresh token expired:
+            value:
+              success: false
+              message: Refresh token has expired
+  404:
+    description: Recipe not found
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Recipe not found:
+            value:
+              success: false
+              message: Recipe not found
+  500:
+    description: Internal server error
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Internal server error:
+            value:
+              success: false
+              message: Internal server error
+
+    

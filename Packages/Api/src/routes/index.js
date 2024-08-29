@@ -5,6 +5,8 @@ const config = require("../config");
 const cronjobRoutes = require("./cronjob.routes");
 const authRoutes = require("./auth.routes");
 const userRoutes = require("./users.routes");
+const recipesRoutes = require("./recipes.routes");
+const activitiesRoutes = require("./activities.routes");
 
 const router = Router();
 
@@ -25,5 +27,11 @@ router.use("/auth", authRoutes);
 
 // User Routes
 router.use("/users", userRoutes);
+
+// Recipes Routes
+router.use("/recipes", recipesRoutes);
+
+// Activities Routes
+router.use("/activities", activitiesRoutes);
 
 module.exports = router;

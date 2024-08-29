@@ -79,6 +79,12 @@ const swaggerDefinition = {
 		"/users/extra-assessment": {
 			patch: routeDocs.users.patchExtraAssessment,
 		},
+
+		//---------------------------RECIPES---------------------------------------------------
+
+		"/recipes/{id}": {
+			get: routeDocs.recipes.getRecipeDetails,
+		},
 	},
 };
 
