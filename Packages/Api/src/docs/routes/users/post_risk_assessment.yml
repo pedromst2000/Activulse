@@ -156,6 +156,25 @@ responses:
               type: boolean
             message:
               type: string
+            data:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  value:
+                     oneOf:
+                       - type: string
+                       - type: integer
+                       - type: boolean
+                  msg:
+                    type: string
+                  path:
+                    type: string
+                  location:
+                    type: string
+              
         examples:
           Invalid Gender:
             value:
@@ -292,6 +311,14 @@ responses:
               type: boolean
             message:
               type: string
+            data:
+              type: object
+              properties:
+                riskScore:
+                  type: number
+                  format: float
+                typeRisk:
+                  type: string  
         examples:
           Already Assessed:
             value:
