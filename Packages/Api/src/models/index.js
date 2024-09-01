@@ -26,7 +26,7 @@ function init(sequelize) {
 	const RecipeCategory = require("../models/recipeCategory.model")(sequelize);
 	const RiskScore = require("../models/riskScore.model")(sequelize);
 	const User = require("../models/user.model")(sequelize);
-	const UserActivity = require("../models/userActivity.model")(sequelize);
+	const UserActivity = require("../models/userActivity.model.js")(sequelize);
 	const UserBadge = require("../models/userBadge.model")(sequelize);
 	const UserAvatar = require("../models/userAvatar.model")(sequelize);
 	const Workout = require("../models/workout.model")(sequelize);
