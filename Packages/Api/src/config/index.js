@@ -1,10 +1,10 @@
-const compression = require("./compression.config");
-const rateLimit = require("./rateLimit.config");
-const tokens = require("./jwt.config");
-const db = require("./db.config");
-const docs = require("./docs.config");
-const cloudinary = require("./cloudinary.config");
-const pagination = require("./pagination.config");
+const compression = require("../config/compression.config");
+const rateLimit = require("../config/rateLimit.config");
+const tokens = require("../config/jwt.config");
+const db = require("../config/db.config");
+const docs = require("../config/docs.config");
+const cloudinary = require("../config/cloudinary.config");
+const pagination = require("../config/pagination.config");
 
 module.exports = {
 	compression,

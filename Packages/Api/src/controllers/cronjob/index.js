@@ -1,4 +1,4 @@
-const deleteUnverifiedUsers = require("./deleteUnverifiedUsers.controller");
+const deleteUnverifiedUsers = require("../cronjob/deleteUnverifiedUsers.controller");
 
 module.exports = {
 	deleteUnverifiedUsers,

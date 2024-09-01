@@ -1,8 +1,8 @@
-const cronjob = require("./cronjob");
-const auth = require("./auth");
-const users = require("./users");
-const recipes = require("./recipes");
-const activities = require("./activities");
+const cronjob = require("../controllers/cronjob");
+const auth = require("../controllers/auth");
+const users = require("../controllers/users");
+const recipes = require("../controllers/recipes");
+const activities = require("../controllers/activities");
 
 module.exports = {
 	cronjob,

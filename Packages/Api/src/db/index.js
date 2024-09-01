@@ -1,5 +1,5 @@
 const colors = require("colors");
-const mysql = require("./mysql");
+const mysql = require("../db/mysql");
 
 /**
  * Connects to the mysql database.

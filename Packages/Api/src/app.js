@@ -2,10 +2,10 @@ const express = require("express");
 const helmet = require("helmet");
 const cors = require("cors");
 const compression = require("compression");
-const config = require("./config");
+const config = require("../src/config");
 const rateLimiter = require("express-rate-limit");
-const utils = require("./utils");
-const routes = require("./routes");
+const utils = require("../src/utils");
+const routes = require("../src/routes");
 
 const app = express(); // Create Express Application
 

@@ -1,5 +1,5 @@
-const verifyEmail = require("./verifyEmail.template");
-const verifyOTP = require("./verifyOTP.template");
+const verifyEmail = require("../templates/verifyEmail.template");
+const verifyOTP = require("../templates/verifyOTP.template");
 
 module.exports = {
 	verifyEmail,

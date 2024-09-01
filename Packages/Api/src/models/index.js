@@ -7,29 +7,29 @@ const { Sequelize } = require("sequelize");
 
 function init(sequelize) {
 	// all models files
-	const Avatar = require("./avatar.model")(sequelize);
-	const Activity = require("./activity.model")(sequelize);
-	const ActivityCategory = require("./activityCategory.model")(sequelize);
-	const Badge = require("./badge.model")(sequelize);
-	const Banner = require("./banner.model")(sequelize);
-	const Buyer = require("./buyer.model")(sequelize);
-	const Challenge = require("./challenge.model")(sequelize);
-	const ChallengeCategory = require("./challengeCategory.model")(sequelize);
-	const ChallengeProgress = require("./challengeProgress.model")(sequelize);
-	const DailyGoals = require("./dailyGoals.model")(sequelize);
-	const Diet = require("./diet.model")(sequelize);
-	const Favorite = require("./favorite.model")(sequelize);
-	const Ingredient = require("./ingredient.model")(sequelize);
-	const Instruction = require("./instruction.model")(sequelize);
-	const Asset = require("./asset.model")(sequelize);
-	const Recipe = require("./recipe.model")(sequelize);
-	const RecipeCategory = require("./recipeCategory.model")(sequelize);
-	const RiskScore = require("./riskScore.model")(sequelize);
-	const User = require("./user.model")(sequelize);
-	const UserActivity = require("./UserActivity.model")(sequelize);
-	const UserBadge = require("./userBadge.model")(sequelize);
-	const UserAvatar = require("./userAvatar.model")(sequelize);
-	const Workout = require("./workout.model")(sequelize);
+	const Avatar = require("../models/avatar.model")(sequelize);
+	const Activity = require("../models/activity.model")(sequelize);
+	const ActivityCategory = require("../models/activityCategory.model")(sequelize);
+	const Badge = require("../models/badge.model")(sequelize);
+	const Banner = require("../models/banner.model")(sequelize);
+	const Buyer = require("../models/buyer.model")(sequelize);
+	const Challenge = require("../models/challenge.model")(sequelize);
+	const ChallengeCategory = require("../models/challengeCategory.model")(sequelize);
+	const ChallengeProgress = require("../models/challengeProgress.model")(sequelize);
+	const DailyGoals = require("../models/dailyGoals.model")(sequelize);
+	const Diet = require("../models/diet.model")(sequelize);
+	const Favorite = require("../models/favorite.model")(sequelize);
+	const Ingredient = require("../models/ingredient.model")(sequelize);
+	const Instruction = require("../models/instruction.model")(sequelize);
+	const Asset = require("../models/asset.model")(sequelize);
+	const Recipe = require("../models/recipe.model")(sequelize);
+	const RecipeCategory = require("../models/recipeCategory.model")(sequelize);
+	const RiskScore = require("../models/riskScore.model")(sequelize);
+	const User = require("../models/user.model")(sequelize);
+	const UserActivity = require("../models/userActivity.model")(sequelize);
+	const UserBadge = require("../models/userBadge.model")(sequelize);
+	const UserAvatar = require("../models/userAvatar.model")(sequelize);
+	const Workout = require("../models/workout.model")(sequelize);
 
 	//* Associations / Relationships
 

@@ -1,9 +1,9 @@
 const fs = require("fs");
 const YAML = require("yaml");
-const cronjob = require("./cronjob");
-const auth = require("./auth");
-const users = require("./users");
-const recipes = require("./recipes");
+const cronjob = require("../routes/cronjob");
+const auth = require("../routes/auth");
+const users = require("../routes/users");
+const recipes = require("../routes/recipes");
 
 const getWelcomeApi = YAML.parse(
 	fs.readFileSync("./src/docs/routes/default/get_welcome_api.yml", "utf8"),

@@ -1,5 +1,5 @@
-const sendEmail = require("./sendEmail.service");
-const cloudinary = require("./cloudinary.service");
+const sendEmail = require("../services/sendEmail.service");
+const cloudinary = require("../services/cloudinary.service");
 
 module.exports = {
 	sendEmail,

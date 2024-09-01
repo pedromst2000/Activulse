@@ -1,5 +1,5 @@
-const validateTokens = require("./validateTokens.middleware");
-const validateCronjob = require("./validateCronjob.middleware");
+const validateTokens = require("../middlewares/validateTokens.middleware");
+const validateCronjob = require("../middlewares/validateCronjob.middleware");
 
 module.exports = {
 	validateTokens,

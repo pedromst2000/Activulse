@@ -2,11 +2,11 @@ const { Router } = require("express");
 const utils = require("../utils");
 const swaggerUi = require("swagger-ui-express");
 const config = require("../config");
-const cronjobRoutes = require("./cronjob.routes");
-const authRoutes = require("./auth.routes");
-const userRoutes = require("./users.routes");
-const recipesRoutes = require("./recipes.routes");
-const activitiesRoutes = require("./activities.routes");
+const cronjobRoutes = require("../routes/cronjob.routes");
+const authRoutes = require("../routes/auth.routes");
+const userRoutes = require("../routes/users.routes");
+const recipesRoutes = require("../routes/recipes.routes");
+const activitiesRoutes = require("../routes/activities.routes");
 
 const router = Router();
 

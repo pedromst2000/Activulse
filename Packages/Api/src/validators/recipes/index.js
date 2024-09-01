@@ -1,4 +1,4 @@
-const recipeDetails = require("./recipeDetails.validator");
+const recipeDetails = require("../recipes/recipeDetails.validator");
 
 module.exports = {
 	recipeDetails,

@@ -1,4 +1,4 @@
-const recipDetails = require("./recipeDetails.controller");
+const recipDetails = require("../recipes/recipeDetails.controller");
 
 module.exports = {
 	recipDetails,

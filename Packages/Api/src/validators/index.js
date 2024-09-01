@@ -1,9 +1,9 @@
 const { validationResult } = require("express-validator");
 const utils = require("../utils");
-const auth = require("./auth");
-const users = require("./users");
-const recipes = require("./recipes");
-const activities = require("./activities");
+const auth = require("../validators/auth");
+const users = require("../validators/users");
+const recipes = require("../validators/recipes");
+const activities = require("../validators/activities");
 
 /**
  * Validates the result of a request and sends an error response if there are any validation errors.
