@@ -14,7 +14,7 @@ const postRequestResetPassword = YAML.parse(
 );
 
 const postVerifyOTP = YAML.parse(
-	fs.readFileSync("./src/docs/routes/auth/post_verify_otp.yml", "utf8"),
+	fs.readFileSync("./src/docs/routes/auth/post_verify_OTP.yml", "utf8"),
 );
 
 const patchResetPassword = YAML.parse(
