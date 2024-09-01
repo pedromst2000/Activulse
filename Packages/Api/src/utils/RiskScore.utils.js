@@ -34,7 +34,7 @@ function CVDRiskScore(
 ) {
 	// Age adjustments
 	if (age < 30) age = 30;
-	if (age > 80) age = 80;
+	if (age > 74) age = 74;
 
 	/**
 	 * @constant coefficients
