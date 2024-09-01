@@ -1,8 +1,11 @@
 export type LoggedUser = {
-	// Debugging purposes
+	id: number;
+	isNewUser: boolean;
+	isAssessmentDone: boolean;
+	fastFoodStatus: string;
+	stressStatus: string;
 	username: string;
-	email: string;
-	// TODO: Add the rest of the user properties
+	points: number;
 };
 
 export type UserContextProps = {

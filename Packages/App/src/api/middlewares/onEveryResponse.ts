@@ -28,7 +28,7 @@ export default (api: AxiosInstance): void => {
 				if (error.response?.status === 401) {
 					await utils.storage.removeItem('authToken');
 					await utils.storage.removeItem('refreshToken');
-					console.log('Removed authToken and refreshToken from storage due to 401 error');
+					// console.log('Removed authToken and refreshToken from storage due to 401 error');
 				}
 			} catch (err) {
 				console.error('Error handling 401 response:', err);

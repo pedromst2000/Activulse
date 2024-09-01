@@ -57,7 +57,7 @@ const VerifyEmail: React.FC = (): React.JSX.Element => {
 							setShowSuccess(true);
 
 							timeoutRef.current = setTimeout(() => {
-								navigation.navigate('AssessmentRiskStack', { screen: 'AssessmentRisk' });
+								navigation.navigate('SignIn');
 							}, 2000); // delaying the navigation for 2 seconds after navigating to the risk assessment screen
 						}
 					},

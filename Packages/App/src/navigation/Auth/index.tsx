@@ -6,7 +6,6 @@ import JoinNow from '../../screens/Auth/JoinNow';
 import VerifyOTP from '../../screens/Auth/verifyOTP';
 import ChangePassword from '../../screens/Auth/ChangePassword';
 import VerifyEmail from '@/src/screens/Auth/VerifyEmail';
-import { AssessmentRiskStackParamList } from '../AssessmentRisk';
 
 export type AuthStackParamList = {
 	SignIn: undefined;
@@ -15,9 +14,6 @@ export type AuthStackParamList = {
 	VerifyOTP: { email: string };
 	ChangePassword: { email: string };
 	VerifyEmail: { email: string };
-	AssessmentRiskStack: {
-		screen: keyof AssessmentRiskStackParamList; // 'Assessment' | 'Result' | 'HowItWorks';
-	};
 };
 
 const Stack = createStackNavigator<AuthStackParamList>();

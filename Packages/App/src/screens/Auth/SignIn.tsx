@@ -56,7 +56,7 @@ const SignIn: React.FC = (): React.JSX.Element => {
 							setShowSuccess(true);
 							timeoutRef.current = setTimeout(() => {
 								setLoggedUser(resData.data.user);
-							}, 2000); // delaying the navigation for 2 seconds after navigating to the home screen
+							}, 2000); // delaying the navigation for 2 seconds after navigating to the risk assessment screen (new user) or home screen
 
 							// Save the tokens on the device storage
 							await utils.storage.setItem('authToken', resData.data.authToken);

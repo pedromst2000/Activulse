@@ -1,5 +1,5 @@
 import { Text, View } from 'react-native';
-import AnimatedComponent from '../components/Animated';
+import AnimatedComponent from '@/src/components/Animated';
 
 const Store: React.FC = (): React.JSX.Element => {
 	return (

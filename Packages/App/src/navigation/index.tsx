@@ -12,15 +12,15 @@ import StoreINS from '../assets/svg/icons/BottomTab/StoreIcon_N_Selected.svg';
 import ProfileIS from '../assets/svg/icons/BottomTab/ProfileIcon_Selected.svg';
 import ProfileINS from '../assets/svg/icons/BottomTab/ProfileIcon_N_Selected.svg';
 import Home from '../screens/Home';
-import Lifestyle from '../screens/Lifestyle';
-import Profile from '../screens/Profile';
-import Store from '../screens/Store';
+import Lifestyle from '../screens/Lifestyle/Lifestyle';
+import Profile from '../screens/Profile/Profile';
+import Store from '../screens/Store/Store';
 import AuthStack, { AuthStackParamList } from './Auth/index';
 import OnBoarding from '../screens/Onboarding';
 import { useUserContext } from '../context/user';
 import AssessmentRiskStack, { AssessmentRiskStackParamList } from './AssessmentRisk';
-import utils from '../navigation/utils';
 import config from '../config';
+import BonusAssessmentStack, { BonusAssessmentStackParamList } from './BonusAssessment';
 
 export type MainTabParamList = {
 	Home: undefined;
@@ -37,6 +37,9 @@ export type RootStackParamList = {
 	};
 	AssessmentRiskStack: {
 		screen: keyof AssessmentRiskStackParamList; // 'Assessment' | 'Result' | 'HowItWorks';
+	};
+	BonusAssessmentStack: {
+		screen: keyof BonusAssessmentStackParamList; // 'InitBonusAssessment' | 'BonusAssessment' | 'BonusOnboarding';
 	};
 };
 
@@ -101,7 +104,7 @@ const MainTabNavigator: React.FC = (): React.JSX.Element => {
 		>
 			<Tab.Screen
 				name="Home"
-				component={utils.guardClause(true, Home, useUserContext().loggedUser)}
+				component={Home}
 				options={{
 					tabBarIcon: ({ focused }) => (focused ? HomeIconSelected() : HomeIconNotSelected()),
 					tabBarItemStyle: config.navigator.tabItemStyle,
@@ -110,7 +113,7 @@ const MainTabNavigator: React.FC = (): React.JSX.Element => {
 
 			<Tab.Screen
 				name="Lifestyle"
-				component={utils.guardClause(true, Lifestyle, useUserContext().loggedUser)}
+				component={Lifestyle}
 				options={{
 					tabBarIcon: ({ focused }) =>
 						focused ? LifestyleIconSelected() : LifestyleIconNotSelected(),
@@ -119,7 +122,7 @@ const MainTabNavigator: React.FC = (): React.JSX.Element => {
 
 			<Tab.Screen
 				name="Store"
-				component={utils.guardClause(true, Store, useUserContext().loggedUser)}
+				component={Store}
 				options={{
 					tabBarIcon: ({ focused }) =>
 						focused ? StoreIconSelected() : StoreIconNotSelected(),
@@ -128,7 +131,7 @@ const MainTabNavigator: React.FC = (): React.JSX.Element => {
 
 			<Tab.Screen
 				name="Profile"
-				component={utils.guardClause(true, Profile, useUserContext().loggedUser)}
+				component={Profile}
 				options={{
 					tabBarIcon: ({ focused }) =>
 						focused ? ProfileIconSelected() : ProfileIconNotSelected(),
@@ -143,15 +146,19 @@ const AppNavigator: React.FC = (): React.JSX.Element => {
 
 	return (
 		<Stack.Navigator screenOptions={{ headerShown: false }}>
+			{/* Guard Clause routes */}
 			{!loggedUser ? (
 				<>
 					<Stack.Screen name="Onboarding" component={OnBoarding} />
 					<Stack.Screen name="AuthStack" component={AuthStack} />
-					<Stack.Screen name="AssessmentRiskStack" component={AssessmentRiskStack} />
 				</>
-			) : (
-				<Stack.Screen name="MainTabs" component={MainTabNavigator} />
-			)}
+			) : loggedUser && loggedUser?.isNewUser === true ? (
+				<Stack.Screen name="AssessmentRiskStack" component={AssessmentRiskStack} />
+			) : loggedUser &&
+			  loggedUser?.isNewUser === false &&
+			  loggedUser?.isAssessmentDone === false ? (
+				<Stack.Screen name="BonusAssessmentStack" component={BonusAssessmentStack} />
+			) : null}
 		</Stack.Navigator>
 	);
 };
