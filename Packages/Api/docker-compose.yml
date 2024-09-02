@@ -11,15 +11,3 @@ services:
       MYSQL_PASSWORD: password
     volumes:
       - ./database:/var/lib/mysql
-  api:
-    build: .
-    ports:
-      - "5000:5000"
-    environment:
-      DATABASE_HOST: database
-      DATABASE_PORT: 3306
-      DATABASE_USER: user
-      DATABASE_PASSWORD: password
-      DATABASE_NAME: database
-    depends_on:
-      - database
