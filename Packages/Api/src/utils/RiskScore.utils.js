@@ -17,10 +17,12 @@
  * @param {number} hdlCholesterol - The HDL cholesterol level of the user (in mg/dL).
  * @param {number} totalCholesterol - The total cholesterol level of the user (in mg/dL).
  *
- * @returns {Object} - The result of the cardiovascular risk assessment.
- * @returns {number} result.score - The calculated risk score of the user, rounded to one decimal place.
- * @returns {string} result.risk - The risk level of the user ('Low', 'Moderate', 'High').
- */
+ * @typedef {Object} CardiovascularRiskResult
+ * @property {number} score - The calculated risk score of the user, rounded to one decimal place.
+ * @property {string} risk - The risk level of the user ('Low', 'Moderate', 'High').
+ * @returns {CardiovascularRiskResult} - The result of the cardiovascular risk assessment.
+ *
+ * */
 
 function CVDRiskScore(
 	gender,
