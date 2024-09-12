@@ -226,7 +226,7 @@ responses:
                   location:
                     type: string
         examples:
-          Invalid Activity ID:
+          Invalid Recipe ID:
             value:
               success: false
               message: Validation Error
