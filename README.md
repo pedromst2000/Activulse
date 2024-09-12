@@ -27,8 +27,6 @@ Activulse is a mobile app empowering heart health and wellness in every step wit
 
 Set and tackle physical activity goals aligned with WHO guidelines, pushing your limits to achieve new levels of fitness. Earn points and rewards by meeting daily goals, completing challenges, and unlocking achievements, making your journey to well-being both fun and rewarding. Additionally, delve into extensive cardiovascular health guides to understand symptoms, adopt heart-friendly habits, and gain the insights you need to take control of your heart health.
 
-Embark on a transformative adventure towards a healthier, more vibrant life with Activulse. Your journey to improved cardiovascular well-being starts here!
-
 ## :computer: Tech Stack
 
 The following Frameworks and Libraries were used in the development of this project:
