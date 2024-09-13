@@ -205,23 +205,23 @@ npm run dev
 
 _To be Added the English Version of the Report of the Project_
 
-PT Report: [Activulse Report](https://drive.google.com/file/d/166h4hyhhfzWRXDNniusBTGGs_A-B1nBF/view?usp=sharing)
+- PT Report: [https://drive.google.com/file/d/166h4hyhhfzWRXDNniusBTGGs_A-B1nBF/view?usp=sharing](https://drive.google.com/file/d/166h4hyhhfzWRXDNniusBTGGs_A-B1nBF/view?usp=sharing)
 
-EN Report: Coming Soon
+- EN Report: Coming Soon
 
-API Deploy URL : [Activulse API](https://activulse.onrender.com/api-activulse/v1)
+- API Deploy URL : [https://activulse.onrender.com/api-activulse/v1](https://activulse.onrender.com/api-activulse/v1)
 
-API Deploy Documentation: [Activulse API Documentation](https://activulse.onrender.com/api-activulse/v1/docs)
+- API Deploy Documentation: [https://activulse.onrender.com/api-activulse/v1/docs](https://activulse.onrender.com/api-activulse/v1/docs)
 
 ## :art: Design and Communication
 
-- Figma Design [Figma Design](<https://www.figma.com/design/avpVZFoqroYaPYGoqzPZxo/Activulse-(Beta-Version)?node-id=0-1&t=GLoH1nqs1IlDR3c8-1>)
+- Figma Design [https://www.figma.com/design/avpVZFoqroYaPYGoqzPZxo/Activulse-(Beta-Version)?node-id=0-1&t=GLoH1nqs1IlDR3c8-1](https://www.figma.com/design/avpVZFoqroYaPYGoqzPZxo/Activulse-(Beta-Version)?node-id=0-1&t=GLoH1nqs1IlDR3c8-1)
 
-- Teaser Video [Teaser Video](https://drive.google.com/file/d/1t9x3cQB_bywPm1PiJwyyeWgS3WkB6LgO/view?usp=sharing)
+- Teaser Video [https://drive.google.com/file/d/1t9x3cQB_bywPm1PiJwyyeWgS3WkB6LgO/view?usp=sharing](https://drive.google.com/file/d/1t9x3cQB_bywPm1PiJwyyeWgS3WkB6LgO/view?usp=sharing)
 
-- Poster [Poster](https://drive.google.com/file/d/1b5V4QSS77OdXd-iGIB4Y6VQ3tA1iDuYQ/view?usp=sharing)
+- Poster [https://drive.google.com/file/d/1b5V4QSS77OdXd-iGIB4Y6VQ3tA1iDuYQ/view?usp=sharing](https://drive.google.com/file/d/1b5V4QSS77OdXd-iGIB4Y6VQ3tA1iDuYQ/view?usp=sharing)
 
-- Project Images [Project Images](https://drive.google.com/drive/folders/1kC9i8xTHcGnYzwAkvyIny8epaEruK0Sr?usp=sharing)
+- Project Images [https://drive.google.com/drive/folders/1kC9i8xTHcGnYzwAkvyIny8epaEruK0Sr?usp=sharing](https://drive.google.com/drive/folders/1kC9i8xTHcGnYzwAkvyIny8epaEruK0Sr?usp=sharing)
 
 ## :link: Contact
 
