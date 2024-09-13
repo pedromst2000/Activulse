@@ -18,7 +18,8 @@
 - [:computer: Tech Stack](#computer-tech-stack)
 - [:rocket: Getting Started](#rocket-getting-started)
 - [:construction_worker_man: Architecture](#construction_worker_man-architecture)
-- [:writing_hand: Documentation](#writing_hand-documentation-report-and-rest-api)
+- [:writing_hand: Documentation and Deploy](#writing_hand-documentation-and-deploy-report-and-rest-api)
+- [:art: Design and Communication](#art-design-and-communication)
 - [:link: Contact](#link-contact)
 
 ## :bulb: About
@@ -200,11 +201,27 @@ npm run dev
 
 ![Architecture](./images/Architecture.png)
 
-## :writing_hand: Documentation (Report and Rest API)
+## :writing_hand: Documentation and Deploy (Report and Rest API)
 
-_will be added the english version and the portuguese version of the report developed for the project soon_
+_To be Added the English Version of the Report of the Project_
 
-_The Rest API documentation will be added soon (working in progress developed with Swagger UI )_
+PT Report: [Activulse Report](https://drive.google.com/file/d/166h4hyhhfzWRXDNniusBTGGs_A-B1nBF/view?usp=sharing)
+
+EN Report: Coming Soon
+
+API Deploy URL : [Activulse API](https://activulse.onrender.com/api-activulse/v1)
+
+API Deploy Documentation: [Activulse API Documentation](https://activulse.onrender.com/api-activulse/v1/docs)
+
+## :art: Design and Communication
+
+- Figma Design [Figma Design](<https://www.figma.com/design/avpVZFoqroYaPYGoqzPZxo/Activulse-(Beta-Version)?node-id=0-1&t=GLoH1nqs1IlDR3c8-1>)
+
+- Teaser Video [Teaser Video](https://drive.google.com/file/d/1t9x3cQB_bywPm1PiJwyyeWgS3WkB6LgO/view?usp=sharing)
+
+- Poster [Poster](https://drive.google.com/file/d/1b5V4QSS77OdXd-iGIB4Y6VQ3tA1iDuYQ/view?usp=sharing)
+
+- Project Images [Project Images](https://drive.google.com/drive/folders/1kC9i8xTHcGnYzwAkvyIny8epaEruK0Sr?usp=sharing)
 
 ## :link: Contact
 
