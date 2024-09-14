@@ -185,7 +185,7 @@ npm run dev
 
 <ul>
   <li>
-    Adapted MVC Architecture With the following layers:
+			 Architecture With the following layers:
   </li>
   <br>
   <ul>
