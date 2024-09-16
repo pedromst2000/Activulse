@@ -114,27 +114,27 @@ const ForgotPassword: React.FC = (): React.JSX.Element => {
 							{/* Title Form */}
 							<Title
 								title="Forgot Password"
-								subTitle="Please enter your email adress to receive a verification code. Let's get you back on track!"
+								subTitle="Please enter your email address to receive a verification code. Let's get you back on track!"
 							/>
 
 							{/* Ilustration */}
-							<View className="flex-1 items-center justify-center pt-[50px]">
+							<View className="flex-1 items-center justify-center pt-12">
 								<Ilustration ilustration={ForgotPasswordIlus} width={239} height={227} />
 							</View>
 							{/* Form */}
-							<View className="flex-1 justify-center items-center pt-[50px]">
+							<View className="flex-1 justify-center items-center pt-12">
 								<View>
 									<Input
 										placeholder="Email"
 										icon={EmailI}
 										onChange={(text: string) => setEmail(text)}
 										value={email}
-										textInputClassName="w-44 pl-[10px]"
-										iconClassName="pl-[12px]"
+										textInputClassName="w-44 pl-2.5"
+										iconClassName="pl-3"
 									/>
 								</View>
 
-								<View className="flex flex-row justify-between items-center pt-[55px]">
+								<View className="flex flex-row justify-between items-center pt-14">
 									<Button
 										disabled={email === '' || status === 'pending'}
 										onPress={handleRequestPassword}
@@ -148,7 +148,7 @@ const ForgotPassword: React.FC = (): React.JSX.Element => {
 										</Text>
 									</Button>
 								</View>
-								<View className="flex-1 w-full items-center pb-[40px] pt-[35px]">
+								<View className="flex-1 w-full items-center pb-10 pt-9">
 									<Ilustration ilustration={LogoIlus} width={150} height={156} />
 								</View>
 							</View>

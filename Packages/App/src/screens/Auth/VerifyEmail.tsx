@@ -143,9 +143,8 @@ const VerifyEmail: React.FC = (): React.JSX.Element => {
 					keyboardShouldPersistTaps="handled"
 					className="bg-primary-50"
 				>
-					<View className="p-[5px] sm:p-8 justify-between flex-1 bg-primary-50 ">
+					<View className="p-4 sm:p-8 justify-between flex-1 bg-primary-50">
 						{/* Message */}
-
 						<AnimatedComponent animation="FadeIn">
 							{showError ? (
 								<Message type="error" message={validationError} />
@@ -157,23 +156,23 @@ const VerifyEmail: React.FC = (): React.JSX.Element => {
 							{/* Title*/}
 							<Title
 								title="Verify your Email"
-								subTitle="We´ve just sent an email to your email adress. Tap on the link to verify your account."
+								subTitle="We´ve just sent an email to your email address. Tap on the link to verify your account."
 							/>
 						</View>
 
 						{/* Ilustration */}
-						<View className="flex-1 items-center justify-center pt-[50px]">
+						<View className="flex-1 items-center justify-center pt-12">
 							<Ilustration ilustration={VerifyEmailIlus} width={200} height={200} />
 						</View>
-						<View className="flex flex-row justify-center items-center pt-[50px]">
+						<View className="flex flex-row justify-center items-center pt-12">
 							<Text
 								onPress={handleResendVerify}
-								className="font-quicksand-semi-bold text-secondary-700 underline "
+								className="font-quicksand-semi-bold text-secondary-700 underline"
 							>
-								Didn´t Receive the Email ? <Text className="font-quicksand-bold">Resend</Text>
+								Didn´t Receive the Email? <Text className="font-quicksand-bold">Resend</Text>
 							</Text>
 						</View>
-						<View className="flex flex-row justify-center items-center pt-[50px]">
+						<View className="flex flex-row justify-center items-center pt-12">
 							<Button disabled={false} onPress={handleConfirmVerify}>
 								<Text className="font-quicksand-bold text-secondary-700 text-base">
 									{statusConfirm === 'pending' ? (
@@ -184,7 +183,7 @@ const VerifyEmail: React.FC = (): React.JSX.Element => {
 								</Text>
 							</Button>
 						</View>
-						<View className="flex-1 w-full items-center pb-[40px] pt-[95px]">
+						<View className="flex-1 w-full items-center pb-10 pt-24">
 							<Ilustration ilustration={LogoIlus} width={150} height={156} />
 						</View>
 					</View>

@@ -12,6 +12,7 @@ export type Animation =
 	| 'SlideInFromBottom';
 
 interface Props extends PropsWithChildren {
+	className?: string;
 	animation?: Animation;
 	dontAnimateOnMount?: boolean;
 	animatedOnUnmount?: boolean;
@@ -21,6 +22,7 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 const AnimatedComponent: React.FC<Props> = ({
+	className,
 	children,
 	animation,
 	dontAnimateOnMount,

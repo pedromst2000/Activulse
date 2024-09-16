@@ -7,7 +7,6 @@ import {
 	Platform,
 	ActivityIndicator,
 } from 'react-native';
-import { APIResponse } from '../../api/types';
 import { RouteProp, useNavigation, useRoute, useFocusEffect } from '@react-navigation/native';
 import useVerifyOTP from '@/src/hooks/ReactQuery/auth/verifyOTP';
 import useRequestResetPassword from '@/src/hooks/ReactQuery/auth/requestResetPassword';
@@ -177,7 +176,7 @@ const VerifyOTP: React.FC = (): React.JSX.Element => {
 							) : null}
 						</AnimatedComponent>
 
-						<View className="flex-1 justify-center items-center pt-[50px]">
+						<View className="flex-1 justify-center items-center pt-12 sm:pt-16">
 							{/* Title Form */}
 							<Title
 								title="Verify your Email"
@@ -185,7 +184,7 @@ const VerifyOTP: React.FC = (): React.JSX.Element => {
 							/>
 
 							{/* Form */}
-							<View className="flex-1 justify-center items-center pt-[50px]">
+							<View className="flex-1 justify-center items-center pt-12 sm:pt-16">
 								<View>
 									{/* Input with 6 digits OTP */}
 									<OTPInput
@@ -196,17 +195,17 @@ const VerifyOTP: React.FC = (): React.JSX.Element => {
 									/>
 								</View>
 
-								<View className="flex flex-row justify-between items-center pt-[40px]">
+								<View className="flex flex-row justify-between items-center pt-10 sm:pt-12">
 									<Text
 										onPress={handleResendEmail}
-										className="font-quicksand-medium text-secondary-700 text-[13px] "
+										className="font-quicksand-medium text-secondary-700 text-xs sm:text-sm"
 									>
-										Didn´t Receive the Email or expired ?{' '}
+										Didn´t Receive the Email or expired?{' '}
 										<Text className="font-quicksand-bold">Resend</Text>
 									</Text>
 								</View>
 
-								<View className="flex flex-row justify-between items-center pt-[55px]">
+								<View className="flex flex-row justify-between items-center pt-14 sm:pt-16">
 									<Button
 										disabled={havesAllDigits !== true || status === 'pending'}
 										onPress={handleVerifyOTP}
@@ -221,7 +220,7 @@ const VerifyOTP: React.FC = (): React.JSX.Element => {
 									</Button>
 								</View>
 
-								<View className="flex-1 w-full items-center pb-[40px] pt-[95px]">
+								<View className="flex-1 w-full items-center pb-10 sm:pb-12 pt-24 sm:pt-28">
 									<Ilustration ilustration={LogoIlus} width={150} height={156} />
 								</View>
 							</View>

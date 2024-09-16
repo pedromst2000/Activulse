@@ -165,16 +165,16 @@ const ChangePassword: React.FC = (): React.JSX.Element => {
 							/>
 
 							{/* Illustration */}
-							<View className="flex-1 items-center justify-center pt-[50px]">
+							<View className="flex-1 items-center justify-center pt-12">
 								<Ilustration ilustration={ChangePasswordIlus} width={200} height={157} />
 							</View>
 
 							{/* Form */}
-							<View className="flex-1 justify-center items-center pt-[30px]">
+							<View className="flex-1 justify-center items-center pt-8">
 								{/* Display long error messages */}
 								{longErrorMessage && (
 									<View className="w-full items-center mb-4">
-										<Text className="text-center text-[13px] text-red-500">
+										<Text className="text-center text-xs text-red-500">
 											{longErrorMessage}
 										</Text>
 									</View>
@@ -187,21 +187,21 @@ const ChangePassword: React.FC = (): React.JSX.Element => {
 										onChange={(text: string) => setNewPassword(text)}
 										value={newPassword}
 										icon={PasswordI}
-										textInputClassName="w-44 pl-[10px]"
+										textInputClassName="w-44 pl-2.5"
 									/>
-									<View className="mt-[20px]">
+									<View className="mt-5">
 										<Input
 											placeholder="Confirm Password"
 											hideText
 											onChange={(text: string) => setConfirmPassword(text)}
 											value={confirmPassword}
 											icon={PasswordI}
-											textInputClassName="w-44 pl-[10px]"
+											textInputClassName="w-44 pl-2.5"
 										/>
 									</View>
 								</View>
 
-								<View className="flex flex-row justify-between items-center pt-[55px]">
+								<View className="flex flex-row justify-between items-center pt-14">
 									<Button
 										disabled={
 											newPassword === '' || confirmPassword === '' || status === 'pending'
@@ -217,7 +217,7 @@ const ChangePassword: React.FC = (): React.JSX.Element => {
 										</Text>
 									</Button>
 								</View>
-								<View className="flex-1 w-full items-center pb-[40px] pt-[35px]">
+								<View className="flex-1 w-full items-center pb-10 pt-9">
 									<Ilustration ilustration={LogoIlus} width={150} height={56} />
 								</View>
 							</View>

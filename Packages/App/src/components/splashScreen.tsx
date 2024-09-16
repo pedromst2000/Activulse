@@ -1,5 +1,5 @@
 import LottieView from 'lottie-react-native';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { View, StyleSheet } from 'react-native';
 
 type SplashScreenProps = {
@@ -16,18 +16,23 @@ const styles = StyleSheet.create({
 const SplashScreen: React.FC<SplashScreenProps> = ({
 	onAnimationFinish,
 }): React.JSX.Element => {
+	const animationRef = useRef<LottieView>(null);
+
 	useEffect(() => {
-		setTimeout(() => {
+		const timer = setTimeout(() => {
+			if (animationRef.current) {
+				animationRef.current.reset();
+			}
 			onAnimationFinish();
 		}, 3800);
+
+		return () => clearTimeout(timer);
 	}, [onAnimationFinish]);
 
 	return (
-		<View
-			className="items-center justify-center flex-1 bg-primary-50
-        "
-		>
+		<View className="items-center justify-center flex-1 bg-primary-50">
 			<LottieView
+				ref={animationRef}
 				source={require('../assets/gif/SplashScreen.json')}
 				autoPlay={true}
 				loop={false}

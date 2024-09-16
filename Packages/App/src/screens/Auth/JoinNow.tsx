@@ -161,24 +161,24 @@ const JoinNow: React.FC = (): React.JSX.Element => {
 						/>
 
 						{/* Form */}
-						<View className="flex-1 justify-center items-center pt-[50px]">
+						<View className="flex-1 justify-center items-center pt-12">
 							{/* Display long error messages */}
 							{longErrorMessage && (
 								<View className="w-full items-center mb-4">
-									<Text className="text-center text-[13px] text-red-500">
+									<Text className="text-center text-xs text-red-500">
 										{longErrorMessage}
 									</Text>
 								</View>
 							)}
-							<View className="flex justify-center items-center gap-[25px]">
+							<View className="flex justify-center items-center gap-6">
 								<View>
 									<Input
 										placeholder="Username"
 										icon={UsernameI}
 										onChange={(text: string) => setUsername(text)}
 										value={username}
-										textInputClassName="w-44 pl-[10px]"
-										iconClassName="pl-[12px]"
+										textInputClassName="w-44 sm:w-64 pl-2.5"
+										iconClassName="pl-3"
 									/>
 								</View>
 
@@ -188,8 +188,8 @@ const JoinNow: React.FC = (): React.JSX.Element => {
 										icon={EmailI}
 										onChange={(text: string) => setEmail(text)}
 										value={email}
-										textInputClassName="w-44 pl-[10px]"
-										iconClassName="pl-[12px]"
+										textInputClassName="w-44 sm:w-64 pl-2.5"
+										iconClassName="pl-3"
 									/>
 								</View>
 
@@ -200,22 +200,22 @@ const JoinNow: React.FC = (): React.JSX.Element => {
 										onChange={(text: string) => setPassword(text)}
 										value={password}
 										icon={PasswordI}
-										textInputClassName="w-44 pl-[10px]"
+										textInputClassName="w-44 sm:w-64 pl-2.5"
 									/>
 								</View>
 							</View>
 
-							<View className="flex flex-row justify-between items-center pt-[40px]">
+							<View className="flex flex-row justify-between items-center pt-10">
 								<Text
 									onPress={() => navigation.navigate('SignIn' as never)}
-									className="font-quicksand-semi-bold text-secondary-700 underline "
+									className="font-quicksand-semi-bold text-secondary-700 underline"
 								>
-									Already have an account ?{' '}
+									Already have an account?{' '}
 									<Text className="font-quicksand-bold">Sign In</Text>
 								</Text>
 							</View>
 
-							<View className="flex flex-row justify-between items-center pt-[55px]">
+							<View className="flex flex-row justify-between items-center pt-14">
 								<Button
 									disabled={
 										username === '' || email === '' || password === '' || status === 'pending'
@@ -231,7 +231,7 @@ const JoinNow: React.FC = (): React.JSX.Element => {
 									</Text>
 								</Button>
 							</View>
-							<View className="flex-1 w-full items-center pb-[40px] pt-[5px]">
+							<View className="flex-1 w-full items-center pb-10 pt-1.5">
 								<Ilustration ilustration={LogoIlus} width={140} height={96} />
 							</View>
 						</View>

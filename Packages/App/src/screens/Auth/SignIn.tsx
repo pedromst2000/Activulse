@@ -135,29 +135,29 @@ const SignIn: React.FC = (): React.JSX.Element => {
 						/>
 
 						{/* Form */}
-						<View className="flex-1 justify-center items-center pt-[50px]">
+						<View className="flex-1 justify-center items-center pt-12">
 							<View>
 								<Input
 									placeholder="Email"
 									icon={EmailI}
 									onChange={(text: string) => setEmail(text)}
 									value={email}
-									textInputClassName="w-44 pl-[10px]"
-									iconClassName="pl-[12px]"
+									textInputClassName="w-44 sm:w-64 pl-2.5"
+									iconClassName="pl-3"
 								/>
 							</View>
 
-							<View className="pt-[25px]">
+							<View className="pt-6">
 								<Input
 									placeholder="Password"
 									hideText
 									onChange={(text: string) => setPassword(text)}
 									value={password}
 									icon={PasswordI}
-									textInputClassName="w-44 pl-[10px]"
+									textInputClassName="w-44 sm:w-64 pl-2.5"
 								/>
 							</View>
-							<View className="flex flex-row justify-between items-center pr-[110px] pt-[10px]">
+							<View className="flex flex-row justify-between items-center sm:pr-28 pt-2.5">
 								<SelectBoxInput
 									value={rememberMe}
 									onPress={(newValue: boolean) => setRememberMe(newValue)}
@@ -165,24 +165,24 @@ const SignIn: React.FC = (): React.JSX.Element => {
 									className="flex-row items-center"
 								/>
 							</View>
-							<View className="flex flex-row justify-between items-center pt-[40px]">
+							<View className="flex flex-row justify-between items-center pt-10">
 								<Text
 									onPress={() => navigation.navigate('ForgotPassword' as never)}
-									className="font-quicksand-semi-bold text-secondary-700 underline "
+									className="font-quicksand-semi-bold text-secondary-700 underline"
 								>
 									Forgot Password{' '}
 								</Text>
 							</View>
-							<View className="flex flex-row justify-between items-center pt-[40px]">
+							<View className="flex flex-row justify-between items-center pt-10">
 								<Text
 									onPress={() => navigation.navigate('JoinNow' as never)}
-									className="font-quicksand-semi-bold text-secondary-700 underline "
+									className="font-quicksand-semi-bold text-secondary-700 underline"
 								>
-									Don´t have an account? <Text className="font-quicksand-bold">Join Now</Text>
+									Don’t have an account? <Text className="font-quicksand-bold">Join Now</Text>
 								</Text>
 							</View>
 
-							<View className="flex flex-row justify-between items-center pt-[55px]">
+							<View className="flex flex-row justify-between items-center pt-14">
 								<Button
 									disabled={email === '' || password === '' || status === 'pending'}
 									onPress={handleSignIn}
@@ -196,7 +196,7 @@ const SignIn: React.FC = (): React.JSX.Element => {
 									</Text>
 								</Button>
 							</View>
-							<View className="flex-1 w-full items-center pb-[40px] pt-[35px]">
+							<View className="flex-1 w-full items-center pb-10 pt-9">
 								<Ilustration ilustration={LogoIlus} width={150} height={56} />
 							</View>
 						</View>
