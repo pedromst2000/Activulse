@@ -24,7 +24,7 @@ const SplashScreen: React.FC<SplashScreenProps> = ({
 				animationRef.current.reset();
 			}
 			onAnimationFinish();
-		}, 3800);
+		}, 4800);
 
 		return () => clearTimeout(timer);
 	}, [onAnimationFinish]);
