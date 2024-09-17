@@ -20,7 +20,7 @@ import OnBoarding from '../screens/Onboarding';
 import { useUserContext } from '../context/user';
 import AssessmentRiskStack, { AssessmentRiskStackParamList } from './AssessmentRisk';
 import config from '../config';
-import BonusAssessmentStack, { BonusAssessmentStackParamList } from './BonusAssessment';
+import InitBonusAssessment from '../screens/BonusAssessment';
 
 export type MainTabParamList = {
 	Home: undefined;
@@ -38,9 +38,7 @@ export type RootStackParamList = {
 	AssessmentRiskStack: {
 		screen: keyof AssessmentRiskStackParamList; // 'Assessment' | 'Result' | 'HowItWorks';
 	};
-	BonusAssessmentStack: {
-		screen: keyof BonusAssessmentStackParamList; // 'InitBonusAssessment' | 'BonusAssessment' | 'BonusOnboarding';
-	};
+	InitBonusAssessment: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -157,8 +155,10 @@ const AppNavigator: React.FC = (): React.JSX.Element => {
 			) : loggedUser &&
 			  loggedUser?.isNewUser === false &&
 			  loggedUser?.isAssessmentDone === false ? (
-				<Stack.Screen name="BonusAssessmentStack" component={BonusAssessmentStack} />
-			) : null}
+				<Stack.Screen name="InitBonusAssessment" component={InitBonusAssessment} />
+			) : (
+				<Stack.Screen name="MainTabs" component={MainTabNavigator} />
+			)}
 		</Stack.Navigator>
 	);
 };

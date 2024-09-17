@@ -4,12 +4,31 @@ import InitAssessment from '@/src/screens/AssessmentRisk/Index';
 import Assessment from '@/src/screens/AssessmentRisk/Assessment';
 import Result from '@/src/screens/AssessmentRisk/Result';
 import HowItWorks from '@/src/screens/AssessmentRisk/HowItWorks';
+import InitBonusAssessment from '@/src/screens/BonusAssessment';
+import BonusAssessment from '@/src/screens/BonusAssessment/Assessment';
+import BonusOnboarding from '@/src/screens/BonusAssessment/BonusOnboarding';
 
 export type AssessmentRiskStackParamList = {
 	InitAssessment: undefined;
 	AssessmentRisk: undefined;
-	AssessmentRiskResult: undefined;
+	AssessmentRiskResult: {
+		riskScore: number;
+		typeRisk: string;
+		health_data: {
+			gender: string;
+			age: number;
+			smoker: 'Yes' | 'No';
+			diabetes: 'Yes' | 'No';
+			treatment_for_hypertension: 'Yes' | 'No';
+			systolic_blood_pressure: number;
+			HDL_cholesterol: number;
+			total_cholesterol: number;
+		};
+	};
 	HowItWorks: undefined;
+	InitBonusAssessment: undefined;
+	BonusAssessment: undefined;
+	BonusOnboarding: undefined;
 };
 
 const Stack = createStackNavigator<AssessmentRiskStackParamList>();
@@ -21,6 +40,9 @@ const AssessmentRiskStack: React.FC = (): React.JSX.Element => {
 			<Stack.Screen name="AssessmentRisk" component={Assessment} />
 			<Stack.Screen name="AssessmentRiskResult" component={Result} />
 			<Stack.Screen name="HowItWorks" component={HowItWorks} />
+			<Stack.Screen name="InitBonusAssessment" component={InitBonusAssessment} />
+			<Stack.Screen name="BonusAssessment" component={BonusAssessment} />
+			<Stack.Screen name="BonusOnboarding" component={BonusOnboarding} />
 		</Stack.Navigator>
 	);
 };

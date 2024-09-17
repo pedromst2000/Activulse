@@ -33,7 +33,7 @@ const HypertensionQuestion: React.FC<HypertensionQuestionProps> = ({
 					text="Yes"
 					onPress={() => {
 						setIsHypertensive(true);
-						console.log('Next Question');
+						handleNext();
 					}}
 					className="bg-primary-50 border-2 border-accent-500 flex-1 mx-2"
 				/>

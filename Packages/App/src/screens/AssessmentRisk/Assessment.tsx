@@ -63,30 +63,35 @@ const Assessment: React.FC = (): React.JSX.Element => {
 				</View>
 				{/* Assessment Content */}
 				<View className="flex-1 justify-center items-center w-full px-4 md:px-8 lg:px-16">
-					{step === 1 && <GenderSelection
-						selectedGender={selectedGender}
-						setSelectedGender={setSelectedGender}
-						handleNext={handleNext}
-					/>}
-					{step === 2 && <AgeQuestion age={age} setAge={setAge} 
-						handleNext={handleNext}
-					/>}
-					{step === 3 && <SmokerQuestion
-						isSmoker={isSmoker}
-						setIsSmoker={setIsSmoker}
-						handleNext={handleNext}
-					/>}
-					{step === 4 && <DiabetesQuestion
-						isDiabetic={isDiabetic}
-						setIsDiabetic={setIsDiabetic}
-						handleNext={handleNext}
-					/>}
-					{step === 5 && <HypertensionQuestion 
-					
-						isHypertensive={isHypertensive}
-						setIsHypertensive={setIsHypertensive}
-						handleNext={handleNext}
-					/>}
+					{step === 1 && (
+						<GenderSelection
+							selectedGender={selectedGender}
+							setSelectedGender={setSelectedGender}
+							handleNext={handleNext}
+						/>
+					)}
+					{step === 2 && <AgeQuestion age={age} setAge={setAge} handleNext={handleNext} />}
+					{step === 3 && (
+						<SmokerQuestion
+							isSmoker={isSmoker}
+							setIsSmoker={setIsSmoker}
+							handleNext={handleNext}
+						/>
+					)}
+					{step === 4 && (
+						<DiabetesQuestion
+							isDiabetic={isDiabetic}
+							setIsDiabetic={setIsDiabetic}
+							handleNext={handleNext}
+						/>
+					)}
+					{step === 5 && (
+						<HypertensionQuestion
+							isHypertensive={isHypertensive}
+							setIsHypertensive={setIsHypertensive}
+							handleNext={handleNext}
+						/>
+					)}
 					{step === 6 && (
 						<BloodPressureQuestion
 							bloodPressure={bloodPressure}
@@ -96,11 +101,16 @@ const Assessment: React.FC = (): React.JSX.Element => {
 					)}
 					{step === 7 && (
 						<CholesterolQuestion
+							gender={selectedGender}
+							age={age}
+							isSmoker={isSmoker}
+							isDiabetic={isDiabetic}
+							isHypertensive={isHypertensive}
+							bloodPressure={bloodPressure}
 							HDL={HDL}
 							totalCholesterol={totalCholesterol}
 							setHDL={setHDL}
 							setTotalCholesterol={setTotalCholesterol}
-							handleNext={handleNext}
 						/>
 					)}
 				</View>

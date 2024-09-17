@@ -1,32 +1,62 @@
 import React, { useEffect, useRef } from 'react';
 import { View, Text } from 'react-native';
 import utils from '@/src/utils';
+import useHeartRiskAssessment from '@/src/hooks/ReactQuery/users/heartRiskAssessment';
 import Ilustration from '../../Ilustration';
 import CholesterolIlus from '../../../assets/svg/ilustrations/heartRiskAssessment/Cholesterol.svg';
 import AnimatedComponent from '../../Animated';
 import Input from '../../Input';
 import Button from '../../Button';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { AssessmentRiskStackParamList } from '@/src/navigation/AssessmentRisk';
+
+type CholesterolQuestiondNavigationProp = NativeStackNavigationProp<
+	AssessmentRiskStackParamList,
+	'AssessmentRisk'
+>;
 
 type CholesterolQuestionProps = {
+	gender: 'Male' | 'Female' | null;
+	age: string;
+	isSmoker: boolean;
+	isDiabetic: boolean;
+	isHypertensive: boolean;
+	bloodPressure: string;
 	HDL: string;
 	setHDL: React.Dispatch<React.SetStateAction<string>>;
 	totalCholesterol: string;
 	setTotalCholesterol: React.Dispatch<React.SetStateAction<string>>;
-	handleNext: () => void;
 };
 
 const CholesterolQuestion: React.FC<CholesterolQuestionProps> = ({
+	gender,
+	age,
+	isSmoker,
+	isDiabetic,
+	isHypertensive,
+	bloodPressure,
 	HDL,
 	setHDL,
 	totalCholesterol,
 	setTotalCholesterol,
-	handleNext,
 }): React.JSX.Element => {
 	const [isValidHDL, setIsValidHDL] = React.useState<boolean>(true);
 	const [isValidTotalCholesterol, setIsValidTotalCholesterol] = React.useState<boolean>(true);
 	const [showError, setShowError] = React.useState<boolean>(false);
 	const [errorMessage, setErrorMessage] = React.useState<string>('');
 	const timeoutRef = useRef<NodeJS.Timeout | null>(null); // Manage the timeout for the error message
+	const navigation = useNavigation<CholesterolQuestiondNavigationProp>();
+	const { mutateAsync } = useHeartRiskAssessment({
+		gender: gender,
+		age: parseInt(age),
+		smoker: isSmoker,
+		diabetes: isDiabetic,
+		treatment_for_hypertension: isHypertensive,
+		systolic_blood_pressure: parseInt(bloodPressure),
+		HDL_cholesterol: parseInt(HDL),
+		total_cholesterol: parseInt(totalCholesterol),
+	});
 
 	useEffect(() => {
 		if (showError) {
@@ -42,7 +72,7 @@ const CholesterolQuestion: React.FC<CholesterolQuestionProps> = ({
 		};
 	}, [showError]);
 
-	const handleValidation = () => {
+	const handleValidation = (): void => {
 		// Validate HDL
 		const isHDLValid = utils.validateData.isValid(HDL, 'HDL');
 		const isTotalCholesterolValid = utils.validateData.isValid(
@@ -62,6 +92,46 @@ const CholesterolQuestion: React.FC<CholesterolQuestionProps> = ({
 			setIsValidHDL(true);
 			setIsValidTotalCholesterol(true);
 			setShowError(false);
+		}
+	};
+
+	const handleAssessment = async (): Promise<void> => {
+		try {
+			const resData = await mutateAsync({
+				gender,
+				age: parseInt(age),
+				smoker: isSmoker,
+				diabetes: isDiabetic,
+				treatment_for_hypertension: isHypertensive,
+				systolic_blood_pressure: parseInt(bloodPressure),
+				HDL_cholesterol: parseInt(HDL),
+				total_cholesterol: parseInt(totalCholesterol),
+			});
+
+			if (resData.success && resData.data) {
+				const { riskScore, typeRisk, health_data } = resData.data;
+
+				navigation.navigate('AssessmentRiskResult', {
+					riskScore,
+					typeRisk,
+					health_data: {
+						gender: health_data.gender,
+						age: health_data.age,
+						smoker: health_data.smoker,
+						diabetes: health_data.diabetes,
+						treatment_for_hypertension: health_data.treatment_for_hypertension,
+						systolic_blood_pressure: health_data.systolic_blood_pressure,
+						HDL_cholesterol: health_data.HDL_cholesterol,
+						total_cholesterol: health_data.total_cholesterol,
+					},
+				});
+			} else {
+				console.log('Error: Data is undefined.');
+			}
+		} catch (error: any) {
+			const errorMessage = utils.error.getMessage(error);
+			setErrorMessage(errorMessage);
+			setShowError(true);
 		}
 	};
 
@@ -122,7 +192,7 @@ const CholesterolQuestion: React.FC<CholesterolQuestionProps> = ({
 						disabled={HDL === '' || totalCholesterol === ''}
 						onPress={() => {
 							handleValidation();
-							console.log('Finished Assessment');
+							handleAssessment();
 						}}
 					>
 						<Text className="font-quicksand-bold text-secondary-700 text-sm sm:text-base md:text-lg lg:text-xl text-center">

@@ -52,7 +52,7 @@ const InitAssessment: React.FC = (): React.JSX.Element => {
 						<View className="flex-1">
 							<Button
 								onPress={() => {
-									console.log('Start Assessment');
+									navigation.navigate('AssessmentRisk' as never);
 								}}
 							>
 								<Text className="font-quicksand-bold text-secondary-700 text-base">Start</Text>
@@ -62,7 +62,7 @@ const InitAssessment: React.FC = (): React.JSX.Element => {
 							<LastSlideButton
 								text="How It Works"
 								onPress={() => {
-									console.log('How It Works');
+									navigation.navigate('HowItWorks' as never);
 								}}
 								className="bg-primary-50 border-2 border-accent-500"
 							/>
