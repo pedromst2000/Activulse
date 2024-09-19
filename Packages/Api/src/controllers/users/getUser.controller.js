@@ -131,7 +131,11 @@ async function getUser(req, res) {
 			return;
 		}
 
-		console.log(JSON.stringify(user, null, 2));
+		const isNewUser = await db.mysql.RiskScore.findOne({
+			where: { user_id: user.user_ID },
+		});
+
+		// console.log(JSON.stringify(user, null, 2));
 
 		const responseData = isLoggedUser
 			? {

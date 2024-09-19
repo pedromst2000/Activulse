@@ -23,7 +23,32 @@ async function login(req, res) {
 		const { email, password, remember_me } = req.body;
 
 		// Check if there's a user with the same email
-		const user = await db.mysql.User.findOne({ where: { email } });
+		const user = await db.mysql.User.findOne({
+			where: { email },
+			include: [
+				{
+					model: db.mysql.UserAvatar,
+					attributes: ["avatar_id"],
+					include: [
+						{
+							model: db.mysql.Avatar,
+							attributes: ["avatar_ID"],
+							include: [
+								{
+									model: db.mysql.Asset,
+									attributes: ["provider_image_url"],
+								},
+							],
+						},
+					],
+					required: false,
+				},
+			],
+		});
+
+		console.log(JSON.stringify(user, null, 2));
+		
+
 		if (!user) {
 			utils.handleResponse(
 				res,
@@ -82,6 +107,7 @@ async function login(req, res) {
 				stressStatus: user.stress_status === null ? "Unknown" : user.stress_status,
 				username: user.username,
 				points: user.points,
+				avatar: user.user_avatars.length > 0 ? user.user_avatars[0].avatar.asset.provider_image_url : null,
 			},
 		});
 	} catch (error) {

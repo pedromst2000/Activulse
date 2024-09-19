@@ -75,6 +75,7 @@ responses:
                     stressStatus: Frequently
                     username: pedromst
                     points: 0
+                    avatar: "https://res.cloudinary.com/dvthg2763/image/upload/v1716397591/activevulse/dev/avatars/male_default_avatar_h6oh4l.png"
   "400":
     description: Bad Request
     content:
