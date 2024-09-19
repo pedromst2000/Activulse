@@ -22,6 +22,7 @@ import AnimatedComponent from '../../components/Animated/index';
 import Message from '../../components/Message';
 import utils from '../../utils';
 import Ilustration from '@/src/components/Ilustration';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SignIn: React.FC = (): React.JSX.Element => {
 	const navigation = useNavigation();
@@ -56,6 +57,10 @@ const SignIn: React.FC = (): React.JSX.Element => {
 							setShowSuccess(true);
 							timeoutRef.current = setTimeout(() => {
 								setLoggedUser(resData.data.user);
+								AsyncStorage.getItem('loggedUser').then((user) =>
+									console.log('AsyncStorage value:', user),
+								);
+
 							}, 2000); // delaying the navigation for 2 seconds after navigating to the risk assessment screen (new user) or home screen
 
 							// Save the tokens on the device storage

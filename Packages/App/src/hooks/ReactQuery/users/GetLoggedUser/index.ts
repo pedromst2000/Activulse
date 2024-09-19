@@ -4,6 +4,7 @@ import { APIResponse } from '../../../../api/types';
 import api from '../../../../api';
 
 type User = {
+	id: number;
 	username: string;
 	email: string;
 	points: number;
