@@ -20,7 +20,6 @@ const LastSlideButton: React.FC<Props> = ({
                 rounded-md  rounded-[30px] ${className}`}
 			activeOpacity={activeOpacity || 0.75}
 			onPress={() => {
-				console.log('Button pressed');
 				if (onPress) {
 					onPress();
 				}

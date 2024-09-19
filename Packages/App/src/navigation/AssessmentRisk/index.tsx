@@ -28,7 +28,10 @@ export type AssessmentRiskStackParamList = {
 	HowItWorks: undefined;
 	InitBonusAssessment: undefined;
 	BonusAssessment: undefined;
-	BonusOnboarding: undefined;
+	BonusOnboarding: {
+		isFastFood?: boolean;
+		
+	};
 };
 
 const Stack = createStackNavigator<AssessmentRiskStackParamList>();

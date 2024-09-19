@@ -9,6 +9,7 @@ import Ilustration from '@/src/components/Ilustration';
 import GaugeChartIlus from '@/src/assets/svg/ilustrations/heartRiskAssessment/GaugeChart.svg';
 import { AssessmentRiskStackParamList } from '@/src/navigation/AssessmentRisk';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type AssessmentResultRouteProp = RouteProp<
 	AssessmentRiskStackParamList,
@@ -253,7 +254,8 @@ const Result: React.FC = (): React.JSX.Element => {
 						<View className="mt-10 w-11/12 sm:w-4/5 mx-auto">
 							<Button
 								onPress={() => {
-									navigation.navigate('InitBonusAssessment');
+									navigation.navigate('InitBonusAssessment' as never);
+									AsyncStorage.getItem('loggedUser').then((user) => console.log(`LoggedUser: ${user}`));
 
 								}}
 								className="w-full"

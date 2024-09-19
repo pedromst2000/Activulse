@@ -1,4 +1,3 @@
-// src/components/Onboarding/AgeQuestion.tsx
 import React from 'react';
 import { View, Text } from 'react-native';
 import AnimatedComponent from '../../Animated';

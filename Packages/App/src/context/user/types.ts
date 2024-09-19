@@ -6,6 +6,7 @@ export type LoggedUser = {
 	stressStatus: string;
 	username: string;
 	points: number;
+	avatar: string;
 };
 
 export type UserContextProps = {
