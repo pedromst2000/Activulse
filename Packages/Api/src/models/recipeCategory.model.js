@@ -17,7 +17,7 @@ const RecipeCategoryModel = (sequelize) => {
 				type: DataTypes.STRING(255),
 				allowNull: false,
 				validate: {
-					isIn: [["Soups", "Main Dishes", "Salades", "Desserts"]],
+					isIn: [["All", "Soups", "Main Dishes", "Salades", "Desserts"]],
 				},
 			},
 		},

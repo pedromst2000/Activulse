@@ -14,4 +14,13 @@ router.get(
 	controllers.recipes.recipDetails,
 );
 
+// Get Recipes
+router.get(
+	"/",
+	validators.recipes.getRecipes(),
+	validators.validateResult,
+	middlewares.validateTokens,
+	controllers.recipes.getRecipes,
+);	
+
 module.exports = router;
