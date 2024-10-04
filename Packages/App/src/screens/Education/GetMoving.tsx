@@ -207,6 +207,29 @@ const GetMoving: React.FC = (): React.JSX.Element => {
 					</View>
 				</View>
 
+				<View className="flex-1 justify-center items-center px-4 py-7">
+					<Image
+						source={require('../../assets/images/Education/GetMoving04.png')}
+						className="w-full h-auto"
+					/>
+				</View>
+
+				<View className="px-4">
+					<View className="items-center mt-2 w-full">
+						<Text className="font-merriweather-bold text-xl md:text-2xl lg:text-3xl text-center text-secondary-700">
+							LIMIT AND REPLACE sedentary behavior time
+						</Text>
+					</View>
+
+					<View className="py-2">
+						<Text className="font-quicksand-medium text-secondary-700 text-sm md:text-base lg:text-lg text-justify leading-6">
+							Adults should limit sedentary behavior time. Replacing sedentary time with
+							physical activities of any intensity (even low intensity) provides health
+							benefits.
+						</Text>
+					</View>
+				</View>
+
 				<View
 					className="
 					flex-1 justify-center items-center px-4 py-7
@@ -220,8 +243,28 @@ const GetMoving: React.FC = (): React.JSX.Element => {
 							)
 						}
 					>
-						<Text className="font-quicksand-bold">1.</Text>WHO.
-						 Physical activity Fact sheet.2021. Available at: https://iris.who.int/bitstream/handle/10665/346252/WHO-HEP-HPR-RUN-2021.2-eng.pdf?sequence=1#page=5.46
+						<Text className="font-quicksand-bold">1.</Text> [ENG] WHO. Physical activity Fact
+						sheet.2021. Available at:
+						https://iris.who.int/bitstream/handle/10665/346252/WHO-HEP-HPR-RUN-2021.2-eng.pdf?sequence=1#page=5.46
+					</Text>
+				</View>
+
+				<View
+					className="
+					flex-1 justify-center items-center px-4 py-2
+				"
+				>
+					<Text
+						className="font-quicksand-medium text-secondary-700 text-base text-justify leading-6 underline"
+						onPress={() =>
+							Linking.openURL(
+								'https://www.mun-setubal.pt/wp-content/uploads/2021/02/OMS-recomendacoes-exercicio-sedentarismo.pdf',
+							)
+						}
+					>
+						<Text className="font-quicksand-bold">2.</Text> [PT] OMS. Physical activity Fact
+						sheet.2021. Available at:
+						https://www.mun-setubal.pt/wp-content/uploads/2021/02/OMS-recomendacoes-exercicio-sedentarismo.pdf
 					</Text>
 				</View>
 			</ScrollView>

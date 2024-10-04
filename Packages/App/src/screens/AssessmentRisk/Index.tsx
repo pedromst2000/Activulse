@@ -9,14 +9,26 @@ import Button from '@/src/components/Button';
 import LastSlideButton from '@/src/components/Onboarding/LastSlideBtn';
 import { useNavigation } from '@react-navigation/native';
 import { ScrollView } from 'react-native-gesture-handler';
+import utils from '@/src/utils';
+import { useUserContext } from '@/src/context/user';
 
 const InitAssessment: React.FC = (): React.JSX.Element => {
 	const navigation = useNavigation();
+	const { setLoggedUser } = useUserContext();
+
+	const handleSignOut = async (): Promise<void> => {
+		// Remove the tokens from the device storage
+		await utils.storage.removeItem('authToken');
+		await utils.storage.removeItem('refreshToken');
+
+		// Update the global state
+		setLoggedUser(null);
+	};
 
 	return (
 		<AnimatedComponent animation="FadeIn">
 			<ScrollView keyboardShouldPersistTaps="handled" className="bg-primary-50">
-				<View className="flex-1 justify-center items-center min-h-screen px-4 py-5 gap-4 bg-primary-50">
+				<View className="flex-1 justify-center items-center min-h-screen px-4 py-5 gap-4 bg-primary-50 mt-2">
 					{/* Heading Section */}
 					<View>
 						<Text className="font-merriweather-bold text-[25px] text-secondary-700 text-center">
@@ -28,8 +40,8 @@ const InitAssessment: React.FC = (): React.JSX.Element => {
 					<View className="flex flex-row w-full px-4 py-2 gap-2 sm:px-8 sm:py-4 items-center">
 						<Icon icon={InfoI} width={20} height={20} />
 						<Text className="font-quicksand-medium text-secondary-700 text-[12px] tracking-[1px] flex-1">
-							We recommend to check out the assessment guidelines in ‘How It Works’ before
-							you start your assessment.
+							We recommend to check out the assessment guidelines in ‘How It Works’ before you
+							start your assessment.
 						</Text>
 					</View>
 
@@ -67,6 +79,11 @@ const InitAssessment: React.FC = (): React.JSX.Element => {
 								className="bg-primary-50 border-2 border-accent-500"
 							/>
 						</View>
+						<Button onPress={handleSignOut} className="flex-1 bg-primary-50 border-2 border-accent-500">
+							<Text className="font-quicksand-bold text-secondary-700 text-base text-center">
+								Sign Out
+							</Text>
+						</Button>
 					</View>
 				</View>
 			</ScrollView>

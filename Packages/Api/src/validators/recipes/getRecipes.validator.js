@@ -12,7 +12,6 @@ function validator() {
 		query("page").exists().withMessage("Page Query is required"),
 
 		query("page")
-			.optional()
 			.isInt({ min: 1 })
 			.toInt()
 			.withMessage("Page must be a positive integer"),
@@ -20,7 +19,6 @@ function validator() {
 		query("limit").exists().withMessage("Limit Query is required"),
 
 		query("limit")
-			.optional()
 			.isInt({ min: 1, max: config.pagination.recipes.feed.maxLimit })
 			.toInt()
 			.withMessage("Limit must be a positive integer"),

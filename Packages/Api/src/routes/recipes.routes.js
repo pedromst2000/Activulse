@@ -21,6 +21,6 @@ router.get(
 	validators.validateResult,
 	middlewares.validateTokens,
 	controllers.recipes.getRecipes,
-);	
+);
 
 module.exports = router;

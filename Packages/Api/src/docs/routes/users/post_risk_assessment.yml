@@ -164,17 +164,17 @@ responses:
                   type:
                     type: string
                   value:
-                     oneOf:
-                       - type: string
-                       - type: integer
-                       - type: boolean
+                    oneOf:
+                      - type: string
+                      - type: integer
+                      - type: boolean
                   msg:
                     type: string
                   path:
                     type: string
                   location:
                     type: string
-              
+
         examples:
           Invalid Gender:
             value:
@@ -318,7 +318,7 @@ responses:
                   type: number
                   format: float
                 typeRisk:
-                  type: string  
+                  type: string
         examples:
           Already Assessed:
             value:

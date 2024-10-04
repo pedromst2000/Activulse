@@ -108,7 +108,7 @@ async function getRecipes(req, res) {
 			page = config.pagination.recipes.feed.defaultPage,
 			limit = config.pagination.recipes.feed.defaultLimit,
 			diet,
-			title,
+			title = "",
 			category,
 		} = req.query;
 
@@ -153,9 +153,38 @@ async function getRecipes(req, res) {
 			offset: (page - 1) * limit,
 		});
 
-		// To avoid duplicate recipes
+		const findUserPremiumRecipes = await db.mysql.Buyer.findAndCountAll({
+			where: {
+				user_id: loggedUser,
+				recipe_id: {
+					[Op.ne]: null,
+				},
+			},
+			include: {
+				model: db.mysql.Recipe,
+				attributes: RECIPE_ATTRIBUTES,
+				include: [
+					{
+						model: db.mysql.Diet,
+						attributes: ["diet_ID", "diet_name"],
+					},
+					{
+						model: db.mysql.RecipeCategory,
+						attributes: ["recipe_category_ID", "category"],
+					},
+					{
+						model: db.mysql.Asset,
+						attributes: ["provider_image_url"],
+					},
+				],
+			},
+		});
+
+		//To avoid duplicate recipes
 		const uniqueRecipes = [];
+		const uniqueUserPremiumRecipes = [];
 		const recipeIds = new Set();
+		const userPremiumRecipeIds = new Set();
 
 		for (const recipe of findRecipes.rows) {
 			if (!recipeIds.has(recipe.recipe_ID)) {
@@ -164,44 +193,82 @@ async function getRecipes(req, res) {
 			}
 		}
 
+		for (const recipe of findUserPremiumRecipes.rows) {
+			if (!userPremiumRecipeIds.has(recipe.recipe.recipe_ID)) {
+				uniqueUserPremiumRecipes.push(recipe);
+				userPremiumRecipeIds.add(recipe.recipe.recipe_ID);
+			}
+		}
+
 		const recipes = {
 			count: uniqueRecipes.length,
 			rows: uniqueRecipes,
 		};
 
-		const resultRecipes = recipes.rows;
+		const premiumUserRecipes = {
+			count: uniqueUserPremiumRecipes.length,
+			rows: uniqueUserPremiumRecipes,
+		};
 
-		if (!resultRecipes || resultRecipes.length === 0) {
-			utils.handleResponse(res, utils.http.StatusNotFound, "No Recipes found");
-			return;
+		const resultRecipes = recipes.rows;
+		const resultUserPremiumRecipes = premiumUserRecipes.rows;
+
+		const ALL_RECIPES =
+			// slice the recipes that are not buyed by the user
+			resultRecipes
+				.filter(
+					(recipe) =>
+						!resultUserPremiumRecipes.some(
+							(premiumRecipe) => premiumRecipe.recipe_ID === recipe.recipe_ID,
+						),
+				)
+				.map((recipe) => recipe.toJSON())
+				.slice(0, limit - resultUserPremiumRecipes.length);
+
+		const PREMIUM_RECIPES = uniqueUserPremiumRecipes
+			.map((recipe) => recipe.recipe)
+			.filter((recipe) => recipe.title.includes(title))
+			.map((parsedRecipe) => ({
+				id: parsedRecipe.recipe_ID,
+				isPremium: parsedRecipe.isPremium,
+				title: parsedRecipe.title,
+				videoTime: parsedRecipe.video_time,
+				category: parsedRecipe.recipe_category.category,
+				diet: parsedRecipe.diet.diet_name,
+				imageUrl: parsedRecipe.asset.provider_image_url,
+			}));
+
+		if (category === "Premium") {
+			if (PREMIUM_RECIPES.length === 0) {
+				utils.handleResponse(res, utils.http.StatusNotFound, "No Premium Recipes Found");
+				return;
+			}
+		} else {
+			if (resultRecipes.length === 0) {
+				utils.handleResponse(res, utils.http.StatusNotFound, "No Recipes Found");
+				return;
+			}
 		}
 
-		utils.handleResponse(res, utils.http.StatusOK, "Recipes retrieved successfully", {
-			recipes: resultRecipes.map((recipe) => {
-				const parsedRecipe = recipe.toJSON();
+		// utils.handleResponse(res, utils.http.StatusOK, "Recipes retrieved successfully", {
+		// 	recipes:
+		// 		category === "Premium"
+		// 			? PREMIUM_RECIPES
+		// 			: resultRecipes.map((recipe) => {
+		// 					const parsedRecipe = recipe.toJSON();
 
-				return parsedRecipe.isPremium
-					? {
-							id: parsedRecipe.recipe_ID,
-							isPremium: parsedRecipe.isPremium,
-							title: parsedRecipe.title,
-							videoTime: parsedRecipe.video_time,
-							category: parsedRecipe.recipe_category.category,
-							diet: parsedRecipe.diet.diet_name,
-							imageUrl: parsedRecipe.asset.provider_image_url,
-						}
-					: {
-							id: parsedRecipe.recipe_ID,
-							isPremium: parsedRecipe.isPremium,
-							title: parsedRecipe.title,
-							durationConf: parsedRecipe.duration_conf,
-							category: parsedRecipe.recipe_category.category,
-							diet: parsedRecipe.diet.diet_name,
-							imageUrl: parsedRecipe.asset.provider_image_url,
-						};
-			}),
-			total: recipes.count,
-		});
+		// 					return {
+		// 						id: parsedRecipe.recipe_ID,
+		// 						isPremium: parsedRecipe.isPremium,
+		// 						title: parsedRecipe.title,
+		// 						videoTime: parsedRecipe.video_time,
+		// 						category: parsedRecipe.recipe_category.category,
+		// 						diet: parsedRecipe.diet.diet_name,
+		// 						imageUrl: parsedRecipe.asset.provider_image_url,
+		// 					};
+		// 				}),
+		// 	total: category === "Premium" ? PREMIUM_RECIPES.length : resultRecipes.length,
+		// });
 	} catch (error) {
 		utils.handleError(res, error, __filename);
 	}

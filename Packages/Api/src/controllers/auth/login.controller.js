@@ -47,7 +47,6 @@ async function login(req, res) {
 		});
 
 		console.log(JSON.stringify(user, null, 2));
-		
 
 		if (!user) {
 			utils.handleResponse(
@@ -107,7 +106,10 @@ async function login(req, res) {
 				stressStatus: user.stress_status === null ? "Unknown" : user.stress_status,
 				username: user.username,
 				points: user.points,
-				avatar: user.user_avatars.length > 0 ? user.user_avatars[0].avatar.asset.provider_image_url : null,
+				avatar:
+					user.user_avatars.length > 0
+						? user.user_avatars[0].avatar.asset.provider_image_url
+						: null,
 			},
 		});
 	} catch (error) {

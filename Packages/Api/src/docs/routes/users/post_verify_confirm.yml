@@ -66,10 +66,10 @@ responses:
                   type:
                     type: string
                   value:
-                     oneOf:
-                       - type: string
-                       - type: integer
-                       - type: boolean
+                    oneOf:
+                      - type: string
+                      - type: integer
+                      - type: boolean
                   msg:
                     type: string
                   path:

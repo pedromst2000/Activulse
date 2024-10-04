@@ -1,0 +1,54 @@
+summary: Get the recipes feed
+description: Get the recipes feed of one diet type (DASH, Vegan and Mediterranean)
+tags:
+  - "Recipes"
+security:
+  - bearerAuth: []
+parameters:
+  - in: header
+    name: x-auth-token
+    schema:
+      type: string
+    required: true
+    description: Authorization token
+  - in: header
+    name: x-refresh-token
+    schema:
+      type: string
+    required: true
+    description: Authorization token
+  - name: page
+    in: query
+    description: Number of the page to retrieve
+    required: true
+    schema:
+      type: number
+      example: 1
+  - name: limit
+    in: query
+    description: Number of recipes requests per page
+    required: true
+    schema:
+      type: number
+      example: 6
+  - name: diet
+    in: query
+    description: Type of the diet (DASH, Vegan, Mediterranean) and is only mandatory if the user has not a diet assigned
+    required: false
+    schema:
+      type: string
+      example: "DASH"
+  - name: category
+    in: query
+    description: category of the recipe (All, Soups, Main Dishes, Salads, Desserts, Premium)
+    required: false
+    schema:
+      type: string
+      example: "Soups"
+  - name: title
+    in: query
+    description: Title of the recipe
+    required: false
+    schema:
+      type: string
+      example: "Hearty Bean"

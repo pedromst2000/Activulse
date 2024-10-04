@@ -85,6 +85,10 @@ const swaggerDefinition = {
 		"/recipes/{id}": {
 			get: routeDocs.recipes.getRecipeDetails,
 		},
+
+		"/recipes": {
+			get: routeDocs.recipes.getRecipesFeed,
+		},
 	},
 };
 

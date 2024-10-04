@@ -19,10 +19,7 @@ async function activityDetails(req, res) {
 		const { id } = req.params;
 		const loggedUserId = req.userId;
 
-		const activity = await db.mysql.Activity.findByPk(id, {
-			 
-		});
-
+		const activity = await db.mysql.Activity.findByPk(id, {});
 	} catch (error) {
 		utils.handleError(res, error, __filename);
 	}
