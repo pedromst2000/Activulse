@@ -134,7 +134,9 @@ async function getRecipes(req, res) {
 					diet: diet,
 					category: category,
 				})),
+				isPremium: !1, // not premium recipes
 			},
+
 			include: [
 				{
 					model: db.mysql.Diet,
@@ -213,18 +215,6 @@ async function getRecipes(req, res) {
 		const resultRecipes = recipes.rows;
 		const resultUserPremiumRecipes = premiumUserRecipes.rows;
 
-		const ALL_RECIPES =
-			// slice the recipes that are not buyed by the user
-			resultRecipes
-				.filter(
-					(recipe) =>
-						!resultUserPremiumRecipes.some(
-							(premiumRecipe) => premiumRecipe.recipe_ID === recipe.recipe_ID,
-						),
-				)
-				.map((recipe) => recipe.toJSON())
-				.slice(0, limit - resultUserPremiumRecipes.length);
-
 		const PREMIUM_RECIPES = uniqueUserPremiumRecipes
 			.map((recipe) => recipe.recipe)
 			.filter((recipe) => recipe.title.includes(title))
@@ -250,25 +240,25 @@ async function getRecipes(req, res) {
 			}
 		}
 
-		// utils.handleResponse(res, utils.http.StatusOK, "Recipes retrieved successfully", {
-		// 	recipes:
-		// 		category === "Premium"
-		// 			? PREMIUM_RECIPES
-		// 			: resultRecipes.map((recipe) => {
-		// 					const parsedRecipe = recipe.toJSON();
+		utils.handleResponse(res, utils.http.StatusOK, "Recipes retrieved successfully", {
+			recipes:
+				category === "Premium"
+					? PREMIUM_RECIPES
+					: resultRecipes.map((recipe) => {
+							const parsedRecipe = recipe.toJSON();
 
-		// 					return {
-		// 						id: parsedRecipe.recipe_ID,
-		// 						isPremium: parsedRecipe.isPremium,
-		// 						title: parsedRecipe.title,
-		// 						videoTime: parsedRecipe.video_time,
-		// 						category: parsedRecipe.recipe_category.category,
-		// 						diet: parsedRecipe.diet.diet_name,
-		// 						imageUrl: parsedRecipe.asset.provider_image_url,
-		// 					};
-		// 				}),
-		// 	total: category === "Premium" ? PREMIUM_RECIPES.length : resultRecipes.length,
-		// });
+							return {
+								id: parsedRecipe.recipe_ID,
+								isPremium: parsedRecipe.isPremium,
+								title: parsedRecipe.title,
+								confTime: parsedRecipe.duration_conf,
+								category: parsedRecipe.recipe_category.category,
+								diet: parsedRecipe.diet.diet_name,
+								imageUrl: parsedRecipe.asset.provider_image_url,
+							};
+						}),
+			total: category === "Premium" ? PREMIUM_RECIPES.length : resultRecipes.length,
+		});
 	} catch (error) {
 		utils.handleError(res, error, __filename);
 	}

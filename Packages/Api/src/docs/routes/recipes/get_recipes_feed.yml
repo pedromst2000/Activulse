@@ -52,3 +52,238 @@ parameters:
     schema:
       type: string
       example: "Hearty Bean"
+responses:
+  200:
+    description: Success
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+            data:
+              type: object
+              properties:
+                recipes:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      isPremium:
+                        type: boolean
+                      title:
+                        type: string
+                      confTime:
+                        type: number
+                      videoTime:
+                        type: number
+                      category:
+                        type: string
+                      diet:
+                        type: string
+                      imageUrl:
+                        type: string
+                total:
+                  type: number
+        examples:
+          Success - Normal Recipes:
+            value:
+              success: true
+              message: "Recipes retrieved successfully"
+              data:
+                recipes:
+                  - id: 37
+                    isPremium: false
+                    title: "Cauliflower and Chickpea Curry"
+                    confTime: 30,
+                    category: "Main Dishes"
+                    diet: "Vegan"
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399641/activevulse/dev/recipes/Cauliflower_and_Chickpea_Curry_hrdoux.png"
+                  - id: 38
+                    isPremium: false
+                    title: "Vegetable Paella"
+                    confTime: 40,
+                    category: "Main Dishes"
+                    diet: "Vegan"
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399677/activevulse/dev/recipes/Vegetable_Paella_aezdu4.png"
+                  - id: 39
+                    isPremium: false
+                    title: "Crunchy Rainbow Salad"
+                    confTime: 12,
+                    category: "Salads"
+                    diet: "Vegan"
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399645/activevulse/dev/recipes/Crunchy_Rainbow_Salad_yajktz.png"
+                  - id: 40
+                    isPremium: false
+                    title: "Grilled Veggie and Tofu Salad"
+                    confTime: 20,
+                    category: "Salads"
+                    diet: "Vegan"
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399649/activevulse/dev/recipes/Grilled_Veggie_and_Tofu_Salad_porngd.png"
+                  - id: 41
+                    isPremium: false
+                    title: "Summer Veggie and Couscous Salad"
+                    confTime: 15,
+                    category: "Salads"
+                    diet: "Vegan"
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399674/activevulse/dev/recipes/Summer_Veggie_and_Couscous_Salad_q44gai.png"
+                  - id: 42
+                    isPremium: false
+                    title: "Noodle Salad with Peanut Dressing"
+                    confTime: 30,
+                    category: "Salads"
+                    diet: "Vegan"
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399656/activevulse/dev/recipes/Noodle_Salad_with_Peanut_Dressing_swcbhi.png"
+                total: 6
+          Success - Premium Recipe(s):
+            value:
+              success: true
+              message: "Recipes retrieved successfully"
+              data:
+                recipes:
+                  - id: 49
+                    isPremium: true
+                    title: "Vegan Caramel Cheesecake"
+                    videoTime: 25
+                    category: "Desserts"
+                    diet: "Vegan"
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399664/activevulse/dev/recipes/premium_VEGAN_CARAMEL_CHEESECAKE_a7rw6y.png"
+                total: 1
+  400:
+    description: Bad Request
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+            data:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  value:
+                    oneOf:
+                      - type: string
+                      - type: integer
+                      - type: boolean
+                  msg:
+                    type: string
+                  path:
+                    type: string
+                  location:
+                    type: string
+        examples:
+          Page Query Parameter Missing:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  msg: "Page Query is required"
+                  path: "page"
+                  location: "query"
+          Limit Query Parameter Missing:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  msg: "Limit Query is required"
+                  path: "limit"
+                  location: "query"
+          Diet Query Parameter Missing:
+            description: Diet Query is required if the user has not a diet assigned.
+            value:
+              success: false
+              message: Please provide a diet!
+          Invalid Diet:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: "asd"
+                  msg: "Diet must be a valid diet type: Vegan, DASH, or Mediterranean"
+                  path: "diet"
+                  location: "query"
+          Invalid Category:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: "asdasd"
+                  msg: "Category must be a valid category: All, Soups, Main Dishes, Salads, Desserts, Premium"
+                  path: "category"
+                  location: "query"
+  401:
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Missing token:
+            value:
+              success: false
+              message: Missing auth token or refresh token
+          Invalid token:
+            value:
+              success: false
+              message: Invalid auth token or refresh token
+          Refresh token expired:
+            value:
+              success: false
+              message: Refresh token has expired
+  404:
+    description: Not Found
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          No Recipes Found:
+            value:
+              success: false
+              message: No recipes found
+          No Premium Recipes Found:
+            value:
+              success: false
+              message: No Premium Recipes Found
+  500:
+    description: Internal Server Error
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Internal Server Error:
+            value:
+              success: false
+              message: Internal Server Error
