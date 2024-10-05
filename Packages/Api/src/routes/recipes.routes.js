@@ -5,7 +5,7 @@ const middlewares = require("../middlewares");
 
 const router = Router();
 
-// Get One Recipe
+// Get One Recipe Details
 router.get(
 	"/:id",
 	validators.recipes.recipeDetails(),
@@ -14,7 +14,7 @@ router.get(
 	controllers.recipes.recipDetails,
 );
 
-// Get Recipes
+// Get Recipes Feed
 router.get(
 	"/",
 	validators.recipes.getRecipes(),

@@ -22,18 +22,18 @@ function validator() {
 			.toInt()
 			.withMessage("Limit must be a positive integer"),
 
-		query("diet")
+		query("intensity")
 			.optional()
 			.isString()
-			.isIn(["DASH", "Vegan", "Mediterranean"])
-			.withMessage(`Diet must be a valid diet type: Vegan, DASH, or Mediterranean`),
+			.isIn(["Light", "Moderate", "Vigorous"])
+			.withMessage(`Intensity must be a valid intensity: Light, Moderate, or Vigorous`),
 
 		query("category")
 			.optional()
 			.isString()
-			.isIn(["All", "Soups", "Main Dishes", "Salads", "Desserts", "Premium"])
+			.isIn(["All", "Cardio", "Yoga", "Muscles", "Premium"])
 			.withMessage(
-				"Category must be a valid category: All, Soups, Main Dishes, Salads, Desserts, or Premium",
+				"Category must be a valid category: All, Cardio, Yoga, Muscles, or Premium",
 			),
 	];
 }
