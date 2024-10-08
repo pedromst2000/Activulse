@@ -4,6 +4,7 @@ const cronjob = require("../routes/cronjob");
 const auth = require("../routes/auth");
 const users = require("../routes/users");
 const recipes = require("../routes/recipes");
+const activities = require("../routes/activities");
 
 const getWelcomeApi = YAML.parse(
 	fs.readFileSync("./src/docs/routes/default/get_welcome_api.yml", "utf8"),
@@ -18,4 +19,5 @@ module.exports = {
 	auth,
 	users,
 	recipes,
+	activities,
 };

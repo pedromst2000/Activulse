@@ -89,6 +89,11 @@ const swaggerDefinition = {
 		"/recipes": {
 			get: routeDocs.recipes.getRecipesFeed,
 		},
+		//---------------------------ACTIVITIES---------------------------------------------------
+
+		"/activities": {
+			get: routeDocs.activities.getActivitiesFeed,
+		},
 	},
 };
 

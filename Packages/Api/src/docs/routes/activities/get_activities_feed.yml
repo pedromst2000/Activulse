@@ -1,7 +1,7 @@
-summary: Get the recipes feed
-description: Get the recipes feed of one diet type (DASH, Vegan and Mediterranean)
+summary: Get the activities feed
+description: Get the activities feed by category or/and physical intensity
 tags:
-  - "Recipes"
+  - "Activities"
 security:
   - bearerAuth: []
 parameters:
@@ -26,32 +26,25 @@ parameters:
       example: 1
   - name: limit
     in: query
-    description: Number of recipes requests per page
+    description: Number of activities requests per page
     required: true
     schema:
       type: number
       example: 6
-  - name: diet
+  - name: intensity
     in: query
-    description: Type of the diet (DASH, Vegan, Mediterranean) and is only mandatory if the user has not a diet assigned
+    description: Physical intensity of the activity ( Light, Moderate, Vigorous)
     required: false
     schema:
       type: string
-      example: "DASH"
+      example: "Moderate"
   - name: category
     in: query
-    description: category of the recipe (All, Soups, Main Dishes, Salads, Desserts, Premium)
+    description: category of the activity (All, Cardio, Yoga, Muscles, Premium)
     required: false
     schema:
       type: string
-      example: "Soups"
-  - name: title
-    in: query
-    description: Title of the recipe
-    required: false
-    schema:
-      type: string
-      example: "Hearty Bean"
+      example: "Cardio"
 responses:
   200:
     description: Success
@@ -67,7 +60,7 @@ responses:
             data:
               type: object
               properties:
-                recipes:
+                activities:
                   type: array
                   items:
                     type: object
@@ -78,82 +71,89 @@ responses:
                         type: boolean
                       title:
                         type: string
-                      confTime:
+                      duration:
                         type: number
                       videoTime:
                         type: number
                       category:
                         type: string
-                      diet:
+                      intensity:
                         type: string
                       imageUrl:
                         type: string
                 total:
                   type: number
         examples:
-          Success - Normal Recipes:
+          Success - Normal Activities:
             value:
               success: true
-              message: "Recipes retrieved successfully"
+              message: "Activities retrieved successfully"
               data:
                 recipes:
-                  - id: 31
+                  - id: 2
+                    title: "Sunset Jogging"
                     isPremium: false
-                    title: "Creamy Mushroom and Almond Soup"
-                    confTime: 25,
-                    category: "Soups"
-                    diet: "Vegan"
-                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399644/activevulse/dev/recipes/Creamy_Mushroom_and_Almond_Soup_neqjzn.png"
-                  - id: 35
+                    duration: 45,
+                    category: "Cardio"
+                    intensity: "Moderate"
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399535/activevulse/dev/activities/Sunset_Jogging_lth1ly.png"
+                  - id: 3
+                    title: "Park Perimeter Jog"
                     isPremium: false
-                    title: "Butternut Squash and Sage Risotto"
-                    confTime: 45,
-                    category: "Main Dishes"
-                    diet: "Vegan"
-                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399641/activevulse/dev/recipes/Butternut_Squash_and_Sage_Risotto_hyuxfp.png"
-                  - id: 32
+                    duration: 60,
+                    category: "Cardio"
+                    intensity: "Vigorous"
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399526/activevulse/dev/activities/Park_Perimeter_Jog_paqfnx.png"
+                  - id: 6
+                    title: "City Explorer Walk"
                     isPremium: false
-                    title: "Hearty Bean and Vegetable Soup"
-                    confTime: 30,
-                    category: "Soups"
-                    diet: "Vegan"
-                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399649/activevulse/dev/recipes/Hearty_Bean_and_Vegetable_Soup_uczfsy.png"
-                  - id: 36
+                    duration: 75,
+                    category: "Cardio"
+                    intensity: "Vigorous"
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399518/activevulse/dev/activities/City_Explorer_Walk_uitita.png"
+                  - id: 1
+                    title: "Morning Bliss Run"
                     isPremium: false
-                    title: "Sweet Potato and Black Bean Enchiladas"
-                    confTime: 45,
-                    category: "Main Dishes"
-                    diet: "Vegan"
-                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399675/activevulse/dev/recipes/Sweet_Potato_and_Black_Bean_Enchiladas_cm2cqa.png"
-                  - id: 33
+                    duration: 30,
+                    category: "Cardio"
+                    intensity: "Moderate"
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399524/activevulse/dev/activities/Morning_Bliss_Run_th4w09.png"
+                  - id: 5
+                    title: "Beachfront Promenade"
                     isPremium: false
-                    title: "Creamy Seitan and Vegetable Chowder"
-                    confTime: 25,
-                    category: "Soups"
-                    diet: "Vegan"
-                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399644/activevulse/dev/recipes/Creamy_Seitan_and_Vegetable_Chowder_fe4tij.png"
-                  - id: 34
+                    duration: 45,
+                    category: "Cardio"
+                    intensity: "Moderate"
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399517/activevulse/dev/activities/Beachfront_Promenade_rcgvrb.png"
+                  - id: 4
+                    title: "Nature Stroll"
                     isPremium: false
-                    title: "Nutty Almond and Flaxseed Soup"
-                    confTime: 30,
-                    category: "Soups"
-                    diet: "Vegan"
-                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399656/activevulse/dev/recipes/Nutty_Almond_and_Flaxseed_Soup_heytuy.png"
+                    duration: 60,
+                    category: "Cardio"
+                    intensity: "Vigorous"
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399525/activevulse/dev/activities/Nature_Stroll_gsu4tv.png"
                 total: 6
-          Success - Premium Recipe(s):
+          Success - Premium Activities:
             value:
               success: true
-              message: "Recipes retrieved successfully"
+              message: "Activities retrieved successfully"
               data:
-                recipes:
-                  - id: 49
+                activities:
+                  - id: 34
+                    title: "Hatha Yoga Practice I"
                     isPremium: true
-                    title: "Vegan Caramel Cheesecake"
-                    videoTime: 25
-                    category: "Desserts"
-                    diet: "Vegan"
-                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399664/activevulse/dev/recipes/premium_VEGAN_CARAMEL_CHEESECAKE_a7rw6y.png"
-                total: 1
+                    videoTime: 19
+                    category: "Yoga"
+                    intensity: "Light"
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399529/activevulse/dev/activities/premium_Hatha_Yoga_Practice__1_o2ti8w.png"
+                  - id: 38
+                    title: "Chest Workout I"
+                    isPremium: true
+                    videoTime: 10
+                    category: "Muscles"
+                    intensity: "Moderate"
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399528/activevulse/dev/activities/premium_Chest_Workout_1_m1cdrk.png"
+                total: 2
   400:
     description: Bad Request
     content:
@@ -222,29 +222,24 @@ responses:
                   msg: "Limit Query must be a positive number"
                   path: "limit"
                   location: "query"
-          Diet Query Parameter Missing:
-            description: Diet Query is required if the user has not a diet assigned.
-            value:
-              success: false
-              message: Please provide a diet!
-          Invalid Diet Query Parameter:
+          Intensity Query Parameter Invalid:
             value:
               success: false
               message: Validation Error
               data:
                 - type: "field"
-                  value: "asd"
-                  msg: "Diet must be a valid diet type: Vegan, DASH, or Mediterranean"
-                  path: "diet"
+                  value: "Lighhfjh"
+                  msg: "Intensity must be a valid intensity: Light, Moderate, or Vigorous"
+                  path: "intensity"
                   location: "query"
-          Invalid Category Query Parameter:
+          Category Query Parameter Invalid:
             value:
               success: false
               message: Validation Error
               data:
                 - type: "field"
-                  value: "asdasd"
-                  msg: "Category must be a valid category: All, Soups, Main Dishes, Salads, Desserts, Premium"
+                  value: "Cardiooasd"
+                  msg: "Category must be a valid category: All, Cardio, Yoga, Muscles, or Premium"
                   path: "category"
                   location: "query"
   401:
@@ -283,14 +278,14 @@ responses:
             message:
               type: string
         examples:
-          No Recipes Found:
+          No Activities Found:
             value:
               success: false
-              message: No recipes found
-          No Premium Recipes Found:
+              message: No Activities Found
+          No Premium Activities Found:
             value:
               success: false
-              message: No Premium Recipes Found
+              message: No Premium Activities Found
   500:
     description: Internal Server Error
     content:
