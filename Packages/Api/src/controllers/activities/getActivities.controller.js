@@ -40,7 +40,14 @@ async function GetQueryOptions(options) {
 		switch (key) {
 			case "intensity":
 				if (value) {
-					query.intensity = { [Op.eq]: value };
+					if (value === "Light") {
+						query.intensity = { [Op.eq]: 1 };
+					}
+					if (value === "Moderate") {
+						query.intensity = { [Op.between]: [2, 4] };
+					} else if (value === "Vigorous") {
+						query.intensity = { [Op.eq]: 5 };
+					}
 				}
 			case "category":
 				if (value && value !== "All") {
@@ -78,7 +85,7 @@ async function getActivities(req, res) {
 		let {
 			page = config.pagination.recipes.feed.defaultPage,
 			limit = config.pagination.recipes.feed.defaultLimit,
-			intensity,
+			intensity = "",
 			category,
 		} = req.query;
 
@@ -161,8 +168,57 @@ async function getActivities(req, res) {
 			rows: uniqueUserPremiumActivities,
 		};
 
-		const resultActivities = activities.rows;
+		let resultActivities = activities.rows;
 		const resultUserPremiumActivities = premiumUserActivities.rows;
+
+		// Randomize the activities feed to avoid showing the same activities in the same order
+		const categories = {
+			Cardio: [],
+			Yoga: [],
+			Muscles: [],
+		};
+
+		resultActivities.forEach((activity) => {
+			const category = activity.activity_category.category;
+			if (categories[category]) {
+				categories[category].push(activity);
+			}
+		});
+
+		const randomizedActivities = [];
+		let index = 0;
+		const CATEGORIES = Object.keys(categories);
+
+		while (randomizedActivities.length < resultActivities.length) {
+			const category = CATEGORIES[index];
+			const activities = categories[category];
+			if (activities.length > 0) {
+				const randomIndex = Math.floor(Math.random() * activities.length);
+				randomizedActivities.push(activities[randomIndex]);
+				categories[category].splice(randomIndex, 1);
+			}
+
+			index = (index + 1) % CATEGORIES.length;
+		}
+
+		resultActivities = randomizedActivities;
+
+		const ALL_ACTIVITIES = resultActivities.map((parsedActivity) => ({
+			id: parsedActivity.activity_ID,
+			title: parsedActivity.title,
+			isPremium: parsedActivity.isPremium,
+			duration: parsedActivity.duration,
+			category: parsedActivity.activity_category.category,
+			intensity:
+				parsedActivity.intensity === 1
+					? "Light"
+					: parsedActivity.intensity === 2 ||
+						  parsedActivity.intensity === 3 ||
+						  parsedActivity.intensity === 4
+						? "Moderate"
+						: "Vigorous",
+			imageUrl: parsedActivity.asset.provider_image_url,
+		}));
 
 		const PREMIUM_ACTIVITIES = uniqueUserPremiumActivities
 			.map((activity) => activity.activity)
@@ -213,30 +269,8 @@ async function getActivities(req, res) {
 		}
 
 		utils.handleResponse(res, utils.http.StatusOK, "Activities retrieved successfully", {
-			activities:
-				category === "Premium"
-					? PREMIUM_ACTIVITIES
-					: resultActivities.map((activity) => {
-							const parsedActivity = activity.toJSON();
-
-							return {
-								id: parsedActivity.activity_ID,
-								title: parsedActivity.title,
-								isPremium: parsedActivity.isPremium,
-								duration: parsedActivity.duration,
-								category: parsedActivity.activity_category.category,
-								intensity:
-									parsedActivity.intensity === 1
-										? "Light"
-										: parsedActivity.intensity === 2 ||
-											  parsedActivity.intensity === 3 ||
-											  parsedActivity.intensity === 4
-											? "Moderate"
-											: "Vigorous",
-								imageUrl: parsedActivity.asset.provider_image_url,
-							};
-						}),
-			total: category === "Premium" ? PREMIUM_ACTIVITIES.length : resultActivities.length,
+			activities: category === "Premium" ? PREMIUM_ACTIVITIES : ALL_ACTIVITIES,
+			total: category === "Premium" ? PREMIUM_ACTIVITIES.length : ALL_ACTIVITIES.length,
 		});
 	} catch (error) {
 		utils.handleError(res, error, __filename);
