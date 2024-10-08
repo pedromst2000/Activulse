@@ -97,48 +97,48 @@ responses:
               message: "Recipes retrieved successfully"
               data:
                 recipes:
-                  - id: 37
+                  - id: 31
                     isPremium: false
-                    title: "Cauliflower and Chickpea Curry"
-                    confTime: 30,
+                    title: "Creamy Mushroom and Almond Soup"
+                    confTime: 25,
+                    category: "Soups"
+                    diet: "Vegan"
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399644/activevulse/dev/recipes/Creamy_Mushroom_and_Almond_Soup_neqjzn.png"
+                  - id: 35
+                    isPremium: false
+                    title: "Butternut Squash and Sage Risotto"
+                    confTime: 45,
                     category: "Main Dishes"
                     diet: "Vegan"
-                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399641/activevulse/dev/recipes/Cauliflower_and_Chickpea_Curry_hrdoux.png"
-                  - id: 38
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399641/activevulse/dev/recipes/Butternut_Squash_and_Sage_Risotto_hyuxfp.png"
+                  - id: 32
                     isPremium: false
-                    title: "Vegetable Paella"
-                    confTime: 40,
+                    title: "Hearty Bean and Vegetable Soup"
+                    confTime: 30,
+                    category: "Soups"
+                    diet: "Vegan"
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399649/activevulse/dev/recipes/Hearty_Bean_and_Vegetable_Soup_uczfsy.png"
+                  - id: 36
+                    isPremium: false
+                    title: "Sweet Potato and Black Bean Enchiladas"
+                    confTime: 45,
                     category: "Main Dishes"
                     diet: "Vegan"
-                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399677/activevulse/dev/recipes/Vegetable_Paella_aezdu4.png"
-                  - id: 39
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399675/activevulse/dev/recipes/Sweet_Potato_and_Black_Bean_Enchiladas_cm2cqa.png"
+                  - id: 33
                     isPremium: false
-                    title: "Crunchy Rainbow Salad"
-                    confTime: 12,
-                    category: "Salads"
+                    title: "Creamy Seitan and Vegetable Chowder"
+                    confTime: 25,
+                    category: "Soups"
                     diet: "Vegan"
-                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399645/activevulse/dev/recipes/Crunchy_Rainbow_Salad_yajktz.png"
-                  - id: 40
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399644/activevulse/dev/recipes/Creamy_Seitan_and_Vegetable_Chowder_fe4tij.png"
+                  - id: 34
                     isPremium: false
-                    title: "Grilled Veggie and Tofu Salad"
-                    confTime: 20,
-                    category: "Salads"
-                    diet: "Vegan"
-                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399649/activevulse/dev/recipes/Grilled_Veggie_and_Tofu_Salad_porngd.png"
-                  - id: 41
-                    isPremium: false
-                    title: "Summer Veggie and Couscous Salad"
-                    confTime: 15,
-                    category: "Salads"
-                    diet: "Vegan"
-                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399674/activevulse/dev/recipes/Summer_Veggie_and_Couscous_Salad_q44gai.png"
-                  - id: 42
-                    isPremium: false
-                    title: "Noodle Salad with Peanut Dressing"
+                    title: "Nutty Almond and Flaxseed Soup"
                     confTime: 30,
-                    category: "Salads"
+                    category: "Soups"
                     diet: "Vegan"
-                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399656/activevulse/dev/recipes/Noodle_Salad_with_Peanut_Dressing_swcbhi.png"
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399656/activevulse/dev/recipes/Nutty_Almond_and_Flaxseed_Soup_heytuy.png"
                 total: 6
           Success - Premium Recipe(s):
             value:

@@ -212,8 +212,38 @@ async function getRecipes(req, res) {
 			rows: uniqueUserPremiumRecipes,
 		};
 
-		const resultRecipes = recipes.rows;
+		let resultRecipes = recipes.rows;
 		const resultUserPremiumRecipes = premiumUserRecipes.rows;
+
+		// Randomize the recipes feed to avoid showing the same recipes in the same order
+		const categorizedRecipes = {
+			Soups: [],
+			"Main Dishes": [],
+			Salads: [],
+			Desserts: [],
+			Premium: [],
+		};
+
+		resultRecipes.forEach((recipe) => {
+			const category = recipe.recipe_category.category;
+			if (categorizedRecipes[category]) {
+				categorizedRecipes[category].push(recipe);
+			}
+		});
+
+		const randomizedRecipes = [];
+		let index = 0;
+		const categories = Object.keys(categorizedRecipes);
+
+		while (randomizedRecipes.length < resultRecipes.length) {
+			const category = categories[index % categories.length];
+			if (categorizedRecipes[category].length > 0) {
+				randomizedRecipes.push(categorizedRecipes[category].shift());
+			}
+			index++;
+		}
+
+		resultRecipes = randomizedRecipes;
 
 		const PREMIUM_RECIPES = uniqueUserPremiumRecipes
 			.map((recipe) => recipe.recipe)
