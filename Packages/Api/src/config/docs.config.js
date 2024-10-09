@@ -91,6 +91,10 @@ const swaggerDefinition = {
 		},
 		//---------------------------ACTIVITIES---------------------------------------------------
 
+		"/activities/{id}": {
+			get: routeDocs.activities.getActivitiesDetails,
+		},
+
 		"/activities": {
 			get: routeDocs.activities.getActivitiesFeed,
 		},

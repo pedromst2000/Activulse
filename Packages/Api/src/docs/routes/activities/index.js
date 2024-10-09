@@ -1,8 +1,15 @@
 const fs = require("fs");
 const YAML = require("yaml");
 
+const getActivitiesDetails = YAML.parse(
+	fs.readFileSync("./src/docs/routes/activities/get_activity_details.yml", "utf8"),
+);
+
 const getActivitiesFeed = YAML.parse(
 	fs.readFileSync("./src/docs/routes/activities/get_activities_feed.yml", "utf8"),
 );
 
-module.exports = { getActivitiesFeed };
+module.exports = {
+	getActivitiesDetails,
+	getActivitiesFeed,
+};

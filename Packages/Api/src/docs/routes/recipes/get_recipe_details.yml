@@ -43,6 +43,8 @@ responses:
                   type: number
                 isPremium:
                   type: boolean
+                isMyPremium:
+                  type: boolean
                 isMyFavorite:
                   type: boolean
                 title:
@@ -107,7 +109,7 @@ responses:
           Normal Recipe:
             value:
               success: true
-              message: User data retrieved successfully
+              message: Recipe data retrieved successfully
               data:
                 recipe_id: 10
                 isPremium: false
@@ -157,7 +159,7 @@ responses:
           Premium Recipe Buyed:
             value:
               success: true
-              message: User data retrieved successfully
+              message: Recipe data retrieved successfully
               data:
                 recipe_id: 53
                 isPremium: true
@@ -179,7 +181,7 @@ responses:
           Premium Recipe Not Buyed:
             value:
               success: true
-              message: User data retrieved successfully
+              message: Recipe data retrieved successfully
               data:
                 recipe_id: 49
                 isPremium: true

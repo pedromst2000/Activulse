@@ -1,0 +1,286 @@
+summary: Get one activity details
+description: Get one activity details available from a category (Cardio, Muscles, Yoga or Premium) or by intensity (Light, Moderate, or Vigorous).
+tags:
+  - "Activities"
+security:
+  - bearerAuth: []
+parameters:
+  - in: header
+    name: x-auth-token
+    schema:
+      type: string
+    required: true
+    description: Authorization token
+  - in: header
+    name: x-refresh-token
+    schema:
+      type: string
+    required: true
+    description: Authorization token
+  - name: id
+    in: path
+    description: ID of the activity
+    required: true
+    schema:
+      type: number
+      example: 1
+responses:
+  200:
+    description: Success
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+            data:
+              type: object
+              properties:
+                activity_id:
+                  type: number
+                isPremium:
+                  type: boolean
+                isMyPremium:
+                  type: boolean
+                isMyFavorite:
+                  type: boolean
+                intensity:
+                  type: string
+                title:
+                  type: string
+                category:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    name:
+                      type: string
+                tag:
+                  type: string
+                description:
+                  oneOf:
+                    - type: string
+                    - type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          workout:
+                            type: string
+                image:
+                  type: object
+                  properties:
+                    url:
+                      type: string
+                video:
+                  type: object
+                  properties:
+                    url:
+                      type: string
+                price:
+                  type: number
+                videoTime:
+                  type: number
+                duration:
+                  type: number
+                createdAt:
+                  type: string
+                  format: date-time
+                updatedAt:
+                  type: string
+                  format: date-time
+        examples:
+          Normal Activity:
+            value:
+              success: true
+              message: Activity data retrieved successfully
+              data:
+                activity_id: 1
+                isPremium: false
+                isMyPremium: false
+                isMyFavorite: true
+                intensity: "Moderate I"
+                title: "Morning Bliss Run"
+                category:
+                  id: 1
+                  name: "Cardio"
+                tag: "Jogging"
+                description: "Start your day with the refreshing Morning Bliss Run. Feel the cool breeze as you jog through scenic routes, awakening your senses and energizing your body. This invigorating run is perfect for clearing your mind and setting a positive tone for the day."
+                image:
+                  url: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399524/activevulse/dev/activities/Morning_Bliss_Run_th4w09.png"
+                duration: 30
+                createdAt: "2024-08-28T22:07:26.000Z"
+                updatedAt: "2024-08-28T22:07:26.000Z"
+          Normal Activity with workouts:
+            value:
+              success: true
+              message: Activity data retrieved successfully
+              data:
+                activity_id: 31
+                isPremium: false
+                isMyPremium: false
+                isMyFavorite: true
+                intensity: "Vigorous"
+                title: "Deltoid Domination Drill"
+                category:
+                  id: 3
+                  name: "Muscles"
+                tag: "Shoulders"
+                description:
+                  - id: 28
+                    workout: "Warm-up: 10 minutes of light cardio"
+                  - id: 29
+                    workout: "Arnold Press: 4 sets x 10-12 reps"
+                  - id: 30
+                    workout: "Bent-over Lateral Raises: 4 sets x 12-15 reps"
+                  - id: 31
+                    workout: "Shrugs: 3 sets x 10-12 reps"
+                  - id: 32
+                    workout: "Reverse Flyes: 3 sets x 10-12 reps"
+                  - id: 33
+                    workout: "Cool Down: 5 minutes of stretching"
+                image:
+                  url: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399524/activevulse/dev/activities/Morning_Bliss_Run_th4w09.png"
+                duration: 55
+                createdAt: "2024-08-28T22:07:26.000Z"
+                updatedAt: "2024-08-28T22:07:26.000Z"
+          Premium Activity Buyed:
+            value:
+              success: true
+              message: Activity data retrieved successfully
+              data:
+                activity_id: 34
+                isPremium: true
+                isMyPremium: true
+                isMyFavorite: false
+                intensity: "Low"
+                title: "Hatha Yoga Practice I"
+                category:
+                  id: 2
+                  name: "Premium"
+                tag: "Hatha Yoga"
+                description: "Flow with serene rhythm in calming Hatha yoga. Harmonize mind and body through purposeful postures, melting away stress and realigning equilibrium. Suitable for all levels, experience revitalization and invigoration."
+                video:
+                  url: "https://res.cloudinary.com/dvthg2763/video/upload/v1716454705/activevulse/dev/activities-premium/premium_Hatha_Yoga_1_csxpgk.mp4"
+                videoTime: 19
+                createdAt: "2024-10-28T22:17:36.000Z"
+                updatedAt: "2024-10-28T22:17:36.000Z"
+          Premium Activity Not Buyed:
+            value:
+              success: true
+              message: Activity data retrieved successfully
+              data:
+                activity_id: 40
+                isPremium: true
+                isMyPremium: false
+                intensity: "Moderate III"
+                title: "Arms Workout II"
+                tag: "Arms"
+                description: "Dive into our Beginner's Arms Workout! Target your arms with curls to overhead presses. Perfect for newcomers, build strength and definition with proper form every step. Feel the burn and see results on your path to stronger, toned arms!"
+                price: 3400
+                videoTime: 10
+                image:
+                  url: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399528/activevulse/dev/activities/premium_Arms_Workout_2_i9pc9e.png"
+                createdAt: "2024-10-28T22:17:36.000Z"
+                updatedAt: "2024-10-28T22:17:36.000Z"
+  400:
+    description: Bad Request
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+            data:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  value:
+                    oneOf:
+                      - type: string
+                      - type: integer
+                      - type: integer
+                      - type: boolean
+                  msg:
+                    type: string
+                  path:
+                    type: string
+                  location:
+                    type: string
+        examples:
+          Invalid Activity ID:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: "asd"
+                  msg: "Invalid activity id"
+                  path: "id"
+                  location: "params"
+  401:
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Missing token:
+            value:
+              success: false
+              message: Missing auth token or refresh token
+          Invalid token:
+            value:
+              success: false
+              message: Invalid auth token or refresh token
+          Refresh token expired:
+            value:
+              success: false
+              message: Refresh token has expired
+  404:
+    description: Activity not found
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Recipe not found:
+            value:
+              success: false
+              message: Activity not found
+  500:
+    description: Internal server error
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Internal server error:
+            value:
+              success: false
+              message: Internal server error
