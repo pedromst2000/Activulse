@@ -152,6 +152,7 @@ async function recipeDetails(req, res) {
 			"Recipe Data retrieved successfully",
 			responseData,
 		);
+		return;
 	} catch (error) {
 		utils.handleError(res, error, __filename);
 	}
