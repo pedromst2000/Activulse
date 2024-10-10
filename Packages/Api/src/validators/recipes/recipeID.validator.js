@@ -1,7 +1,7 @@
 const { param } = require("express-validator");
 
 /**
- * Returns an array of validation rules for the get recipe endpoint.
+ * Returns an array of validation rules for the validation of the recipe id.
  * @returns {Array} An array of validation rules.
  */
 function validator() {

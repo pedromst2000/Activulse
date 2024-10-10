@@ -8,7 +8,7 @@ const router = Router();
 // Get One Recipe Details
 router.get(
 	"/:id",
-	validators.recipes.recipeDetails(),
+	validators.recipes.recipeID(),
 	validators.validateResult,
 	middlewares.validateTokens,
 	controllers.recipes.recipDetails,
@@ -21,6 +21,15 @@ router.get(
 	validators.validateResult,
 	middlewares.validateTokens,
 	controllers.recipes.getRecipes,
+);
+
+// Add Recipe to Favorites
+router.post(
+	"/:id/favorites",
+	validators.recipes.recipeID(),
+	validators.validateResult,
+	middlewares.validateTokens,
+	controllers.recipes.addRecipeFav,
 );
 
 module.exports = router;
