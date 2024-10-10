@@ -52,8 +52,12 @@ const swaggerDefinition = {
 
 		//---------------------------USERS---------------------------------------------------
 
-		"/users/verify/{token}": {
-			patch: routeDocs.users.patchVerifyUser,
+		"/users/me": {
+			get: routeDocs.users.getLoggedUser,
+		},
+
+		"/users/{id}": {
+			get: routeDocs.users.getUserProfile,
 		},
 
 		"/users/verify": {
@@ -64,16 +68,12 @@ const swaggerDefinition = {
 			post: routeDocs.users.postResendVerify,
 		},
 
-		"/users/me": {
-			get: routeDocs.users.getLoggedUser,
-		},
-
-		"/users/{id}": {
-			get: routeDocs.users.getUserProfile,
-		},
-
 		"/users/heart-risk-assessment": {
 			post: routeDocs.users.postRiskAssessment,
+		},
+
+		"/users/verify/{token}": {
+			patch: routeDocs.users.patchVerifyUser,
 		},
 
 		"/users/extra-assessment": {
@@ -89,6 +89,11 @@ const swaggerDefinition = {
 		"/recipes": {
 			get: routeDocs.recipes.getRecipesFeed,
 		},
+
+		"/recipes/{id}/favorites": {
+			post: routeDocs.recipes.postAddRecipeFavorites,
+		},
+
 		//---------------------------ACTIVITIES---------------------------------------------------
 
 		"/activities/{id}": {

@@ -262,7 +262,7 @@ responses:
             value:
               success: false
               message: Refresh token has expired
-  
+
   403:
     description: Forbidden
     content:
@@ -279,7 +279,7 @@ responses:
             value:
               success: false
               message: you are not allowed to see this recipe that does not match your diet
-          
+
   404:
     description: Recipe not found
     content:
