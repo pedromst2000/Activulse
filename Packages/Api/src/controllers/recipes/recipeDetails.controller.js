@@ -58,8 +58,29 @@ async function recipeDetails(req, res) {
 			},
 		});
 
+		const userDiet = await db.mysql.User.findOne({
+			where: {
+				user_id: loggedUserId,
+			},
+			attributes: ["diet_id"],
+			include: {
+				model: db.mysql.Diet,
+				attributes: ["diet_ID", "diet_name"],
+			},
+			required: false,
+		});
+
 		if (!recipe) {
 			utils.handleResponse(res, utils.http.StatusNotFound, "Recipe not found");
+			return;
+		}
+
+		if (userDiet?.diet !== null && recipe.diet.diet_name !== userDiet?.diet.diet_name) {
+			utils.handleResponse(
+				res,
+				utils.http.StatusForbidden,
+				"you are not allowed to see this recipe that does not match your diet",
+			);
 			return;
 		}
 
