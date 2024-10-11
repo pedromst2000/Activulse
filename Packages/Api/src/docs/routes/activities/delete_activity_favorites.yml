@@ -1,7 +1,7 @@
-summary: Delete one recipe from the favorites list
-description: Delete one recipe by the id from the favorites list
+summary: Delete one activity from the favorites list
+description: Delete one activity by the id from the favorites list
 tags:
-  - "Recipes"
+  - "Activities"
 security:
   - bearerAuth: []
 parameters:
@@ -19,7 +19,7 @@ parameters:
     description: Authorization token
   - name: id
     in: path
-    description: ID of the recipe to delete from favorites
+    description: ID of the activity to delete from favorites
     required: true
     schema:
       type: number
@@ -37,10 +37,10 @@ responses:
             message:
               type: string
         examples:
-          Recipe Deleted from Favorites:
+          Activity Deleted from Favorites:
             value:
               success: true
-              message: Recipe removed from favorites !
+              message: Activity removed from favorites !
   400:
     description: Bad Request
     content:
@@ -71,14 +71,14 @@ responses:
                   location:
                     type: string
         examples:
-          Invalid Recipe ID:
+          Invalid Activity ID:
             value:
               success: false
               message: Validation Error
               data:
                 - type: "field"
                   value: "asd"
-                  msg: "Invalid recipe id"
+                  msg: "Invalid activity id"
                   path: "id"
                   location: "params"
   401:
@@ -106,7 +106,7 @@ responses:
               success: false
               message: Refresh token has expired
   404:
-    description: Not Found
+    description: Not found
     content:
       application/json:
         schema:
@@ -117,14 +117,14 @@ responses:
             message:
               type: string
         examples:
-          Recipe not found:
+          Activity not found:
             value:
               success: false
-              message: Recipe not found !
-          Recipe not in favorites:
+              message: Activity not found !
+          Activity not in favorites:
             value:
               success: false
-              message: Recipe not in favorites !
+              message: Activity not in favorites !
   500:
     description: Internal server error
     content:
