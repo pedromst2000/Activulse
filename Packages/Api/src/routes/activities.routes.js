@@ -32,4 +32,13 @@ router.post(
 	controllers.activities.addActivityFav,
 );
 
+// Delete Activity from Favorites
+router.delete(
+	"/:id/favorites",
+	validators.activities.activityID(),
+	validators.validateResult,
+	middlewares.validateTokens,
+	controllers.activities.deleteActivityFav,
+);
+
 module.exports = router;

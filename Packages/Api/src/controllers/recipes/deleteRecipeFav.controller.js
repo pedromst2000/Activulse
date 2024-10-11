@@ -18,14 +18,7 @@ async function deleteRecipeFav(req, res) {
 		const { id } = req.params;
 		const loggedUserId = req.userId;
 
-		const recipe = await db.mysql.Recipe.findByPk(id, {
-			include: [
-				{
-					model: db.mysql.Diet,
-					attributes: ["diet_ID", "diet_name"],
-				},
-			],
-		});
+		const recipe = await db.mysql.Recipe.findByPk(id);
 
 		const findFavoritesRecipes = await db.mysql.Favorite.findOne({
 			where: {
