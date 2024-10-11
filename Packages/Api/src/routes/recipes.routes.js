@@ -32,4 +32,13 @@ router.post(
 	controllers.recipes.addRecipeFav,
 );
 
+// Delete Recipe from Favorites
+router.delete(
+	"/:id/favorites",
+	validators.recipes.recipeID(),
+	validators.validateResult,
+	middlewares.validateTokens,
+	controllers.recipes.deleteRecipeFav,
+);
+
 module.exports = router;
