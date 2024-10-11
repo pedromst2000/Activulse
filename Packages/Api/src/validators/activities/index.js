@@ -1,7 +1,7 @@
-const activityDetails = require("../activities/activityDetails.validator");
+const activityID = require("../activities/activityID.validator");
 const getActivities = require("../activities/getActivities.validator");
 
 module.exports = {
-	activityDetails,
+	activityID,
 	getActivities,
 };

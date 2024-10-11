@@ -8,7 +8,7 @@ const router = Router();
 // Get One Activity Details
 router.get(
 	"/:id",
-	validators.activities.activityDetails(),
+	validators.activities.activityID(),
 	validators.validateResult,
 	middlewares.validateTokens,
 	controllers.activities.activityDetails,
@@ -21,6 +21,15 @@ router.get(
 	validators.validateResult,
 	middlewares.validateTokens,
 	controllers.activities.getActivities,
+);
+
+// Add Activity to Favorites
+router.post(
+	"/:id/favorites",
+	validators.activities.activityID(),
+	validators.validateResult,
+	middlewares.validateTokens,
+	controllers.activities.addActivityFav,
 );
 
 module.exports = router;

@@ -1,14 +1,14 @@
 const { param } = require("express-validator");
 
 /**
- * Returns an array of validation rules for the get activity endpoint.
+ * Returns an array of validation rules for the validation of the activity id.
  * @returns {Array} An array of validation rules.
  */
 function validator() {
 	return [
 		param("id")
 			.matches(/^(me|\d+)$/)
-			.withMessage("Invalid Activity id"),
+			.withMessage("Invalid activity id"),
 	];
 }
 
