@@ -92,6 +92,7 @@ const swaggerDefinition = {
 
 		"/recipes/{id}/favorites": {
 			post: routeDocs.recipes.postAddRecipeFavorites,
+			delete: routeDocs.recipes.deleteRecipeFavorites,
 		},
 
 		//---------------------------ACTIVITIES---------------------------------------------------
