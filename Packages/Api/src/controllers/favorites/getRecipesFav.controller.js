@@ -100,19 +100,19 @@ async function getRecipesFav(req, res) {
 						const recipe = favRecipe;
 						return recipe.isPremium
 							? {
-									recipe_ID: recipe.recipe_ID,
+									id: recipe.recipe_ID,
 									isPremium: recipe.isPremium,
 									title: recipe.title,
-									video_time: recipe.video_time,
+									videoTime: recipe.video_time,
 									category: recipe.recipe_category.category,
 									diet: recipe.diet.diet_name,
 									imageUrl: recipe.asset.provider_image_url,
 								}
 							: {
-									recipe_ID: recipe.recipe_ID,
+									id: recipe.recipe_ID,
 									isPremium: recipe.isPremium,
 									title: recipe.title,
-									duration_conf: recipe.duration_conf,
+									confTime: recipe.duration_conf,
 									category: recipe.recipe_category.category,
 									diet: recipe.diet.diet_name,
 									imageUrl: recipe.asset.provider_image_url,

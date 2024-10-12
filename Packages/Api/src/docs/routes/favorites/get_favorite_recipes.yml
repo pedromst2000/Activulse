@@ -1,0 +1,217 @@
+summary: Get the favorite recipes of the user
+description: Get the favorite recipes of the user
+tags:
+  - "Favorites"
+security:
+  - bearerAuth: []
+parameters:
+  - in: header
+    name: x-auth-token
+    schema:
+      type: string
+    required: true
+    description: Authorization token
+  - in: header
+    name: x-refresh-token
+    schema:
+      type: string
+    required: true
+    description: Authorization token
+  - name: page
+    in: query
+    description: Number of the page to retrieve
+    required: true
+    schema:
+      type: number
+      example: 1
+  - name: limit
+    in: query
+    description: Number of favorite recipes requests per page
+    required: true
+    schema:
+      type: number
+      example: 4
+responses:
+  200:
+    description: Success
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+            data:
+              type: object
+              properties:
+                recipes:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      isPremium:
+                        type: boolean
+                      title:
+                        type: string
+                      confTime:
+                        type: number
+                      videoTime:
+                        type: number
+                      category:
+                        type: string
+                      diet:
+                        type: string
+                      imageUrl:
+                        type: string
+                total:
+                  type: number
+        examples:
+          Favorite Recipes Retrieved:
+            value:
+              success: true
+              message: "Favorite Recipes retrieved successfully"
+              data:
+                recipes:
+                  - id: 35
+                    isPremium: false
+                    title: "Butternut Squash and Sage Risotto"
+                    confTime: 45,
+                    category: "Main Dishes"
+                    diet: "Vegan"
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399641/activevulse/dev/recipes/Butternut_Squash_and_Sage_Risotto_hyuxfp.png"
+                  - id: 49
+                    isPremium: true
+                    title: "Vegan Caramel Cheesecake"
+                    videoTime: 10,
+                    category: "Desserts"
+                    diet: "Vegan"
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399664/activevulse/dev/recipes/premium_VEGAN_CARAMEL_CHEESECAKE_a7rw6y.png"
+                total: 2
+  400:
+    description: Bad Request
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+            data:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  value:
+                    oneOf:
+                      - type: string
+                      - type: integer
+                      - type: boolean
+                  msg:
+                    type: string
+                  path:
+                    type: string
+                  location:
+                    type: string
+        examples:
+          Page Query Parameter Missing:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  msg: "Page Query is required"
+                  path: "page"
+                  location: "query"
+          Invalid Page Query Parameter:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: -1
+                  msg: "Page Query must be a positive number"
+                  path: "page"
+                  location: "query"
+          Limit Query Parameter Missing:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  msg: "Limit Query is required"
+                  path: "limit"
+                  location: "query"
+          Invalid Limit Query Parameter:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: -1
+                  msg: "Limit Query must be a positive number"
+                  path: "limit"
+                  location: "query"
+  401:
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Missing token:
+            value:
+              success: false
+              message: Missing auth token or refresh token
+          Invalid token:
+            value:
+              success: false
+              message: Invalid auth token or refresh token
+          Refresh token expired:
+            value:
+              success: false
+              message: Refresh token has expired
+  404:
+    description: Not Found
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          No Favorite Recipes Found:
+            value:
+              success: false
+              message: No Favorite Recipes Found
+  500:
+    description: Internal Server Error
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Internal Server Error:
+            value:
+              success: false
+              message: Internal Server Error

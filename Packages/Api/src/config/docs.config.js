@@ -109,6 +109,12 @@ const swaggerDefinition = {
 			post: routeDocs.activities.postAddActivityFav,
 			delete: routeDocs.activities.deleteActivityFav,
 		},
+
+		//---------------------------Favorites---------------------------------------------------
+
+		"/favorites/recipes": {
+			get: routeDocs.favorites.getFavoriteRecipes,
+		},
 	},
 };
 

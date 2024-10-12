@@ -5,6 +5,7 @@ const auth = require("../routes/auth");
 const users = require("../routes/users");
 const recipes = require("../routes/recipes");
 const activities = require("../routes/activities");
+const favorites = require("../routes/favorites");
 
 const getWelcomeApi = YAML.parse(
 	fs.readFileSync("./src/docs/routes/default/get_welcome_api.yml", "utf8"),
@@ -20,4 +21,5 @@ module.exports = {
 	users,
 	recipes,
 	activities,
+	favorites,
 };
