@@ -87,6 +87,7 @@ responses:
                     isPremium: false
                     title: "Sunset Serenade Skip"
                     duration: 25,
+                    intensity: "Moderate I"
                     category: "Cardio"
                     imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399537/activevulse/dev/activities/Sunset_Serenade_Skip_qjvtzu.png"
                 total: 2
