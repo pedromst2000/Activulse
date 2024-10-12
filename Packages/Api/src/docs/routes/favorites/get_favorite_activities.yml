@@ -65,6 +65,8 @@ responses:
                         type: string
                       category:
                         type: string
+                      tag:
+                        type: string
                       imageUrl:
                         type: string
                 total:
@@ -82,6 +84,7 @@ responses:
                     videoTime: 10,
                     intensity: "Moderate III"
                     category: "Muscles"
+                    tag: "Arms"
                     imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399528/activevulse/dev/activities/premium_Arms_Workout_2_i9pc9e.png"
                   - id: 9
                     isPremium: false
@@ -89,6 +92,7 @@ responses:
                     duration: 25,
                     intensity: "Moderate I"
                     category: "Cardio"
+                    tag: "Jogging"
                     imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399537/activevulse/dev/activities/Sunset_Serenade_Skip_qjvtzu.png"
                 total: 2
   400:

@@ -115,6 +115,7 @@ async function getActivitiesFav(req, res) {
 														? "Moderate III"
 														: "Vigorous",
 									category: activity.activity_category.category,
+									tag: activity.tag,
 									imageUrl: activity.asset.provider_image_url,
 								}
 							: {
@@ -133,6 +134,7 @@ async function getActivitiesFav(req, res) {
 														? "Moderate III"
 														: "Vigorous",
 									category: activity.activity_category.category,
+									tag: activity.tag,
 									imageUrl: activity.asset.provider_image_url,
 								};
 					}),
