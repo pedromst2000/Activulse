@@ -57,10 +57,6 @@ responses:
                         type: boolean
                       title:
                         type: string
-                      duration:
-                        type: number
-                      videoTime:
-                        type: number
                       intensity:
                         type: string
                       category:
@@ -81,7 +77,6 @@ responses:
                   - id: 40
                     isPremium: true
                     title: "Arms Workout II"
-                    videoTime: 10,
                     intensity: "Moderate III"
                     category: "Muscles"
                     tag: "Arms"
@@ -89,7 +84,6 @@ responses:
                   - id: 9
                     isPremium: false
                     title: "Sunset Serenade Skip"
-                    duration: 25,
                     intensity: "Moderate I"
                     category: "Cardio"
                     tag: "Jogging"

@@ -98,45 +98,24 @@ async function getActivitiesFav(req, res) {
 				{
 					activities: resultFavActivities.map((favActivity) => {
 						const activity = favActivity;
-						return activity.isPremium
-							? {
-									id: activity.activity_ID,
-									isPremium: activity.isPremium,
-									title: activity.title,
-									videoTime: activity.video_time,
-									intensity:
-										activity.intensity === 1
-											? "Light"
-											: activity.intensity === 2
-												? "Moderate I"
-												: activity.intensity === 3
-													? "Moderate II"
-													: activity.intensity === 4
-														? "Moderate III"
-														: "Vigorous",
-									category: activity.activity_category.category,
-									tag: activity.tag,
-									imageUrl: activity.asset.provider_image_url,
-								}
-							: {
-									id: activity.activity_ID,
-									isPremium: activity.isPremium,
-									title: activity.title,
-									duration: activity.duration,
-									intensity:
-										activity.intensity === 1
-											? "Light"
-											: activity.intensity === 2
-												? "Moderate I"
-												: activity.intensity === 3
-													? "Moderate II"
-													: activity.intensity === 4
-														? "Moderate III"
-														: "Vigorous",
-									category: activity.activity_category.category,
-									tag: activity.tag,
-									imageUrl: activity.asset.provider_image_url,
-								};
+						return {
+							id: activity.activity_ID,
+							isPremium: activity.isPremium,
+							title: activity.title,
+							intensity:
+								activity.intensity === 1
+									? "Light"
+									: activity.intensity === 2
+										? "Moderate I"
+										: activity.intensity === 3
+											? "Moderate II"
+											: activity.intensity === 4
+												? "Moderate III"
+												: "Vigorous",
+							category: activity.activity_category.category,
+							tag: activity.tag,
+							imageUrl: activity.asset.provider_image_url,
+						};
 					}),
 					total: resultFavActivities.length,
 				},
