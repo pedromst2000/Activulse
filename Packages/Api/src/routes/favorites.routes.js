@@ -14,4 +14,13 @@ router.get(
 	controllers.favorites.getRecipesFav,
 );
 
+// Get Favorites Activities
+router.get(
+	"/activities",
+	validators.favorites.getFavorites(),
+	validators.validateResult,
+	middlewares.validateTokens,
+	controllers.favorites.getActivitiesFav,
+);
+
 module.exports = router;
