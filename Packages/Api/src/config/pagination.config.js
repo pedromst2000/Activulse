@@ -27,6 +27,13 @@ const config = {
 			maxLimit: 10,
 		},
 	},
+	favorites: {
+		feed: {
+			defaultPage: 1,
+			defaultLimit: 4,
+			maxLimit: 10,
+		},
+	},
 };
 
 module.exports = config;

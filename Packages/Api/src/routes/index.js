@@ -7,6 +7,7 @@ const authRoutes = require("../routes/auth.routes");
 const userRoutes = require("../routes/users.routes");
 const recipesRoutes = require("../routes/recipes.routes");
 const activitiesRoutes = require("../routes/activities.routes");
+const favoritesRoutes = require("../routes/favorites.routes");
 
 const router = Router();
 
@@ -33,5 +34,8 @@ router.use("/recipes", recipesRoutes);
 
 // Activities Routes
 router.use("/activities", activitiesRoutes);
+
+// Favorites Routes
+router.use("/favorites", favoritesRoutes);
 
 module.exports = router;
