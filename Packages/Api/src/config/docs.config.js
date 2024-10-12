@@ -115,6 +115,10 @@ const swaggerDefinition = {
 		"/favorites/recipes": {
 			get: routeDocs.favorites.getFavoriteRecipes,
 		},
+
+		"/favorites/activities": {
+			get: routeDocs.favorites.getFavoriteActivities,
+		},
 	},
 };
 
