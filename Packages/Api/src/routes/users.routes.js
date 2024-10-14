@@ -29,6 +29,9 @@ router.post(
 	controllers.users.resendVerify,
 );
 
+// User Badges
+router.get("/badges", middlewares.validateTokens, controllers.users.getUserBadges);
+
 // Get Logged User data
 router.get(
 	"/:id",
