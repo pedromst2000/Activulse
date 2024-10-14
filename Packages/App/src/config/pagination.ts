@@ -20,7 +20,7 @@ export default {
 			maxLimit: 10,
 		},
 	},
-	banners: {
+	favorites: {
 		feed: {
 			defaultPage: 1,
 			defaultLimit: 4,

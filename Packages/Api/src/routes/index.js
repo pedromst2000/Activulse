@@ -8,6 +8,7 @@ const userRoutes = require("../routes/users.routes");
 const recipesRoutes = require("../routes/recipes.routes");
 const activitiesRoutes = require("../routes/activities.routes");
 const favoritesRoutes = require("../routes/favorites.routes");
+const bannersRoutes = require("../routes/banners.routes");
 
 const router = Router();
 
@@ -37,5 +38,8 @@ router.use("/activities", activitiesRoutes);
 
 // Favorites Routes
 router.use("/favorites", favoritesRoutes);
+
+// Banners Routes
+router.use("/banners", bannersRoutes);
 
 module.exports = router;
