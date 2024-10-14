@@ -135,8 +135,6 @@ async function getUser(req, res) {
 			where: { user_id: user.user_ID },
 		});
 
-		// console.log(JSON.stringify(user, null, 2));
-
 		const responseData = isLoggedUser
 			? {
 					user_id: user.user_ID,
@@ -219,15 +217,6 @@ async function getUser(req, res) {
 									id: banner.banner_id,
 									is_selected: banner.banner_id === user.selected_banner_ID,
 									banner: banner.banner.asset.provider_image_url,
-								}))
-							: [],
-					badges:
-						user.user_badges.length > 0
-							? user.user_badges.map((badge) => ({
-									id: badge.badge.badge_ID,
-									title: badge.badge.title,
-									description: badge.badge.description,
-									badge: badge.badge.asset.provider_image_url,
 								}))
 							: [],
 					createdAt: user.createdAt,
