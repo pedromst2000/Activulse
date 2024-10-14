@@ -49,7 +49,7 @@ async function getStoreBanners(req, res) {
 				return {
 					id: banner.banner_ID,
 					price: banner.price,
-					provider_image_url: banner.asset.provider_image_url,
+					imageUrl: banner.asset.provider_image_url,
 				};
 			});
 

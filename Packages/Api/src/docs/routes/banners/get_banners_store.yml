@@ -1,0 +1,117 @@
+summary: Get the banners from the store
+description: Get the banners from the store that the user not yet purchased
+tags:
+  - "Banners"
+security:
+  - bearerAuth: []
+parameters:
+  - in: header
+    name: x-auth-token
+    schema:
+      type: string
+    required: true
+    description: Authorization token
+  - in: header
+    name: x-refresh-token
+    schema:
+      type: string
+    required: true
+    description: Authorization token
+responses:
+  200:
+    description: Retrieves only the banners that the user not yet purchased from the store
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+            data:
+              type: object
+              properties:
+                banners:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      price:
+                        type: number
+                      imageUrl:
+                        type: string
+        examples:
+          Success - Banners retrieved successfully:
+            value:
+              success: true
+              message: "Banners retrieved successfully"
+              data:
+                banners:
+                  - id: 2
+                    price: 350
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399556/activevulse/dev/banners/image_141_v6nv2i.png"
+                  - id: 5
+                    price: 1200
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399557/activevulse/dev/banners/image_144_s70roa.png"
+                  - id: 6
+                    price: 1600
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399557/activevulse/dev/banners/image_145_vmpsx2.png"
+  401:
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Missing token:
+            value:
+              success: false
+              message: Missing auth token or refresh token
+          Invalid token:
+            value:
+              success: false
+              message: Invalid auth token or refresh token
+          Refresh token expired:
+            value:
+              success: false
+              message: Refresh token has expired
+  404:
+    description: Not Found ! When the user already purchased all the banners from the store
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          No banners available:
+            value:
+              success: false
+              message: No banners to buy it !
+  500:
+    description: Internal Server Error
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Internal Server Error:
+            value:
+              success: false
+              message: Internal Server Error

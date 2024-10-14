@@ -1,5 +1,4 @@
 const fs = require("fs");
-const { get } = require("http");
 const YAML = require("yaml");
 
 const getFavoriteRecipes = YAML.parse(

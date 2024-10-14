@@ -119,6 +119,12 @@ const swaggerDefinition = {
 		"/favorites/activities": {
 			get: routeDocs.favorites.getFavoriteActivities,
 		},
+
+		//---------------------------Banners---------------------------------------------------
+
+		"/banners/store": {
+			get: routeDocs.banners.getBannersStore,
+		},
 	},
 };
 
