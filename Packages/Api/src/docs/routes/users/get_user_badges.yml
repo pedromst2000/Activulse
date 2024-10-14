@@ -19,7 +19,7 @@ parameters:
     description: Authorization token
 responses:
   "200":
-    description: Success - Earned key flag indicates if the badge has been earned by the user or not yet !
+    description: Success - **earned** key flag indicates if the badge has been earned by the user or not yet and **total** key indicates the total number of badges earned by the user
     content:
       application/json:
         schema:
@@ -49,6 +49,8 @@ responses:
                         type: string
                       earned:
                         type: boolean
+                total:
+                  type: number
         examples:
           Badges retrieved successfully:
             value:
@@ -145,6 +147,7 @@ responses:
                   description: "Finish All Marathon Challenges"
                   imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1721140639/activevulse/dev/badges/Marathon_Legend_yencof.svg"
                   earned: false
+              total: 6
   "401":
     description: Unauthorized
     content:

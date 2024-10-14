@@ -40,6 +40,7 @@ async function getUserBadges(req, res) {
 
 		utils.handleResponse(res, utils.http.StatusOK, "Badges retrieved successfully", {
 			badges: badgesList,
+			total: userBadges.length,
 		});
 	} catch (error) {
 		utils.handleError(res, error, __filename);
