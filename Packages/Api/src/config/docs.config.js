@@ -64,6 +64,10 @@ const swaggerDefinition = {
 			get: routeDocs.users.getUserBadges,
 		},
 
+		"/users/leaderboard": {
+			get: routeDocs.users.getLeaderboard,
+		},
+
 		"/users/verify": {
 			post: routeDocs.users.postVerifyConfirm,
 		},

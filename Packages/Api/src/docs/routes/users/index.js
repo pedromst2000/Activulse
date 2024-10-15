@@ -25,6 +25,10 @@ const getUserBadges = YAML.parse(
 	fs.readFileSync("./src/docs/routes/users/get_user_badges.yml", "utf8"),
 );
 
+const getLeaderboard = YAML.parse(
+	fs.readFileSync("./src/docs/routes/users/get_leaderboard.yml", "utf8"),
+);
+
 const postRiskAssessment = YAML.parse(
 	fs.readFileSync("./src/docs/routes/users/post_risk_assessment.yml", "utf8"),
 );
@@ -40,6 +44,7 @@ module.exports = {
 	getLoggedUser,
 	getUserProfile,
 	getUserBadges,
+	getLeaderboard,
 	postRiskAssessment,
 	patchExtraAssessment,
 };

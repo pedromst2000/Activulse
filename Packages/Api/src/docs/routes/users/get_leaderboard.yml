@@ -1,0 +1,132 @@
+summary: Get Top 5 users leaderboard
+description: Get the Top 5 users from the leaderboard
+tags:
+  - "Users"
+security:
+  - bearerAuth: []
+parameters:
+  - in: header
+    name: x-auth-token
+    schema:
+      type: string
+    required: true
+    description: Authorization token
+  - in: header
+    name: x-refresh-token
+    schema:
+      type: string
+    required: true
+    description: Authorization token
+responses:
+  200:
+    description: Success
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+              example: true
+            message:
+              type: string
+              example: "Leaderboard TOP 5 retrieved successfully"
+            data:
+              type: object
+              properties:
+                top_5:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      username:
+                        type: string
+                      points:
+                        type: number
+                      avatar:
+                        type: string
+        examples:
+          Leaderboard TOP 5 retrieved successfully:
+            value:
+              success: true
+              message: Leaderboard TOP 5 retrieved successfully
+              top_5:
+                - id: 3
+                  username: "Avsa"
+                  points: 730
+                  avatar: "https://res.cloudinary.com/dvthg2763/image/upload/v1716397591/activevulse/dev/avatars/female_default_avatar_pqwebu.jpg"
+                - id: 5
+                  username: "pedromst"
+                  points: 350
+                  avatar: "https://res.cloudinary.com/dvthg2763/image/upload/v1716397591/activevulse/dev/avatars/male_default_avatar_h6oh4l.png"
+                - id: 4
+                  username: "pedroK"
+                  points: 120
+                  avatar: "https://res.cloudinary.com/dvthg2763/image/upload/v1716397591/activevulse/dev/avatars/male_default_avatar_h6oh4l.png"
+                - id: 1
+                  username: "johnDoe"
+                  points: 100
+                  avatar: "https://res.cloudinary.com/dvthg2763/image/upload/v1716397591/activevulse/dev/avatars/male_default_avatar_h6oh4l.png"
+                - id: 2
+                  username: "Katerine"
+                  points: 50
+                  avatar: "https://res.cloudinary.com/dvthg2763/image/upload/v1716397591/activevulse/dev/avatars/female_default_avatar_pqwebu.jpg"
+
+  401:
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Missing token:
+            value:
+              success: false
+              message: Missing auth token or refresh token
+          Invalid token:
+            value:
+              success: false
+              message: Invalid auth token or refresh token
+          Refresh token expired:
+            value:
+              success: false
+              message: Refresh token has expired
+  404:
+    description: Not Found - No Users Available with more than 0 points
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          No Users Available:
+            value:
+              success: false
+              message: No Users Available with more than 0 points
+  500:
+    description: Internal server error
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Internal server error:
+            value:
+              success: false
+              message: Internal server error

@@ -41,7 +41,11 @@ async function leaderboard(req, res) {
 		});
 
 		if (users.length === 0) {
-			utils.handleResponse(res, utils.http.StatusNotFound, "No Users Available");
+			utils.handleResponse(
+				res,
+				utils.http.StatusNotFound,
+				"No Users Available with more than 0 points",
+			);
 			return;
 		}
 
