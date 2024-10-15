@@ -6,6 +6,7 @@ const getUserBadges = require("../users/getUserBadges.controller");
 // const updateUser = require("./updateUser.controller");
 const assessmentHeartRisk = require("../users/assessmentHeartRisk.controller");
 const extraAssessment = require("../users/extraAssessment.controller");
+const leaderboard = require("../users/leaderboard.controller");
 
 module.exports = {
 	verifyUser,
@@ -16,4 +17,5 @@ module.exports = {
 	// updateUser,
 	assessmentHeartRisk,
 	extraAssessment,
+	leaderboard,
 };

@@ -32,6 +32,9 @@ router.post(
 // User Badges
 router.get("/badges", middlewares.validateTokens, controllers.users.getUserBadges);
 
+// Leaderboard
+router.get("/leaderboard", middlewares.validateTokens, controllers.users.leaderboard);
+
 // Get Logged User data
 router.get(
 	"/:id",
