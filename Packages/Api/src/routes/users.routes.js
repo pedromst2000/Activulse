@@ -30,7 +30,13 @@ router.post(
 );
 
 // User Badges
-router.get("/badges", middlewares.validateTokens, controllers.users.getUserBadges);
+router.get(
+	"/badges",
+	validators.users.getUserBadges(),
+	validators.validateResult,
+	middlewares.validateTokens,
+	controllers.users.getUserBadges,
+);
 
 // Leaderboard
 router.get("/leaderboard", middlewares.validateTokens, controllers.users.leaderboard);

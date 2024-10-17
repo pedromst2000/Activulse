@@ -17,9 +17,27 @@ parameters:
       type: string
     required: true
     description: Authorization token
+  - name: page
+    in: query
+    description: Number of the page to retrieve
+    required: true
+    schema:
+      type: number
+      example: 1
+  - name: limit
+    in: query
+    description: Number of badges per page
+    required: true
+    schema:
+      type: number
+      example: 4
 responses:
   "200":
-    description: Success - **earned** key flag indicates if the badge has been earned by the user or not yet and **total** key indicates the total number of badges earned by the user
+    description: |
+      Success
+      - **earned** key flag indicates if the badge has been earned by the user or not yet.
+      - **total** key indicates the total number of badges available of the current pagination.
+      - **totalEarned** key indicates the total number of badges earned by the user.
     content:
       application/json:
         schema:
@@ -49,7 +67,15 @@ responses:
                         type: string
                       earned:
                         type: boolean
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
                 total:
+                  type: number
+                totalEarned:
                   type: number
         examples:
           Badges retrieved successfully:
@@ -60,94 +86,26 @@ responses:
                 - id: 1
                   title: "Strider Pro"
                   description: "Total 25K Steps"
-                  imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1721142427/activevulse/dev/badges/Strider_Pro_kzzlta.svg"
-                  earned: true
-                - id: 2
-                  title: "Step Explorer"
-                  description: "Total 50K Steps"
                   imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1721140662/activevulse/dev/badges/Step_Explorer_vuepjq.svg"
                   earned: false
+                  createdAt: "2022-03-17T00:00:00.000Z"
+                  updatedAt: "2022-03-17T00:00:00.000Z"
                 - id: 3
                   title: "Step Trekker"
                   description: "Total 100K Steps"
                   imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1721142371/activevulse/dev/badges/Step_Trekker_un6e2l.svg"
                   earned: false
+                  createdAt: "2022-03-17T00:00:00.000Z"
+                  updatedAt: "2022-03-17T00:00:00.000Z"
                 - id: 4
                   title: "Step Warrior"
                   description: "Total 250K Steps"
                   imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1721142410/activevulse/dev/badges/Step_Warrior_gpjzwb.svg"
                   earned: false
-                - id: 5
-                  title: "Step Gladiator"
-                  description: "Total 500K Steps"
-                  imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1721140726/activevulse/dev/badges/Step_Gladiator_w5tjxa.svg"
-                  earned: true
-                - id: 6
-                  title: "Step Olympian"
-                  description: "Total 700K Steps"
-                  imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1721142354/activevulse/dev/badges/Step_Olympian_gpynfj.svg"
-                  earned: false
-                - id: 7
-                  title: "Step Legend"
-                  description: "Total +1M Steps"
-                  imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1721141332/activevulse/dev/badges/Step_Legend_hi6o23.svg"
-                  earned: true
-                - id: 8
-                  title: "Road Runner"
-                  description: "Total 10Km distance"
-                  imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1721140650/activevulse/dev/badges/Road_Runner_vemhsb.svg"
-                  earned: false
-                - id: 9
-                  title: "Distance Voyager"
-                  description: "Total 25Km distance"
-                  imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1721140605/activevulse/dev/badges/Distance_Voyager_w50mrf.svg"
-                  earned: true
-                - id: 10
-                  title: "Distance Diamond"
-                  description: "Total 50Km distance"
-                  imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1721140583/activevulse/dev/badges/Distance_Diamond_nzle3l.svg"
-                  earned: true
-                - id: 11
-                  title: "Distance Master"
-                  description: "Total +100Km distance"
-                  imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1721140594/activevulse/dev/badges/Distance_Master_vvltur.svg"
-                  earned: false
-                - id: 12
-                  title: "Challenge Conqueror"
-                  description: "Finish 5 Challenges"
-                  imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1721140524/activevulse/dev/badges/Challenge_Conqueror_momoui.svg"
-                  earned: false
-                - id: 13
-                  title: "Challenge Champion"
-                  description: "Finish 10 Challenges"
-                  imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1721140514/activevulse/dev/badges/Challenge_Champion_tgvky3.svg"
-                  earned: false
-                - id: 14
-                  title: "Challenge Master"
-                  description: "Finish 20 Challenges"
-                  imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1721140546/activevulse/dev/badges/Challenge_Master_avaojv.svg"
-                  earned: false
-                - id: 15
-                  title: "Challenge Legend"
-                  description: "Finish All Challenges"
-                  imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1721140535/activevulse/dev/badges/Challenge_Legend_chg3ht.svg"
-                  earned: true
-                - id: 16
-                  title: "Marathon Conqueror"
-                  description: "Finish 1 Marathon Challenge"
-                  imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1721140627/activevulse/dev/badges/Marathon_Conqueror_lfksc9.svg"
-                  earned: false
-                - id: 17
-                  title: "Marathon Champion"
-                  description: "Finish 2 Marathon Challenges"
-                  imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1721140616/activevulse/dev/badges/Marathon_Champion_zjlgrb.svg"
-                  earned: false
-                - id: 18
-                  title: "Marathon Legend"
-                  description: "Finish All Marathon Challenges"
-                  imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1721140639/activevulse/dev/badges/Marathon_Legend_yencof.svg"
-                  earned: false
-              total: 6
+                  createdAt: "2022-03-17T00:00:00.000Z"
+                  updatedAt: "2022-03-17T00:00:00.000Z"
+              total: 4
+              totalEarned: 6
   "401":
     description: Unauthorized
     content:
@@ -172,6 +130,22 @@ responses:
             value:
               success: false
               message: Refresh token has expired
+  "404":
+    description: Not found - When there is no badges to display in the current pagination !
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Badges not found:
+            value:
+              success: false
+              message: No badges found !
   "500":
     description: Internal server error
     content:
