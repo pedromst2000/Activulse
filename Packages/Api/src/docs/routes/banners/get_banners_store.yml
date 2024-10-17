@@ -43,6 +43,12 @@ responses:
                         type: number
                       imageUrl:
                         type: string
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
         examples:
           Success - Banners retrieved successfully:
             value:
@@ -53,12 +59,18 @@ responses:
                   - id: 2
                     price: 350
                     imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399556/activevulse/dev/banners/image_141_v6nv2i.png"
+                    createdAt: "2021-09-20T14:00:00.000Z"
+                    updatedAt: "2021-09-20T14:00:00.000Z"
                   - id: 5
                     price: 1200
                     imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399557/activevulse/dev/banners/image_144_s70roa.png"
+                    createdAt: "2021-09-20T14:00:00.000Z"
+                    updatedAt: "2021-09-20T14:00:00.000Z"
                   - id: 6
                     price: 1600
                     imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399557/activevulse/dev/banners/image_145_vmpsx2.png"
+                    createdAt: "2021-09-20T14:00:00.000Z"
+                    updatedAt: "2021-09-20T14:00:00.000Z"
   401:
     description: Unauthorized
     content:

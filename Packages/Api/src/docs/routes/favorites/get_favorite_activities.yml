@@ -26,7 +26,7 @@ parameters:
       example: 1
   - name: limit
     in: query
-    description: Number of favorite activities requests per page
+    description: Number of favorite activities per page
     required: true
     schema:
       type: number
@@ -65,6 +65,12 @@ responses:
                         type: string
                       imageUrl:
                         type: string
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
                 total:
                   type: number
         examples:
@@ -81,6 +87,8 @@ responses:
                     category: "Muscles"
                     tag: "Arms"
                     imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399528/activevulse/dev/activities/premium_Arms_Workout_2_i9pc9e.png"
+                    createdAt: "2021-09-01T14:00:00.000Z"
+                    updatedAt: "2021-09-01T14:00:00.000Z"
                   - id: 9
                     isPremium: false
                     title: "Sunset Serenade Skip"
@@ -88,6 +96,8 @@ responses:
                     category: "Cardio"
                     tag: "Jogging"
                     imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399537/activevulse/dev/activities/Sunset_Serenade_Skip_qjvtzu.png"
+                    createdAt: "2021-09-01T14:00:00.000Z"
+                    updatedAt: "2021-09-01T14:00:00.000Z"
                 total: 2
   400:
     description: Bad Request

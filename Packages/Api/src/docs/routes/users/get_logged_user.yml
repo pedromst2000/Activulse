@@ -145,9 +145,11 @@ responses:
                         example: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399555/activevulse/dev/banners/banner_default_xb8m7l.jpg"
                 createdAt:
                   type: string
+                  format: date-time
                   example: "2024-08-13T16:23:19.000Z"
                 updatedAt:
                   type: string
+                  format: date-time
                   example: "2024-08-13T16:23:19.000Z"
   "401":
     description: Unauthorized

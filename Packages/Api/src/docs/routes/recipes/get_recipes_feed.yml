@@ -26,7 +26,7 @@ parameters:
       example: 1
   - name: limit
     in: query
-    description: Number of recipes requests per page
+    description: Number of recipes per page
     required: true
     schema:
       type: number
@@ -54,7 +54,7 @@ parameters:
       example: "Hearty Bean"
 responses:
   200:
-    description: Success
+    description: Success - the **total** key indicates the total number of recipes of the current pagination
     content:
       application/json:
         schema:
@@ -88,6 +88,12 @@ responses:
                         type: string
                       imageUrl:
                         type: string
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
                 total:
                   type: number
         examples:
@@ -104,6 +110,8 @@ responses:
                     category: "Soups"
                     diet: "Vegan"
                     imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399644/activevulse/dev/recipes/Creamy_Mushroom_and_Almond_Soup_neqjzn.png"
+                    createdAt: "2021-09-20T15:00:00.000Z"
+                    updatedAt: "2021-09-20T15:00:00.000Z"
                   - id: 35
                     isPremium: false
                     title: "Butternut Squash and Sage Risotto"
@@ -111,6 +119,8 @@ responses:
                     category: "Main Dishes"
                     diet: "Vegan"
                     imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399641/activevulse/dev/recipes/Butternut_Squash_and_Sage_Risotto_hyuxfp.png"
+                    createdAt: "2021-09-20T15:00:00.000Z"
+                    updatedAt: "2021-09-20T15:00:00.000Z"
                   - id: 32
                     isPremium: false
                     title: "Hearty Bean and Vegetable Soup"
@@ -118,6 +128,8 @@ responses:
                     category: "Soups"
                     diet: "Vegan"
                     imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399649/activevulse/dev/recipes/Hearty_Bean_and_Vegetable_Soup_uczfsy.png"
+                    createdAt: "2021-09-20T15:00:00.000Z"
+                    updatedAt: "2021-09-20T15:00:00.000Z"
                   - id: 36
                     isPremium: false
                     title: "Sweet Potato and Black Bean Enchiladas"
@@ -125,6 +137,8 @@ responses:
                     category: "Main Dishes"
                     diet: "Vegan"
                     imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399675/activevulse/dev/recipes/Sweet_Potato_and_Black_Bean_Enchiladas_cm2cqa.png"
+                    createdAt: "2021-09-20T15:00:00.000Z"
+                    updatedAt: "2021-09-20T15:00:00.000Z"
                   - id: 33
                     isPremium: false
                     title: "Creamy Seitan and Vegetable Chowder"
@@ -132,6 +146,8 @@ responses:
                     category: "Soups"
                     diet: "Vegan"
                     imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399644/activevulse/dev/recipes/Creamy_Seitan_and_Vegetable_Chowder_fe4tij.png"
+                    createdAt: "2021-09-20T15:00:00.000Z"
+                    updatedAt: "2021-09-20T15:00:00.000Z"
                   - id: 34
                     isPremium: false
                     title: "Nutty Almond and Flaxseed Soup"
@@ -139,6 +155,8 @@ responses:
                     category: "Soups"
                     diet: "Vegan"
                     imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399656/activevulse/dev/recipes/Nutty_Almond_and_Flaxseed_Soup_heytuy.png"
+                    createdAt: "2021-09-20T15:00:00.000Z"
+                    updatedAt: "2021-09-20T15:00:00.000Z"
                 total: 6
           Success - Premium Recipe(s):
             value:
@@ -153,6 +171,8 @@ responses:
                     category: "Desserts"
                     diet: "Vegan"
                     imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399664/activevulse/dev/recipes/premium_VEGAN_CARAMEL_CHEESECAKE_a7rw6y.png"
+                    createdAt: "2021-09-20T15:00:00.000Z"
+                    updatedAt: "2021-09-20T15:00:00.000Z"
                 total: 1
   400:
     description: Bad Request

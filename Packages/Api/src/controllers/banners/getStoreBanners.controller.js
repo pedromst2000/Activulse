@@ -2,7 +2,7 @@ const utils = require("../../utils");
 const db = require("../../db");
 const { Op } = require("sequelize");
 
-const BANNER_ATTRIBUTES = ["banner_ID", "price"];
+const BANNER_ATTRIBUTES = ["banner_ID", "price", "createdAt", "updatedAt"];
 
 /**
  * Get the Banners from the store.
@@ -50,6 +50,8 @@ async function getStoreBanners(req, res) {
 					id: banner.banner_ID,
 					price: banner.price,
 					imageUrl: banner.asset.provider_image_url,
+					createdAt: banner.createdAt,
+					updatedAt: banner.updatedAt,
 				};
 			});
 

@@ -11,6 +11,8 @@ const RECIPE_ATTRIBUTES = [
 	"isPremium",
 	"category_id",
 	"diet_id",
+	"createdAt",
+	"updatedAt",
 ];
 
 /**
@@ -28,10 +30,9 @@ const RECIPE_ATTRIBUTES = [
 
 async function getRecipesFav(req, res) {
 	try {
-		/** @type {QueryOptions} */
-
 		const loggedUser = req.userId;
 
+		/** @type {QueryOptions} */
 		let {
 			page = config.pagination.favorites.defaultPage,
 			limit = config.pagination.favorites.defaultLimit,
@@ -107,6 +108,8 @@ async function getRecipesFav(req, res) {
 									category: recipe.recipe_category.category,
 									diet: recipe.diet.diet_name,
 									imageUrl: recipe.asset.provider_image_url,
+									createdAt: recipe.createdAt,
+									updatedAt: recipe.updatedAt,
 								}
 							: {
 									id: recipe.recipe_ID,
@@ -116,6 +119,8 @@ async function getRecipesFav(req, res) {
 									category: recipe.recipe_category.category,
 									diet: recipe.diet.diet_name,
 									imageUrl: recipe.asset.provider_image_url,
+									createdAt: recipe.createdAt,
+									updatedAt: recipe.updatedAt,
 								};
 					}),
 					total: resultFavRecipes.length,

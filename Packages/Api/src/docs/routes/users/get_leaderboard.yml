@@ -47,6 +47,12 @@ responses:
                         type: number
                       avatar:
                         type: string
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
         examples:
           Leaderboard TOP 5 retrieved successfully:
             value:
@@ -57,23 +63,32 @@ responses:
                   username: "Avsa"
                   points: 730
                   avatar: "https://res.cloudinary.com/dvthg2763/image/upload/v1716397591/activevulse/dev/avatars/female_default_avatar_pqwebu.jpg"
+                  createdAt: "2022-03-01T00:00:00.000Z"
+                  updatedAt: "2022-03-01T00:00:00.000Z"
                 - id: 5
                   username: "pedromst"
                   points: 350
                   avatar: "https://res.cloudinary.com/dvthg2763/image/upload/v1716397591/activevulse/dev/avatars/male_default_avatar_h6oh4l.png"
+                  createdAt: "2022-03-01T00:00:00.000Z"
+                  updatedAt: "2022-03-01T00:00:00.000Z"
                 - id: 4
                   username: "pedroK"
                   points: 120
                   avatar: "https://res.cloudinary.com/dvthg2763/image/upload/v1716397591/activevulse/dev/avatars/male_default_avatar_h6oh4l.png"
+                  createdAt: "2022-03-01T00:00:00.000Z"
+                  updatedAt: "2022-03-01T00:00:00.000Z"
                 - id: 1
                   username: "johnDoe"
                   points: 100
                   avatar: "https://res.cloudinary.com/dvthg2763/image/upload/v1716397591/activevulse/dev/avatars/male_default_avatar_h6oh4l.png"
+                  createdAt: "2022-03-01T00:00:00.000Z"
+                  updatedAt: "2022-03-01T00:00:00.000Z"
                 - id: 2
                   username: "Katerine"
                   points: 50
                   avatar: "https://res.cloudinary.com/dvthg2763/image/upload/v1716397591/activevulse/dev/avatars/female_default_avatar_pqwebu.jpg"
-
+                  createdAt: "2022-03-01T00:00:00.000Z"
+                  updatedAt: "2022-03-01T00:00:00.000Z"
   401:
     description: Unauthorized
     content:

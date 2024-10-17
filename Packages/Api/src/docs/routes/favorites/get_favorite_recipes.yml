@@ -26,7 +26,7 @@ parameters:
       example: 1
   - name: limit
     in: query
-    description: Number of favorite recipes requests per page
+    description: Number of favorite recipes per page
     required: true
     schema:
       type: number
@@ -67,6 +67,12 @@ responses:
                         type: string
                       imageUrl:
                         type: string
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
                 total:
                   type: number
         examples:
@@ -83,6 +89,8 @@ responses:
                     category: "Main Dishes"
                     diet: "Vegan"
                     imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399641/activevulse/dev/recipes/Butternut_Squash_and_Sage_Risotto_hyuxfp.png"
+                    createdAt: "2021-09-01T12:00:00.000Z"
+                    updatedAt: "2021-09-01T12:00:00.000Z"
                   - id: 49
                     isPremium: true
                     title: "Vegan Caramel Cheesecake"
@@ -90,6 +98,8 @@ responses:
                     category: "Desserts"
                     diet: "Vegan"
                     imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399664/activevulse/dev/recipes/premium_VEGAN_CARAMEL_CHEESECAKE_a7rw6y.png"
+                    createdAt: "2021-09-01T12:00:00.000Z"
+                    updatedAt: "2021-09-01T12:00:00.000Z"
                 total: 2
   400:
     description: Bad Request

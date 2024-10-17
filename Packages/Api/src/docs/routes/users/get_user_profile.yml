@@ -93,9 +93,11 @@ responses:
                         example: "https://res.cloudinary.com/dvthg2763/image/upload/v1721140650/activevulse/dev/badges/Road_Runner_vemhsb.svg"
                 createdAt:
                   type: string
+                  format: date-time
                   example: "2024-08-13T16:23:19.000Z"
                 updatedAt:
                   type: string
+                  format: date-time
                   example: "2024-08-13T16:23:19.000Z"
   "400":
     description: Bad Request

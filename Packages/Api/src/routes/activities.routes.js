@@ -5,15 +5,6 @@ const middlewares = require("../middlewares");
 
 const router = Router();
 
-// Get One Activity Details
-router.get(
-	"/:id",
-	validators.activities.activityID(),
-	validators.validateResult,
-	middlewares.validateTokens,
-	controllers.activities.activityDetails,
-);
-
 // Get Activities Feed
 router.get(
 	"/",
@@ -21,6 +12,24 @@ router.get(
 	validators.validateResult,
 	middlewares.validateTokens,
 	controllers.activities.getActivities,
+);
+
+// Get Store Activities
+router.get(
+	"/store",
+	validators.activities.getActivities(),
+	validators.validateResult,
+	middlewares.validateTokens,
+	controllers.activities.getStoreActivities,
+);
+
+// Get One Activity Details
+router.get(
+	"/:id",
+	validators.activities.activityID(),
+	validators.validateResult,
+	middlewares.validateTokens,
+	controllers.activities.activityDetails,
 );
 
 // Add Activity to Favorites

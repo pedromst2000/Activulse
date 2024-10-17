@@ -11,6 +11,8 @@ const ACTIVITY_ATTRIBUTES = [
 	"duration",
 	"isPremium",
 	"category_id",
+	"createdAt",
+	"updatedAt",
 ];
 
 /**
@@ -78,13 +80,13 @@ async function GetQueryOptions(options) {
  */
 async function getActivities(req, res) {
 	try {
-		/** @type {QueryOptions} */
-
 		const loggedUser = req.userId;
 
+		/** @type {QueryOptions} */
+
 		let {
-			page = config.pagination.recipes.feed.defaultPage,
-			limit = config.pagination.recipes.feed.defaultLimit,
+			page = config.pagination.activities.feed.defaultPage,
+			limit = config.pagination.activities.feed.defaultLimit,
 			intensity = "",
 			category,
 		} = req.query;
@@ -220,6 +222,8 @@ async function getActivities(req, res) {
 								? "Moderate III"
 								: "Vigorous",
 			imageUrl: parsedActivity.asset.provider_image_url,
+			createdAt: parsedActivity.createdAt,
+			updateAt: parsedActivity.updatedAt,
 		}));
 
 		const PREMIUM_ACTIVITIES = uniqueUserPremiumActivities
@@ -252,6 +256,8 @@ async function getActivities(req, res) {
 							? "Moderate"
 							: "Vigorous",
 				imageUrl: parsedActivity.asset.provider_image_url,
+				createdAt: parsedActivity.createdAt,
+				updateAt: parsedActivity.updatedAt,
 			}));
 
 		if (category === "Premium") {
@@ -270,10 +276,15 @@ async function getActivities(req, res) {
 			}
 		}
 
-		utils.handleResponse(res, utils.http.StatusOK, "Activities retrieved successfully", {
-			activities: category === "Premium" ? PREMIUM_ACTIVITIES : ALL_ACTIVITIES,
-			total: category === "Premium" ? PREMIUM_ACTIVITIES.length : ALL_ACTIVITIES.length,
-		});
+		return utils.handleResponse(
+			res,
+			utils.http.StatusOK,
+			"Activities retrieved successfully",
+			{
+				activities: category === "Premium" ? PREMIUM_ACTIVITIES : ALL_ACTIVITIES,
+				total: category === "Premium" ? PREMIUM_ACTIVITIES.length : ALL_ACTIVITIES.length,
+			},
+		);
 	} catch (error) {
 		utils.handleError(res, error, __filename);
 	}

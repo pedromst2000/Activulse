@@ -11,6 +11,8 @@ const RECIPE_ATTRIBUTES = [
 	"isPremium",
 	"category_id",
 	"diet_id",
+	"createdAt",
+	"updatedAt",
 ];
 
 /**
@@ -88,8 +90,6 @@ async function GetQueryOptions(options) {
  */
 async function getRecipes(req, res) {
 	try {
-		/** @type {QueryOptions} */
-
 		const loggedUser = req.userId;
 
 		const userDiet = await db.mysql.User.findOne({
@@ -103,6 +103,8 @@ async function getRecipes(req, res) {
 			},
 			required: false,
 		});
+
+		/** @type {QueryOptions} */
 
 		let {
 			page = config.pagination.recipes.feed.defaultPage,
@@ -256,6 +258,8 @@ async function getRecipes(req, res) {
 				category: parsedRecipe.recipe_category.category,
 				diet: parsedRecipe.diet.diet_name,
 				imageUrl: parsedRecipe.asset.provider_image_url,
+				createdAt: parsedRecipe.createdAt,
+				updateAt: parsedRecipe.updatedAt,
 			}));
 
 		if (category === "Premium") {
@@ -285,6 +289,8 @@ async function getRecipes(req, res) {
 								category: parsedRecipe.recipe_category.category,
 								diet: parsedRecipe.diet.diet_name,
 								imageUrl: parsedRecipe.asset.provider_image_url,
+								createdAt: parsedRecipe.createdAt,
+								updateAt: parsedRecipe.updatedAt,
 							};
 						}),
 			total: category === "Premium" ? PREMIUM_RECIPES.length : resultRecipes.length,

@@ -11,6 +11,8 @@ const ACTIVITY_ATTRIBUTES = [
 	"duration",
 	"isPremium",
 	"category_id",
+	"createdAt",
+	"updatedAt",
 ];
 
 /**
@@ -28,10 +30,9 @@ const ACTIVITY_ATTRIBUTES = [
 
 async function getActivitiesFav(req, res) {
 	try {
-		/** @type {QueryOptions} */
-
 		const loggedUser = req.userId;
 
+		/** @type {QueryOptions} */
 		let {
 			page = config.pagination.favorites.defaultPage,
 			limit = config.pagination.favorites.defaultLimit,
@@ -91,6 +92,8 @@ async function getActivitiesFav(req, res) {
 			);
 			return;
 		} else {
+			console.log(JSON.stringify(resultFavActivities, null, 2));
+
 			utils.handleResponse(
 				res,
 				utils.http.StatusOK,
@@ -115,6 +118,8 @@ async function getActivitiesFav(req, res) {
 							category: activity.activity_category.category,
 							tag: activity.tag,
 							imageUrl: activity.asset.provider_image_url,
+							createdAt: activity.createdAt,
+							updatedAt: activity.updatedAt,
 						};
 					}),
 					total: resultFavActivities.length,
