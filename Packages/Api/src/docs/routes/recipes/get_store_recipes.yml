@@ -1,7 +1,7 @@
-summary: Get the store activities feed
-description: Get the store activities feed by category
+summary: Get the store recipes feed
+description: Get the store recipes feed by category
 tags:
-  - "Activities"
+  - "Recipes"
 security:
   - bearerAuth: []
 parameters:
@@ -26,21 +26,21 @@ parameters:
       example: 1
   - name: limit
     in: query
-    description: Number of store activities per page
+    description: Number of store recipes per page
     required: true
     schema:
       type: number
       example: 3
   - name: category
     in: query
-    description: category of the activity ( All, Cardio, Yoga, Muscles )
+    description: category of the recipe (All, Soups, Main Dishes, Salads, Desserts)
     required: false
     schema:
       type: string
-      example: "Cardio"
+      example: "Soups"
 responses:
   200:
-    description: Success - the **total** key indicates the total number of store activities of the current pagination
+    description: Success - the **total** key indicates the total number of store recipes of the current pagination
     content:
       application/json:
         schema:
@@ -64,11 +64,11 @@ responses:
                         type: string
                       videoTime:
                         type: number
-                      intensity:
-                        type: string
                       price:
                         type: number
                       category:
+                        type: string
+                      diet:
                         type: string
                       imageUrl:
                         type: string
@@ -84,37 +84,34 @@ responses:
           Success:
             value:
               success: true
-              message: "Store Activities retrieved successfully"
+              message: "Store Recipes retrieved successfully"
               data:
-                activities:
-                  - id: 34
-                    title: "Hatha Yoga Practice I"
-                    videoTime: 19
-                    intensity: "Light"
-                    price: 7250
-                    tag: "Hatha Yoga"
-                    category: "Yoga"
-                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399529/activevulse/dev/activities/premium_Hatha_Yoga_Practice__1_o2ti8w.png"
+                recipes:
+                  - id: 47
+                    title: "Vegan Potato Leek Soup"
+                    videoTime: 5
+                    price: 300
+                    category: "Soups"
+                    diet: "Vegan"
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399665/activevulse/dev/recipes/premium_VEGAN_POTATO_LEEK_SOUP_ugmtkw.png"
                     createdAt: "2024-10-10T17:07:45.000Z"
                     updateAt: "2024-10-10T17:07:45.000Z"
-                  - id: 37
-                    title: "Yoga Begginers II"
-                    videoTime: 11
-                    intensity: "Light"
-                    price: 6200
-                    tag: "Flexibility Yoga"
-                    category: "Yoga"
-                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399532/activevulse/dev/activities/premium_Yoga_Begginers_2_bgbuk2.png"
+                  - id: 48
+                    title: "Vegetarian Chili"
+                    videoTime: 5
+                    price: 350
+                    category: "Main Dishes"
+                    diet: "Vegan"
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399666/activevulse/dev/recipes/premium_VEGETARIAN_CHILI_ttjkqq.png"
                     createdAt: "2024-10-10T17:07:45.000Z"
                     updateAt: "2024-10-10T17:07:45.000Z"
-                  - id: 38
-                    title: "Chest Workout I"
-                    videoTime: 10
-                    intensity: "Moderate I"
-                    price: 2250
-                    tag: "Chest"
-                    category: "Muscles"
-                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399528/activevulse/dev/activities/premium_Chest_Workout_1_m1cdrk.png"
+                  - id: 49
+                    title: "Vegan Caramel Cheesecake"
+                    videoTime: 5
+                    price: 5250
+                    category: "Desserts"
+                    diet: "Vegan"
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399664/activevulse/dev/recipes/premium_VEGAN_CARAMEL_CHEESECAKE_a7rw6y.png"
                     createdAt: "2024-10-10T17:07:45.000Z"
                     updateAt: "2024-10-10T17:07:45.000Z"
                 total: 3
@@ -193,7 +190,7 @@ responses:
               data:
                 - type: "field"
                   value: "Cardiooasd"
-                  msg: "Category must be a valid category: All, Cardio, Yoga, Muscles"
+                  msg: "Category must be a valid category: All, Soups, Main Dishes, Salads, Desserts"
                   path: "category"
                   location: "query"
   401:
@@ -232,10 +229,10 @@ responses:
             message:
               type: string
         examples:
-          No Store Activities Found:
+          No Store Recipes Found:
             value:
               success: false
-              message: No Store Activities Found
+              message: No Store Recipes Found
   500:
     description: Internal Server Error
     content:

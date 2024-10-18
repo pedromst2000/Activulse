@@ -9,6 +9,10 @@ const getRecipesFeed = YAML.parse(
 	fs.readFileSync("./src/docs/routes/recipes/get_recipes_feed.yml", "utf8"),
 );
 
+const getStoreRecipes = YAML.parse(
+	fs.readFileSync("./src/docs/routes/recipes/get_store_recipes.yml", "utf8"),
+);
+
 const postAddRecipeFavorites = YAML.parse(
 	fs.readFileSync("./src/docs/routes/recipes/post_add_recipe_favorites.yml", "utf8"),
 );
@@ -20,6 +24,7 @@ const deleteRecipeFavorites = YAML.parse(
 module.exports = {
 	getRecipeDetails,
 	getRecipesFeed,
+	getStoreRecipes,
 	postAddRecipeFavorites,
 	deleteRecipeFavorites,
 };

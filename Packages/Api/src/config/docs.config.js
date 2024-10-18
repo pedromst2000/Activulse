@@ -98,6 +98,10 @@ const swaggerDefinition = {
 			get: routeDocs.recipes.getRecipesFeed,
 		},
 
+		"/recipes/store": {
+			get: routeDocs.recipes.getStoreRecipes,
+		},
+
 		"/recipes/{id}/favorites": {
 			post: routeDocs.recipes.postAddRecipeFavorites,
 			delete: routeDocs.recipes.deleteRecipeFavorites,
