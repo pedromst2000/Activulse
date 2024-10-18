@@ -1,0 +1,176 @@
+summary: Buy one premium recipe
+description: Buy one premium recipe
+tags:
+  - "Recipes"
+security:
+  - bearerAuth: []
+parameters:
+  - in: header
+    name: x-auth-token
+    schema:
+      type: string
+    required: true
+    description: Authorization token
+  - in: header
+    name: x-refresh-token
+    schema:
+      type: string
+    required: true
+    description: Authorization token
+  - name: id
+    in: path
+    description: ID of the recipe to buy
+    required: true
+    schema:
+      type: number
+      example: 49
+responses:
+  201:
+    description: Created
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Recipe bought successfully:
+            value:
+              success: true
+              message: Premium Recipe bought successfully !
+  400:
+    description: Bad Request
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+            data:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  value:
+                    oneOf:
+                      - type: string
+                      - type: integer
+                      - type: boolean
+                  msg:
+                    type: string
+                  path:
+                    type: string
+                  location:
+                    type: string
+        examples:
+          Invalid Recipe ID:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: "asd"
+                  msg: "Invalid recipe id"
+                  path: "id"
+                  location: "params"
+  401:
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Missing token:
+            value:
+              success: false
+              message: Missing auth token or refresh token
+          Invalid token:
+            value:
+              success: false
+              message: Invalid auth token or refresh token
+          Refresh token expired:
+            value:
+              success: false
+              message: Refresh token has expired
+
+  403:
+    description: Forbidden
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Not enough points:
+            value:
+              success: false
+              message: you do not have enough coins to buy this recipe
+          No Match the user diet:
+            value:
+              success: false
+              message: you are not allowed to buy one recipe that does not match your diet
+  404:
+    description: Recipe not found
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Premium Recipe not found:
+            value:
+              success: false
+              message: Premium Recipe not found !
+  409:
+    description: Conflict
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Recipe already bought:
+            value:
+              success: false
+              message: you have already bought this recipe !
+  500:
+    description: Internal server error
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Internal server error:
+            value:
+              success: false
+              message: Internal server error
