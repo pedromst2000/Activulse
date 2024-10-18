@@ -113,6 +113,10 @@ const swaggerDefinition = {
 			get: routeDocs.activities.getActivitiesFeed,
 		},
 
+		"/activities/store": {
+			get: routeDocs.activities.getStoreActivities,
+		},
+
 		"/activities/{id}/favorites": {
 			post: routeDocs.activities.postAddActivityFav,
 			delete: routeDocs.activities.deleteActivityFav,

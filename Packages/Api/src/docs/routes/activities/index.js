@@ -9,6 +9,10 @@ const getActivitiesFeed = YAML.parse(
 	fs.readFileSync("./src/docs/routes/activities/get_activities_feed.yml", "utf8"),
 );
 
+const getStoreActivities = YAML.parse(
+	fs.readFileSync("./src/docs/routes/activities/get_store_activities.yml", "utf8"),
+);
+
 const postAddActivityFav = YAML.parse(
 	fs.readFileSync("./src/docs/routes/activities/post_add_activity_favorites.yml", "utf8"),
 );
@@ -20,6 +24,7 @@ const deleteActivityFav = YAML.parse(
 module.exports = {
 	getActivitiesDetails,
 	getActivitiesFeed,
+	getStoreActivities,
 	postAddActivityFav,
 	deleteActivityFav,
 };

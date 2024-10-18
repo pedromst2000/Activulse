@@ -1,0 +1,254 @@
+summary: Get the store activities feed
+description: Get the store activities feed by category
+tags:
+  - "Activities"
+security:
+  - bearerAuth: []
+parameters:
+  - in: header
+    name: x-auth-token
+    schema:
+      type: string
+    required: true
+    description: Authorization token
+  - in: header
+    name: x-refresh-token
+    schema:
+      type: string
+    required: true
+    description: Authorization token
+  - name: page
+    in: query
+    description: Number of the page to retrieve
+    required: true
+    schema:
+      type: number
+      example: 1
+  - name: limit
+    in: query
+    description: Number of store activities per page
+    required: true
+    schema:
+      type: number
+      example: 3
+  - name: category
+    in: query
+    description: category of the activity (All, Cardio, Yoga, Muscles, Premium)
+    required: false
+    schema:
+      type: string
+      example: "Cardio"
+responses:
+  200:
+    description: Success - the **total** key indicates the total number of store activities of the current pagination
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+            data:
+              type: object
+              properties:
+                activities:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      title:
+                        type: string
+                      videoTime:
+                        type: number
+                      intensity:
+                        type: string
+                      price:
+                        type: number
+                      category:
+                        type: string
+                      imageUrl:
+                        type: string
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                total:
+                  type: number
+        examples:
+          Success:
+            value:
+              success: true
+              message: "Store Activities retrieved successfully"
+              data:
+                activities:
+                  - id: 34
+                    title: "Hatha Yoga Practice I"
+                    videoTime: 19
+                    intensity: "Light"
+                    price: 7250
+                    tag: "Hatha Yoga"
+                    category: "Yoga"
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399529/activevulse/dev/activities/premium_Hatha_Yoga_Practice__1_o2ti8w.png"
+                    createdAt: "2024-10-10T17:07:45.000Z"
+                    updateAt: "2024-10-10T17:07:45.000Z"
+                  - id: 37
+                    title: "Yoga Begginers II"
+                    videoTime: 11
+                    intensity: "Light"
+                    price: 6200
+                    tag: "Flexibility Yoga"
+                    category: "Yoga"
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399532/activevulse/dev/activities/premium_Yoga_Begginers_2_bgbuk2.png"
+                    createdAt: "2024-10-10T17:07:45.000Z"
+                    updateAt: "2024-10-10T17:07:45.000Z"
+                  - id: 38
+                    title: "Chest Workout I"
+                    videoTime: 10
+                    intensity: "Moderate I"
+                    price: 2250
+                    tag: "Chest"
+                    category: "Muscles"
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399528/activevulse/dev/activities/premium_Chest_Workout_1_m1cdrk.png"
+                    createdAt: "2024-10-10T17:07:45.000Z"
+                    updateAt: "2024-10-10T17:07:45.000Z"
+                total: 3
+  400:
+    description: Bad Request
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+            data:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  value:
+                    oneOf:
+                      - type: string
+                      - type: integer
+                      - type: boolean
+                  msg:
+                    type: string
+                  path:
+                    type: string
+                  location:
+                    type: string
+        examples:
+          Page Query Parameter Missing:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  msg: "Page Query is required"
+                  path: "page"
+                  location: "query"
+          Invalid Page Query Parameter:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: -1
+                  msg: "Page Query must be a positive number"
+                  path: "page"
+                  location: "query"
+          Limit Query Parameter Missing:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  msg: "Limit Query is required"
+                  path: "limit"
+                  location: "query"
+          Invalid Limit Query Parameter:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: -1
+                  msg: "Limit Query must be a positive number"
+                  path: "limit"
+                  location: "query"
+          Category Query Parameter Invalid:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: "Cardiooasd"
+                  msg: "Category must be a valid category: All, Cardio, Yoga, Muscles, or Premium"
+                  path: "category"
+                  location: "query"
+  401:
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Missing token:
+            value:
+              success: false
+              message: Missing auth token or refresh token
+          Invalid token:
+            value:
+              success: false
+              message: Invalid auth token or refresh token
+          Refresh token expired:
+            value:
+              success: false
+              message: Refresh token has expired
+  404:
+    description: Not Found
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          No Activities Found:
+            value:
+              success: false
+              message: No Activities Found
+  500:
+    description: Internal Server Error
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Internal Server Error:
+            value:
+              success: false
+              message: Internal Server Error

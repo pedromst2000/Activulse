@@ -182,7 +182,16 @@ async function getStoreActivities(req, res) {
 						id: parsedActivity.activity_ID,
 						title: parsedActivity.title,
 						videoTime: parsedActivity.video_time,
-						intensity: parsedActivity.intensity,
+						intensity:
+							parsedActivity.intensity === 1
+								? "Light"
+								: parsedActivity.intensity === 2
+									? "Moderate I"
+									: parsedActivity.intensity === 3
+										? "Moderate II"
+										: parsedActivity.intensity === 4
+											? "Moderate III"
+											: "Vigorous",
 						price: parsedActivity.price,
 						tag: parsedActivity.tag,
 						category: parsedActivity.activity_category.category,
