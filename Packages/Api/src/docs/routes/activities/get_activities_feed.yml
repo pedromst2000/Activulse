@@ -101,7 +101,7 @@ responses:
                     isPremium: false
                     duration: 45,
                     category: "Cardio"
-                    intensity: "Moderate"
+                    intensity: "Moderate II"
                     imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399535/activevulse/dev/activities/Sunset_Jogging_lth1ly.png"
                     createdAt: "2021-09-01T00:00:00.000Z"
                     updatedAt: "2021-09-01T00:00:00.000Z"
@@ -128,7 +128,7 @@ responses:
                     isPremium: false
                     duration: 30,
                     category: "Cardio"
-                    intensity: "Moderate"
+                    intensity: "Moderate I"
                     imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399524/activevulse/dev/activities/Morning_Bliss_Run_th4w09.png"
                     createdAt: "2021-09-01T00:00:00.000Z"
                     updatedAt: "2021-09-01T00:00:00.000Z"
@@ -137,7 +137,7 @@ responses:
                     isPremium: false
                     duration: 45,
                     category: "Cardio"
-                    intensity: "Moderate"
+                    intensity: "Moderate III"
                     imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399517/activevulse/dev/activities/Beachfront_Promenade_rcgvrb.png"
                     createdAt: "2021-09-01T00:00:00.000Z"
                     updatedAt: "2021-09-01T00:00:00.000Z"
@@ -171,7 +171,7 @@ responses:
                     isPremium: true
                     videoTime: 10
                     category: "Muscles"
-                    intensity: "Moderate"
+                    intensity: "Moderate III"
                     imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399528/activevulse/dev/activities/premium_Chest_Workout_1_m1cdrk.png"
                     createdAt: "2021-09-01T00:00:00.000Z"
                     updatedAt: "2021-09-01T00:00:00.000Z"

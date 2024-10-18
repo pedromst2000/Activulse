@@ -250,11 +250,13 @@ async function getActivities(req, res) {
 				intensity:
 					parsedActivity.intensity === 1
 						? "Light"
-						: parsedActivity.intensity === 2 ||
-							  parsedActivity.intensity === 3 ||
-							  parsedActivity.intensity === 4
-							? "Moderate"
-							: "Vigorous",
+						: parsedActivity.intensity === 2
+							? "Moderate I"
+							: parsedActivity.intensity === 3
+								? "Moderate II"
+								: parsedActivity.intensity === 4
+									? "Moderate III"
+									: "Vigorous",
 				imageUrl: parsedActivity.asset.provider_image_url,
 				createdAt: parsedActivity.createdAt,
 				updateAt: parsedActivity.updatedAt,
