@@ -15,6 +15,10 @@ const utils = require("../../utils");
 
 async function deleteRecipeFav(req, res) {
 	try {
+		/**
+		 * @type {deleteRecipeFavParams}
+		 * */
+
 		const { id } = req.params;
 		const loggedUserId = req.userId;
 

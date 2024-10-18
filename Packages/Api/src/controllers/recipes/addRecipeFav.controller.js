@@ -15,6 +15,10 @@ const utils = require("../../utils");
 
 async function addRecipeFav(req, res) {
 	try {
+		/**
+		 * @type {addRecipeFavParams}
+		 * */
+
 		const { id } = req.params;
 		const loggedUserId = req.userId;
 

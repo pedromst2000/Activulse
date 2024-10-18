@@ -16,6 +16,10 @@ const { Op } = require("sequelize");
 
 async function recipeDetails(req, res) {
 	try {
+		/**
+		 * @type {recipeDetailsParams}
+		 */
+
 		const { id } = req.params;
 		const loggedUserId = req.userId;
 

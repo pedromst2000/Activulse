@@ -15,6 +15,10 @@ const utils = require("../../utils");
 
 async function addActivityFav(req, res) {
 	try {
+		/**
+		 * @type {addActivityFavParams}
+		 */
+
 		const { id } = req.params;
 		const loggedUserId = req.userId;
 

@@ -41,6 +41,15 @@ router.post(
 	controllers.recipes.addRecipeFav,
 );
 
+// Buy Recipe
+router.post(
+	"/:id/buy",
+	validators.recipes.recipeID(),
+	validators.validateResult,
+	middlewares.validateTokens,
+	controllers.recipes.buyRecipe,
+);
+
 // Delete Recipe from Favorites
 router.delete(
 	"/:id/favorites",

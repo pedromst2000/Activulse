@@ -15,6 +15,10 @@ const utils = require("../../utils");
 
 async function deleteActivityFav(req, res) {
 	try {
+		/**
+		 * @type {deleteActivityFavParams}
+		 */
+
 		const { id } = req.params;
 		const loggedUserId = req.userId;
 

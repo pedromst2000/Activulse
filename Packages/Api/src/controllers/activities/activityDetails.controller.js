@@ -16,6 +16,10 @@ const { Op } = require("sequelize");
 
 async function activityDetails(req, res) {
 	try {
+		/**
+		 * @type {activityDetailsParams}
+		 */
+
 		const { id } = req.params;
 		const loggedUserId = req.userId;
 
