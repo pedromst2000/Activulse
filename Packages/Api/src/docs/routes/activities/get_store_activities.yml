@@ -235,7 +235,7 @@ responses:
           No Activities Found:
             value:
               success: false
-              message: No Activities Found
+              message: No Store Activities Found
   500:
     description: Internal Server Error
     content:

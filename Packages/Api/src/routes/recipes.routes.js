@@ -5,15 +5,6 @@ const middlewares = require("../middlewares");
 
 const router = Router();
 
-// Get One Recipe Details
-router.get(
-	"/:id",
-	validators.recipes.recipeID(),
-	validators.validateResult,
-	middlewares.validateTokens,
-	controllers.recipes.recipDetails,
-);
-
 // Get Recipes Feed
 router.get(
 	"/",
@@ -21,6 +12,24 @@ router.get(
 	validators.validateResult,
 	middlewares.validateTokens,
 	controllers.recipes.getRecipes,
+);
+
+// Get Store Recipes
+router.get(
+	"/store",
+	validators.recipes.getRecipes(),
+	validators.validateResult,
+	middlewares.validateTokens,
+	controllers.recipes.getStoreRecipes,
+);
+
+// Get One Recipe Details
+router.get(
+	"/:id",
+	validators.recipes.recipeID(),
+	validators.validateResult,
+	middlewares.validateTokens,
+	controllers.recipes.recipDetails,
 );
 
 // Add Recipe to Favorites

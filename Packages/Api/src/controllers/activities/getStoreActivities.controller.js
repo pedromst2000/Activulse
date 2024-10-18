@@ -8,7 +8,6 @@ const ACTIVITY_ATTRIBUTES = [
 	"title",
 	"intensity",
 	"video_time",
-	"isPremium",
 	"price",
 	"tag",
 	"category_id",
@@ -166,7 +165,7 @@ async function getStoreActivities(req, res) {
 		PREMIUM_ACTIVITIES = PREMIUM_ACTIVITIES.slice((page - 1) * limit, page * limit);
 
 		if (PREMIUM_ACTIVITIES.length === 0) {
-			utils.handleResponse(res, utils.http.StatusNotFound, "No Activities Found");
+			utils.handleResponse(res, utils.http.StatusNotFound, "No Store Activities Found");
 			return;
 		}
 
