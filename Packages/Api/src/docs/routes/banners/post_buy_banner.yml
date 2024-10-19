@@ -1,7 +1,7 @@
-summary: Buy one premium recipe
-description: Buy one premium recipe from the store
+summary: Buy one banner
+description: Buy one banner from the store
 tags:
-  - "Recipes"
+  - "Banners"
 security:
   - bearerAuth: []
 parameters:
@@ -19,11 +19,11 @@ parameters:
     description: Authorization token
   - name: id
     in: path
-    description: ID of the recipe to buy
+    description: ID of the banner to buy
     required: true
     schema:
       type: number
-      example: 49
+      example: 5
 responses:
   201:
     description: Created
@@ -37,10 +37,10 @@ responses:
             message:
               type: string
         examples:
-          Recipe bought successfully:
+          Banner bought successfully:
             value:
               success: true
-              message: Premium Recipe bought successfully !
+              message: Banner bought successfully !
   400:
     description: Bad Request
     content:
@@ -71,14 +71,14 @@ responses:
                   location:
                     type: string
         examples:
-          Invalid Recipe ID:
+          Invalid Banner ID:
             value:
               success: false
               message: Validation Error
               data:
                 - type: "field"
                   value: "asd"
-                  msg: "Invalid recipe id"
+                  msg: "Invalid banner id"
                   path: "id"
                   location: "params"
   401:
@@ -121,13 +121,9 @@ responses:
           Not enough points:
             value:
               success: false
-              message: you do not have enough coins to buy this recipe
-          No Match the user diet:
-            value:
-              success: false
-              message: you are not allowed to buy one recipe that does not match your diet
+              message: you do not have enough coins to buy this banner
   404:
-    description: Recipe not found
+    description: Banner not found
     content:
       application/json:
         schema:
@@ -138,10 +134,10 @@ responses:
             message:
               type: string
         examples:
-          Premium Recipe not found:
+          Banner not found:
             value:
               success: false
-              message: Premium Recipe not found !
+              message: Banner not found !
   409:
     description: Conflict
     content:
@@ -154,10 +150,10 @@ responses:
             message:
               type: string
         examples:
-          Recipe already bought:
+          Banner already bought:
             value:
               success: false
-              message: you have already bought this recipe !
+              message: you have already bought this banner !
   500:
     description: Internal server error
     content:
