@@ -41,6 +41,15 @@ router.post(
 	controllers.activities.addActivityFav,
 );
 
+// Buy Activity
+router.post(
+	"/:id/buy",
+	validators.activities.activityID(),
+	validators.validateResult,
+	middlewares.validateTokens,
+	controllers.activities.buyActivity,
+);
+
 // Delete Activity from Favorites
 router.delete(
 	"/:id/favorites",
