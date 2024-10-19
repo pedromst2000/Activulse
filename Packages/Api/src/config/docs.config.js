@@ -125,6 +125,10 @@ const swaggerDefinition = {
 			get: routeDocs.activities.getStoreActivities,
 		},
 
+		"/activities/{id}/buy": {
+			post: routeDocs.activities.postBuyActivity,
+		},
+
 		"/activities/{id}/favorites": {
 			post: routeDocs.activities.postAddActivityFav,
 			delete: routeDocs.activities.deleteActivityFav,
