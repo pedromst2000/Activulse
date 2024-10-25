@@ -153,6 +153,12 @@ const swaggerDefinition = {
 		"/banners/{id}/buy": {
 			post: routeDocs.banners.postBuyBanner,
 		},
+
+		//---------------------------Challenges---------------------------------------------------
+
+		"/challenges/top": {
+			get: routeDocs.challenges.getTopChallenges,
+		},
 	},
 };
 

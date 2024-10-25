@@ -1,0 +1,151 @@
+summary: Get the Top Challenges
+description: Gets the top 5 challenges order by earn points and difficulty level (physical intensity)
+tags:
+  - "Challenges"
+security:
+  - bearerAuth: []
+parameters:
+  - in: header
+    name: x-auth-token
+    schema:
+      type: string
+    required: true
+    description: Authorization token
+  - in: header
+    name: x-refresh-token
+    schema:
+      type: string
+    required: true
+    description: Authorization token
+responses:
+  200:
+    description: Success
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+            data:
+              type: object
+              properties:
+                topChallenges:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      title:
+                        type: string
+                      category:
+                        type: string
+                      earnPoints:
+                        type: number
+                      status:
+                        type: string
+                      difficulty:
+                        type: string
+                      imageUrl:
+                        type: string
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+        examples:
+          Success - Top Challenges:
+            value:
+              success: true
+              message: "Top Challenges retrieved successfully"
+              data:
+                topChallenges:
+                  - id: 1
+                    title: "Marathon Mayhem"
+                    category: "Marathon"
+                    earnPoints: 2900
+                    status: "In Progress"
+                    difficulty: "Vigorous"
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399589/activevulse/dev/challenges/Marathon_Mayhem_lefdvj.png"
+                    createdAt: "2021-09-20T15:00:00.000Z"
+                    updatedAt: "2021-09-20T15:00:00.000Z"
+                  - id: 2
+                    title: "Marathon Mastery"
+                    category: "Marathon"
+                    earnPoints: 1900
+                    status: "Not Started"
+                    difficulty: "Vigorous"
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399588/activevulse/dev/challenges/Marathon_Mastery_i0x46k.png"
+                    createdAt: "2021-09-20T15:00:00.000Z"
+                    updatedAt: "2021-09-20T15:00:00.000Z"
+                  - id: 3
+                    title: "Half Marathon Hustle"
+                    category: "Marathon"
+                    earnPoints: 900
+                    status: "Not Started"
+                    difficulty: "Vigorous"
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399587/activevulse/dev/challenges/Half_Marathon_Hustle_jcqlui.png"
+                    createdAt: "2021-09-20T15:00:00.000Z"
+                    updatedAt: "2021-09-20T15:00:00.000Z"
+                  - id: 4
+                    title: "Half Marathon Hero"
+                    category: "Marathon"
+                    earnPoints: 900
+                    status: "Completed"
+                    difficulty: "Vigorous"
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399586/activevulse/dev/challenges/Half_Marathon_Hero_hjjzzl.png"
+                    createdAt: "2021-09-20T15:00:00.000Z"
+                    updatedAt: "2021-09-20T15:00:00.000Z"
+                  - id: 5
+                    title: "Sunset Seaside Sprint"
+                    category: "Run"
+                    earnPoints: 620
+                    status: "Completed"
+                    difficulty: "Vigorous"
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399599/activevulse/dev/challenges/Sunset_Seaside_Sprint_te9k1v.png"
+                    createdAt: "2021-09-20T15:00:00.000Z"
+                    updatedAt: "2021-09-20T15:00:00.000Z"
+  401:
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Missing token:
+            value:
+              success: false
+              message: Missing auth token or refresh token
+          Invalid token:
+            value:
+              success: false
+              message: Invalid auth token or refresh token
+          Refresh token expired:
+            value:
+              success: false
+              message: Refresh token has expired
+  500:
+    description: Internal Server Error
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Internal Server Error:
+            value:
+              success: false
+              message: Internal Server Error
