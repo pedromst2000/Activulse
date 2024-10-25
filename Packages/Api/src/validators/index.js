@@ -6,6 +6,7 @@ const recipes = require("../validators/recipes");
 const activities = require("../validators/activities");
 const favorites = require("../validators/favorites");
 const banners = require("../validators/banners");
+const challenges = require("../validators/challenges");
 
 /**
  * Validates the result of a request and sends an error response if there are any validation errors.
@@ -38,4 +39,5 @@ module.exports = {
 	activities,
 	favorites,
 	banners,
+	challenges,
 };
