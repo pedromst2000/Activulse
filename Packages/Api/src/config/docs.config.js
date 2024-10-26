@@ -159,6 +159,10 @@ const swaggerDefinition = {
 		"/challenges/top": {
 			get: routeDocs.challenges.getTopChallenges,
 		},
+
+		"/challenges": {
+			get: routeDocs.challenges.getChallengesFeed,
+		},
 	},
 };
 

@@ -1,0 +1,312 @@
+summary: Get the Challenges Feed
+description: Gets the challenges Feed by category, status or/and difficulty
+tags:
+  - "Challenges"
+security:
+  - bearerAuth: []
+parameters:
+  - in: header
+    name: x-auth-token
+    schema:
+      type: string
+    required: true
+    description: Authorization token
+  - in: header
+    name: x-refresh-token
+    schema:
+      type: string
+    required: true
+    description: Authorization token
+  - name: page
+    in: query
+    description: Number of the page to retrieve
+    required: true
+    schema:
+      type: number
+      example: 1
+  - name: limit
+    in: query
+    description: Number of challenges per page
+    required: true
+    schema:
+      type: number
+      example: 6
+  - name: category
+    in: query
+    description: Category of the challenges (All, Run, Walk, Marathon, Jogging)
+    required: false
+    schema:
+      type: string
+      example: "Run"
+  - name: status
+    in: query
+    description: Status of the challenges (All, Not Started, In Progress, Completed)
+    required: false
+    schema:
+      type: string
+      example: "In Progress"
+  - name: difficulty
+    in: query
+    description: Difficulty of the challenges (All, Easy, Medium, Hard, Master)
+    required: false
+    schema:
+      type: string
+      example: "Hard"
+responses:
+  200:
+    description: Success
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+            data:
+              type: object
+              properties:
+                challenges:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      title:
+                        type: string
+                      category:
+                        type: string
+                      earnPoints:
+                        type: number
+                      status:
+                        type: string
+                      difficulty:
+                        type: string
+                      imageUrl:
+                        type: string
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                total:
+                  type: number
+        examples:
+          Success:
+            value:
+              success: true
+              message: "Challenges retrieved successfully"
+              data:
+                challenges:
+                  - id: 14
+                    title: "Urban Explorer Expedition II"
+                    category: "Jogging"
+                    earnPoints: 250
+                    status: "Not Started"
+                    difficulty: "Moderate III"
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399601/activevulse/dev/challenges/Urban_Explorer_Expedition_II_zrsulm.png"
+                    createdAt: "2024-10-10T17:07:45.000Z"
+                    updatedAt: "2024-10-10T17:07:45.000Z"
+                  - id: 15
+                    title: "Lakeside Loop Adventure"
+                    category: "Jogging"
+                    earnPoints: 290
+                    status: "Not Started"
+                    difficulty: "Moderate III"
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399588/activevulse/dev/challenges/Lakeside_Loop_Adventure_ol4hhz.png"
+                    createdAt: "2024-10-10T17:07:45.000Z"
+                    updatedAt: "2024-10-10T17:07:45.000Z"
+                  - id: 16
+                    title: "Riverside Retreat Run"
+                    category: "Jogging"
+                    earnPoints: 330
+                    status: "Not Started"
+                    difficulty: "Moderate III"
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399596/activevulse/dev/challenges/Riverside_Retreat_Run_bsvh9q.png"
+                    createdAt: "2024-10-10T17:07:45.000Z"
+                    updatedAt: "2024-10-10T17:07:45.000Z"
+                  - id: 17
+                    title: "Suburban Scenic Route"
+                    category: "Jogging"
+                    earnPoints: 380
+                    status: "Not Started"
+                    difficulty: "Moderate III"
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399597/activevulse/dev/challenges/Suburban_Scenic_Route_s3bnp8.png"
+                    createdAt: "2024-10-10T17:07:45.000Z"
+                    updatedAt: "2024-10-10T17:07:45.000Z"
+                  - id: 18
+                    title: "Coastal Clifftop Trek"
+                    category: "Jogging"
+                    earnPoints: 350
+                    status: "Not Started"
+                    difficulty: "Moderate III"
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399583/activevulse/dev/challenges/Coastal_Clifftop_Trek_jtjnfj.png"
+                    createdAt: "2024-10-10T17:07:45.000Z"
+                    updatedAt: "2024-10-10T17:07:45.000Z"
+                  - id: 19
+                    title: "Nature Reserve Ramble"
+                    category: "Jogging"
+                    earnPoints: 300
+                    status: "Not Started"
+                    difficulty: "Moderate III"
+                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399592/activevulse/dev/challenges/Nature_Reserve_Ramble_gmfbkd.png"
+                    createdAt: "2024-10-10T17:07:45.000Z"
+                    updatedAt: "2024-10-10T17:07:45.000Z"
+                total: 6
+  400:
+    description: Bad Request
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+            data:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  value:
+                    oneOf:
+                      - type: string
+                      - type: integer
+                      - type: boolean
+                  msg:
+                    type: string
+                  path:
+                    type: string
+                  location:
+                    type: string
+        examples:
+          Page Query Parameter Missing:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  msg: "Page Query is required"
+                  path: "page"
+                  location: "query"
+          Invalid Page Query Parameter:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: -1
+                  msg: "Page Query must be a positive number"
+                  path: "page"
+                  location: "query"
+          Limit Query Parameter Missing:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  msg: "Limit Query is required"
+                  path: "limit"
+                  location: "query"
+          Invalid Limit Query Parameter:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: -1
+                  msg: "Limit Query must be a positive number"
+                  path: "limit"
+                  location: "query"
+          Difficulty Query Parameter Invalid:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: "Hsaadsard"
+                  msg: "Difficulty must be a valid category: All, Easy, Medium, Hard, or Master"
+                  path: "difficulty"
+                  location: "query"
+          Category Query Parameter Invalid:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: "joggsadaing"
+                  msg: "Category must be a valid category: All, Run, Walk, Marathon, or Jogging"
+                  path: "category"
+                  location: "query"
+          Status Query Parameter Invalid:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: "In Progdsress"
+                  msg: "Status must be a valid category: All, Not Started, In Progress, or Completed"
+                  path: "status"
+                  location: "query"
+  401:
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Missing token:
+            value:
+              success: false
+              message: Missing auth token or refresh token
+          Invalid token:
+            value:
+              success: false
+              message: Invalid auth token or refresh token
+          Refresh token expired:
+            value:
+              success: false
+              message: Refresh token has expired
+  404:
+    description: Not Found
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          No Challenges Found:
+            value:
+              success: false
+              message: Challenges Not Found !
+  500:
+    description: Internal Server Error
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Internal Server Error:
+            value:
+              success: false
+              message: Internal Server Error
