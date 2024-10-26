@@ -8,4 +8,13 @@ const router = Router();
 // Get top challenges
 router.get("/top", middlewares.validateTokens, controllers.challenges.topChallenges);
 
+// Get Challenges Feed
+router.get(
+	"/",
+	validators.challenges.getChallenges(),
+	validators.validateResult,
+	middlewares.validateTokens,
+	controllers.challenges.getChallenges,
+);
+
 module.exports = router;

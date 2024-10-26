@@ -84,7 +84,6 @@ async function topChallenges(req, res) {
 				topChallenges: TOP_CHALLENGES_RES.map((challenge) => {
 					return {
 						...challenge,
-						id: TOP_CHALLENGES_RES.indexOf(challenge) + 1,
 					};
 				}),
 			},

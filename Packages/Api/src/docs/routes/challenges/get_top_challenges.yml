@@ -64,7 +64,7 @@ responses:
               message: "Top Challenges retrieved successfully"
               data:
                 topChallenges:
-                  - id: 1
+                  - id: 32
                     title: "Marathon Mayhem"
                     category: "Marathon"
                     earnPoints: 2900
@@ -73,7 +73,7 @@ responses:
                     imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399589/activevulse/dev/challenges/Marathon_Mayhem_lefdvj.png"
                     createdAt: "2021-09-20T15:00:00.000Z"
                     updatedAt: "2021-09-20T15:00:00.000Z"
-                  - id: 2
+                  - id: 31
                     title: "Marathon Mastery"
                     category: "Marathon"
                     earnPoints: 1900
@@ -82,7 +82,7 @@ responses:
                     imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399588/activevulse/dev/challenges/Marathon_Mastery_i0x46k.png"
                     createdAt: "2021-09-20T15:00:00.000Z"
                     updatedAt: "2021-09-20T15:00:00.000Z"
-                  - id: 3
+                  - id: 33
                     title: "Half Marathon Hustle"
                     category: "Marathon"
                     earnPoints: 900
@@ -91,7 +91,7 @@ responses:
                     imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399587/activevulse/dev/challenges/Half_Marathon_Hustle_jcqlui.png"
                     createdAt: "2021-09-20T15:00:00.000Z"
                     updatedAt: "2021-09-20T15:00:00.000Z"
-                  - id: 4
+                  - id: 34
                     title: "Half Marathon Hero"
                     category: "Marathon"
                     earnPoints: 900
@@ -100,7 +100,7 @@ responses:
                     imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399586/activevulse/dev/challenges/Half_Marathon_Hero_hjjzzl.png"
                     createdAt: "2021-09-20T15:00:00.000Z"
                     updatedAt: "2021-09-20T15:00:00.000Z"
-                  - id: 5
+                  - id: 27
                     title: "Sunset Seaside Sprint"
                     category: "Run"
                     earnPoints: 620
