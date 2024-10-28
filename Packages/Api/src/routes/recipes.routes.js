@@ -29,7 +29,7 @@ router.get(
 	validators.recipes.recipeID(),
 	validators.validateResult,
 	middlewares.validateTokens,
-	controllers.recipes.recipDetails,
+	controllers.recipes.recipeDetails,
 );
 
 // Add Recipe to Favorites

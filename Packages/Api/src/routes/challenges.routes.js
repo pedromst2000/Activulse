@@ -17,4 +17,13 @@ router.get(
 	controllers.challenges.getChallenges,
 );
 
+// Get One Challenge Details
+router.get(
+	"/:id",
+	validators.challenges.challengeID(),
+	validators.validateResult,
+	middlewares.validateTokens,
+	controllers.challenges.challengeDetails,
+);
+
 module.exports = router;
