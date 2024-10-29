@@ -61,22 +61,25 @@ async function challengeDetails(req, res) {
 			return;
 		}
 
+		console.log(JSON.stringify(challenge, null, 2));
+
 		let CHALLENGE_RES = {
 			challenge_id: challenge.challenge_ID,
 			title: challenge.title,
-			category: challenge.challenge_category.category,
+			category: {
+				id: challenge.challenge_category.challenge_category_ID,
+				name: challenge.challenge_category.category,
+			},
 			status: challengeProgress ? challengeProgress?.status : "Not Started",
 			earnPoints: challenge.earn_points,
 			difficulty:
 				challenge.difficulty === 1
-					? "Light"
-					: challenge.difficulty === 2
-						? "Moderate I"
-						: challenge.difficulty === 3
-							? "Moderate II"
-							: challenge.difficulty === 4
-								? "Moderate III"
-								: "Vigorous",
+					? "Easy"
+					: challenge.difficulty === 2 || challenge.difficulty === 3
+						? "Medium"
+						: challenge.difficulty === 4
+							? "Hard"
+							: "Master",
 			description: challenge.description,
 			progress:
 				challengeProgress?.status === "In Progress"
@@ -105,13 +108,17 @@ async function challengeDetails(req, res) {
 							steps: challenge.challenge_steps,
 							distance: challenge.challenge_distance,
 						},
-						imageUrl: challenge.asset.provider_image_url,
+						image: {
+							url: challenge.asset.provider_image_url,
+						},
 						createdAt: challenge.createdAt,
 						updatedAt: challenge.updatedAt,
 					}
 				: {
 						...CHALLENGE_RES,
-						imageUrl: challenge.asset.provider_image_url,
+						imageUrl: {
+							url: challenge.asset.provider_image_url,
+						},
 						createdAt: challenge.createdAt,
 						updatedAt: challenge.updatedAt,
 					},

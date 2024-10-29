@@ -1,0 +1,265 @@
+summary: Get one challenge details
+description: Get one challenge details available from a category (Walk, Jogging, Run, Marathon)
+tags:
+  - "Challenges"
+security:
+  - bearerAuth: []
+parameters:
+  - in: header
+    name: x-auth-token
+    schema:
+      type: string
+    required: true
+    description: Authorization token
+  - in: header
+    name: x-refresh-token
+    schema:
+      type: string
+    required: true
+    description: Authorization token
+  - name: id
+    in: path
+    description: ID of the challenge
+    required: true
+    schema:
+      type: number
+      example: 5
+responses:
+  200:
+    description: Success
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+            data:
+              type: object
+              properties:
+                challenge_id:
+                  type: number
+                title:
+                  type: string
+                category:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    name:
+                      type: string
+                status:
+                  type: string
+                earnPoints:
+                  type: number
+                difficulty:
+                  type: string
+                description:
+                  type: string
+                progress:
+                  type: object
+                  required: false
+                  properties:
+                    currentSteps:
+                      type: number
+                      required: false
+                    currentDistance:
+                      type: number
+                      required: false
+                    totalSteps:
+                      type: number
+                      required: false
+                    totalDistance:
+                      type: number
+                      required: false
+                    stepsCompleted:
+                      type: number
+                      required: false
+                    distanceCompleted:
+                      type: number
+                      required: false
+                goals:
+                  type: object
+                  required: false
+                  properties:
+                    steps:
+                      type: number
+                    distance:
+                      type: number
+                image:
+                  type: object
+                  properties:
+                    url:
+                      type: string
+                createdAt:
+                  type: string
+                  format: date-time
+                updatedAt:
+                  type: string
+                  format: date-time
+        examples:
+          Challenge - Not Started:
+            value:
+              success: true
+              message: Challenge data retrieved successfully
+              data:
+                challenge_id: 30
+                title: "Forest Foliage Frenzy"
+                category:
+                  id: 3
+                  name: "Run"
+                status: "Not Started"
+                earnPoints: 600
+                difficulty: "Master"
+                description: "Explore dense forest trails, immerse in vibrant foliage, and let nature's beauty ignite your senses in the Forest Foliage Frenzy challenge!"
+                progress: null
+                goals:
+                  steps: 19685
+                  distance: 15000
+                image:
+                  url: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399584/activevulse/dev/challenges/Forest_Foliage_Frenzy_hutizb.png"
+                createdAt: "2024-08-28T22:07:26.000Z"
+                updatedAt: "2024-08-28T22:07:26.000Z"
+          Challenge - In Progress:
+            value:
+              success: true
+              message: Challenge data retrieved successfully
+              data:
+                challenge_id: 32
+                title: "Marathon Mayhem"
+                category:
+                  id: 4
+                  name: "Marathon"
+                status: "In Progress"
+                earnPoints: 2900
+                difficulty: "Master"
+                description: "Get ready for an electrifying journey through endurance. In Marathon Mayhem, we challenge you to push your limits and embrace the chaos of the marathon distance. From your pounding heart to rhythmic footsteps, every moment ignites your spirit."
+                progress:
+                  currentSteps: 56000
+                  currentDistance: 12321
+                  totalSteps: 56430
+                  totalDistance: 43000
+                image:
+                  url: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399589/activevulse/dev/challenges/Marathon_Mayhem_lefdvj.png"
+                createdAt: "2024-10-10T17:07:45.000Z"
+                updatedAt: "2024-10-10T17:07:45.000Z"
+          Challenge - Completed:
+            value:
+              success: true
+              message: Challenge data retrieved successfully
+              data:
+                challenge_id: 5
+                title: "Garden Grove Gauntlet"
+                category:
+                  id: 1
+                  name: "Walk"
+                status: "Completed"
+                earnPoints: 65
+                difficulty: "Medium"
+                description: "Immerse yourself in the beauty of nature with a leisurely stroll through a local botanical garden. Let the vibrant colors and fragrant blooms ignite your senses as you explore winding paths and hidden alcoves."
+                progress:
+                  stepsCompleted: 5775
+                  distanceCompleted: 4400
+                imageUrl:
+                  url: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399586/activevulse/dev/challenges/Garden_Grove_Gauntlet_egrppa.png"
+                createdAt: "2024-10-10T17:07:45.000Z"
+                updatedAt: "2024-10-10T17:07:45.000Z"
+  400:
+    description: Bad Request
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+            data:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  value:
+                    oneOf:
+                      - type: string
+                      - type: integer
+                      - type: integer
+                      - type: boolean
+                  msg:
+                    type: string
+                  path:
+                    type: string
+                  location:
+                    type: string
+        examples:
+          Invalid Challenge ID:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: "asd"
+                  msg: "Invalid challenge id"
+                  path: "id"
+                  location: "params"
+  401:
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Missing token:
+            value:
+              success: false
+              message: Missing auth token or refresh token
+          Invalid token:
+            value:
+              success: false
+              message: Invalid auth token or refresh token
+          Refresh token expired:
+            value:
+              success: false
+              message: Refresh token has expired
+  404:
+    description: Challenge not found
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Challenge not found:
+            value:
+              success: false
+              message: Challenge Not Found !
+  500:
+    description: Internal server error
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Internal server error:
+            value:
+              success: false
+              message: Internal server error
