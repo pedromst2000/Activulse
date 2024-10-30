@@ -13,8 +13,13 @@ const getChallengeDetails = YAML.parse(
 	fs.readFileSync("./src/docs/routes/challenges/get_challenge_details.yml", "utf8"),
 );
 
+const postStartChallenge = YAML.parse(
+	fs.readFileSync("./src/docs/routes/challenges/post_start_challenge.yml", "utf8"),
+);
+
 module.exports = {
 	getTopChallenges,
 	getChallengesFeed,
 	getChallengeDetails,
+	postStartChallenge,
 };

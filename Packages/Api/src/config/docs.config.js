@@ -164,9 +164,12 @@ const swaggerDefinition = {
 			get: routeDocs.challenges.getChallengesFeed,
 		},
 
-		// TODO: SWAGGER DOCS challenge details
 		"/challenges/{id}": {
 			get: routeDocs.challenges.getChallengeDetails,
+		},
+
+		"/challenges/{id}/start": {
+			post: routeDocs.challenges.postStartChallenge,
 		},
 	},
 };

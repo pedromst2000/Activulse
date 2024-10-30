@@ -1,7 +1,5 @@
 const utils = require("../../utils");
 const db = require("../../db");
-const config = require("../../config");
-const { Op } = require("sequelize");
 
 /**
  * @typedef startChallengeParams
