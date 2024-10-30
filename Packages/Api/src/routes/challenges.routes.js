@@ -26,4 +26,13 @@ router.get(
 	controllers.challenges.challengeDetails,
 );
 
+// Start One Challenge
+router.post(
+	"/:id/start",
+	validators.challenges.challengeID(),
+	validators.validateResult,
+	middlewares.validateTokens,
+	controllers.challenges.startChallenge,
+);
+
 module.exports = router;

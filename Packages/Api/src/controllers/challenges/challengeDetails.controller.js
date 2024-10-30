@@ -61,8 +61,6 @@ async function challengeDetails(req, res) {
 			return;
 		}
 
-		console.log(JSON.stringify(challenge, null, 2));
-
 		let CHALLENGE_RES = {
 			challenge_id: challenge.challenge_ID,
 			title: challenge.title,

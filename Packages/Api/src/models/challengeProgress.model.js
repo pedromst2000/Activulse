@@ -15,29 +15,27 @@ const ChallengeProgressModel = (sequelize) => {
 			},
 			steps_progress: {
 				type: DataTypes.INTEGER,
-				allowNull: true,
-				validate: {
-					min: 0,
-				},
+				allowNull: false,
+				defaultValue: 0,
 			},
 			is_steps_completed: {
 				type: DataTypes.BOOLEAN,
+				allowNull: false,
 				defaultValue: false,
 			},
 			distance_progress: {
 				type: DataTypes.INTEGER,
-				allowNull: true,
-				validate: {
-					min: 0,
-				},
+				allowNull: false,
+				defaultValue: 0,
 			},
 			is_distance_completed: {
 				type: DataTypes.BOOLEAN,
+				allowNull: false,
 				defaultValue: false,
 			},
 			status: {
 				type: DataTypes.STRING(255),
-				allowNull: true,
+				allowNull: false,
 				defaultValue: "In Progress",
 				validate: {
 					isIn: [["In Progress", "Completed"]],
@@ -45,11 +43,11 @@ const ChallengeProgressModel = (sequelize) => {
 			},
 			user_id: {
 				type: DataTypes.INTEGER,
-				allowNull: true,
+				allowNull: false,
 			},
 			challenge_id: {
 				type: DataTypes.INTEGER,
-				allowNull: true,
+				allowNull: false,
 			},
 		},
 		{
