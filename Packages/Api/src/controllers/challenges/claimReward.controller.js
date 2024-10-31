@@ -66,7 +66,6 @@ async function claimReward(req, res) {
 			const EARN_POINTS = challenge.find((ch) => ch.challenge_ID === +id).earn_points;
 
 			console.log(EARN_POINTS);
-			
 
 			await db.mysql.ChallengeProgress.destroy({
 				where: {

@@ -171,6 +171,10 @@ const swaggerDefinition = {
 		"/challenges/{id}/start": {
 			post: routeDocs.challenges.postStartChallenge,
 		},
+
+		"/challenges/{id}/claim-reward": {
+			post: routeDocs.challenges.postClaimReward,
+		},
 	},
 };
 

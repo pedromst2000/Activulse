@@ -17,9 +17,14 @@ const postStartChallenge = YAML.parse(
 	fs.readFileSync("./src/docs/routes/challenges/post_start_challenge.yml", "utf8"),
 );
 
+const postClaimReward = YAML.parse(
+	fs.readFileSync("./src/docs/routes/challenges/post_claim_reward.yml", "utf8"),
+);
+
 module.exports = {
 	getTopChallenges,
 	getChallengesFeed,
 	getChallengeDetails,
 	postStartChallenge,
+	postClaimReward,
 };
