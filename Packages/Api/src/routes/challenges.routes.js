@@ -35,4 +35,13 @@ router.post(
 	controllers.challenges.startChallenge,
 );
 
+// Claim Reward of One Challenge
+router.post(
+	"/:id/claim-reward",
+	validators.challenges.challengeID(),
+	validators.validateResult,
+	middlewares.validateTokens,
+	controllers.challenges.claimReward,
+);
+
 module.exports = router;
