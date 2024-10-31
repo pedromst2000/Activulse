@@ -107,6 +107,10 @@ async function assessmentHeartRisk(req, res) {
 				typeRisk: assessmentRisk.risk,
 			});
 
+			await db.mysql.DailyGoals.create({
+				user_id: loggedUserId,
+			});
+
 			await db.mysql.UserAvatar.create({
 				user_id: loggedUserId,
 				avatar_id: gender === "Female" ? 2 : 1,
