@@ -15,17 +15,11 @@ const DailyGoalsModel = (sequelize) => {
 			},
 			goal_steps: {
 				type: DataTypes.INTEGER,
-				allowNull: false,
-				validate: {
-					min: 0,
-				},
+				defaultValue: 5000,
 			},
 			steps_progress: {
 				type: DataTypes.INTEGER,
-				allowNull: true,
-				validate: {
-					min: 0,
-				},
+				defaultValue: 0,
 			},
 			is_steps_completed: {
 				type: DataTypes.BOOLEAN,
@@ -33,17 +27,11 @@ const DailyGoalsModel = (sequelize) => {
 			},
 			goal_distance: {
 				type: DataTypes.INTEGER,
-				allowNull: false,
-				validate: {
-					min: 0,
-				},
+				defaultValue: 3810,
 			},
 			distance_progress: {
 				type: DataTypes.INTEGER,
-				allowNull: true,
-				validate: {
-					min: 0,
-				},
+				defaultValue: 0,
 			},
 			is_distance_completed: {
 				type: DataTypes.BOOLEAN,

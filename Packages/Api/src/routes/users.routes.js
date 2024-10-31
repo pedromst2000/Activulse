@@ -68,4 +68,13 @@ router.patch(
 	controllers.users.extraAssessment,
 );
 
+// Chance Daily Goals
+router.patch(
+	"/daily-goals",
+	validators.users.ChanceGoals(),
+	validators.validateResult,
+	middlewares.validateTokens,
+	controllers.users.changeGoals,
+);
+
 module.exports = router;

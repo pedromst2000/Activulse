@@ -5,6 +5,7 @@ const getUser = require("../users/getUser.validator");
 const getUserBadges = require("../users/getUserBadges.validator");
 const assessmentHeartRisk = require("../users/assessmentHeartRisk.validator");
 const extraAssessment = require("../users/extraAssessment.validator");
+const ChanceGoals = require("../users/chanceGoals.validator");
 
 module.exports = {
 	verifyUser,
@@ -14,4 +15,5 @@ module.exports = {
 	getUserBadges,
 	assessmentHeartRisk,
 	extraAssessment,
+	ChanceGoals,
 };

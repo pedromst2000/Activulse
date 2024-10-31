@@ -17,4 +17,22 @@ module.exports = [
 		is_distance_completed: false,
 		user_id: 2,
 	},
+	{
+		goal_steps: 5000,
+		steps_progress: 0,
+		is_steps_completed: false,
+		goal_distance: 3810,
+		distance_progress: 0,
+		is_distance_completed: false,
+		user_id: 3,
+	},
+	{
+		goal_steps: 5000,
+		steps_progress: 0,
+		is_steps_completed: false,
+		goal_distance: 3810,
+		distance_progress: 0,
+		is_distance_completed: false,
+		user_id: 4,
+	},
 ];

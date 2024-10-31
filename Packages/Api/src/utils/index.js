@@ -7,6 +7,7 @@ const http = require("../utils/http.utils");
 const validateData = require("../utils/validateData.utils");
 const formatData = require("../utils/formatData.utils");
 const CVDriskScore = require("../utils/RiskScore.utils");
+const converter = require("../utils/converter.utils");
 
 module.exports = {
 	checkEnvs,
@@ -18,4 +19,5 @@ module.exports = {
 	validateData,
 	formatData,
 	CVDriskScore,
+	converter,
 };
