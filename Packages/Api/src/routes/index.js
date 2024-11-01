@@ -10,6 +10,7 @@ const activitiesRoutes = require("../routes/activities.routes");
 const favoritesRoutes = require("../routes/favorites.routes");
 const bannersRoutes = require("../routes/banners.routes");
 const challengesRoutes = require("../routes/challenges.routes");
+const dailyGoalsRoutes = require("../routes/dailyGoals.routes");
 
 const router = Router();
 
@@ -30,6 +31,9 @@ router.use("/auth", authRoutes);
 
 // User Routes
 router.use("/users", userRoutes);
+
+// Daily Goals Routes
+router.use("/daily-goals", dailyGoalsRoutes);
 
 // Recipes Routes
 router.use("/recipes", recipesRoutes);

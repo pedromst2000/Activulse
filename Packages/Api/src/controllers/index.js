@@ -6,6 +6,7 @@ const activities = require("../controllers/activities");
 const favorites = require("../controllers/favorites");
 const banners = require("../controllers/banners");
 const challenges = require("../controllers/challenges");
+const dailyGoals = require("../controllers/dailyGoals");
 
 module.exports = {
 	cronjob,
@@ -16,4 +17,5 @@ module.exports = {
 	favorites,
 	banners,
 	challenges,
+	dailyGoals,
 };

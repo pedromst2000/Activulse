@@ -1,7 +1,7 @@
 summary: Change daily goals
 description: Change the daily goals (steps or distance) of the authenticated user
 tags:
-  - "Users"
+  - "Daily Goals"
 security:
   - bearerAuth: []
 parameters:

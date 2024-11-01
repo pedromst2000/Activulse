@@ -37,10 +37,6 @@ const patchExtraAssessment = YAML.parse(
 	fs.readFileSync("./src/docs/routes/users/patch_extra_assessment.yml", "utf8"),
 );
 
-const patchChangeDailyGoals = YAML.parse(
-	fs.readFileSync("./src/docs/routes/users/patch_change_daily_goals.yml", "utf8"),
-);
-
 module.exports = {
 	patchVerifyUser,
 	postVerifyConfirm,
@@ -51,5 +47,4 @@ module.exports = {
 	getLeaderboard,
 	postRiskAssessment,
 	patchExtraAssessment,
-	patchChangeDailyGoals,
 };
