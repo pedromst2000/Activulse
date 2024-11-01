@@ -88,6 +88,10 @@ const swaggerDefinition = {
 			patch: routeDocs.users.patchExtraAssessment,
 		},
 
+		"/users/daily-goals": {
+			patch: routeDocs.users.patchChangeDailyGoals,
+		},
+
 		//---------------------------RECIPES---------------------------------------------------
 
 		"/recipes/{id}": {
