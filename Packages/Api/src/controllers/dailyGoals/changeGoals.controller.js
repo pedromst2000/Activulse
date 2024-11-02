@@ -25,11 +25,21 @@ async function changeGoals(req, res) {
 
 		const loggedUserId = req.userId;
 
+		console.log("loggedUserId", loggedUserId);
+
 		const dailyGoals = await db.mysql.DailyGoals.findOne({
 			where: {
 				user_id: loggedUserId,
 			},
 		});
+
+		if (!dailyGoals) {
+			return utils.handleResponse(
+				res,
+				utils.http.StatusForbidden,
+				"Finish the Heart Assessment first to set your daily goals!",
+			);
+		}
 
 		if (dailyGoals.is_steps_completed && dailyGoals.is_distance_completed) {
 			utils.handleResponse(
@@ -43,6 +53,16 @@ async function changeGoals(req, res) {
 				{
 					goal_steps: steps,
 					goal_distance: utils.converter.stepsToMeters(steps),
+					earn_points:
+						steps >= 2500 && steps <= 5000
+							? 100
+							: steps >= 5001 && steps <= 7500
+								? 150
+								: steps >= 7501 && steps <= 10000
+									? 200
+									: steps > 10000
+										? 250
+										: 100,
 				},
 				{
 					where: {
@@ -55,6 +75,16 @@ async function changeGoals(req, res) {
 				{
 					goal_steps: utils.converter.metersToSteps(distance),
 					goal_distance: distance,
+					earn_points:
+						distance >= 1905 && distance <= 3810
+							? 100
+							: distance >= 3811 && distance <= 5715
+								? 150
+								: distance >= 5716 && distance <= 7620
+									? 200
+									: distance > 7620
+										? 250
+										: 100,
 				},
 				{
 					where: {

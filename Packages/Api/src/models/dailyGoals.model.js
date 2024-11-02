@@ -37,6 +37,10 @@ const DailyGoalsModel = (sequelize) => {
 				type: DataTypes.BOOLEAN,
 				defaultValue: false,
 			},
+			earn_points: {
+				type: DataTypes.INTEGER,
+				defaultValue: 100,
+			},
 			user_id: {
 				type: DataTypes.INTEGER,
 				allowNull: false,

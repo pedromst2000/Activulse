@@ -1,20 +1,22 @@
 module.exports = [
 	{
-		goal_steps: 10500,
+		goal_steps: 5000,
 		steps_progress: 500,
 		is_steps_completed: false,
-		goal_distance: 8001,
+		goal_distance: 3810,
 		distance_progress: 381,
 		is_distance_completed: false,
+		earn_points: 100,
 		user_id: 1,
 	},
 	{
-		goal_steps: 8000,
+		goal_steps: 5000,
 		steps_progress: 0,
 		is_steps_completed: false,
-		goal_distance: 6096,
+		goal_distance: 3810,
 		distance_progress: 0,
 		is_distance_completed: false,
+		earn_points: 100,
 		user_id: 2,
 	},
 	{
@@ -24,6 +26,7 @@ module.exports = [
 		goal_distance: 3810,
 		distance_progress: 0,
 		is_distance_completed: false,
+		earn_points: 100,
 		user_id: 3,
 	},
 	{
@@ -33,6 +36,7 @@ module.exports = [
 		goal_distance: 3810,
 		distance_progress: 0,
 		is_distance_completed: false,
+		earn_points: 100,
 		user_id: 4,
 	},
 ];

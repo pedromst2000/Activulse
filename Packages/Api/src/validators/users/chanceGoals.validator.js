@@ -23,7 +23,9 @@ function validator() {
 				return true;
 			})
 			.isInt({ min: 0 })
-			.withMessage("steps must be a positive number"),
+			.withMessage("steps must be a positive number")
+			.isInt({ min: 2500 })
+			.withMessage("steps must be at least 2500"),
 
 		body("distance")
 			.optional()
@@ -34,7 +36,9 @@ function validator() {
 				return true;
 			})
 			.isInt({ min: 0 })
-			.withMessage("distance must be a positive number"),
+			.withMessage("distance must be a positive number")
+			.isInt({ min: 1905 })
+			.withMessage("distance must be at least 1905"),
 	];
 }
 

@@ -125,6 +125,26 @@ responses:
                   msg: "distance must be a positive number"
                   path: "distance"
                   location: "body"
+          Not Minimal Steps:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: 100
+                  msg: "steps must be at least 2500"
+                  path: "steps"
+                  location: "body"
+          Not Minimal Distance:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: 500
+                  msg: "distance must be at least 1905"
+                  path: "distance"
+                  location: "body"
   401:
     description: Unauthorized
     content:
@@ -165,6 +185,10 @@ responses:
             value:
               success: false
               message: You can´t change the daily goals when completed !
+          Assessment not completed:
+            value:
+              success: false
+              message: Finish the Heart Assessment first to set your daily goals!
   500:
     description: Internal Server Error
     content:
