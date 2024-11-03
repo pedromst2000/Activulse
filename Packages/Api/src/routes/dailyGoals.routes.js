@@ -14,4 +14,7 @@ router.patch(
 	controllers.dailyGoals.changeDailyGoals,
 );
 
+// Get authenticated user daily goals
+router.get("/", middlewares.validateTokens, controllers.dailyGoals.getUserGoals);
+
 module.exports = router;

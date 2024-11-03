@@ -25,8 +25,6 @@ async function changeGoals(req, res) {
 
 		const loggedUserId = req.userId;
 
-		console.log("loggedUserId", loggedUserId);
-
 		const dailyGoals = await db.mysql.DailyGoals.findOne({
 			where: {
 				user_id: loggedUserId,
