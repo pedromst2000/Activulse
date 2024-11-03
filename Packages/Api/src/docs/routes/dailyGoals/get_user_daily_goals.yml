@@ -1,0 +1,126 @@
+summary: Get user daily goals
+description: Get the daily goals (steps or distance) of the authenticated user
+tags:
+  - "Daily Goals"
+security:
+  - bearerAuth: []
+parameters:
+  - in: header
+    name: x-auth-token
+    schema:
+      type: string
+    required: true
+    description: Authorization token
+  - in: header
+    name: x-refresh-token
+    schema:
+      type: string
+    required: true
+    description: Authorization token
+responses:
+  200:
+    description: Success
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+            data:
+              type: object
+              properties:
+                daily_goals:
+                  type: object
+                  properties:
+                    isCompleted:
+                      type: boolean
+                    earn_points:
+                      type: integer
+                    steps:
+                      type: object
+                      properties:
+                        goal:
+                          type: integer
+                        progress:
+                          type: integer
+                    distance:
+                      type: object
+                      properties:
+                        goal:
+                          type: integer
+                        progress:
+                          type: integer
+        examples:
+          Success - daily goals retrieved:
+            value:
+              success: true
+              message: "Your daily goals were successfully retrieved!"
+              data:
+                daily_goals:
+                  isCompleted: false
+                  earn_points: 250
+                  steps:
+                    goal: 10001
+                    progress: 0
+                  distance:
+                    goal: 7621
+                    progress: 0
+  401:
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Missing token:
+            value:
+              success: false
+              message: Missing auth token or refresh token
+          Invalid token:
+            value:
+              success: false
+              message: Invalid auth token or refresh token
+          Refresh token expired:
+            value:
+              success: false
+              message: Refresh token has expired
+  404:
+    description: Not Found - if the logged user doesn't have daily goals yet (Heart Assessment not completed)
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Daily goals not found:
+            value:
+              success: false
+              message: You don't have daily goals yet! Finish the Heart Assessment first to set your daily goals!
+  500:
+    description: Internal Server Error
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Internal Server Error:
+            value:
+              success: false
+              message: Internal Server Error

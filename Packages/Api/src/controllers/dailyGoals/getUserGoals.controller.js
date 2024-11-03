@@ -31,12 +31,12 @@ async function getUserGoals(req, res) {
 					dailyGoals.is_distance_completed == true,
 				earn_points: dailyGoals.earn_points,
 				steps: {
-					goal_steps: dailyGoals.goal_steps,
-					steps_progress: dailyGoals.steps_progress,
+					goal: dailyGoals.goal_steps,
+					progress: dailyGoals.steps_progress,
 				},
 				distance: {
-					goal_distance: dailyGoals.goal_distance,
-					distance_progress: dailyGoals.distance_progress,
+					goal: dailyGoals.goal_distance,
+					progress: dailyGoals.distance_progress,
 				},
 			};
 

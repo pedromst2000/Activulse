@@ -90,6 +90,7 @@ const swaggerDefinition = {
 
 		// ---------------------------Daily Goals---------------------------------------------------
 		"/daily-goals": {
+			get: routeDocs.dailyGoals.getUserDailyGoals,
 			patch: routeDocs.dailyGoals.patchChangeDailyGoals,
 		},
 
