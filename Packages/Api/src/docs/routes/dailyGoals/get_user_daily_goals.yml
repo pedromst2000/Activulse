@@ -1,5 +1,5 @@
 summary: Get user daily goals
-description: Get the daily goals (steps or distance) of the authenticated user
+description: Get the daily goals (steps or distance) of the authenticated user. The daily goals resets every day at 00:00 UTC or in greater or equal then 24 hours or in different day.
 tags:
   - "Daily Goals"
 security:

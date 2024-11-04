@@ -46,8 +46,6 @@ async function login(req, res) {
 			],
 		});
 
-		console.log(JSON.stringify(user, null, 2));
-
 		if (!user) {
 			utils.handleResponse(
 				res,

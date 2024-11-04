@@ -25,6 +25,34 @@ async function getUserGoals(req, res) {
 				"You don't have daily goals yet! Finish the Heart Assessment first to set your daily goals!",
 			);
 		} else {
+			// reseting after 24h the daily goals or at midnight or different day than the last updated
+			const currentHour = new Date().getHours();
+			const currentDate = new Date().toLocaleDateString();
+			const now = new Date();
+			const lastUpdated = new Date(dailyGoals.updatedAt);
+			const diffTime = Math.abs(now - lastUpdated);
+			const hours = Math.floor(diffTime / 3600000); // convert ms to hours
+
+			if (
+				hours >= 24 ||
+				currentHour == 0 ||
+				currentDate != lastUpdated.toLocaleDateString()
+			) {
+				await db.mysql.DailyGoals.update(
+					{
+						is_steps_completed: false,
+						is_distance_completed: false,
+						steps_progress: 0,
+						distance_progress: 0,
+					},
+					{
+						where: {
+							user_id: loggedUserId,
+						},
+					},
+				);
+			}
+
 			const USER_GOALS_RES = {
 				isCompleted:
 					dailyGoals.is_steps_completed == true &&
