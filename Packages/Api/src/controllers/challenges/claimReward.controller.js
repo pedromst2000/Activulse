@@ -49,7 +49,7 @@ async function claimReward(req, res) {
 		) {
 			utils.handleResponse(
 				res,
-				utils.http.StatusBadRequest,
+				utils.http.StatusForbidden,
 				"Challenge not completed yet. Complete the challenge first !",
 			);
 			return;
@@ -58,14 +58,12 @@ async function claimReward(req, res) {
 		) {
 			utils.handleResponse(
 				res,
-				utils.http.StatusBadRequest,
+				utils.http.StatusForbidden,
 				"Challenge not started yet. Start the challenge first !",
 			);
 			return;
 		} else {
 			const EARN_POINTS = challenge.find((ch) => ch.challenge_ID === +id).earn_points;
-
-			console.log(EARN_POINTS);
 
 			await db.mysql.ChallengeProgress.destroy({
 				where: {

@@ -76,14 +76,6 @@ responses:
                   msg: "Invalid challenge id"
                   path: "id"
                   location: "params"
-          Challenge Not Started:
-            value:
-              success: false
-              message: Challenge not started yet. Start the challenge first !
-          Challenge Not Completed:
-            value:
-              success: false
-              message: Challenge not completed yet. Complete the challenge first !
   401:
     description: Unauthorized
     content:
@@ -108,6 +100,26 @@ responses:
             value:
               success: false
               message: Refresh token has expired
+  403:
+    description: Forbidden
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+        examples:
+          Challenge Not Started:
+            value:
+              success: false
+              message: Challenge not started yet. Start the challenge first !
+          Challenge Not Completed:
+            value:
+              success: false
+              message: Challenge not completed yet. Complete the challenge first !
   404:
     description: Challenge not found
     content:
