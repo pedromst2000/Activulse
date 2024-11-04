@@ -94,6 +94,10 @@ const swaggerDefinition = {
 			patch: routeDocs.dailyGoals.patchChangeDailyGoals,
 		},
 
+		"/daily-goals/claim-reward": {
+			post: routeDocs.dailyGoals.postClaimReward,
+		},
+
 		//---------------------------RECIPES---------------------------------------------------
 
 		"/recipes/{id}": {
