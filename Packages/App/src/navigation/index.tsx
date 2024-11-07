@@ -131,6 +131,8 @@ const MainTabNavigator: React.FC = (): React.JSX.Element => {
 const AppNavigator: React.FC = (): React.JSX.Element => {
 	const { loggedUser } = useUserContext();
 
+	console.log(`Logged User nav: ${JSON.stringify(loggedUser, null, 2)}`);
+
 	return (
 		<Stack.Navigator screenOptions={{ headerShown: false }}>
 			{!loggedUser ? (
@@ -140,6 +142,7 @@ const AppNavigator: React.FC = (): React.JSX.Element => {
 				</>
 			) : loggedUser && loggedUser?.isNewUser === true ? (
 				<>
+					\
 					<Stack.Screen name="AssessmentRiskStack" component={AssessmentRiskStack} />
 				</>
 			) : loggedUser &&

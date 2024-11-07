@@ -18,7 +18,7 @@ const UserProvider: React.FC<PropsWithChildren> = ({ children }): React.JSX.Elem
 						if (storedUser) {
 							// If there is a user in storage, set it
 							setLoggedUser(JSON.parse(storedUser));
-							console.log('User loaded from storage:', loggedUser);
+							console.log('User loaded from storage:', JSON.parse(storedUser));
 						}
 					} catch (error) {
 						console.error('Error loading hte user from the storage!:', error);

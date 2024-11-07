@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text, View, Image } from 'react-native';
 import { useUserContext } from '../../context/user';
 import Icon from '../Icon';
@@ -7,6 +7,10 @@ import AppI from '../../assets/svg/ilustrations/Icon.svg';
 
 const TopBar: React.FC = (): React.JSX.Element => {
 	const { loggedUser } = useUserContext();
+
+	useEffect(() => {
+		console.log(`loggedUser TopBar: ${JSON.stringify(loggedUser, null, 2)}`);
+	}, []);
 
 	return (
 		<View

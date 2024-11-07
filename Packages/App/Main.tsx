@@ -39,6 +39,8 @@ const MainApp: React.FC = (): React.JSX.Element => {
 
 	// Display error screen if any error occurred
 	if (anErrorOccurred) {
+		console.log('An error occurred while loading the user from storage');
+
 		return <Error />;
 	}
 
