@@ -1,4 +1,4 @@
-import { Text, View , Image, Linking } from 'react-native';
+import { Text, View, Image, Linking } from 'react-native';
 import AnimatedComponent from '@/src/components/Animated';
 import { ScrollView } from 'react-native-gesture-handler';
 import GoBackBtn from '@/src/components/GoBackBtn';
@@ -13,7 +13,10 @@ const QuitSmoking: React.FC = (): React.JSX.Element => {
 		<AnimatedComponent animation="FadeIn">
 			<ScrollView keyboardShouldPersistTaps="handled">
 				<View className="flex-row items-center mt-10 ml-4 z-10">
-					<GoBackBtn onPress={() => navigation.navigate('HealthList' as never)} isRounded={true} />
+					<GoBackBtn
+						onPress={() => navigation.navigate('HealthList' as never)}
+						isRounded={true}
+					/>
 					<Text className="font-merriweather-bold text-[22px] md:text-xl lg:text-2xl text-secondary-700 ml-14">
 						Quit Smoking
 					</Text>

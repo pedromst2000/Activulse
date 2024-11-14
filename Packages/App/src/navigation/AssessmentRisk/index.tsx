@@ -30,7 +30,6 @@ export type AssessmentRiskStackParamList = {
 	BonusAssessment: undefined;
 	BonusOnboarding: {
 		isFastFood?: boolean;
-		
 	};
 };
 

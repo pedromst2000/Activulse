@@ -7,9 +7,14 @@ const Error: React.FC = (): React.JSX.Element => {
 	return (
 		<View className="flex-1 items-center justify-center p-4 md:p-8">
 			<View className="w-full max-w-xs md:max-w-md items-center">
-				<Ilustration ilustration={ErrorIlus} width={200} height={200} className="w-48 h-48 md:w-64 md:h-64" />
+				<Ilustration
+					ilustration={ErrorIlus}
+					width={200}
+					height={200}
+					className="w-48 h-48 md:w-64 md:h-64"
+				/>
 			</View>
-			
+
 			<View className="w-full max-w-xs md:max-w-md mt-4 items-center">
 				<Text className="text-lg md:text-xl text-center uppercase font-merriweather-bold text-secondary-700">
 					Oops! Internal Server Error

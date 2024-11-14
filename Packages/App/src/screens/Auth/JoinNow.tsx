@@ -165,9 +165,7 @@ const JoinNow: React.FC = (): React.JSX.Element => {
 							{/* Display long error messages */}
 							{longErrorMessage && (
 								<View className="w-full items-center mb-4">
-									<Text className="text-center text-xs text-red-500">
-										{longErrorMessage}
-									</Text>
+									<Text className="text-center text-xs text-red-500">{longErrorMessage}</Text>
 								</View>
 							)}
 							<View className="flex justify-center items-center gap-6">
@@ -210,8 +208,7 @@ const JoinNow: React.FC = (): React.JSX.Element => {
 									onPress={() => navigation.navigate('SignIn' as never)}
 									className="font-quicksand-semi-bold text-secondary-700 underline"
 								>
-									Already have an account?{' '}
-									<Text className="font-quicksand-bold">Sign In</Text>
+									Already have an account? <Text className="font-quicksand-bold">Sign In</Text>
 								</Text>
 							</View>
 

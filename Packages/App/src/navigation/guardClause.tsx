@@ -29,12 +29,16 @@ const guardClause = (
 	}
 
 	if (!mustBeLogged && loggedUser && loggedUser.isNewUser === true) {
-        return AssessmentRiskStack; // FallBack if logged
-    }
+		return AssessmentRiskStack; // FallBack if logged
+	}
 
-    if (!mustBeLogged && loggedUser && loggedUser.isNewUser === false && loggedUser.isAssessmentDone === false) {
-        
-    }
+	if (
+		!mustBeLogged &&
+		loggedUser &&
+		loggedUser.isNewUser === false &&
+		loggedUser.isAssessmentDone === false
+	) {
+	}
 
 	return destiny;
 };

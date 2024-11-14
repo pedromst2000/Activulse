@@ -18,7 +18,7 @@ type SlideProps = {
 	id: number;
 	title: string;
 	description: string;
-	imageKey: string; 
+	imageKey: string;
 };
 
 const BonusOnboardingItem: React.FC<SlideProps> = React.memo(
@@ -27,7 +27,7 @@ const BonusOnboardingItem: React.FC<SlideProps> = React.memo(
 
 		// Memoize the image source to avoid re-calculating on every render
 		const illustrationSource: ImageSourcePropType = useMemo(() => {
-			return imageMapping[imageKey]; 
+			return imageMapping[imageKey];
 		}, [imageKey]);
 
 		return (

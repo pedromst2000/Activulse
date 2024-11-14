@@ -8,10 +8,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { MainTabParamList } from '../navigation';
 import { useNavigation } from '@react-navigation/native';
 
-
 const Home: React.FC = (): React.JSX.Element => {
-
-		const navigation = useNavigation();
+	const navigation = useNavigation();
 
 	return (
 		<AnimatedComponent animation="FadeIn">
@@ -20,10 +18,10 @@ const Home: React.FC = (): React.JSX.Element => {
 			</View>
 			<View className="flex-1 py-5 justify-center items-center bg-primary-50">
 				<View className="flex justify-center items-center">
-					<TouchableOpacity activeOpacity={0.7} className="flex justify-center items-center"
-						onPress={() => 
-							navigation.navigate('HealthList' as never)
-						}
+					<TouchableOpacity
+						activeOpacity={0.7}
+						className="flex justify-center items-center"
+						onPress={() => navigation.navigate('HealthList' as never)}
 					>
 						<View
 							className="rounded-2xl  w-11/12"

@@ -10,6 +10,24 @@ const UserProvider: React.FC<PropsWithChildren> = ({ children }): React.JSX.Elem
 	const [loading, setLoading] = useState(true);
 	const [animationComplete, setAnimationComplete] = useState<boolean>(false);
 
+	useEffect(() => {
+		// To load the user from storage when the app starts
+		const loadUserFromStorage = async () => {
+			try {
+				const storedUser = await AsyncStorage.getItem('loggedUser');
+				if (storedUser) {
+					// If there is a user in storage, set it
+					setLoggedUser(JSON.parse(storedUser));
+					console.log('User loaded from storage:', loggedUser);
+				}
+			} catch (error) {
+				console.error('Error loading hte user from the storage!:', error);
+			} finally {
+				setLoading(false);
+			}
+		};
+		loadUserFromStorage();
+	}, []);
 			useEffect(() => {
 				// To load the user from storage when the app starts
 				const loadUserFromStorage = async () => {
@@ -29,22 +47,21 @@ const UserProvider: React.FC<PropsWithChildren> = ({ children }): React.JSX.Elem
 				loadUserFromStorage();
 			}, []);
 
-
-		useEffect(() => {
-			// To save the user to storage when the user changes
-			const saveUserToStorage = async () => {
-				try {
-					if (loggedUser) {
-						await AsyncStorage.setItem('loggedUser', JSON.stringify(loggedUser));
-					} else {
-						await AsyncStorage.removeItem('loggedUser');
-					}
-				} catch (error) {
-					console.error('Error saving the user in the storage:', error);
+	useEffect(() => {
+		// To save the user to storage when the user changes
+		const saveUserToStorage = async () => {
+			try {
+				if (loggedUser) {
+					await AsyncStorage.setItem('loggedUser', JSON.stringify(loggedUser));
+				} else {
+					await AsyncStorage.removeItem('loggedUser');
 				}
-			};
-			saveUserToStorage();
-		}, [loggedUser]);
+			} catch (error) {
+				console.error('Error saving the user in the storage:', error);
+			}
+		};
+		saveUserToStorage();
+	}, [loggedUser]);
 
 	const contextValue: UserContextProps = useMemo(
 		() => ({
