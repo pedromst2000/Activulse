@@ -14,7 +14,6 @@ type BodyData = {
 	total_cholesterol: number;
 };
 
-
 const heartRiskAssessment = async (bodyData: BodyData): Promise<APIResponse> => {
 	const { data }: AxiosResponse<APIResponse> = await api.post(
 		'/users/heart-risk-assessment',
@@ -22,7 +21,6 @@ const heartRiskAssessment = async (bodyData: BodyData): Promise<APIResponse> => 
 	);
 	return data; // Return the full data object here.
 };
-
 
 const useHeartRiskAssessment = (bodyData: BodyData): UseMutationResult<APIResponse, Error> => {
 	return useMutation({

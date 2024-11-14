@@ -71,20 +71,18 @@ const Profile: React.FC = (): React.JSX.Element => {
 				</View>
 				<View className="flex-1 justify-center items-center space-y-4 md:space-y-6 lg:space-y-8">
 					<Button
-					className='px-12 py-2'
-					// onPress={() => navigation.navigate('C')}
+						className="px-12 py-2"
+						// onPress={() => navigation.navigate('C')}
 					>
-						<Text
-							className='font-quicksand-bold text-secondary-700 text-base md:text-lg lg:text-xl'
-						>Change Password</Text>
+						<Text className="font-quicksand-bold text-secondary-700 text-base md:text-lg lg:text-xl">
+							Change Password
+						</Text>
 					</Button>
 
-					<Button
-						className='px-12 py-2'
-					onPress={handleSignOut}>
-						<Text
-							className='font-quicksand-bold text-secondary-700 text-base md:text-lg lg:text-xl'
-						>Sign Out</Text>
+					<Button className="px-12 py-2" onPress={handleSignOut}>
+						<Text className="font-quicksand-bold text-secondary-700 text-base md:text-lg lg:text-xl">
+							Sign Out
+						</Text>
 					</Button>
 				</View>
 			</View>

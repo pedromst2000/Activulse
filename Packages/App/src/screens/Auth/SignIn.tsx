@@ -60,7 +60,6 @@ const SignIn: React.FC = (): React.JSX.Element => {
 								AsyncStorage.getItem('loggedUser').then((user) =>
 									console.log('AsyncStorage value:', user),
 								);
-
 							}, 2000); // delaying the navigation for 2 seconds after navigating to the risk assessment screen (new user) or home screen
 
 							// Save the tokens on the device storage

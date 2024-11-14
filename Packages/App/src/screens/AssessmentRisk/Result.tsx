@@ -20,8 +20,6 @@ type AssessmentResultNavigationProp = NativeStackNavigationProp<
 	'AssessmentRiskResult'
 >;
 
-
-
 const Result: React.FC = (): React.JSX.Element => {
 	const navigation = useNavigation<AssessmentResultNavigationProp>();
 	const _navigation_ = useNavigation();
@@ -105,9 +103,8 @@ const Result: React.FC = (): React.JSX.Element => {
 						{/* Risk Percentage and Warning */}
 						<View className="mt-5 items-center">
 							<Text className="text-3xl font-quicksand-bold text-secondary-700">
-								{route.params.riskScore}%{
-									route.params.health_data.diabetes === 'Yes' ? '*' : ''
-								}
+								{route.params.riskScore}%
+								{route.params.health_data.diabetes === 'Yes' ? '*' : ''}
 							</Text>
 							<Text className="font-quicksand-medium text-base tracking-wide text-secondary-700">
 								10-year risk of CV event
@@ -150,9 +147,7 @@ const Result: React.FC = (): React.JSX.Element => {
 									</View>
 									<View>
 										<Text className="font-quicksand-medium text-secondary-700 tracking-wide">
-											{
-												route.params.health_data.gender
-											}
+											{route.params.health_data.gender}
 										</Text>
 									</View>
 								</View>
@@ -162,9 +157,7 @@ const Result: React.FC = (): React.JSX.Element => {
 									</View>
 									<View>
 										<Text className="font-quicksand-medium text-secondary-700 tracking-wide">
-											{
-												route.params.health_data.age
-											}
+											{route.params.health_data.age}
 										</Text>
 									</View>
 								</View>
@@ -176,9 +169,7 @@ const Result: React.FC = (): React.JSX.Element => {
 									</View>
 									<View>
 										<Text className="font-quicksand-medium text-secondary-700 tracking-wide">
-											{
-												route.params.health_data.smoker
-											}
+											{route.params.health_data.smoker}
 										</Text>
 									</View>
 								</View>
@@ -190,9 +181,7 @@ const Result: React.FC = (): React.JSX.Element => {
 									</View>
 									<View>
 										<Text className="font-quicksand-medium text-secondary-700 tracking-wide">
-											{
-												route.params.health_data.diabetes
-											}
+											{route.params.health_data.diabetes}
 										</Text>
 									</View>
 								</View>
@@ -204,9 +193,7 @@ const Result: React.FC = (): React.JSX.Element => {
 									</View>
 									<View>
 										<Text className="font-quicksand-medium text-secondary-700 tracking-wide">
-											{
-												route.params.health_data.treatment_for_hypertension
-											}
+											{route.params.health_data.treatment_for_hypertension}
 										</Text>
 									</View>
 								</View>
@@ -216,9 +203,7 @@ const Result: React.FC = (): React.JSX.Element => {
 									</View>
 									<View>
 										<Text className="font-quicksand-medium text-secondary-700 tracking-wide">
-											{
-												route.params.health_data.systolic_blood_pressure
-											} mmHg
+											{route.params.health_data.systolic_blood_pressure} mmHg
 										</Text>
 									</View>
 								</View>
@@ -228,9 +213,7 @@ const Result: React.FC = (): React.JSX.Element => {
 									</View>
 									<View>
 										<Text className="font-quicksand-medium text-secondary-700 tracking-wide">
-											{
-												route.params.health_data.HDL_cholesterol
-											} mg/dl
+											{route.params.health_data.HDL_cholesterol} mg/dl
 										</Text>
 									</View>
 								</View>
@@ -242,9 +225,7 @@ const Result: React.FC = (): React.JSX.Element => {
 									</View>
 									<View>
 										<Text className="font-quicksand-medium text-secondary-700 tracking-wide">
-											{
-												route.params.health_data.total_cholesterol
-											} mg/dl
+											{route.params.health_data.total_cholesterol} mg/dl
 										</Text>
 									</View>
 								</View>
@@ -255,8 +236,9 @@ const Result: React.FC = (): React.JSX.Element => {
 							<Button
 								onPress={() => {
 									navigation.navigate('InitBonusAssessment' as never);
-									AsyncStorage.getItem('loggedUser').then((user) => console.log(`LoggedUser: ${user}`));
-
+									AsyncStorage.getItem('loggedUser').then((user) =>
+										console.log(`LoggedUser: ${user}`),
+									);
 								}}
 								className="w-full"
 							>

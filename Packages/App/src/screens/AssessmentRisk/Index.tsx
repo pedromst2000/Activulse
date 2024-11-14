@@ -79,7 +79,10 @@ const InitAssessment: React.FC = (): React.JSX.Element => {
 								className="bg-primary-50 border-2 border-accent-500"
 							/>
 						</View>
-						<Button onPress={handleSignOut} className="flex-1 bg-primary-50 border-2 border-accent-500">
+						<Button
+							onPress={handleSignOut}
+							className="flex-1 bg-primary-50 border-2 border-accent-500"
+						>
 							<Text className="font-quicksand-bold text-secondary-700 text-base text-center">
 								Sign Out
 							</Text>

@@ -37,62 +37,64 @@ const AgeQuestion: React.FC<AgeQuestionProps> = ({
 	}, [showError]);
 
 	return (
-		<AnimatedComponent animation="FadeIn"
-			
-		>
-		<View className="flex justify-center items-center p-4">
-			<View className="mb-2">
-				<Text className="font-merriweather-bold text-xl md:text-2xl lg:text-3xl text-secondary-700 text-center">
-					How old are you ?
-				</Text>
-			</View>
-			<View className="mb-2">
-				<Ilustration ilustration={AgeIlus} width={320} height={320} />
-			</View>
-			{/* ERROR MESSAGE */}
-			{showError && (
-				<AnimatedComponent animation="FadeIn">
-					<View className="mb-2">
-						<Text className="font-quicksand-bold text-red-500 text-sm text-center">
-							Age must be between 30 and 99
-						</Text>
-					</View>
-				</AnimatedComponent>
-			)}
-
-			<View className="mb-4 w-
-				flex justify-center items-center p-1
-			">
-				<Input
-					placeholder="Insert your age"
-					value={age}
-					onChange={(text) => setAge(text)}
-					keyboardType="numeric"
-					className="w-full"
-				/>
-			</View>
-			<View className="w-full mb-4 mt-4
-				flex justify-center items-center p-2
-			">
-				<Button
-					disabled={age === ''}
-					onPress={() => {
-						if (!utils.validateData.isValid(age, 'age')) {
-							setIsValidAge(false);
-							setShowError(true);
-						} else {
-							setIsValidAge(true);
-							setShowError(false);
-							handleNext();
-						}
-					}}
-				>
-					<Text className="font-quicksand-bold text-secondary-700 text-base text-center md:text-lg lg:text-xl">
-						Next
+		<AnimatedComponent animation="FadeIn">
+			<View className="flex justify-center items-center p-4">
+				<View className="mb-2">
+					<Text className="font-merriweather-bold text-xl md:text-2xl lg:text-3xl text-secondary-700 text-center">
+						How old are you ?
 					</Text>
-				</Button>
+				</View>
+				<View className="mb-2">
+					<Ilustration ilustration={AgeIlus} width={320} height={320} />
+				</View>
+				{/* ERROR MESSAGE */}
+				{showError && (
+					<AnimatedComponent animation="FadeIn">
+						<View className="mb-2">
+							<Text className="font-quicksand-bold text-red-500 text-sm text-center">
+								Age must be between 30 and 99
+							</Text>
+						</View>
+					</AnimatedComponent>
+				)}
+
+				<View
+					className="mb-4 w-
+				flex justify-center items-center p-1
+			"
+				>
+					<Input
+						placeholder="Insert your age"
+						value={age}
+						onChange={(text) => setAge(text)}
+						keyboardType="numeric"
+						className="w-full"
+					/>
+				</View>
+				<View
+					className="w-full mb-4 mt-4
+				flex justify-center items-center p-2
+			"
+				>
+					<Button
+						disabled={age === ''}
+						onPress={() => {
+							if (!utils.validateData.isValid(age, 'age')) {
+								setIsValidAge(false);
+								setShowError(true);
+							} else {
+								setIsValidAge(true);
+								setShowError(false);
+								handleNext();
+							}
+						}}
+					>
+						<Text className="font-quicksand-bold text-secondary-700 text-base text-center md:text-lg lg:text-xl">
+							Next
+						</Text>
+					</Button>
+				</View>
 			</View>
-		</View>
 		</AnimatedComponent>
 	);
 };

@@ -79,11 +79,12 @@ const BonusAssessment: React.FC = (): React.JSX.Element => {
 
 					{step === 3 &&
 						(knowDietState ? (
-							<DietSelection diet={diet} setDiet={setDiet} 
-							stressState={stressState}
-							KnowDietState={knowDietState}
-							FastFoodState={FastFoodState}
-								
+							<DietSelection
+								diet={diet}
+								setDiet={setDiet}
+								stressState={stressState}
+								KnowDietState={knowDietState}
+								FastFoodState={FastFoodState}
 							/>
 						) : (
 							<FastFoodSelection
