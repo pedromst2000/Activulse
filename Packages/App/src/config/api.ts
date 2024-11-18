@@ -12,9 +12,9 @@ const axiosOptions: CreateAxiosDefaults = {
 	}, // Default header for all requests
 	timeout: 120000, // 2 minutes
 	timeoutErrorMessage: 'Request timed out', // Error message when request times out
-	withCredentials: true, // Disable sending and receiving cookies from the server
+	withCredentials: false, // Disable sending and receiving cookies from the server
 } as const;
 
-console.log(`API_URL: ${axiosOptions.baseURL}`);
+console.log('API URL:', axiosOptions.baseURL);
 
 export default axiosOptions;

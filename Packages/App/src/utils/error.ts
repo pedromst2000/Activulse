@@ -1,3 +1,5 @@
+import axiosOptions from '../config/api';
+
 const getMessage = (error: any): string => {
 	if (error && error.response && error.response.data && error.response.data.message) {
 		return error.response.data.message === 'Validation Error'
@@ -5,6 +7,8 @@ const getMessage = (error: any): string => {
 			: error.response.data.message;
 	} else {
 		console.log('Error:', error);
+		console.log(`API URL: ${axiosOptions.baseURL}`);
+
 		return 'An error occurred';
 	}
 };

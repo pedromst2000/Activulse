@@ -12,13 +12,26 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app needs access to the camera to take photos.",
+        "NSLocationWhenInUseUsageDescription": "This app needs access to your location.",
+        "NSPhotoLibraryUsageDescription": "This app needs access to your photo library."
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "src/assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "INTERNET",
+        "CAMERA",
+        "ACCESS_FINE_LOCATION",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ],
+      "package": "com.anonymous.activulse"
     },
     "plugins": [
       "expo-font",
