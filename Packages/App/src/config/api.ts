@@ -15,6 +15,4 @@ const axiosOptions: CreateAxiosDefaults = {
 	withCredentials: false, // Disable sending and receiving cookies from the server
 } as const;
 
-console.log('API URL:', axiosOptions.baseURL);
-
 export default axiosOptions;

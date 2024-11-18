@@ -1,4 +1,3 @@
-import axiosOptions from '../config/api';
 
 const getMessage = (error: any): string => {
 	if (error && error.response && error.response.data && error.response.data.message) {
@@ -7,7 +6,8 @@ const getMessage = (error: any): string => {
 			: error.response.data.message;
 	} else {
 		console.log('Error:', error);
-		console.log(`API URL: ${axiosOptions.baseURL}`);
+		console.log('Error Request:', error.request);
+		console.log('Error Response:', error.response);
 
 		return 'An error occurred';
 	}
