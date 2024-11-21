@@ -10,38 +10,45 @@ const UserProvider: React.FC<PropsWithChildren> = ({ children }): React.JSX.Elem
 	const [loading, setLoading] = useState(true);
 	const [animationComplete, setAnimationComplete] = useState<boolean>(false);
 
-	useEffect(() => {
-		// To load the user from storage when the app starts
-		const loadUserFromStorage = async () => {
-			try {
-				const storedUser = await AsyncStorage.getItem('loggedUser');
-				if (storedUser) {
-					// If there is a user in storage, set it
-					setLoggedUser(JSON.parse(storedUser));
-					console.log('User loaded from storage:', loggedUser);
-				}
-			} catch (error) {
-				console.error('Error loading hte user from the storage!:', error);
-			} finally {
-				setLoading(false);
+	// To load the user from storage when the app starts
+	const loadUserFromStorage = async () => {
+		try {
+			const storedUser = await AsyncStorage.getItem('loggedUser');
+			if (storedUser) {
+				// If there is a user in storage, set it
+				setLoggedUser(JSON.parse(storedUser));
+				console.log('User loaded from storage:', JSON.parse(storedUser));
 			}
-		};
+		} catch (error) {
+			console.error('Error loading the user from the storage!:', error);
+		} finally {
+			setLoading(false);
+		}
+	};
+
+	// To save the user to storage when the user changes
+	const saveUserToStorage = async () => {
+		try {
+			if (loggedUser) {
+				await AsyncStorage.setItem('loggedUser', JSON.stringify(loggedUser));
+			} else {
+				await AsyncStorage.removeItem('loggedUser');
+			}
+		} catch (error) {
+			console.error('Error saving the user in the storage:', error);
+		}
+	};
+
+	const updateUser = (user: LoggedUser): void => {
+		AsyncStorage.setItem('loggedUser', JSON.stringify(user));
+		setLoggedUser(user);
+	};
+
+	useEffect(() => {
 		loadUserFromStorage();
 	}, []);
 
 	useEffect(() => {
-		// To save the user to storage when the user changes
-		const saveUserToStorage = async () => {
-			try {
-				if (loggedUser) {
-					await AsyncStorage.setItem('loggedUser', JSON.stringify(loggedUser));
-				} else {
-					await AsyncStorage.removeItem('loggedUser');
-				}
-			} catch (error) {
-				console.error('Error saving the user in the storage:', error);
-			}
-		};
 		saveUserToStorage();
 	}, [loggedUser]);
 
@@ -49,6 +56,7 @@ const UserProvider: React.FC<PropsWithChildren> = ({ children }): React.JSX.Elem
 		() => ({
 			loggedUser: loggedUser,
 			setLoggedUser,
+			updateUser,
 		}),
 		[loggedUser, setLoggedUser],
 	);

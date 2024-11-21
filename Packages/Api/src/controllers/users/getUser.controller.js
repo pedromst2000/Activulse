@@ -131,10 +131,6 @@ async function getUser(req, res) {
 			return;
 		}
 
-		const isNewUser = await db.mysql.RiskScore.findOne({
-			where: { user_id: user.user_ID },
-		});
-
 		const responseData = isLoggedUser
 			? {
 					user_id: user.user_ID,
@@ -172,7 +168,7 @@ async function getUser(req, res) {
 					diet:
 						user.diet !== null
 							? { id: user.diet.diet_ID, name: user.diet.diet_name }
-							: null,
+							: "Unknown",
 
 					gender: user.gender,
 					age: user.age,

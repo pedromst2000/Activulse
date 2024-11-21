@@ -21,8 +21,11 @@ const MainApp: React.FC = (): React.JSX.Element => {
 				if (storedUser) {
 					setLoggedUser(JSON.parse(storedUser));
 				}
-			} catch (error) {
+			} catch (error : any) {
 				console.error('Error loading user from storage:', error);
+				if (error.message === 'Network Error') {
+					console.error('Network error occurred while loading user from storage');
+				}
 				setAnErrorOccurred(true); // Set error state if there's an issue
 			} finally {
 				setLoadingUser(false); // Once user is loaded or error occurs, stop loading
@@ -39,6 +42,8 @@ const MainApp: React.FC = (): React.JSX.Element => {
 
 	// Display error screen if any error occurred
 	if (anErrorOccurred) {
+		console.log('An error occurred while loading the user from storage');
+
 		return <Error />;
 	}
 

@@ -2,7 +2,9 @@ import { API_URL } from '@env';
 import { CreateAxiosDefaults } from 'axios';
 
 const axiosOptions: CreateAxiosDefaults = {
-	baseURL: API_URL, // Base URL for all requests
+	// baseURL: 'http://192.168.1.73:5000/api-activulse/v1',
+	// Base URL for all requests
+	baseURL: API_URL,
 	headers: {
 		'Content-Type': 'application/json',
 		// ! Enable Caching only in development for debugging purposes !! DO NOT USE IN PRODUCTION CAN CAUSE PERFORMANCE ISSUES
@@ -12,7 +14,7 @@ const axiosOptions: CreateAxiosDefaults = {
 	}, // Default header for all requests
 	timeout: 120000, // 2 minutes
 	timeoutErrorMessage: 'Request timed out', // Error message when request times out
-	withCredentials: true, // Disable sending and receiving cookies from the server
+	withCredentials: false, // Disable sending and receiving cookies from the server
 } as const;
 
 export default axiosOptions;

@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text, View, Image } from 'react-native';
 import { useUserContext } from '../../context/user';
 import Icon from '../Icon';
@@ -7,6 +7,10 @@ import AppI from '../../assets/svg/ilustrations/Icon.svg';
 
 const TopBar: React.FC = (): React.JSX.Element => {
 	const { loggedUser } = useUserContext();
+
+	useEffect(() => {
+		console.log('loggedUserds:', JSON.stringify(loggedUser, null, 2));
+	}, []);
 
 	return (
 		<View
@@ -17,11 +21,16 @@ const TopBar: React.FC = (): React.JSX.Element => {
 			<View className="flex flex-row items-center space-x-4">
 				{/* User Avatar */}
 				<View className="relative w-14 h-14 rounded-full border-2 border-secondary-700 overflow-hidden">
+					{/*TODO:
+						Add a fallback avatar if the user doesn't have one set (bug prevention)
+						
+						*/}
+
 					<Image
 						className="w-full h-full"
 						source={
-							loggedUser?.avatar
-								? { uri: loggedUser.avatar }
+							loggedUser?.avatar !== null
+								? { uri: loggedUser?.avatar }
 								: {
 										uri: `https://api.dicebear.com/7.x/adventurer-neutral/svg?seed=${loggedUser?.username}`,
 									}

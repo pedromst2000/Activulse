@@ -73,7 +73,7 @@ const BloodPressureQuestion: React.FC<BloodPressureQuestionProps> = ({
 							value={bloodPressure}
 							onChange={(text) => setBloodPressure(text)}
 							keyboardType="numeric"
-							className="w-[70%] sm:w-[80%] md:w-[70%] lg:w-[60%] pr-2 py-2"
+							className=" w-[70%] sm:w-[80%] md:w-[70%] lg:w-[60%]"
 						/>
 						<Text className="ml-2 font-quicksand-bold text-secondary-700 text-xs sm:text-sm md:text-base">
 							mmHg

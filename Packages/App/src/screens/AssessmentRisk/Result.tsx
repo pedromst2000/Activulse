@@ -9,7 +9,7 @@ import Ilustration from '@/src/components/Ilustration';
 import GaugeChartIlus from '@/src/assets/svg/ilustrations/heartRiskAssessment/GaugeChart.svg';
 import { AssessmentRiskStackParamList } from '@/src/navigation/AssessmentRisk';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useUserContext } from '@/src/context/user';
 
 type AssessmentResultRouteProp = RouteProp<
 	AssessmentRiskStackParamList,
@@ -22,8 +22,20 @@ type AssessmentResultNavigationProp = NativeStackNavigationProp<
 
 const Result: React.FC = (): React.JSX.Element => {
 	const navigation = useNavigation<AssessmentResultNavigationProp>();
-	const _navigation_ = useNavigation();
 	const route = useRoute<AssessmentResultRouteProp>();
+	const { loggedUser, updateUser } = useUserContext();
+
+	const handleNavigate = (): void => {
+		const update = {
+			isNewUser: false,
+		};
+
+		if (loggedUser) {
+			updateUser({ ...loggedUser, ...update });
+		}
+
+		navigation.navigate('InitBonusAssessment' as never);
+	};
 
 	return (
 		<AnimatedComponent animation="SlideInFromRight">
@@ -235,10 +247,7 @@ const Result: React.FC = (): React.JSX.Element => {
 						<View className="mt-10 w-11/12 sm:w-4/5 mx-auto">
 							<Button
 								onPress={() => {
-									navigation.navigate('InitBonusAssessment' as never);
-									AsyncStorage.getItem('loggedUser').then((user) =>
-										console.log(`LoggedUser: ${user}`),
-									);
+									handleNavigate();
 								}}
 								className="w-full"
 							>

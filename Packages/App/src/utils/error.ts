@@ -5,17 +5,22 @@ const getMessage = (error: any): string => {
 			: error.response.data.message;
 	} else {
 		console.log('Error:', error);
+		console.log('Error Request:', error.request);
+		console.log('Error Response:', error.response);
+
 		return 'An error occurred';
 	}
 };
 const returnError = (error: any): any => {
-	return (
-		{ ...error?.response?.data, status: error?.response?.status } || {
+	if (error && error.response && error.response.data) {
+		return { ...error.response.data, status: error.response.status };
+	} else {
+		return {
 			success: false,
 			message: 'An error has occurred',
 			status: 500,
-		}
-	);
+		};
+	}
 };
 
 export default { getMessage, returnError };

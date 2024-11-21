@@ -5,8 +5,6 @@ import Assessment from '@/src/screens/AssessmentRisk/Assessment';
 import Result from '@/src/screens/AssessmentRisk/Result';
 import HowItWorks from '@/src/screens/AssessmentRisk/HowItWorks';
 import InitBonusAssessment from '@/src/screens/BonusAssessment';
-import BonusAssessment from '@/src/screens/BonusAssessment/Assessment';
-import BonusOnboarding from '@/src/screens/BonusAssessment/BonusOnboarding';
 
 export type AssessmentRiskStackParamList = {
 	InitAssessment: undefined;
@@ -27,10 +25,6 @@ export type AssessmentRiskStackParamList = {
 	};
 	HowItWorks: undefined;
 	InitBonusAssessment: undefined;
-	BonusAssessment: undefined;
-	BonusOnboarding: {
-		isFastFood?: boolean;
-	};
 };
 
 const Stack = createStackNavigator<AssessmentRiskStackParamList>();
@@ -43,8 +37,6 @@ const AssessmentRiskStack: React.FC = (): React.JSX.Element => {
 			<Stack.Screen name="AssessmentRiskResult" component={Result} />
 			<Stack.Screen name="HowItWorks" component={HowItWorks} />
 			<Stack.Screen name="InitBonusAssessment" component={InitBonusAssessment} />
-			<Stack.Screen name="BonusAssessment" component={BonusAssessment} />
-			<Stack.Screen name="BonusOnboarding" component={BonusOnboarding} />
 		</Stack.Navigator>
 	);
 };

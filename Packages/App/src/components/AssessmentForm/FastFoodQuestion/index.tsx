@@ -10,8 +10,9 @@ import Ilustration from '../../Ilustration';
 import Button from '../../Button';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { AssessmentRiskStackParamList } from '@/src/navigation/AssessmentRisk';
+import { BonusAssessmentStackParamList } from '@/src/navigation/BonusAssessment';
 import utils from '@/src/utils';
+import { useUserContext } from '@/src/context/user';
 
 type FastFoodSelectionProps = {
 	FastFoodState: 'Rare' | 'Sometimes' | 'Frequently' | null;
@@ -23,8 +24,8 @@ type FastFoodSelectionProps = {
 };
 
 type FastFooddNavigationProp = NativeStackNavigationProp<
-	AssessmentRiskStackParamList,
-	'AssessmentRisk'
+	BonusAssessmentStackParamList,
+	'BonusAssessment'
 >;
 
 const FastFoodSelection: React.FC<FastFoodSelectionProps> = ({
@@ -40,6 +41,7 @@ const FastFoodSelection: React.FC<FastFoodSelectionProps> = ({
 	const [showError, setShowError] = React.useState<boolean>(false);
 	const [errorMessage, setErrorMessage] = React.useState<string>('');
 	const timeoutRef = useRef<NodeJS.Timeout | null>(null); // Manage the timeout for the error message
+	const { loggedUser, updateUser } = useUserContext();
 
 	const { mutateAsync } = useExtraAssessment({
 		stress: stressState,
@@ -100,16 +102,11 @@ const FastFoodSelection: React.FC<FastFoodSelectionProps> = ({
 			});
 
 			if (resData.success) {
-				const user = await AsyncStorage.getItem('loggedUser');
-				if (user) {
-					const loggedUser = JSON.parse(user);
-					loggedUser.isAssessmentDone = true;
-					await AsyncStorage.setItem('loggedUser', JSON.stringify(loggedUser));
-				}
-
 				navigation.navigate('BonusOnboarding', {
 					isFastFood:
 						FastFoodState === 'Frequently' || FastFoodState === 'Sometimes' ? true : false,
+					fastFoodState: FastFoodState,
+					stressState: stressState,
 				});
 			}
 		} catch (error: any) {
@@ -199,7 +196,12 @@ const FastFoodSelection: React.FC<FastFoodSelectionProps> = ({
 
 				{/* Next Button */}
 				<View className="w-full">
-					<Button disabled={FastFoodState === null} onPress={() => handleExtraAssessment()}>
+					<Button
+						disabled={FastFoodState === null}
+						onPress={() => {
+							handleExtraAssessment();
+						}}
+					>
 						<Text className="font-quicksand-bold text-secondary-700 text-base">Finish</Text>
 					</Button>
 				</View>

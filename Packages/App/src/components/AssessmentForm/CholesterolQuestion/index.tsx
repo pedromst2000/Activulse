@@ -10,7 +10,6 @@ import Button from '../../Button';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { AssessmentRiskStackParamList } from '@/src/navigation/AssessmentRisk';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type CholesterolQuestiondNavigationProp = NativeStackNavigationProp<
 	AssessmentRiskStackParamList,
@@ -112,19 +111,6 @@ const CholesterolQuestion: React.FC<CholesterolQuestionProps> = ({
 			if (resData.success && resData.data) {
 				const { riskScore, typeRisk, health_data } = resData.data;
 
-				const user = await AsyncStorage.getItem('loggedUser');
-				if (user) {
-					const loggedUser = JSON.parse(user);
-					loggedUser.isNewUser = false;
-					loggedUser.avatar =
-						gender === 'Male'
-							? 'https://res.cloudinary.com/dvthg2763/image/upload/v1716397591/activevulse/dev/avatars/male_default_avatar_h6oh4l.png'
-							: 'https://res.cloudinary.com/dvthg2763/image/upload/v1716397591/activevulse/dev/avatars/female_default_avatar_pqwebu.jpg';
-					await AsyncStorage.setItem('loggedUser', JSON.stringify(loggedUser));
-
-					console.log(`User store updated: ${JSON.stringify(loggedUser)}`);
-				}
-
 				navigation.navigate('AssessmentRiskResult', {
 					riskScore,
 					typeRisk,
@@ -192,7 +178,7 @@ const CholesterolQuestion: React.FC<CholesterolQuestionProps> = ({
 									label === 'HDL' ? setHDL(text) : setTotalCholesterol(text)
 								}
 								keyboardType="numeric"
-								className="flex-1 pr-2 py-2"
+								className=" w-[70%] sm:w-[80%] md:w-[70%] lg:w-[60%]"
 							/>
 							<Text className="ml-2 font-quicksand-bold text-secondary-700 text-xs sm:text-sm md:text-base">
 								mg/dL

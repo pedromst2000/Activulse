@@ -5,16 +5,13 @@ import { useUserContext } from '../context/user';
 import OnBoarding from '../screens/Onboarding';
 import AuthStack, { AuthStackParamList } from './Auth';
 import AssessmentRiskStack, { AssessmentRiskStackParamList } from './AssessmentRisk';
-import InitBonusAssessment from '../screens/BonusAssessment';
-import BonusAssessment from '../screens/BonusAssessment/Assessment';
-import BonusOnboarding from '../screens/BonusAssessment/BonusOnboarding';
+import BonusAssessmentStack, { BonusAssessmentStackParamList } from './BonusAssessment';
 import Home from '../screens/Home';
 import Lifestyle from '../screens/Lifestyle/Lifestyle';
 import Profile from '../screens/Profile/Profile';
 import Store from '../screens/Store/Store';
 import config from '../config';
 import Icon from '../components/Icon';
-
 import HomeIS from '../assets/svg/icons/BottomTab/HomeIcon_Selected.svg';
 import HomeINS from '../assets/svg/icons/BottomTab/HomeIcon_N_Selected.svg';
 import LifestyleIS from '../assets/svg/icons/BottomTab/LifestyleIcon_Selected.svg';
@@ -46,10 +43,8 @@ export type RootStackParamList = {
 	AssessmentRiskStack: {
 		screen: keyof AssessmentRiskStackParamList; // 'Assessment' | 'Result' | 'HowItWorks';
 	};
-	InitBonusAssessment: undefined;
-	BonusAssessment: undefined;
-	BonusOnboarding: {
-		isFastFood?: boolean;
+	BonusAssessmentStack: {
+		screen: keyof BonusAssessmentStackParamList; // 'InitBonusAssessment' | 'BonusAssessment' | 'BonusOnboarding';
 	};
 };
 
@@ -146,9 +141,7 @@ const AppNavigator: React.FC = (): React.JSX.Element => {
 			  loggedUser?.isNewUser === false &&
 			  loggedUser?.isAssessmentDone === false ? (
 				<>
-					<Stack.Screen name="InitBonusAssessment" component={InitBonusAssessment} />
-					<Stack.Screen name="BonusAssessment" component={BonusAssessment} />
-					<Stack.Screen name="BonusOnboarding" component={BonusOnboarding} />
+					<Stack.Screen name="BonusAssessmentStack" component={BonusAssessmentStack} />
 				</>
 			) : (
 				<Stack.Screen name="MainTabs" component={MainTabNavigator} />

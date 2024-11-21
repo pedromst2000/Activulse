@@ -53,6 +53,8 @@ responses:
                       type: string
                     stressStatus:
                       type: string
+                    diet:
+                      type: string
                     username:
                       type: string
                     points:
@@ -73,6 +75,7 @@ responses:
                     isAssessmentDone: false
                     fastFoodStatus: Sometimes
                     stressStatus: Frequently
+                    diet: Vegan
                     username: pedromst
                     points: 0
                     avatar: "https://res.cloudinary.com/dvthg2763/image/upload/v1716397591/activevulse/dev/avatars/male_default_avatar_h6oh4l.png"
