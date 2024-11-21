@@ -25,7 +25,6 @@ const BonusAssessment: React.FC = (): React.JSX.Element => {
 
 	const handleNext = (): void => {
 		if (step < 3) setStep(step + 1);
-		else console.log('Assessment Finished');
 	};
 
 	const handlePrev = (): void => {

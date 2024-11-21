@@ -5,24 +5,24 @@ import BonusOnboardingItem from '@/src/components/BonusOnboarding/item';
 import Button from '@/src/components/Button';
 import slides from '@/src/data/BonusOnboarding';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
-import { AssessmentRiskStackParamList } from '@/src/navigation/AssessmentRisk';
+import { BonusAssessmentStackParamList } from '@/src/navigation/BonusAssessment';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { MainTabParamList, RootStackParamList } from '@/src/navigation';
+import { MainTabParamList } from '@/src/navigation';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { useUserContext } from '@/src/context/user';
 
-type BonusOnboardingRouteProp = RouteProp<AssessmentRiskStackParamList, 'BonusOnboarding'>;
+type BonusOnboardingRouteProp = RouteProp<BonusAssessmentStackParamList, 'BonusOnboarding'>;
 type BonusOnboardingNavigationProp = BottomTabNavigationProp<MainTabParamList, 'Home'>;
 
 const BonusOnboarding: React.FC = (): React.JSX.Element => {
 	const navigation = useNavigation<BonusOnboardingNavigationProp>();
 	const route = useRoute<BonusOnboardingRouteProp>();
 	const [currentIndex, setCurrentIndex] = useState<number>(0);
-	const scrollX = useRef(new Animated.Value(0)).current;
+	const scrollX = useRef<Animated.Value>(new Animated.Value(0)).current;
 	const slidesRef = useRef<FlatList<any>>(null);
 	const [isStress, setIsStress] = useState<boolean>(false);
 	const [isFastFood, setIsFastFood] = useState<boolean>(false);
-	const { loggedUser } = useUserContext();
+	const { loggedUser, updateUser } = useUserContext();
 
 	const viewableItemsChanged = useRef(({ viewableItems }: any) => {
 		if (viewableItems.length > 0 && viewableItems[0].index !== undefined) {
@@ -36,10 +36,6 @@ const BonusOnboarding: React.FC = (): React.JSX.Element => {
 		AsyncStorage.getItem('selectedStress').then((res) => {
 			const _isStress_ = res === 'Sometimes' || res === 'Frequently';
 			setIsStress(_isStress_);
-		});
-
-		AsyncStorage.getItem('loggedUser').then((res) => {
-			console.log('loggedUser:', res);
 		});
 
 		setIsFastFood(route.params.isFastFood ? true : false);
@@ -89,6 +85,16 @@ const BonusOnboarding: React.FC = (): React.JSX.Element => {
 						if (slidesRef.current && currentIndex < filteredSlides.length - 1) {
 							slidesRef.current.scrollToIndex({ index: currentIndex + 1 });
 						} else if (currentIndex === filteredSlides.length - 1) {
+							const update = {
+								isAssessmentDone: true,
+								fastFoodStatus: route.params.fastFoodState ?? 'Unknown',
+								stressStatus: route.params.stressState ?? 'Unknown',
+							};
+
+							if (loggedUser) {
+								updateUser({ ...loggedUser, ...update });
+							}
+
 							navigation.navigate('Home');
 						}
 					}}

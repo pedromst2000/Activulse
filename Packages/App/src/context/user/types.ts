@@ -4,6 +4,7 @@ export type LoggedUser = {
 	isAssessmentDone: boolean;
 	fastFoodStatus: string;
 	stressStatus: string;
+	diet: string;
 	username: string;
 	points: number;
 	avatar: string;
@@ -12,4 +13,5 @@ export type LoggedUser = {
 export type UserContextProps = {
 	loggedUser: LoggedUser | null;
 	setLoggedUser: React.Dispatch<React.SetStateAction<LoggedUser | null>>;
+	updateUser: (user: LoggedUser) => void;
 };

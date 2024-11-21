@@ -108,8 +108,6 @@ const FastFoodSelection: React.FC<FastFoodSelectionProps> = ({
 					fastFoodState: FastFoodState,
 					stressState: stressState,
 				});
-
-				
 			}
 		} catch (error: any) {
 			const errorMessage = utils.error.getMessage(error);

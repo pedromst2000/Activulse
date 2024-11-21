@@ -11,7 +11,7 @@ import utils from '@/src/utils';
 
 const InitBonusAssessment: React.FC = (): React.JSX.Element => {
 	const navigation = useNavigation();
-	const { setLoggedUser } = useUserContext();
+	const { setLoggedUser, loggedUser } = useUserContext();
 
 	const handleSignOut = async (): Promise<void> => {
 		// Remove the tokens from the device storage
@@ -50,6 +50,9 @@ const InitBonusAssessment: React.FC = (): React.JSX.Element => {
 							<Button
 								onPress={() => {
 									navigation.navigate('BonusAssessment' as never);
+									console.log(
+										`User state before starting the assessment: ${JSON.stringify(loggedUser, null, 2)}`,
+									);
 								}}
 							>
 								<Text className="font-quicksand-bold text-secondary-700 text-base">Start</Text>

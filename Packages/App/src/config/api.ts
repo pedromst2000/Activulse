@@ -2,7 +2,9 @@ import { API_URL } from '@env';
 import { CreateAxiosDefaults } from 'axios';
 
 const axiosOptions: CreateAxiosDefaults = {
-	baseURL: API_URL, // Base URL for all requests
+	// baseURL: 'http://192.168.1.73:5000/api-activulse/v1',
+	// Base URL for all requests
+	baseURL: API_URL,
 	headers: {
 		'Content-Type': 'application/json',
 		// ! Enable Caching only in development for debugging purposes !! DO NOT USE IN PRODUCTION CAN CAUSE PERFORMANCE ISSUES
