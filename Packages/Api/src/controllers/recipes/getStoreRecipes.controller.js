@@ -80,12 +80,25 @@ async function getStoreRecipes(req, res) {
 
 		category = !category ? "All" : category; // by default the category is All to return all the recipes
 
+		const findUserDiet = await db.mysql.User.findOne({
+			where: {
+				user_ID: loggedUser,
+			},
+			include: {
+				model: db.mysql.Diet,
+				attributes: ["diet_ID", "diet_name"],
+			},
+		});
+
 		const findPremiumRecipes = await db.mysql.Recipe.findAndCountAll({
 			attributes: RECIPE_ATTRIBUTES,
 			where: {
 				...(await GetQueryOptions({
 					category: category,
 				})),
+
+				diet_id: findUserDiet.diet ? findUserDiet.diet.diet_ID : { [Op.ne]: null },
+
 				isPremium: true, // premium recipes
 			},
 			include: [
@@ -103,6 +116,8 @@ async function getStoreRecipes(req, res) {
 				},
 			],
 		});
+
+		// Premium Recipes Bought by the user will not be displayed
 
 		const findUserPremiumRecipes = await db.mysql.Buyer.findAndCountAll({
 			where: {

@@ -9,7 +9,7 @@ const TopBar: React.FC = (): React.JSX.Element => {
 	const { loggedUser } = useUserContext();
 
 	useEffect(() => {
-		console.log(`loggedUser TopBar: ${JSON.stringify(loggedUser, null, 2)}`);
+		console.log('loggedUserds:', JSON.stringify(loggedUser, null, 2));
 	}, []);
 
 	return (
@@ -21,11 +21,18 @@ const TopBar: React.FC = (): React.JSX.Element => {
 			<View className="flex flex-row items-center space-x-4">
 				{/* User Avatar */}
 				<View className="relative w-14 h-14 rounded-full border-2 border-secondary-700 overflow-hidden">
+					
+					
+					{/*TODO:
+						Add a fallback avatar if the user doesn't have one set (bug prevention)
+						
+						*/}
+
 					<Image
 						className="w-full h-full"
 						source={
-							loggedUser?.avatar
-								? { uri: loggedUser.avatar }
+							loggedUser?.avatar !== null
+								? { uri: loggedUser?.avatar }
 								: {
 										uri: `https://api.dicebear.com/7.x/adventurer-neutral/svg?seed=${loggedUser?.username}`,
 									}

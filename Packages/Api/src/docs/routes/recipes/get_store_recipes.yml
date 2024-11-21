@@ -40,7 +40,7 @@ parameters:
       example: "Soups"
 responses:
   200:
-    description: Success - the **total** key indicates the total number of store recipes of the current pagination
+    description: Success - the **total** key indicates the total number of store recipes of the current pagination. If the user has a diet will return only the recipes that match the diet of the user. If the user has no diet, it will return all the recipes.
     content:
       application/json:
         schema:

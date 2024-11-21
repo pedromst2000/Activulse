@@ -43,6 +43,10 @@ async function login(req, res) {
 					],
 					required: false,
 				},
+				{
+					model: db.mysql.Diet,
+					attributes: ["diet_name"],
+				},
 			],
 		});
 
@@ -102,6 +106,7 @@ async function login(req, res) {
 				fastFoodStatus:
 					user.fast_food_status === null ? "Unknown" : user.fast_food_status,
 				stressStatus: user.stress_status === null ? "Unknown" : user.stress_status,
+				diet: user.diet === null ? "Unknown" : user.diet.diet_name,
 				username: user.username,
 				points: user.points,
 				avatar:

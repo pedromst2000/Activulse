@@ -5,8 +5,8 @@ import useExtraAssessment from '@/src/hooks/ReactQuery/users/extraAssessment';
 import utils from '@/src/utils';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { AssessmentRiskStackParamList } from '@/src/navigation/AssessmentRisk';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { BonusAssessmentStackParamList } from '@/src/navigation/BonusAssessment';
+import { useUserContext } from '@/src/context/user';
 
 type DietSelectionProps = {
 	diet: 'DASH' | 'Vegan' | 'Mediterranean' | null;
@@ -17,8 +17,8 @@ type DietSelectionProps = {
 };
 
 type SelectDietNavigationProp = NativeStackNavigationProp<
-	AssessmentRiskStackParamList,
-	'AssessmentRisk'
+	BonusAssessmentStackParamList,
+	'BonusAssessment'
 >;
 
 const DietSelection: React.FC<DietSelectionProps> = ({
@@ -34,6 +34,8 @@ const DietSelection: React.FC<DietSelectionProps> = ({
 		null,
 	);
 
+	const { loggedUser, updateUser } = useUserContext();
+
 	const handleDietSelection = (dietType: 'DASH' | 'Vegan' | 'Mediterranean') => {
 		setSelectedDiet(dietType);
 		setDiet(dietType);
@@ -47,7 +49,6 @@ const DietSelection: React.FC<DietSelectionProps> = ({
 		stress: stressState ?? undefined,
 		havesDiet: KnowDietState ?? undefined,
 		diet: selectedDiet ?? undefined,
-		fastFoodStatus: FastFoodState ?? undefined,
 	});
 
 	useEffect(() => {
@@ -64,13 +65,6 @@ const DietSelection: React.FC<DietSelectionProps> = ({
 		};
 	}, [showError]);
 
-	// Trigger the API call when `selectedDiet` is updated
-	useEffect(() => {
-		if (selectedDiet) {
-			handleExtraAssessment();
-		}
-	}, [selectedDiet]);
-
 	const handleExtraAssessment = async (): Promise<void> => {
 		try {
 			const resData = await mutateAsync({
@@ -80,16 +74,19 @@ const DietSelection: React.FC<DietSelectionProps> = ({
 			});
 
 			if (resData.success) {
-				const user = await AsyncStorage.getItem('loggedUser');
-				if (user) {
-					const loggedUser = JSON.parse(user);
-					loggedUser.isAssessmentDone = true;
-					await AsyncStorage.setItem('loggedUser', JSON.stringify(loggedUser));
+				if (loggedUser) {
+					const update = {
+						diet: selectedDiet ?? '',
+					};
+
+					updateUser({ ...loggedUser, ...update });
 				}
 
 				navigation.navigate('BonusOnboarding', {
 					isFastFood:
 						FastFoodState === 'Frequently' || FastFoodState === 'Sometimes' ? true : false,
+					stressState: stressState,
+					fastFoodState: FastFoodState,
 				});
 			}
 		} catch (error: any) {
@@ -98,6 +95,13 @@ const DietSelection: React.FC<DietSelectionProps> = ({
 			setShowError(true);
 		}
 	};
+
+	// Triggering the API call when `selectedDiet` is updated
+	useEffect(() => {
+		if (selectedDiet) {
+			handleExtraAssessment();
+		}
+	}, [selectedDiet]);
 
 	return (
 		<AnimatedComponent

@@ -11,6 +11,4 @@ router.delete(
 	controllers.cronjob.deleteUnverifiedUsers,
 );
 
-
-
 module.exports = router;

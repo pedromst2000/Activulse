@@ -19,7 +19,7 @@ parameters:
     description: Authorization token
 responses:
   "200":
-    description: Success
+    description: Success - If the user has no diet will be displayed 'Unknown'
     content:
       application/json:
         schema:
