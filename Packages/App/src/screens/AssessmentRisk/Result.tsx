@@ -1,5 +1,4 @@
 import AnimatedComponent from '@/src/components/Animated';
-import GoBackBtn from '@/src/components/GoBackBtn';
 import Button from '@/src/components/Button';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import React from 'react';
@@ -50,11 +49,6 @@ const Result: React.FC = (): React.JSX.Element => {
 				className="bg-primary-50"
 			>
 				<View className="flex-1 w-full relative">
-					{/* Go Back Button */}
-					<View className="absolute top-8 left-5 z-10">
-						<GoBackBtn onPress={() => navigation.goBack()} isRounded={true} />
-					</View>
-
 					{/* Risk Layout */}
 					<View>
 						{/* Title */}
@@ -252,7 +246,7 @@ const Result: React.FC = (): React.JSX.Element => {
 								className="w-full"
 							>
 								<Text className="font-quicksand-bold text-secondary-700 text-base text-center">
-									Next
+									Continue
 								</Text>
 							</Button>
 						</View>

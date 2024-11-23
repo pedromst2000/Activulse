@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import AnimatedComponent from '@/src/components/Animated';
 import ProgressBar from '@/src/components/AssessmentForm/ProgressBar';
@@ -13,6 +13,7 @@ import DiabetesQuestion from '@/src/components/AssessmentForm/DiabetesQuestion';
 import HypertensionQuestion from '@/src/components/AssessmentForm/HypertensionQuestion';
 import BloodPressureQuestion from '@/src/components/AssessmentForm/BloodPressureQuestion';
 import CholesterolQuestion from '@/src/components/AssessmentForm/CholesterolQuestion';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Assessment: React.FC = (): React.JSX.Element => {
 	const navigation = useNavigation();
@@ -34,6 +35,26 @@ const Assessment: React.FC = (): React.JSX.Element => {
 	const handlePrev = (): void => {
 		if (step > 1) setStep(step - 1);
 	};
+
+	useEffect(() => {
+		//unmount
+		return () => {
+			//reseting the form
+			setSelectedGender(null);
+			setAge('');
+			setIsSmoker(false);
+			setIsDiabetic(false);
+			setIsHypertensive(false);
+			setBloodPressure('');
+			setHDL('');
+			setTotalCholesterol('');
+
+			AsyncStorage.removeItem('selectedGender');
+			AsyncStorage.removeItem('selectedSmoke');
+			AsyncStorage.removeItem('selectedDiabetes');
+			AsyncStorage.removeItem('selectedHypertension');
+		};
+	}, []);
 
 	return (
 		<AnimatedComponent animation="FadeIn">
