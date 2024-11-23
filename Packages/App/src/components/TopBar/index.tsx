@@ -21,18 +21,13 @@ const TopBar: React.FC = (): React.JSX.Element => {
 			<View className="flex flex-row items-center space-x-4">
 				{/* User Avatar */}
 				<View className="relative w-14 h-14 rounded-full border-2 border-secondary-700 overflow-hidden">
-					{/*TODO:
-						Add a fallback avatar if the user doesn't have one set (bug prevention)
-						
-						*/}
-
 					<Image
 						className="w-full h-full"
 						source={
 							loggedUser?.avatar !== null
 								? { uri: loggedUser?.avatar }
 								: {
-										uri: `https://api.dicebear.com/7.x/adventurer-neutral/svg?seed=${loggedUser?.username}`,
+										uri: 'https://res.cloudinary.com/dvthg2763/image/upload/v1732390121/activevulse/dev/avatars/Profile_avatar_placeholder_large_inh11z.png',
 									}
 						}
 						resizeMode="cover"
