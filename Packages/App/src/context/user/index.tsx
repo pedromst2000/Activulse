@@ -39,7 +39,7 @@ const UserProvider: React.FC<PropsWithChildren> = ({ children }): React.JSX.Elem
 		}
 	};
 
-	const updateUser = (user: LoggedUser): void => {
+	const updateUserStorage = (user: LoggedUser): void => {
 		AsyncStorage.setItem('loggedUser', JSON.stringify(user));
 		setLoggedUser(user);
 	};
@@ -56,7 +56,7 @@ const UserProvider: React.FC<PropsWithChildren> = ({ children }): React.JSX.Elem
 		() => ({
 			loggedUser: loggedUser,
 			setLoggedUser,
-			updateUser,
+			updateUser: updateUserStorage,
 		}),
 		[loggedUser, setLoggedUser],
 	);
