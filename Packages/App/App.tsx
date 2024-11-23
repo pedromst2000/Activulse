@@ -6,7 +6,7 @@ import FontsProvider from './src/context/FontsProvider';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { UserProvider } from './src/context/user';
 import { NavigationContainer } from '@react-navigation/native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import MainApp from './Main';
 import config from './src/config';
 
@@ -22,7 +22,27 @@ const asyncStoragePersister = createAsyncStoragePersister({
 	storage: AsyncStorage,
 });
 
+/**
+ * The main application component.
+ *
+ * This component sets up the root view for gesture handling, navigation, and context providers.
+ * It ensures that the assessment form data is reset when the user leaves the assessment screen
+ * without completing it or closes the app. This prevents the next user from seeing previous data
+ * that might be stored in async storage from other users who signed in on the same device.
+ *
+ * @returns {React.JSX.Element} The root component of the application.
+ */
 const App: React.FC = (): React.JSX.Element => {
+	useEffect(() => {
+		//unmount
+		return () => {
+			AsyncStorage.removeItem('selectedGender');
+			AsyncStorage.removeItem('selectedSmoke');
+			AsyncStorage.removeItem('selectedDiabetes');
+			AsyncStorage.removeItem('selectedHypertension');
+		};
+	}, []);
+
 	return (
 		<GestureHandlerRootView style={{ flex: 1 }}>
 			<NavigationContainer theme={config.navigator.theme}>
