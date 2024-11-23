@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
 import AnimatedComponent from '../../Animated';
 import Ilustration from '../../Ilustration';
 import SmokeIlus from '../../../assets/svg/ilustrations/heartRiskAssessment/Smoker.svg';
 import LastSlideButton from '../../Onboarding/LastSlideBtn';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type SmokerQuestionProps = {
 	isSmoker: boolean;
@@ -16,6 +17,37 @@ const SmokerQuestion: React.FC<SmokerQuestionProps> = ({
 	setIsSmoker,
 	handleNext,
 }): React.JSX.Element => {
+	const [isYesSelected, setIsYesSelected] = useState<boolean>(false);
+	const [isNoSelected, setIsNoSelected] = useState<boolean>(false);
+
+	useEffect(() => {
+		const loadSmokeSelection = async () => {
+			try {
+				const savedSelection = await AsyncStorage.getItem('selectedSmoke');
+				if (savedSelection) {
+					setIsSmoker(savedSelection === 'Yes');
+					setIsYesSelected(savedSelection === 'Yes');
+					setIsNoSelected(savedSelection === 'No');
+				}
+			} catch (error) {
+				console.error('Failed to load smoke selection', error);
+			}
+		};
+
+		loadSmokeSelection();
+	}, [setIsSmoker]);
+
+	const handleSmokeSelection = async (smoker: 'Yes' | 'No') => {
+		try {
+			await AsyncStorage.setItem('selectedSmoke', smoker);
+			setIsSmoker(smoker === 'Yes');
+			setIsYesSelected(smoker === 'Yes');
+			setIsNoSelected(smoker === 'No');
+		} catch (error) {
+			console.error('Failed to save smoke selection', error);
+		}
+	};
+
 	return (
 		<AnimatedComponent
 			animation="FadeIn"
@@ -36,17 +68,27 @@ const SmokerQuestion: React.FC<SmokerQuestionProps> = ({
 						text="Yes"
 						onPress={() => {
 							setIsSmoker(true);
+							handleSmokeSelection('Yes');
 							handleNext();
 						}}
-						className="bg-primary-50 border-2 border-accent-500 flex-1 mx-2"
+						className={
+							isYesSelected
+								? 'bg-accent-500 flex-1 mx-1'
+								: 'bg-primary-50 border-[3px] border-accent-500 flex-1 mx-2'
+						}
 					/>
 					<LastSlideButton
 						text="No"
 						onPress={() => {
 							setIsSmoker(false);
+							handleSmokeSelection('No');
 							handleNext();
 						}}
-						className="bg-accent-500 flex-1 mx-2"
+						className={
+							isNoSelected
+								? 'bg-accent-500 flex-1 mx-1'
+								: 'bg-primary-50 border-[3px] border-accent-500 flex-1 mx-2'
+						}
 					/>
 				</View>
 			</View>

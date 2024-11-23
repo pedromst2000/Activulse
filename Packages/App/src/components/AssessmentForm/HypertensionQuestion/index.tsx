@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
 import AnimatedComponent from '../../Animated';
 import Ilustration from '../../Ilustration';
 import HypertensionIlus from '../../../assets/svg/ilustrations/heartRiskAssessment/TreatmentHypertension.svg';
 import LastSlideButton from '../../Onboarding/LastSlideBtn';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type HypertensionQuestionProps = {
 	isHypertensive: boolean;
@@ -16,6 +17,37 @@ const HypertensionQuestion: React.FC<HypertensionQuestionProps> = ({
 	setIsHypertensive,
 	handleNext,
 }): React.JSX.Element => {
+	const [isYesSelected, setIsYesSelected] = useState<boolean>(false);
+	const [isNoSelected, setIsNoSelected] = useState<boolean>(false);
+
+	useEffect(() => {
+		const loadHypertensionSelection = async () => {
+			try {
+				const savedSelection = await AsyncStorage.getItem('selectedHypertension');
+				if (savedSelection) {
+					setIsHypertensive(savedSelection === 'Yes');
+					setIsYesSelected(savedSelection === 'Yes');
+					setIsNoSelected(savedSelection === 'No');
+				}
+			} catch (error) {
+				console.error('Failed to load hypertension selection', error);
+			}
+		};
+
+		loadHypertensionSelection();
+	}, [setIsHypertensive]);
+
+	const handleHypertensionSelection = async (hypertension: 'Yes' | 'No') => {
+		try {
+			await AsyncStorage.setItem('selectedHypertension', hypertension);
+			setIsHypertensive(hypertension === 'Yes');
+			setIsYesSelected(hypertension === 'Yes');
+			setIsNoSelected(hypertension === 'No');
+		} catch (error) {
+			console.error('Failed to save hypertension selection', error);
+		}
+	};
+
 	return (
 		<AnimatedComponent
 			animation="FadeIn"
@@ -36,17 +68,27 @@ const HypertensionQuestion: React.FC<HypertensionQuestionProps> = ({
 						text="Yes"
 						onPress={() => {
 							setIsHypertensive(true);
+							handleHypertensionSelection('Yes');
 							handleNext();
 						}}
-						className="bg-primary-50 border-2 border-accent-500 flex-1 mx-2"
+						className={
+							isYesSelected
+								? 'bg-accent-500 flex-1 mx-1'
+								: 'bg-primary-50 border-[3px] border-accent-500 flex-1 mx-2'
+						}
 					/>
 					<LastSlideButton
 						text="No"
 						onPress={() => {
 							setIsHypertensive(false);
+							handleHypertensionSelection('No');
 							handleNext();
 						}}
-						className="bg-accent-500 flex-1 mx-2"
+						className={
+							isNoSelected
+								? 'bg-accent-500 flex-1 mx-1'
+								: 'bg-primary-50 border-[3px] border-accent-500 flex-1 mx-2'
+						}
 					/>
 				</View>
 			</View>

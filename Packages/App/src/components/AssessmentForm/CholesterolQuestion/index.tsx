@@ -4,12 +4,14 @@ import utils from '@/src/utils';
 import useHeartRiskAssessment from '@/src/hooks/ReactQuery/users/heartRiskAssessment';
 import Ilustration from '../../Ilustration';
 import CholesterolIlus from '../../../assets/svg/ilustrations/heartRiskAssessment/Cholesterol.svg';
+import InfoI from '../../../assets/svg/icons/InfoIcon.svg';
 import AnimatedComponent from '../../Animated';
 import Input from '../../Input';
 import Button from '../../Button';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { AssessmentRiskStackParamList } from '@/src/navigation/AssessmentRisk';
+import Icon from '../../Icon';
 
 type CholesterolQuestiondNavigationProp = NativeStackNavigationProp<
 	AssessmentRiskStackParamList,
@@ -141,6 +143,12 @@ const CholesterolQuestion: React.FC<CholesterolQuestionProps> = ({
 			className="flex justify-center items-center p-4 bg-primary-50"
 		>
 			<View className="flex justify-center items-center p-4">
+				<View className="flex flex-row w-full px-2 py-2 gap-2 sm:px-8 sm:py-4 items-center mb-[18px]">
+					<Icon icon={InfoI} width={20} height={20} />
+					<Text className="font-quicksand-semi-bold text-secondary-700 text-[12px] tracking-[1px] flex-1">
+						Check the previous data filled in the previous steps before continuing.
+					</Text>
+				</View>
 				<View className="mb-2">
 					<Text className="font-merriweather-bold text-xl md:text-2xl lg:text-3xl text-secondary-700 text-center">
 						Let us know about your Cholesterol

@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
 import AnimatedComponent from '../../Animated';
 import Ilustration from '../../Ilustration';
 import DiabetesIlus from '../../../assets/svg/ilustrations/heartRiskAssessment/Diabetes.svg';
 import LastSlideButton from '../../Onboarding/LastSlideBtn';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type DiabetesQuestionProps = {
 	isDiabetic: boolean;
@@ -16,6 +17,37 @@ const DiabetesQuestion: React.FC<DiabetesQuestionProps> = ({
 	setIsDiabetic,
 	handleNext,
 }): React.JSX.Element => {
+	const [isYesSelected, setIsYesSelected] = useState<boolean>(false);
+	const [isNoSelected, setIsNoSelected] = useState<boolean>(false);
+
+	useEffect(() => {
+		const loadDiabetesSelection = async () => {
+			try {
+				const savedSelection = await AsyncStorage.getItem('selectedDiabetes');
+				if (savedSelection) {
+					setIsDiabetic(savedSelection === 'Yes');
+					setIsYesSelected(savedSelection === 'Yes');
+					setIsNoSelected(savedSelection === 'No');
+				}
+			} catch (error) {
+				console.error('Failed to load diabetes selection', error);
+			}
+		};
+
+		loadDiabetesSelection();
+	}, [setIsDiabetic]);
+
+	const handleDiabetesSelection = async (diabetes: 'Yes' | 'No') => {
+		try {
+			await AsyncStorage.setItem('selectedDiabetes', diabetes);
+			setIsDiabetic(diabetes === 'Yes');
+			setIsYesSelected(diabetes === 'Yes');
+			setIsNoSelected(diabetes === 'No');
+		} catch (error) {
+			console.error('Failed to save diabetes selection', error);
+		}
+	};
+
 	return (
 		<AnimatedComponent
 			animation="FadeIn"
@@ -36,17 +68,27 @@ const DiabetesQuestion: React.FC<DiabetesQuestionProps> = ({
 						text="Yes"
 						onPress={() => {
 							setIsDiabetic(true);
+							handleDiabetesSelection('Yes');
 							handleNext();
 						}}
-						className="bg-primary-50 border-2 border-accent-500 flex-1 mx-2"
+						className={
+							isYesSelected
+								? 'bg-accent-500 flex-1 mx-1'
+								: 'bg-primary-50 border-[3px] border-accent-500 flex-1 mx-2'
+						}
 					/>
 					<LastSlideButton
 						text="No"
 						onPress={() => {
 							setIsDiabetic(false);
+							handleDiabetesSelection('No');
 							handleNext();
 						}}
-						className="bg-accent-500 flex-1 mx-2"
+						className={
+							isNoSelected
+								? 'bg-accent-500 flex-1 mx-1'
+								: 'bg-primary-50 border-[3px] border-accent-500 flex-1 mx-2'
+						}
 					/>
 				</View>
 			</View>
