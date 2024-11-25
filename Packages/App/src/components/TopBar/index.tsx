@@ -1,4 +1,3 @@
-import { useNavigation } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 import { Text, View, Image } from 'react-native';
 import { useUserContext } from '../../context/user';
