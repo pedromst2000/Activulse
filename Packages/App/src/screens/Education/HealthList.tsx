@@ -7,6 +7,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import Icon from '@/src/components/Icon';
 import NoSmokeI from '../../assets/svg/icons/NoSmokeIcon.svg';
 import MovingI from '../../assets/svg/icons/MovingIcon.svg';
+import HomeCard from '@/src/components/HomeCard';
 
 const HealthList: React.FC = (): React.JSX.Element => {
 	const navigation = useNavigation();
@@ -39,68 +40,17 @@ const HealthList: React.FC = (): React.JSX.Element => {
                             space-y-[-60px] w-full
                         "
 					>
-						<TouchableOpacity
-							activeOpacity={0.7}
-							className="flex justify-center items-center shadow-lg mb-4
-                                px-2 py-2 w-full
-                                "
+						<HomeCard
+							title="Quit Smoking"
+							icon={NoSmokeI}
 							onPress={() => navigation.navigate('QuitSmoking' as never)}
-						>
-							<View className="rounded-2xl py-10 shadow-lg">
-								<LinearGradient
-									colors={['#EFF6FF', '#F7D7BA', '#FFB875']}
-									start={[0, 0]}
-									end={[0, 1]}
-									locations={[0, 0.5, 1]}
-									style={{
-										shadowColor: '#000',
-										elevation: 48,
-									}}
-									className="rounded-[30px] p-5 justify-center items-center"
-								>
-									<View className="flex-row items-center">
-										<View className="mr-4">
-											<Icon icon={NoSmokeI} width={70} height={70} />
-										</View>
-										<View className="w-[180px]">
-											<Text className="text-[18px] md:text-xl lg:text-2xl font-merriweather-bold text-center text-secondary-700">
-												Quit Smoking for boost your health
-											</Text>
-										</View>
-									</View>
-								</LinearGradient>
-							</View>
-						</TouchableOpacity>
-						<TouchableOpacity
-							activeOpacity={0.7}
-							className="flex justify-center items-center shadow-lg"
+						/>
+
+						<HomeCard
+							title="Get Moving"
+							icon={MovingI}
 							onPress={() => navigation.navigate('GetMoving' as never)}
-						>
-							<View className="rounded-2xl py-10 shadow-lg">
-								<LinearGradient
-									colors={['#EFF6FF', '#F7D7BA', '#FFB875']}
-									start={[0, 0]}
-									end={[0, 1]}
-									locations={[0, 0.5, 1]}
-									style={{
-										shadowColor: '#000',
-										elevation: 48,
-									}}
-									className="rounded-[30px] p-5 justify-center items-center"
-								>
-									<View className="flex-row items-center">
-										<View className="mr-4">
-											<Icon icon={MovingI} width={70} height={70} />
-										</View>
-										<View className="w-[180px]">
-											<Text className="text-[18px] md:text-xl lg:text-2xl font-merriweather-bold text-center text-secondary-700">
-												Get Moving, Get Healthy
-											</Text>
-										</View>
-									</View>
-								</LinearGradient>
-							</View>
-						</TouchableOpacity>
+						/>
 					</View>
 				</View>
 			</ScrollView>

@@ -1,10 +1,9 @@
 import React from 'react';
-import { TouchableOpacity, Text } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 
 type Props = {
 	disabled?: boolean;
 	activeOpacity?: number;
-	// text?: string;
 	onPress?: () => void | Promise<void>;
 } & React.ComponentProps<typeof TouchableOpacity>;
 
@@ -17,9 +16,7 @@ const Button: React.FC<Props> = ({ disabled, activeOpacity, ...props }): React.J
                 rounded-[30px]`}
 			activeOpacity={activeOpacity || 0.75}
 			{...props}
-		>
-			{/* <Text className="font-quicksand-bold text-secondary-700 text-base">{props.text}</Text> */}
-		</TouchableOpacity>
+		></TouchableOpacity>
 	);
 };
 

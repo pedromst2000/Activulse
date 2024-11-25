@@ -7,9 +7,13 @@ import AuthStack, { AuthStackParamList } from './Auth';
 import AssessmentRiskStack, { AssessmentRiskStackParamList } from './AssessmentRisk';
 import BonusAssessmentStack, { BonusAssessmentStackParamList } from './BonusAssessment';
 import Home from '../screens/Home';
-import Lifestyle from '../screens/Lifestyle/Lifestyle';
-import Profile from '../screens/Profile/Profile';
-import Store from '../screens/Store/Store';
+import Lifestyle from '../screens/Lifestyle';
+import Profile from '../screens/Profile';
+import Store from '../screens/Store';
+import HealthList from '../screens/Education/HealthList';
+import GetMoving from '../screens/Education/GetMoving';
+import QuitSmoking from '../screens/Education/QuitSmoking';
+import Leaderboard from '../screens/Leaderboard';
 import config from '../config';
 import Icon from '../components/Icon';
 import HomeIS from '../assets/svg/icons/BottomTab/HomeIcon_Selected.svg';
@@ -20,9 +24,6 @@ import StoreIS from '../assets/svg/icons/BottomTab/StoreIcon_Selected.svg';
 import StoreINS from '../assets/svg/icons/BottomTab/StoreIcon_N_Selected.svg';
 import ProfileIS from '../assets/svg/icons/BottomTab/ProfileIcon_Selected.svg';
 import ProfileINS from '../assets/svg/icons/BottomTab/ProfileIcon_N_Selected.svg';
-import HealthList from '../screens/Education/HealthList';
-import GetMoving from '../screens/Education/GetMoving';
-import QuitSmoking from '../screens/Education/QuitSmoking';
 
 export type MainTabParamList = {
 	Home: undefined;
@@ -32,6 +33,7 @@ export type MainTabParamList = {
 	HealthList: undefined;
 	GetMoving: undefined;
 	QuitSmoking: undefined;
+	Leaderboard: undefined;
 };
 
 export type RootStackParamList = {
@@ -108,6 +110,11 @@ const MainTabNavigator: React.FC = (): React.JSX.Element => {
 						display: 'none',
 					},
 				}}
+			/>
+			<Tab.Screen
+				name="Leaderboard"
+				component={Leaderboard}
+				options={{ tabBarItemStyle: { display: 'none' }, tabBarStyle: { display: 'none' } }}
 			/>
 			<Tab.Screen
 				name="GetMoving"
