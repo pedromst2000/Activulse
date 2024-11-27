@@ -16,7 +16,8 @@
       "infoPlist": {
         "NSCameraUsageDescription": "This app needs access to the camera to take photos.",
         "NSLocationWhenInUseUsageDescription": "This app needs access to your location.",
-        "NSPhotoLibraryUsageDescription": "This app needs access to your photo library."
+        "NSPhotoLibraryUsageDescription": "This app needs access to your photo library.",
+        "NSMotionUsageDescription": "This app uses motion data to track your steps."
       }
     },
     "android": {
@@ -25,17 +26,26 @@
         "backgroundColor": "#ffffff"
       },
       "permissions": [
-        "android.permission.INTERNET",
-        "android.permission.CAMERA",
-        "android.permission.READ_EXTERNAL_STORAGE",
-        "android.permission.WRITE_EXTERNAL_STORAGE",
-        "android.permission.ACCESS_FINE_LOCATION"
+        "INTERNET",
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "ACCESS_FINE_LOCATION",
+        "ACTIVITY_RECOGNITION",
+        "BODY_SENSORS",
+        "HIGH_SAMPLING_RATE_SENSORS"
       ],
-      "package": "com.anonymous.activulse"
+      "package": "com.activulse"
     },
     "plugins": [
       "expo-font",
-      "expo-secure-store"
+      "expo-secure-store",
+      [
+        "expo-sensors",
+        {
+          "motionPermission": "Allow $(PRODUCT_NAME) to access your device motion"
+        }
+      ]
     ],
     "web": {
       "favicon": "src/assets/images/favicon.png"
