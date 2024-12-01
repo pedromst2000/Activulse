@@ -26,29 +26,39 @@
         "backgroundColor": "#ffffff"
       },
       "permissions": [
-        "INTERNET",
-        "CAMERA",
-        "READ_EXTERNAL_STORAGE",
-        "WRITE_EXTERNAL_STORAGE",
-        "ACCESS_FINE_LOCATION",
-        "ACTIVITY_RECOGNITION",
-        "BODY_SENSORS",
-        "HIGH_SAMPLING_RATE_SENSORS"
+        "android.permission.health.READ_STEPS",
+        "android.permission.health.READ_DISTANCE",
+        "android.permission.health.WRITE_STEPS",
+        "android.permission.health.WRITE_DISTANCE"
       ],
       "package": "com.activulse"
     },
     "plugins": [
       "expo-font",
       "expo-secure-store",
+      "react-native-health",
+      "expo-health-connect",
+      "./androidManifestPlugin.js",
+      "react-native-health-connect",
       [
-        "expo-sensors",
+        "expo-build-properties",
         {
-          "motionPermission": "Allow $(PRODUCT_NAME) to access your device motion"
+          "android": {
+            "compileSdkVersion": 35,  
+            "targetSdkVersion": 35,
+            "buildToolsVersion": "35.0.0",
+            "minSdkVersion": 26
+          }
         }
       ]
     ],
     "web": {
       "favicon": "src/assets/images/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "601af393-a1ac-4e6c-9446-d4c691522895"
+      }
     }
   }
 }

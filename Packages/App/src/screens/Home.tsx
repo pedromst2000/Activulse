@@ -1,19 +1,37 @@
-import { Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Platform, Text, View } from 'react-native';
 import AnimatedComponent from '../components/Animated';
 import TopBar from '../components/TopBar';
 import LearnI from '../assets/svg/icons/LearnIcon.svg';
 import LeaderboardI from '../assets/svg/icons/LeaderboardIcon.svg';
 import { useNavigation } from '@react-navigation/native';
 import HomeCard from '../components/HomeCard';
+import useHealthData from '../hooks/HealthData';
 
 const Home: React.FC = (): React.JSX.Element => {
 	const navigation = useNavigation();
+	const [date, setDate] = useState(new Date());
+	const { steps, distance } = useHealthData(date);
+
+	const changeDate = (numDays: number) => {
+		const currentDate = new Date(date); // Create a copy of the current date
+		// Update the date by adding/subtracting the number of days
+		currentDate.setDate(currentDate.getDate() + numDays);
+
+		setDate(currentDate); // Update the state variable
+	};
+
+	useEffect(() => {
+		console.log(`Android Version: ${Platform.Version}`);
+	}, []);
 
 	return (
 		<AnimatedComponent animation="FadeIn">
 			{/* TopBar */}
 			<TopBar />
 			<View className="flex-1 py-5 justify-center items-center bg-primary-50">
+				{/* Track Steps */}
+
 				{/* Home Cards Section */}
 				<View className="flex justify-center items-center">
 					{/* Education */}
