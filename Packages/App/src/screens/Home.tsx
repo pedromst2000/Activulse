@@ -11,15 +11,15 @@ import useHealthData from '../hooks/HealthData';
 const Home: React.FC = (): React.JSX.Element => {
 	const navigation = useNavigation();
 	const [date, setDate] = useState(new Date());
-	const { steps, distance } = useHealthData(date);
+	const { steps } = useHealthData(date);
 
-	const changeDate = (numDays: number) => {
-		const currentDate = new Date(date); // Create a copy of the current date
-		// Update the date by adding/subtracting the number of days
-		currentDate.setDate(currentDate.getDate() + numDays);
+	// const changeDate = (numDays: number) => {
+	// 	const currentDate = new Date(date); // Create a copy of the current date
+	// 	// Update the date by adding/subtracting the number of days
+	// 	currentDate.setDate(currentDate.getDate() + numDays);
 
-		setDate(currentDate); // Update the state variable
-	};
+	// 	setDate(currentDate); // Update the state variable
+	// };
 
 	useEffect(() => {
 		console.log(`Android Version: ${Platform.Version}`);
@@ -30,7 +30,17 @@ const Home: React.FC = (): React.JSX.Element => {
 			{/* TopBar */}
 			<TopBar />
 			<View className="flex-1 py-5 justify-center items-center bg-primary-50">
-				{/* Track Steps */}
+				{/* Track Steps & Distance*/}
+
+				<View className="flex justify-center items-center">
+					<Text className="text-2xl font-bold text-primary-700">Today's Steps</Text>
+					<Text className="text-2xl font-bold text-primary-700">{steps}</Text>
+				</View>
+
+				{/* <View className="flex justify-center items-center">
+					<Text className="text-2xl font-bold text-primary-700">Today's Distance</Text>
+					<Text className="text-2xl font-bold text-primary-700">{distance}</Text>
+				</View> */}
 
 				{/* Home Cards Section */}
 				<View className="flex justify-center items-center">
