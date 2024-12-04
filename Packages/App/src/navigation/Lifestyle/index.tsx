@@ -8,7 +8,7 @@ import Activity from '@/src/screens/Lifestyle/Fitness/Activity';
 import Recipe from '@/src/screens/Lifestyle/Nutrition/Recipe';
 
 export type LifestyleStackParamList = {
-	Lifestyle: undefined; // main screen
+	LifestyleScreen: undefined; // main screen
 	FitnessFeed: undefined;
 	NutritionFeed: undefined;
 	Leaderboard: undefined;
@@ -21,7 +21,7 @@ const Stack = createStackNavigator<LifestyleStackParamList>();
 const LifestyleStack: React.FC = (): React.JSX.Element => {
 	return (
 		<Stack.Navigator screenOptions={{ headerShown: false }}>
-			<Stack.Screen name="Lifestyle" component={Lifestyle} />
+			<Stack.Screen name="LifestyleScreen" component={Lifestyle} />
 			<Stack.Screen name="FitnessFeed" component={FitnessFeed} />
 			<Stack.Screen name="NutritionFeed" component={NutritionFeed} />
 			<Stack.Screen name="Activity" component={Activity} />

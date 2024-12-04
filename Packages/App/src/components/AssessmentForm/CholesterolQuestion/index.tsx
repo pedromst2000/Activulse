@@ -146,7 +146,8 @@ const CholesterolQuestion: React.FC<CholesterolQuestionProps> = ({
 				<View className="flex flex-row w-full px-2 py-2 gap-2 sm:px-8 sm:py-4 items-center mb-[18px]">
 					<Icon icon={InfoI} width={20} height={20} />
 					<Text className="font-quicksand-semi-bold text-secondary-700 text-[12px] tracking-[1px] flex-1">
-						Check the previous data filled in the previous steps before continuing.
+						<Text className="font-quicksand-bold text-[13.5px]">Check</Text> {''}
+						the previous data filled in the previous steps before continuing.
 					</Text>
 				</View>
 				<View className="mb-2">

@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Text, View, FlatList, Animated } from 'react-native';
 import AnimatedComponent from '../../components/Animated';
 import Button from '../../components/Button';
@@ -26,6 +26,10 @@ const Onboarding: React.FC = (): React.JSX.Element => {
 
 	const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
 
+	useEffect(() => {
+		console.log('Onboarding screen mounted');
+	}, []);
+
 	return (
 		<AnimatedComponent animation="FadeIn">
 			<View className="flex-1 py-5 justify-center items-center bg-primary-50">
@@ -42,28 +46,30 @@ const Onboarding: React.FC = (): React.JSX.Element => {
 					)}
 				</View>
 				<View className="flex-1">
-					<FlatList
-						data={slides}
-						renderItem={({ item, index }) => (
-							<OnboardingItem
-								key={index}
-								id={index}
-								title={item.title}
-								description={item.description}
-							/>
-						)}
-						showsHorizontalScrollIndicator={false}
-						horizontal
-						pagingEnabled
-						bounces={false}
-						keyExtractor={(item) => item.id.toString()}
-						onScroll={Animated.event([{ nativeEvent: { contentOffset: { x: scrollX } } }], {
-							useNativeDriver: false,
-						})}
-						onViewableItemsChanged={viewableItemsChanged}
-						viewabilityConfig={viewConfig}
-						ref={slidesRef}
-					/>
+					{slides && slides.length > 0 && (
+						<FlatList
+							data={slides}
+							renderItem={({ item, index }) => (
+								<OnboardingItem
+									key={index}
+									id={index}
+									title={item.title}
+									description={item.description}
+								/>
+							)}
+							showsHorizontalScrollIndicator={false}
+							horizontal
+							pagingEnabled
+							bounces={false}
+							keyExtractor={(item) => item.id.toString()}
+							onScroll={Animated.event([{ nativeEvent: { contentOffset: { x: scrollX } } }], {
+								useNativeDriver: false,
+							})}
+							onViewableItemsChanged={viewableItemsChanged}
+							viewabilityConfig={viewConfig}
+							ref={slidesRef}
+						/>
+					)}
 				</View>
 				<View className="flex flex-col items-center justify-between px-4 py-2">
 					<Paginator data={slides} ScrollX={scrollX} />

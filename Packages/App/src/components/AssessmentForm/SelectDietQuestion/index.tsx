@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { View, TouchableOpacity, Text, Image } from 'react-native';
+import { View, Text } from 'react-native';
 import AnimatedComponent from '../../Animated';
 import useExtraAssessment from '@/src/hooks/ReactQuery/users/extraAssessment';
 import utils from '@/src/utils';
@@ -7,6 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { BonusAssessmentStackParamList } from '@/src/navigation/BonusAssessment';
 import { useUserContext } from '@/src/context/user';
+import OptionCard from '../../OptionCard';
 
 type DietSelectionProps = {
 	diet: 'DASH' | 'Vegan' | 'Mediterranean' | null;
@@ -132,47 +133,29 @@ const DietSelection: React.FC<DietSelectionProps> = ({
 
 				{/* Cards Container */}
 				<View className="flex flex-col md:flex-row justify-center items-center flex-wrap gap-5 px-4">
-					<TouchableOpacity activeOpacity={0.8} onPress={() => handleDietSelection('DASH')}>
-						<View className="relative">
-							<Image
-								className="w-[220px] h-[180px] md:w-[200px] md:h-[240px] rounded-[20px] md:rounded-[30px]"
-								source={require('../../../assets/images/DashDiet.png')}
-							/>
-							<View className="absolute top-0 left-0 w-full h-full bg-black opacity-5 rounded-[20px] md:rounded-[30px]" />
-							<View className="absolute top-2 left-2 bg-accent-700 px-2 py-1 rounded-[20px] md:rounded-[30px]">
-								<Text className="font-quicksand-bold text-secondary-700">DASH</Text>
-							</View>
-						</View>
-					</TouchableOpacity>
+					{/* DASH CARD */}
+					<OptionCard
+						label="DASH"
+						sourceImg={require('../../../assets/images/DashDiet.png')}
+						onPress={() => handleDietSelection('DASH')}
+						description="Discover the DASH Diet: a heart-healthy plan rich in fruits, vegetables, and low-fat dairy, proven to help lower blood pressure."
+					/>
 
-					<TouchableOpacity activeOpacity={0.8} onPress={() => handleDietSelection('Vegan')}>
-						<View className="relative">
-							<Image
-								className="w-[220px] h-[180px] md:w-[200px] md:h-[240px] rounded-[20px] md:rounded-[30px]"
-								source={require('../../../assets/images/VeganDiet.png')}
-							/>
-							<View className="absolute top-0 left-0 w-full h-full bg-black opacity-5 rounded-[20px] md:rounded-[30px]" />
-							<View className="absolute top-2 left-2 bg-accent-700 px-2 py-1 rounded-[20px] md:rounded-[30px]">
-								<Text className="font-quicksand-bold text-secondary-700">Vegan</Text>
-							</View>
-						</View>
-					</TouchableOpacity>
+					{/* VEGAN CARD */}
+					<OptionCard
+						label="Vegan"
+						sourceImg={require('../../../assets/images/VeganDiet.png')}
+						onPress={() => handleDietSelection('Vegan')}
+						description=" Elevate your plate with our Vegetarian Diet, where every bite is a celebration of plant-based goodness."
+					/>
 
-					<TouchableOpacity
-						activeOpacity={0.8}
+					{/* MEDITERRANEAN CARD */}
+					<OptionCard
+						label="Mediterranean"
+						sourceImg={require('../../../assets/images/MediterraneanDiet.png')}
 						onPress={() => handleDietSelection('Mediterranean')}
-					>
-						<View className="relative">
-							<Image
-								className="w-[220px] h-[180px] md:w-[200px] md:h-[240px] rounded-[20px] md:rounded-[30px]"
-								source={require('../../../assets/images/MediterraneanDiet.png')}
-							/>
-							<View className="absolute top-0 left-0 w-full h-full bg-black opacity-5 rounded-[20px] md:rounded-[30px]" />
-							<View className="absolute top-2 left-2 bg-accent-700 px-2 py-1 rounded-[20px] md:rounded-[30px]">
-								<Text className="font-quicksand-bold text-secondary-700">Mediterranean</Text>
-							</View>
-						</View>
-					</TouchableOpacity>
+						description=" Embark on a sensory journey through the sun-kissed lands of the Mediterranean with our diet rich in tradition and taste."
+					/>
 				</View>
 			</View>
 		</AnimatedComponent>
