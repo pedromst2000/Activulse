@@ -7,17 +7,15 @@ import AppI from '../../assets/svg/ilustrations/Icon.svg';
 const TopBar: React.FC = (): React.JSX.Element => {
 	const { loggedUser } = useUserContext();
 
-	useEffect(() => {
-		console.log('loggedUserds:', JSON.stringify(loggedUser, null, 2));
-	}, []);
+	useEffect(() => {}, []);
 
 	return (
 		<View
 			className="flex flex-row items-center justify-between w-full px-4 py-4 mt-4 bg-primary-50 
-			border-b border-secondary-200 shadow-md"
+			border-b border-secondary-700 shadow-md"
 		>
 			{/* Left Side: Avatar and Greeting */}
-			<View className="flex flex-row items-center space-x-4">
+			<View className="flex flex-row items-center space-x-3">
 				{/* User Avatar */}
 				<View className="relative w-14 h-14 rounded-full border-2 border-secondary-700 overflow-hidden">
 					<Image
@@ -40,7 +38,7 @@ const TopBar: React.FC = (): React.JSX.Element => {
 					<Text className="text-[16px] font-quicksand-medium text-secondary-700">
 						Hello <Text className="text-[18px]">👋</Text>
 					</Text>
-					<Text className="text-[18px] font-quicksand-bold text-secondary-700">
+					<Text className="text-[16.5px] font-quicksand-bold text-secondary-700">
 						{loggedUser?.username}
 					</Text>
 				</View>

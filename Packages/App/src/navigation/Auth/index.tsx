@@ -1,10 +1,10 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import ForgotPassword from '../../screens/Auth/ForgotPassword';
-import SignIn from '../../screens/Auth/SignIn';
-import JoinNow from '../../screens/Auth/JoinNow';
-import VerifyOTP from '../../screens/Auth/verifyOTP';
-import ChangePassword from '../../screens/Auth/ChangePassword';
+import ForgotPassword from '@/src/screens/Auth/ForgotPassword';
+import SignIn from '@/src/screens/Auth/SignIn';
+import JoinNow from '@/src/screens/Auth/JoinNow';
+import VerifyOTP from '@/src/screens/Auth/verifyOTP';
+import ChangePassword from '@/src/screens/Auth/ChangePassword';
 import VerifyEmail from '@/src/screens/Auth/VerifyEmail';
 
 export type AuthStackParamList = {

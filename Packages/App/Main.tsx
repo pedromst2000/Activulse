@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import Error from './src/components/Error';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useUserContext } from './src/context/user';
-import Loading from './src/components/Loading/Loading';
+import Loading from './src/components/Loading';
 import SplashScreen from './src/components/splashScreen';
 import AppNavigator from './src/navigation';
 
