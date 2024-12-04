@@ -1,3 +1,5 @@
+import React, { useEffect } from 'react';
+import { StatusBar } from 'expo-status-bar';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
 import { QueryClient } from '@tanstack/react-query';
@@ -6,7 +8,6 @@ import FontsProvider from './src/context/FontsProvider';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { UserProvider } from './src/context/user';
 import { NavigationContainer } from '@react-navigation/native';
-import React, { useEffect } from 'react';
 import MainApp from './Main';
 import config from './src/config';
 
@@ -45,6 +46,8 @@ const App: React.FC = (): React.JSX.Element => {
 
 	return (
 		<GestureHandlerRootView style={{ flex: 1 }}>
+			<StatusBar style="auto" />
+
 			<NavigationContainer theme={config.navigator.theme}>
 				<PersistQueryClientProvider
 					client={queryClient}

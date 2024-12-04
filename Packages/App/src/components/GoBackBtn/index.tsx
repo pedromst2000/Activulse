@@ -2,7 +2,6 @@ import React from 'react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import ArrowLeftI from '../../assets/svg/icons/ArrowLeftIcon.svg';
 import Icon from '../Icon';
-import { View } from 'react-native';
 
 type Props = {
 	onPress?: () => void | Promise<void>;

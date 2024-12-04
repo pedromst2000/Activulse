@@ -2,12 +2,11 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useUserContext } from '../context/user';
-import OnBoarding from '../screens/Onboarding';
 import AuthStack, { AuthStackParamList } from './Auth';
 import AssessmentRiskStack, { AssessmentRiskStackParamList } from './AssessmentRisk';
 import BonusAssessmentStack, { BonusAssessmentStackParamList } from './BonusAssessment';
+import Onboarding from '../screens/Onboarding';
 import Home from '../screens/Home';
-import Lifestyle from '../screens/Lifestyle';
 import Profile from '../screens/Profile';
 import Store from '../screens/Store';
 import HealthList from '../screens/Education/HealthList';
@@ -24,16 +23,17 @@ import StoreIS from '../assets/svg/icons/BottomTab/StoreIcon_Selected.svg';
 import StoreINS from '../assets/svg/icons/BottomTab/StoreIcon_N_Selected.svg';
 import ProfileIS from '../assets/svg/icons/BottomTab/ProfileIcon_Selected.svg';
 import ProfileINS from '../assets/svg/icons/BottomTab/ProfileIcon_N_Selected.svg';
+import LifestyleStack, { LifestyleStackParamList } from './Lifestyle';
 
 export type MainTabParamList = {
-	Home: undefined;
+	Home: undefined; // to convert to HomeStack later
+	Store: undefined; // to convert to StoreStack later
+	Profile: undefined; // to convert to ProfileStack later
 	Lifestyle: undefined;
-	Store: undefined;
-	Profile: undefined;
-	HealthList: undefined;
-	GetMoving: undefined;
-	QuitSmoking: undefined;
-	Leaderboard: undefined;
+	HealthList: undefined; // to be removed
+	GetMoving: undefined; // to be removed
+	QuitSmoking: undefined; // to be removed
+	Leaderboard: undefined; // to be removed
 };
 
 export type RootStackParamList = {
@@ -47,6 +47,9 @@ export type RootStackParamList = {
 	};
 	BonusAssessmentStack: {
 		screen: keyof BonusAssessmentStackParamList; // 'InitBonusAssessment' | 'BonusAssessment' | 'BonusOnboarding';
+	};
+	LifestyleStack: {
+		screen: keyof LifestyleStackParamList; // 'FitnessFeed' | 'NutritionFeed' | 'Leaderboard' | 'Activity' | 'Recipe';
 	};
 };
 
@@ -76,7 +79,7 @@ const MainTabNavigator: React.FC = (): React.JSX.Element => {
 			/>
 			<Tab.Screen
 				name="Lifestyle"
-				component={Lifestyle}
+				component={LifestyleStack}
 				options={{
 					tabBarIcon: ({ focused }) => (
 						<Icon icon={focused ? LifestyleIS : LifestyleINS} width={35} height={35} />
@@ -101,6 +104,9 @@ const MainTabNavigator: React.FC = (): React.JSX.Element => {
 					),
 				}}
 			/>
+
+			{/* To be refactor */}
+
 			<Tab.Screen
 				name="HealthList"
 				component={HealthList}
@@ -137,7 +143,7 @@ const AppNavigator: React.FC = (): React.JSX.Element => {
 		<Stack.Navigator screenOptions={{ headerShown: false }}>
 			{!loggedUser ? (
 				<>
-					<Stack.Screen name="Onboarding" component={OnBoarding} />
+					<Stack.Screen name="Onboarding" component={Onboarding} />
 					<Stack.Screen name="AuthStack" component={AuthStack} />
 				</>
 			) : loggedUser && loggedUser?.isNewUser === true ? (
