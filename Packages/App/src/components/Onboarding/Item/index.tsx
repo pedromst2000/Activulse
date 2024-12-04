@@ -1,12 +1,5 @@
 import React, { useMemo } from 'react';
-import {
-	View,
-	Text,
-	Image,
-	useWindowDimensions,
-	ImageSourcePropType,
-	StyleSheet,
-} from 'react-native';
+import { View, Text, Image, useWindowDimensions, StyleSheet } from 'react-native';
 
 type SlideProps = {
 	id: number;
@@ -17,9 +10,8 @@ type SlideProps = {
 const OnboardingItem: React.FC<SlideProps> = React.memo(({ id, title, description }) => {
 	const { width } = useWindowDimensions();
 
-	// Memoize the image source to avoid re-calculating on every render
-	const illustrationSource: ImageSourcePropType = useMemo(() => {
-		const sources: ImageSourcePropType[] = [
+	const illustrationSource = useMemo(() => {
+		const sources = [
 			require('../../../assets/images/Onboarding/Onboarding01.webp'),
 			require('../../../assets/images/Onboarding/Onboarding02.webp'),
 			require('../../../assets/images/Onboarding/Onboarding03.webp'),
@@ -28,7 +20,9 @@ const OnboardingItem: React.FC<SlideProps> = React.memo(({ id, title, descriptio
 			require('../../../assets/images/Onboarding/Onboarding06.webp'),
 			require('../../../assets/images/Onboarding/OnboardingLast.webp'),
 		];
-		return sources[id] || sources[0];
+		return sources[id] !== undefined
+			? sources[id]
+			: require('../../../assets/images/Onboarding/Onboarding01.webp'); // Fallback image
 	}, [id]);
 
 	return (
@@ -41,6 +35,7 @@ const OnboardingItem: React.FC<SlideProps> = React.memo(({ id, title, descriptio
 					style={[styles.image, { width: width * 0.8, height: width * 0.6 }]}
 				/>
 			</View>
+
 			{/* Title & Description Container */}
 			<View style={styles.textContainer}>
 				{/* Title */}

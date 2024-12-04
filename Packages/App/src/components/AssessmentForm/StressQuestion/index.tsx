@@ -57,7 +57,7 @@ const StressSelection: React.FC<StressSelectionProps> = ({
 
 	return (
 		<AnimatedComponent animation="FadeIn">
-			<View className="flex-1 justify-center items-center gap-5 w-full h-full px-4 md:px-8 lg:px-16 bg-primary-50">
+			<View className="flex-1 justify-center items-center gap-5 w-full h-full px-4 md:px-8 lg:px-16 bg-primary-50 mb-8">
 				<View>
 					<Text className="font-merriweather-bold text-lg md:text-xl lg:text-2xl text-secondary-700 text-center">
 						How frequently do you have stress?

@@ -51,7 +51,7 @@ const GenderSelection: React.FC<GenderSelectionProps> = ({
 
 	return (
 		<AnimatedComponent animation="FadeIn">
-			<View className="flex-1 justify-center items-center gap-5 w-full h-full px-4 md:px-8 lg:px-16 bg-primary-50">
+			<View className="flex-1 justify-center items-center gap-5 w-full h-full px-4 md:px-8 lg:px-16 bg-primary-50 mb-8">
 				<View>
 					<Text className="font-merriweather-bold text-xl md:text-2xl lg:text-3xl text-secondary-700 text-center">
 						Let us know who you are ?
