@@ -7,7 +7,7 @@ type Props = {
 	onPress: () => void | Promise<void>;
 };
 
-const Leaderboardtn: React.FC<Props> = ({ onPress }): React.JSX.Element => {
+const LeaderboardBtn: React.FC<Props> = ({ onPress }): React.JSX.Element => {
 	return (
 		<TouchableOpacity
 			onPress={onPress}
@@ -27,4 +27,4 @@ const Leaderboardtn: React.FC<Props> = ({ onPress }): React.JSX.Element => {
 	);
 };
 
-export default Leaderboardtn;
+export default LeaderboardBtn;
