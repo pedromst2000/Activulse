@@ -1,10 +1,19 @@
 import { Text, View } from 'react-native';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import { LifestyleStackParamList } from '@/src/navigation/Lifestyle';
 import AnimatedComponent from '../../../../components/Animated';
 import GoBackBtn from '@/src/components/GoBackBtn';
-import { useNavigation } from '@react-navigation/native';
+import { useEffect } from 'react';
+
+type NutritionFeedRouteProp = RouteProp<LifestyleStackParamList, 'NutritionFeed'>;
 
 const NutritionFeed: React.FC = (): React.JSX.Element => {
 	const navigation = useNavigation();
+	const route = useRoute<NutritionFeedRouteProp>();
+
+	useEffect(() => {
+		console.log(`Feed Diet: ${route.params.diet}`);
+	}, []);
 
 	return (
 		<AnimatedComponent animation="FadeIn">

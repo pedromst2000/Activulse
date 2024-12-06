@@ -11,7 +11,6 @@ import { APIResponse } from '../../../api/types';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import useConfirmVerify from '@/src/hooks/ReactQuery/users/confirmVerify';
 import useResendVerification from '@/src/hooks/ReactQuery/users/resendVerification';
-import GoBackBtn from '@/src/components/GoBackBtn';
 import Title from '@/src/components/Title';
 import Button from '@/src/components/Button';
 import Ilustration from '@/src/components/Ilustration';

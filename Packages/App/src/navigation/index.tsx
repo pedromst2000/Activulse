@@ -45,7 +45,7 @@ export type RootStackParamList = {
 		screen: keyof HomeStackParamList; // 'HomeScreen' | 'HealthList' | 'GetMoving' | 'QuitSmoking' | 'Leaderboard';
 	};
 	LifestyleStack: {
-		screen: keyof LifestyleStackParamList; // 'FitnessFeed' | 'NutritionFeed' | 'Leaderboard' | 'Activity' | 'Recipe';
+		screen: keyof LifestyleStackParamList; // 'FitnessFeed' | 'NutritionFeed' | 'Leaderboard' | 'Activity' | 'Recipe' | 'SelectFeed';
 	};
 };
 

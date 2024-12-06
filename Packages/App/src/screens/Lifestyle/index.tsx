@@ -1,13 +1,22 @@
 import React from 'react';
 import { Text, View, ScrollView } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { LifestyleStackParamList } from '@/src/navigation/Lifestyle';
 import AnimatedComponent from '@/src/components/Animated';
+import { useUserContext } from '@/src/context/user';
 import TopBar from '@/src/components/TopBar';
 import OptionCard from '@/src/components/OptionCard';
-import Leaderboardtn from '@/src/components/LeaderboardBtn';
-import { useNavigation } from '@react-navigation/native';
+import LeaderboardBtn from '@/src/components/LeaderboardBtn';
+
+type LifestyleNavigationProp = NativeStackNavigationProp<
+	LifestyleStackParamList,
+	'NutritionFeed'
+>;
 
 const Lifestyle: React.FC = (): React.JSX.Element => {
-	const navigation = useNavigation();
+	const navigation = useNavigation<LifestyleNavigationProp>();
+	const { loggedUser } = useUserContext();
 
 	return (
 		<AnimatedComponent animation="FadeIn">
@@ -45,14 +54,18 @@ const Lifestyle: React.FC = (): React.JSX.Element => {
 							label="Nutrition"
 							description="Discover the best diet plan for you and get access to personalized meal plans."
 							sourceImg={require('../../assets/images/Nutrition.png')}
-							onPress={() => navigation.navigate('NutritionFeed' as never)}
+							onPress={() =>
+								loggedUser?.diet === 'Unknown'
+									? navigation.navigate('SelectFeed' as never)
+									: navigation.navigate('NutritionFeed', { diet: loggedUser?.diet })
+							}
 						/>
 					</View>
 				</View>
 			</ScrollView>
 			{/* Leaderboard Button */}
 			<View className="absolute bottom-4 right-4 md:bottom-8 md:right-8">
-				<Leaderboardtn onPress={() => navigation.navigate('Leaderboard' as never)} />
+				<LeaderboardBtn onPress={() => navigation.navigate('Leaderboard' as never)} />
 			</View>
 		</AnimatedComponent>
 	);
