@@ -1,4 +1,34 @@
-const options = {
+interface Theme {
+	dark: boolean;
+	colors: {
+		primary: string;
+		background: string;
+		card: string;
+		text: string;
+		border: string;
+		notification: string;
+	};
+}
+
+interface ScreenOptions {
+	headerShown: boolean;
+	tabBarActiveBackgroundColor: string;
+	tabBarActiveTintColor: string;
+	tabBarHideOnKeyboard: boolean;
+}
+
+interface TabItemStyle {
+	paddingBottom: number;
+	paddingTop: number;
+}
+
+interface Options {
+	theme: Theme;
+	screenOptions: ScreenOptions;
+	tabItemStyle: TabItemStyle;
+}
+
+const options: Options = {
 	theme: {
 		dark: false,
 		colors: {
@@ -20,7 +50,24 @@ const options = {
 		paddingBottom: 7,
 		paddingTop: 7,
 	},
-	// Todo: Add Options for TopBar Navigation
+	// Todo: Add Options for TopBar Navigation (Store)
 };
 
-export default options;
+/**
+ * @description List of screens that should hide the tab bar.
+ */
+const hiddenScreens: string[] = [
+	'FitnessFeed',
+	'NutritionFeed',
+	'Activity',
+	'Recipe',
+	'Leaderboard',
+	'HealthList',
+	'GetMoving',
+	'QuitSmoking',
+];
+
+export default {
+	options,
+	hiddenScreens,
+};

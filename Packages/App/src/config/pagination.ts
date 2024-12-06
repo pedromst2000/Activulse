@@ -1,4 +1,36 @@
-export default {
+interface FeedConfig {
+	defaultPage: number;
+	defaultLimit: number;
+	maxLimit: number;
+}
+
+interface PaginationConfig {
+	challenges: {
+		feed: FeedConfig;
+	};
+	activities: {
+		feed: FeedConfig;
+	};
+	recipes: {
+		feed: FeedConfig;
+	};
+	premium: {
+		activities: {
+			feed: FeedConfig;
+		};
+		recipes: {
+			feed: FeedConfig;
+		};
+	};
+	favorites: {
+		feed: FeedConfig;
+	};
+	badges: {
+		feed: FeedConfig;
+	};
+}
+
+const paginationConfig: PaginationConfig = {
 	challenges: {
 		feed: {
 			defaultPage: 1,
@@ -51,3 +83,5 @@ export default {
 		},
 	},
 };
+
+export default paginationConfig;

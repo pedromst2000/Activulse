@@ -1,12 +1,16 @@
-import { NavigationProp } from '@react-navigation/native';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import config from '../config/navigator';
 
 /**
- * Retrieves the name of the current screen from the navigation state.
- * @param navigation - The navigation prop object.
- * @returns The name of the current screen.
+ * Determines whether the tab bar should be hidden on the current screen.
+ * @param route - The route object.
+ * @returns A boolean indicating whether the tab bar should be hidden.
  */
-const getCurrentScreen = (navigation: NavigationProp<any>): string => {
-	return navigation.getState()?.routes[navigation.getState().index].name;
+
+const shouldHideTabBar = (route: any): boolean => {
+	const routeName = getFocusedRouteNameFromRoute(route) ?? '';
+
+	return config.hiddenScreens.includes(routeName);
 };
 
-export default { getCurrentScreen };
+export default shouldHideTabBar;
