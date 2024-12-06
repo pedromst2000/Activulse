@@ -5,15 +5,13 @@ import { useUserContext } from '../context/user';
 import AuthStack, { AuthStackParamList } from './Auth';
 import AssessmentRiskStack, { AssessmentRiskStackParamList } from './AssessmentRisk';
 import BonusAssessmentStack, { BonusAssessmentStackParamList } from './BonusAssessment';
+import HomeStack, { HomeStackParamList } from './Home';
+import LifestyleStack, { LifestyleStackParamList } from './Lifestyle';
 import Onboarding from '../screens/Onboarding';
-import Home from '../screens/Home';
 import Profile from '../screens/Profile';
 import Store from '../screens/Store';
-import HealthList from '../screens/Education/HealthList';
-import GetMoving from '../screens/Education/GetMoving';
-import QuitSmoking from '../screens/Education/QuitSmoking';
-import Leaderboard from '../screens/Leaderboard';
-import config from '../config';
+import config from '../config/navigator';
+import shouldHideTabBar from '../utils/navigation';
 import Icon from '../components/Icon';
 import HomeIS from '../assets/svg/icons/BottomTab/HomeIcon_Selected.svg';
 import HomeINS from '../assets/svg/icons/BottomTab/HomeIcon_N_Selected.svg';
@@ -23,17 +21,12 @@ import StoreIS from '../assets/svg/icons/BottomTab/StoreIcon_Selected.svg';
 import StoreINS from '../assets/svg/icons/BottomTab/StoreIcon_N_Selected.svg';
 import ProfileIS from '../assets/svg/icons/BottomTab/ProfileIcon_Selected.svg';
 import ProfileINS from '../assets/svg/icons/BottomTab/ProfileIcon_N_Selected.svg';
-import LifestyleStack, { LifestyleStackParamList } from './Lifestyle';
 
 export type MainTabParamList = {
-	Home: undefined; // to convert to HomeStack later
+	Home: undefined;
+	Lifestyle: undefined;
 	Store: undefined; // to convert to StoreStack later
 	Profile: undefined; // to convert to ProfileStack later
-	Lifestyle: undefined;
-	HealthList: undefined; // to be removed
-	GetMoving: undefined; // to be removed
-	QuitSmoking: undefined; // to be removed
-	Leaderboard: undefined; // to be removed
 };
 
 export type RootStackParamList = {
@@ -48,6 +41,9 @@ export type RootStackParamList = {
 	BonusAssessmentStack: {
 		screen: keyof BonusAssessmentStackParamList; // 'InitBonusAssessment' | 'BonusAssessment' | 'BonusOnboarding';
 	};
+	HomeStack: {
+		screen: keyof HomeStackParamList; // 'HomeScreen' | 'HealthList' | 'GetMoving' | 'QuitSmoking' | 'Leaderboard';
+	};
 	LifestyleStack: {
 		screen: keyof LifestyleStackParamList; // 'FitnessFeed' | 'NutritionFeed' | 'Leaderboard' | 'Activity' | 'Recipe';
 	};
@@ -60,17 +56,19 @@ const MainTabNavigator: React.FC = (): React.JSX.Element => {
 	return (
 		<Tab.Navigator
 			initialRouteName="Home"
-			screenOptions={{
-				...config.navigator.screenOptions,
-				tabBarStyle: {
-					backgroundColor: '#EFF6FF',
-					height: 64,
-				},
-			}}
+			screenOptions={({ route }) => ({
+				...config.options.screenOptions,
+				tabBarStyle: shouldHideTabBar(route)
+					? { display: 'none' }
+					: {
+							backgroundColor: '#EFF6FF',
+							height: 64,
+						},
+			})}
 		>
 			<Tab.Screen
 				name="Home"
-				component={Home}
+				component={HomeStack}
 				options={{
 					tabBarIcon: ({ focused }) => (
 						<Icon icon={focused ? HomeIS : HomeINS} width={30} height={30} />
@@ -103,34 +101,6 @@ const MainTabNavigator: React.FC = (): React.JSX.Element => {
 						<Icon icon={focused ? ProfileIS : ProfileINS} width={30} height={30} />
 					),
 				}}
-			/>
-
-			{/* To be refactor */}
-
-			<Tab.Screen
-				name="HealthList"
-				component={HealthList}
-				options={{
-					tabBarItemStyle: { display: 'none' },
-					tabBarStyle: {
-						display: 'none',
-					},
-				}}
-			/>
-			<Tab.Screen
-				name="Leaderboard"
-				component={Leaderboard}
-				options={{ tabBarItemStyle: { display: 'none' }, tabBarStyle: { display: 'none' } }}
-			/>
-			<Tab.Screen
-				name="GetMoving"
-				component={GetMoving}
-				options={{ tabBarItemStyle: { display: 'none' }, tabBarStyle: { display: 'none' } }}
-			/>
-			<Tab.Screen
-				name="QuitSmoking"
-				component={QuitSmoking}
-				options={{ tabBarItemStyle: { display: 'none' }, tabBarStyle: { display: 'none' } }}
 			/>
 		</Tab.Navigator>
 	);
