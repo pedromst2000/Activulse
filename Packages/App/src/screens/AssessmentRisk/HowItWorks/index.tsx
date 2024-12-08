@@ -1,13 +1,14 @@
 import AnimatedComponent from '@/src/components/Animated';
 import React from 'react';
 import { View, Text, Linking } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { ScrollView } from 'react-native-gesture-handler';
 import GoBackBtn from '@/src/components/GoBackBtn';
 import Icon from '@/src/components/Icon';
 import Ilustration from '@/src/components/Ilustration';
 import InfoI from '../../../assets/svg/icons/InfoIcon.svg';
 import LogoIlus from '../../../assets/svg/ilustrations/Logo.svg';
-import { useNavigation } from '@react-navigation/native';
-import { ScrollView } from 'react-native-gesture-handler';
+import ScreenTitle from '@/src/components/ScreenTitle';
 
 const HowItWorks: React.FC = (): React.JSX.Element => {
 	const navigation = useNavigation();
@@ -21,12 +22,8 @@ const HowItWorks: React.FC = (): React.JSX.Element => {
 
 				{/* Layout Assessment Content */}
 				<View className="flex-1 justify-center items-center px-4 py-7">
-					{/* Heading */}
-					<View className="pt-5">
-						<Text className="font-merriweather-bold text-[22.78px] text-secondary-700 text-center">
-							How It Works
-						</Text>
-					</View>
+					<ScreenTitle label="How It Works" onPress={() => navigation.goBack()} />
+
 					{/* Note */}
 					<View className="flex flex-row w-full px-4 py-6 sm:px-8 sm:py-4 gap-2 items-center">
 						<Icon icon={InfoI} width={20} height={20} />

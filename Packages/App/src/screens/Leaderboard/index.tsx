@@ -1,17 +1,17 @@
 import { Text, View } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import AnimatedComponent from '../../components/Animated';
-import GoBackBtn from '../../components/GoBackBtn';
 import { useNavigation } from '@react-navigation/native';
+import ScreenTitle from '@/src/components/ScreenTitle';
 
 const Leaderboard: React.FC = (): React.JSX.Element => {
 	const navigation = useNavigation();
 
 	return (
 		<AnimatedComponent animation="FadeIn">
-			<View className="flex-1 py-5 justify-center items-center bg-primary-50">
-				<GoBackBtn onPress={() => navigation.goBack()} isRounded={true} />
-				<Text>Leaderboard Screen</Text>
-			</View>
+			<ScrollView keyboardShouldPersistTaps="handled" className="flex-1 bg-primary-50">
+				<ScreenTitle label="Leaderboard" onPress={() => navigation.goBack()} />
+			</ScrollView>
 		</AnimatedComponent>
 	);
 };
