@@ -2,11 +2,11 @@ import { Text, View } from 'react-native';
 import { useState } from 'react';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
-import AnimatedComponent from '../../../../components/Animated';
-import GoBackBtn from '@/src/components/GoBackBtn';
-import OptionCard from '@/src/components/OptionCard';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { LifestyleStackParamList } from '@/src/navigation/Lifestyle';
+import AnimatedComponent from '../../../../components/Animated';
+import OptionCard from '@/src/components/OptionCard';
+import ScreenTitle from '@/src/components/ScreenTitle';
 
 type SelectFeedNavigationProp = NativeStackNavigationProp<
 	LifestyleStackParamList,
@@ -27,14 +27,8 @@ const SelectFeed: React.FC = (): React.JSX.Element => {
 
 	return (
 		<AnimatedComponent animation="SlideInFromRight">
-			<ScrollView keyboardShouldPersistTaps="handled" className="bg-primary-50">
-				{/* TODO: Convert into a reusable Component Called - Top Label Screen */}
-				<View className="flex-row items-center mt-10 ml-4 z-10">
-					<GoBackBtn onPress={() => navigation.goBack()} isRounded={true} />
-					<Text className="font-merriweather-bold text-[22px] md:text-xl lg:text-2xl text-secondary-700 ml-14">
-						Nutrition
-					</Text>
-				</View>
+			<ScrollView keyboardShouldPersistTaps="handled" className="flex-1 bg-primary-50">
+				<ScreenTitle label="Nutrition" onPress={() => navigation.goBack()} />
 
 				<View className="flex-1 bg-primary-50 px-4 mb-4">
 					{/* Title & Subtitle */}
@@ -63,7 +57,7 @@ const SelectFeed: React.FC = (): React.JSX.Element => {
 							label="DASH"
 							sourceImg={require('../../../../assets/images/DashDiet.png')}
 							onPress={() => handleDietSelection('DASH')}
-							description="Discover the DASH Diet: a heart-healthy plan rich in fruits, vegetables, and low-fat dairy, proven to help lower blood pressure."
+							description="Heart-healthy plan rich in fruits, vegetables, and low-fat dairy, proven to help lower blood pressure."
 						/>
 
 						{/* VEGAN CARD */}

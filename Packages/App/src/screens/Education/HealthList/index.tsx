@@ -1,23 +1,18 @@
 import { Text, View } from 'react-native';
 import AnimatedComponent from '@/src/components/Animated';
 import { ScrollView } from 'react-native-gesture-handler';
-import GoBackBtn from '@/src/components/GoBackBtn';
 import { useNavigation } from '@react-navigation/native';
 import NoSmokeI from '../../../assets/svg/icons/NoSmokeIcon.svg';
 import MovingI from '../../../assets/svg/icons/MovingIcon.svg';
 import HomeCard from '@/src/components/HomeCard';
+import ScreenTitle from '@/src/components/ScreenTitle';
 
 const HealthList: React.FC = (): React.JSX.Element => {
 	const navigation = useNavigation();
 	return (
 		<AnimatedComponent animation="SlideInFromRight">
-			<ScrollView keyboardShouldPersistTaps="handled">
-				<View className="flex-row items-center mt-10 ml-4 z-10">
-					<GoBackBtn onPress={() => navigation.goBack()} isRounded={true} />
-					<Text className="font-merriweather-bold text-[22px] md:text-xl lg:text-2xl text-secondary-700 ml-14">
-						Health Tips
-					</Text>
-				</View>
+			<ScrollView keyboardShouldPersistTaps="handled" className="flex-1 bg-primary-50">
+				<ScreenTitle label="Health Tips" onPress={() => navigation.goBack()} />
 
 				<View className="flex-1 justify-center items-center px-4 py-7">
 					<View className="flex justify-center items-center">
@@ -34,7 +29,7 @@ const HealthList: React.FC = (): React.JSX.Element => {
 					</View>
 
 					<View
-						className="flex justify-center items-center mt-2
+						className="flex justify-center items-center mt-6
                             space-y-[-60px] w-full
                         "
 					>

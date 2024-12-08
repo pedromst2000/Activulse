@@ -1,28 +1,20 @@
 import { Text, View, Image, Linking } from 'react-native';
 import AnimatedComponent from '@/src/components/Animated';
 import { ScrollView } from 'react-native-gesture-handler';
-import GoBackBtn from '@/src/components/GoBackBtn';
 import { useNavigation } from '@react-navigation/native';
 import Icon from '@/src/components/Icon';
 import IntensityI from '../../../assets/svg/icons/FrequencyIcon.svg';
 import TimeI from '../../../assets/svg/icons/TimeIcon.svg';
 import CalendarI from '../../../assets/svg/icons/CalendarIcon.svg';
+import ScreenTitle from '@/src/components/ScreenTitle';
 
 const GetMoving: React.FC = (): React.JSX.Element => {
 	const navigation = useNavigation();
 
 	return (
 		<AnimatedComponent animation="FadeIn">
-			<ScrollView keyboardShouldPersistTaps="handled">
-				<View className="flex-row items-center mt-10 ml-4 z-10">
-					<GoBackBtn
-						onPress={() => navigation.navigate('HealthList' as never)}
-						isRounded={true}
-					/>
-					<Text className="font-merriweather-bold text-[22px] md:text-xl lg:text-2xl text-secondary-700 ml-14">
-						Get Moving
-					</Text>
-				</View>
+			<ScrollView keyboardShouldPersistTaps="handled" className="flex-1 bg-primary-50">
+				<ScreenTitle label="Get Moving" onPress={() => navigation.goBack()} />
 
 				<View className="flex-1 justify-center items-center px-4 py-7">
 					<Image

@@ -11,7 +11,7 @@ import Onboarding from '../screens/Onboarding';
 import Profile from '../screens/Profile';
 import Store from '../screens/Store';
 import config from '../config/navigator';
-import shouldHideTabBar from '../utils/navigation';
+import utilsNav from '../utils/navigation';
 import Icon from '../components/Icon';
 import HomeIS from '../assets/svg/icons/BottomTab/HomeIcon_Selected.svg';
 import HomeINS from '../assets/svg/icons/BottomTab/HomeIcon_N_Selected.svg';
@@ -58,7 +58,7 @@ const MainTabNavigator: React.FC = (): React.JSX.Element => {
 			initialRouteName="Home"
 			screenOptions={({ route }) => ({
 				...config.options.screenOptions,
-				tabBarStyle: shouldHideTabBar(route)
+				tabBarStyle: utilsNav.shouldHideTabBar(route)
 					? { display: 'none' }
 					: {
 							backgroundColor: '#EFF6FF',
