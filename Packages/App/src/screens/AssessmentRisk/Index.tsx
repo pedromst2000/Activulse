@@ -27,19 +27,19 @@ const InitAssessment: React.FC = (): React.JSX.Element => {
 
 	return (
 		<AnimatedComponent animation="FadeIn">
-			<ScrollView keyboardShouldPersistTaps="handled" className="bg-primary-50">
+			<ScrollView keyboardShouldPersistTaps="handled">
 				<View className="flex-1 justify-center items-center min-h-screen px-4 py-5 gap-4 bg-primary-50 mt-2">
 					{/* Heading Section */}
-					<View>
-						<Text className="font-merriweather-bold text-[25px] text-secondary-700 text-center">
+					<View className="w-full px-4 sm:px-8">
+						<Text className="font-merriweather-bold text-[22px] sm:text-[25px] text-secondary-700 text-center">
 							Risk Heart Assessment
 						</Text>
 					</View>
 
 					{/* Info section */}
-					<View className="flex flex-row w-full px-4 py-2 gap-2 sm:px-8 sm:py-4 items-center">
+					<View className="flex flex-row w-full px-4 py-2 gap-2 items-center sm:px-8 sm:py-4">
 						<Icon icon={InfoI} width={20} height={20} />
-						<Text className="font-quicksand-medium text-secondary-700 text-[12px] tracking-[1px] flex-1">
+						<Text className="font-quicksand-medium text-secondary-700 text-[12px] tracking-[1px] flex-1 sm:text-[14px] sm:tracking-[1.2px]">
 							We recommend to check out the assessment guidelines in ‘How It Works’ before you
 							start your assessment.
 						</Text>
@@ -47,12 +47,15 @@ const InitAssessment: React.FC = (): React.JSX.Element => {
 
 					{/* Ilustration Section */}
 					<View className="w-full items-center">
-						<Ilustration ilustration={HeartAssessmentIlus} width={340} height={170} />
+						<Ilustration
+							ilustration={HeartAssessmentIlus}
+							styleClass="w-[300px] h-[150px] sm:w-[340px] sm:h-[170px] md:w-[380px] md:h-[190px]"
+						/>
 					</View>
 
 					{/* Start Assessment Description */}
-					<View className="px-4">
-						<Text className="font-quicksand-medium text-secondary-700 text-[14.22px] text-center">
+					<View className="px-4 sm:px-8">
+						<Text className="font-quicksand-medium text-secondary-700 text-[14px] sm:text-[16px] text-center">
 							Prepare for an exciting journey to a healthier heart! This assessment reveals
 							your heart's secrets and guides you toward a future full of energy. We're
 							thrilled to join you on this adventure. Let's dive in!
@@ -66,8 +69,11 @@ const InitAssessment: React.FC = (): React.JSX.Element => {
 								onPress={() => {
 									navigation.navigate('AssessmentRisk' as never);
 								}}
+								className="bg-accent-500 py-2 sm:py-3"
 							>
-								<Text className="font-quicksand-bold text-secondary-700 text-base">Start</Text>
+								<Text className="font-quicksand-bold text-secondary-700 text-base sm:text-lg text-center">
+									Start
+								</Text>
 							</Button>
 						</View>
 						<View className="flex-1">
@@ -76,14 +82,14 @@ const InitAssessment: React.FC = (): React.JSX.Element => {
 								onPress={() => {
 									navigation.navigate('HowItWorks' as never);
 								}}
-								className="bg-primary-50 border-2 border-accent-500"
+								className="bg-primary-50 border-2 border-accent-500 py-2 sm:py-3"
 							/>
 						</View>
 						<Button
 							onPress={handleSignOut}
-							className="flex-1 bg-primary-50 border-2 border-accent-500"
+							className="flex-1 bg-primary-50 border-2 border-accent-500 py-2 sm:py-3"
 						>
-							<Text className="font-quicksand-bold text-secondary-700 text-base text-center">
+							<Text className="font-quicksand-bold text-secondary-700 text-base sm:text-lg text-center">
 								Sign Out
 							</Text>
 						</Button>

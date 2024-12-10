@@ -33,7 +33,7 @@ export type RootStackParamList = {
 	Onboarding: undefined;
 	MainTabs: undefined;
 	AuthStack: {
-		screen: keyof AuthStackParamList; // 'SignIn' | 'JoinNow' | 'ForgotPassword';
+		screen: keyof AuthStackParamList; // 'SignIn' | 'JoinNow' | 'ForgotPassword' | 'VerifyOTP' | 'ChangePassword' | 'VerifyEmail';
 	};
 	AssessmentRiskStack: {
 		screen: keyof AssessmentRiskStackParamList; // 'Assessment' | 'Result' | 'HowItWorks';

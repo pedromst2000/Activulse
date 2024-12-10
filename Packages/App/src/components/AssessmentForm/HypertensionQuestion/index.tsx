@@ -50,7 +50,7 @@ const HypertensionQuestion: React.FC<HypertensionQuestionProps> = ({
 
 	return (
 		<AnimatedComponent
-			animation="FadeIn"
+			animation="SlideInFromRight"
 			className="flex justify-center items-center p-4 bg-primary-50"
 		>
 			<View className="flex justify-center items-center p-4">
@@ -60,7 +60,10 @@ const HypertensionQuestion: React.FC<HypertensionQuestionProps> = ({
 					</Text>
 				</View>
 				<View className="mb-2">
-					<Ilustration ilustration={HypertensionIlus} width={300} height={300} />
+					<Ilustration
+						ilustration={HypertensionIlus}
+						styleClass="w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96"
+					/>
 				</View>
 
 				<View className="w-full mb-4 mt-4 flex flex-row justify-around">

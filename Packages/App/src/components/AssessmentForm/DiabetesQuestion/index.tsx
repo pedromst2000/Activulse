@@ -50,7 +50,7 @@ const DiabetesQuestion: React.FC<DiabetesQuestionProps> = ({
 
 	return (
 		<AnimatedComponent
-			animation="FadeIn"
+			animation="SlideInFromRight"
 			className="flex justify-center items-center p-4 bg-primary-50"
 		>
 			<View className="flex justify-center items-center p-4">
@@ -60,7 +60,10 @@ const DiabetesQuestion: React.FC<DiabetesQuestionProps> = ({
 					</Text>
 				</View>
 				<View className="mb-2">
-					<Ilustration ilustration={DiabetesIlus} width={270} height={270} />
+					<Ilustration
+						ilustration={DiabetesIlus}
+						styleClass="w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96"
+					/>
 				</View>
 
 				<View className="w-full mb-4 mt-4 flex flex-row justify-around">

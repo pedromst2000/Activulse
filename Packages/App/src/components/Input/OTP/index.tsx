@@ -38,6 +38,11 @@ const OTPInput: React.FC<OTPInputProps> = ({ length, onOTPChange, setCountDigit 
 		if (text && index < length - 1) {
 			inputsRef.current[index + 1]?.focus();
 		}
+
+		// Automatically when the current input is empty, focus the previous input
+		if (!text && index > 0) {
+			inputsRef.current[index - 1]?.focus();
+		}
 	};
 
 	const handleKeyPress = ({ nativeEvent: { key } }: any, index: number) => {
@@ -58,7 +63,8 @@ const OTPInput: React.FC<OTPInputProps> = ({ length, onOTPChange, setCountDigit 
 	const getInputClassName = (index: number) => {
 		const isFilled = otpValues[index] !== '';
 		const isFocused = focusedInput === index;
-		const baseClass = 'w-12 h-12 border-2 rounded-md text-center text-2xl ';
+		const baseClass =
+			'w-12 h-12 border-2 rounded-md text-center text-2xl sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-18 lg:h-18';
 
 		let dynamicClass = '';
 		if (isFocused) {
@@ -71,6 +77,9 @@ const OTPInput: React.FC<OTPInputProps> = ({ length, onOTPChange, setCountDigit 
 			dynamicClass =
 				'bg-primary-50 border-secondary-700 text-secondary-700 font-quicksand-bold';
 		}
+
+		// Responsive adjustments
+		dynamicClass += ' w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-18 lg:h-18';
 
 		return `${baseClass} ${dynamicClass}`;
 	};

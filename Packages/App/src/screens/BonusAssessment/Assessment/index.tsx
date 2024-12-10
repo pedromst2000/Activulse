@@ -37,7 +37,7 @@ const BonusAssessment: React.FC = (): React.JSX.Element => {
 				{/* Heading  */}
 				<View className="items-center my-5">
 					{/* Back Button */}
-					<View className="absolute top-8 left-5">
+					<View className="z-10 absolute top-2 left-4 sm:top-4 sm:left-6 md:top-6 md:left-8 lg:top-8 lg:left-10 xl:top-10 xl:left-12">
 						<Icon
 							icon={ArrowLeftI}
 							onPress={() => {

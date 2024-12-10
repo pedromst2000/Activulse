@@ -30,14 +30,14 @@ const SplashScreen: React.FC<SplashScreenProps> = ({
 	}, [onAnimationFinish]);
 
 	return (
-		<View className="items-center justify-center flex-1 bg-primary-50">
+		<View className="flex-1 items-center justify-center bg-primary-50">
 			<LottieView
 				ref={animationRef}
 				source={require('../../assets/gif/SplashScreen.json')}
 				autoPlay={true}
 				loop={false}
 				speed={1}
-				style={styles.SplashScreen}
+				style={{ width: '100%', height: '100%' }}
 				onAnimationFinish={onAnimationFinish}
 			/>
 		</View>

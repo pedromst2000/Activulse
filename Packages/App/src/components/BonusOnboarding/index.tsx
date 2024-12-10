@@ -43,12 +43,12 @@ const BonusOnboardingItem: React.FC<SlideProps> = React.memo(
 				{/* Title & Description Container */}
 				<View style={styles.textContainer}>
 					<View>
-						<Text className="font-merriweather-bold text-secondary-700 text-[22px] text-center w-[300px]">
+						<Text className="font-merriweather-bold text-secondary-700 text-center w-[75vw] md:w-[300px] text-[5vw] md:text-[22px]">
 							{title}
 						</Text>
 					</View>
 					<View>
-						<Text className="font-quicksand-medium text-secondary-700 text-[14.22px] text-center w-[315px]">
+						<Text className="font-quicksand-medium text-secondary-700 text-center w-[80vw] md:w-[315px] text-[3.5vw] md:text-[14.22px]">
 							{description}
 						</Text>
 					</View>

@@ -50,7 +50,7 @@ const GenderSelection: React.FC<GenderSelectionProps> = ({
 	};
 
 	return (
-		<AnimatedComponent animation="FadeIn">
+		<AnimatedComponent animation="SlideInFromRight">
 			<View className="flex-1 justify-center items-center gap-5 w-full h-full px-4 md:px-8 lg:px-16 bg-primary-50 mb-8">
 				<View>
 					<Text className="font-merriweather-bold text-xl md:text-2xl lg:text-3xl text-secondary-700 text-center">
@@ -68,7 +68,10 @@ const GenderSelection: React.FC<GenderSelectionProps> = ({
 									isMaleSelected ? 'border-4 border-accent-700' : ''
 								}`}
 							>
-								<Ilustration ilustration={MaleIlus} width={160} height={160} />
+								<Ilustration
+									ilustration={MaleIlus}
+									styleClass="w-40 h-40 md:w-44 md:h-44 lg:w-48 lg:h-48"
+								/>
 								<View className="flex flex-col items-center justify-center bg-accent-500 rounded-2xl px-4 py-1 mt-4">
 									<Text className="font-quicksand-bold text-sm md:text-base lg:text-lg text-secondary-700">
 										Male
@@ -95,9 +98,11 @@ const GenderSelection: React.FC<GenderSelectionProps> = ({
 						</TouchableOpacity>
 					</View>
 				</View>
-				<View>
+				<View className="w-full flex justify-center items-center mt-8">
 					<Button disabled={selectedGender === null} onPress={() => handleNext()}>
-						<Text className="font-quicksand-bold text-secondary-700 text-base">Next</Text>
+						<Text className="font-quicksand-bold text-secondary-700 text-base md:text-lg lg:text-xl">
+							Next
+						</Text>
 					</Button>
 				</View>
 			</View>

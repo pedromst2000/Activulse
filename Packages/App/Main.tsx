@@ -21,7 +21,7 @@ const MainApp: React.FC = (): React.JSX.Element => {
 				if (storedUser) {
 					setLoggedUser(JSON.parse(storedUser));
 				}
-			} catch (error : any) {
+			} catch (error: any) {
 				console.error('Error loading user from storage:', error);
 				if (error.message === 'Network Error') {
 					console.error('Network error occurred while loading user from storage');
@@ -40,14 +40,14 @@ const MainApp: React.FC = (): React.JSX.Element => {
 		return <SplashScreen onAnimationFinish={(): void => setAnimationComplete(true)} />;
 	}
 
-	// Display error screen if any error occurred
+	// // Display error screen if any error occurred
 	if (anErrorOccurred) {
 		console.log('An error occurred while loading the user from storage');
 
 		return <Error />;
 	}
 
-	// Show a loading screen while fetching the user from storage
+	// // Show a loading screen while fetching the user from storage
 	if (loadingUser) {
 		return <Loading />;
 	}

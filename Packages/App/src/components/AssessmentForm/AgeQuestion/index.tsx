@@ -37,7 +37,7 @@ const AgeQuestion: React.FC<AgeQuestionProps> = ({
 	}, [showError]);
 
 	return (
-		<AnimatedComponent animation="FadeIn">
+		<AnimatedComponent animation="SlideInFromRight">
 			<View className="flex justify-center items-center p-4">
 				<View className="mb-2">
 					<Text className="font-merriweather-bold text-xl md:text-2xl lg:text-3xl text-secondary-700 text-center">
@@ -45,37 +45,32 @@ const AgeQuestion: React.FC<AgeQuestionProps> = ({
 					</Text>
 				</View>
 				<View className="mb-2">
-					<Ilustration ilustration={AgeIlus} width={320} height={320} />
+					<Ilustration
+						ilustration={AgeIlus}
+						styleClass="w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96"
+					/>
 				</View>
 				{/* ERROR MESSAGE */}
 				{showError && (
 					<AnimatedComponent animation="FadeIn">
 						<View className="mb-2">
-							<Text className="font-quicksand-bold text-red-500 text-sm text-center">
+							<Text className="font-quicksand-bold text-red-500 text-xs sm:text-sm md:text-base lg:text-lg text-center">
 								Age must be between 30 and 99
 							</Text>
 						</View>
 					</AnimatedComponent>
 				)}
 
-				<View
-					className="mb-4 w-
-				flex justify-center items-center p-1
-			"
-				>
+				<View className="mb-4 w-full flex justify-center items-center p-1">
 					<Input
 						placeholder="Insert your age"
 						value={age}
 						onChange={(text) => setAge(text)}
 						keyboardType="numeric"
-						className="w-full"
+						className="w-full sm:w-3/4 md:w-2/3 lg:w-1/2 text-base sm:text-lg md:text-xl lg:text-2xl"
 					/>
 				</View>
-				<View
-					className="w-full mb-4 mt-4
-				flex justify-center items-center p-2
-			"
-				>
+				<View className="w-full mb-4 mt-4 flex justify-center items-center p-2">
 					<Button
 						disabled={age === ''}
 						onPress={() => {
@@ -88,8 +83,9 @@ const AgeQuestion: React.FC<AgeQuestionProps> = ({
 								handleNext();
 							}
 						}}
+						styleClass="w-full sm:w-3/4 md:w-2/3 lg:w-1/2"
 					>
-						<Text className="font-quicksand-bold text-secondary-700 text-base text-center md:text-lg lg:text-xl">
+						<Text className="font-quicksand-bold text-secondary-700 text-base text-center sm:text-lg md:text-xl lg:text-2xl">
 							Next
 						</Text>
 					</Button>
