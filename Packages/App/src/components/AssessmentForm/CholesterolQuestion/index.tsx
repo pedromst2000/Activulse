@@ -128,7 +128,7 @@ const CholesterolQuestion: React.FC<CholesterolQuestionProps> = ({
 					},
 				});
 			} else {
-				console.log('Error: Data is undefined.');
+				console.error('Error: Data is undefined.');
 			}
 		} catch (error: any) {
 			const errorMessage = utils.error.getMessage(error);
@@ -139,14 +139,17 @@ const CholesterolQuestion: React.FC<CholesterolQuestionProps> = ({
 
 	return (
 		<AnimatedComponent
-			animation="FadeIn"
+			animation="SlideInFromRight"
 			className="flex justify-center items-center p-4 bg-primary-50"
 		>
 			<View className="flex justify-center items-center p-4">
-				<View className="flex flex-row w-full px-2 py-2 gap-2 sm:px-8 sm:py-4 items-center mb-[18px]">
+				<View className="flex flex-row w-full px-2 py-2 gap-2 items-center mb-4 sm:px-4 sm:py-2 md:px-6 md:py-3 lg:px-8 lg:py-4">
 					<Icon icon={InfoI} width={20} height={20} />
-					<Text className="font-quicksand-semi-bold text-secondary-700 text-[12px] tracking-[1px] flex-1">
-						<Text className="font-quicksand-bold text-[13.5px]">Check</Text> {''}
+					<Text className="font-quicksand-semi-bold text-secondary-700 text-xs sm:text-sm md:text-base lg:text-lg tracking-wide flex-1">
+						<Text className="font-quicksand-bold text-sm sm:text-base md:text-lg lg:text-xl">
+							Check
+						</Text>{' '}
+						{''}
 						the previous data filled in the previous steps before continuing.
 					</Text>
 				</View>
@@ -156,14 +159,17 @@ const CholesterolQuestion: React.FC<CholesterolQuestionProps> = ({
 					</Text>
 				</View>
 				<View className="mb-2">
-					<Ilustration ilustration={CholesterolIlus} width={300} height={300} />
+					<Ilustration
+						ilustration={CholesterolIlus}
+						styleClass="w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96"
+					/>
 				</View>
 
 				{/* ERROR MESSAGE */}
 				{showError && (
 					<AnimatedComponent animation="FadeIn">
 						<View className="mb-2">
-							<Text className="font-quicksand-bold text-red-500 text-xs md:text-sm lg:text-base text-center">
+							<Text className="font-quicksand-bold text-red-500 text-xs sm:text-sm md:text-base lg:text-lg text-center">
 								{errorMessage}
 							</Text>
 						</View>
@@ -174,9 +180,9 @@ const CholesterolQuestion: React.FC<CholesterolQuestionProps> = ({
 					{['HDL', 'Total'].map((label, index) => (
 						<View
 							key={index}
-							className="relative flex-1 flex flex-row justify-center items-center  max-w-md"
+							className="relative flex-1 flex flex-row justify-center items-center max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg"
 						>
-							<Text className="mr-2 font-quicksand-bold text-secondary-700 text-sm md:text-base lg:text-lg">
+							<Text className="mr-2 font-quicksand-bold text-secondary-700 text-xs sm:text-sm md:text-base lg:text-lg">
 								{label}
 							</Text>
 
@@ -187,9 +193,9 @@ const CholesterolQuestion: React.FC<CholesterolQuestionProps> = ({
 									label === 'HDL' ? setHDL(text) : setTotalCholesterol(text)
 								}
 								keyboardType="numeric"
-								className=" w-[70%] sm:w-[80%] md:w-[70%] lg:w-[60%]"
+								className="w-[60%] sm:w-[70%] md:w-[60%] lg:w-[50%]"
 							/>
-							<Text className="ml-2 font-quicksand-bold text-secondary-700 text-xs sm:text-sm md:text-base">
+							<Text className="ml-2 font-quicksand-bold text-secondary-700 text-xs sm:text-sm md:text-base lg:text-lg">
 								mg/dL
 							</Text>
 						</View>
@@ -203,6 +209,7 @@ const CholesterolQuestion: React.FC<CholesterolQuestionProps> = ({
 							handleValidation();
 							handleAssessment();
 						}}
+						styleClass="w-full sm:w-3/4 md:w-2/3 lg:w-1/2"
 					>
 						<Text className="font-quicksand-bold text-secondary-700 text-sm sm:text-base md:text-lg lg:text-xl text-center">
 							Finish

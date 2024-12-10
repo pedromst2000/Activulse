@@ -21,6 +21,7 @@ import AnimatedComponent from '@/src/components/Animated';
 import Message from '@/src/components/Message';
 import OTPInput from '@/src/components/Input/OTP';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import Link from '@/src/components/Link';
 
 type VerifyOTPRouteProp = RouteProp<AuthStackParamList, 'VerifyOTP'>;
 type VerifyOTPNavigationProp = NativeStackNavigationProp<AuthStackParamList, 'VerifyOTP'>;
@@ -38,8 +39,13 @@ const VerifyOTP: React.FC = (): React.JSX.Element => {
 	const [countDigit, setCountDigit] = useState<number>(0);
 	const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 	const scrollViewRef = useRef<ScrollView>(null);
-	const { status, mutateAsync } = useVerifyOTP({ OTP, email: route.params.email });
-	const { mutateAsync: resendMutate } = useRequestResetPassword({ email: route.params.email });
+	const { status, mutateAsync } = useVerifyOTP({
+		OTP,
+		email: route.params.email,
+	});
+	const { mutateAsync: resendMutate } = useRequestResetPassword({
+		email: route.params.email,
+	});
 
 	// Reset states when component is focused
 	useFocusEffect(
@@ -69,7 +75,10 @@ const VerifyOTP: React.FC = (): React.JSX.Element => {
 			setShowError(false);
 
 			// Send the OTP verification request
-			const resData = await mutateAsync({ OTP, email: route.params.email });
+			const resData = await mutateAsync({
+				OTP,
+				email: route.params.email,
+			});
 			if (resData.success) {
 				setSuccessMessage(resData.message);
 				setShowSuccess(true);
@@ -110,7 +119,9 @@ const VerifyOTP: React.FC = (): React.JSX.Element => {
 			setShowError(false);
 
 			// Send the request to resend the email
-			const resData = await resendMutate({ email: route.params.email });
+			const resData = await resendMutate({
+				email: route.params.email,
+			});
 			if (resData.success) {
 				setSuccessMessage('Email sent successfully');
 				setShowSuccess(true);
@@ -151,32 +162,28 @@ const VerifyOTP: React.FC = (): React.JSX.Element => {
 	}, [showError, showSuccess]);
 
 	return (
-		<AnimatedComponent animation="FadeIn">
+		<AnimatedComponent animation="SlideInFromRight">
 			<KeyboardAvoidingView
 				style={{ flex: 1 }}
 				behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
 				keyboardVerticalOffset={Platform.OS === 'ios' ? 80 : 0}
 			>
-				<ScrollView
-					ref={scrollViewRef}
-					keyboardShouldPersistTaps="handled"
-					className="bg-primary-50"
-				>
+				<ScrollView ref={scrollViewRef} keyboardShouldPersistTaps="handled">
 					<View className="p-4 sm:p-8 justify-between flex-1 bg-primary-50">
-						<View className="absolute top-3 left-2 mt-6 ml-4">
+						<View className="absolute top-3 left-2 mt-6 ml-4 sm:mt-8 sm:ml-6 md:mt-10 md:ml-8 lg:mt-12 lg:ml-10">
 							<GoBackBtn onPress={() => navigation.goBack()} isRounded={true} />
 						</View>
 
 						{/* Message */}
 						<AnimatedComponent animation="FadeIn">
-							{showError && errorCode !== 409 ? (
+							{showError ? (
 								<Message type="error" message={validationError} />
 							) : showSuccess ? (
 								<Message type="success" message={successMessage} />
 							) : null}
 						</AnimatedComponent>
 
-						<View className="flex-1 justify-center items-center pt-12 sm:pt-16">
+						<View className="flex-1 justify-center items-center  mt-[-70px] pt-12 sm:pt-16 md:pt-20 lg:pt-24">
 							{/* Title Form */}
 							<Title
 								title="Verify your Email"
@@ -184,7 +191,7 @@ const VerifyOTP: React.FC = (): React.JSX.Element => {
 							/>
 
 							{/* Form */}
-							<View className="flex-1 justify-center items-center pt-12 sm:pt-16">
+							<View className="flex-1 justify-center items-center  pt-12 sm:pt-16 md:pt-20 lg:pt-24">
 								<View>
 									{/* Input with 6 digits OTP */}
 									<OTPInput
@@ -195,20 +202,19 @@ const VerifyOTP: React.FC = (): React.JSX.Element => {
 									/>
 								</View>
 
-								<View className="flex flex-row justify-between items-center pt-10 sm:pt-12">
-									<Text
-										onPress={handleResendEmail}
-										className="font-quicksand-medium text-secondary-700 text-xs sm:text-sm"
-									>
-										Didn´t Receive the Email or expired?{' '}
-										<Text className="font-quicksand-bold">Resend</Text>
-									</Text>
-								</View>
+								<Link
+									type="Long"
+									message="Didn´t Receive the Email or expired? "
+									boldMessage="Resend"
+									onPress={handleResendEmail}
+									styleClass="flex flex-row justify-between items-center pt-10 sm:pt-12 md:pt-14 lg:pt-16"
+								/>
 
-								<View className="flex flex-row justify-between items-center pt-14 sm:pt-16">
+								<View className="flex flex-row justify-between items-center pt-10 sm:pt-12 md:pt-14 lg:pt-16">
 									<Button
 										disabled={havesAllDigits !== true || status === 'pending'}
 										onPress={handleVerifyOTP}
+										styleClass="w-full sm:w-3/4 md:w-2/3 lg:w-1/2"
 									>
 										<Text className="font-quicksand-bold text-secondary-700 text-base">
 											{status === 'pending' ? (
@@ -220,8 +226,11 @@ const VerifyOTP: React.FC = (): React.JSX.Element => {
 									</Button>
 								</View>
 
-								<View className="flex-1 w-full items-center pb-10 sm:pb-12 pt-24 sm:pt-28">
-									<Ilustration ilustration={LogoIlus} width={150} height={156} />
+								<View className="flex-1 w-full items-center pb-8 pt-8 sm:pb-10 sm:pt-10 md:pb-12 md:pt-12 lg:pb-14 lg:pt-14">
+									<Ilustration
+										ilustration={LogoIlus}
+										styleClass="w-36 h-14 sm:w-40 sm:h-16 md:w-44 md:h-18 lg:w-48 lg:h-20"
+									/>
 								</View>
 							</View>
 						</View>

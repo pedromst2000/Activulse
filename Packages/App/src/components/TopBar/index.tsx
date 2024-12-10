@@ -35,25 +35,32 @@ const TopBar: React.FC = (): React.JSX.Element => {
 
 				{/* Greeting and Username */}
 				<View>
-					<Text className="text-[16px] font-quicksand-medium text-secondary-700">
-						Hello <Text className="text-[18px]">👋</Text>
+					<Text className="text-[14px] sm:text-[16px] font-quicksand-medium text-secondary-700">
+						Hello <Text className="text-[16px] sm:text-[18px]">👋</Text>
 					</Text>
-					<Text className="text-[16.5px] font-quicksand-bold text-secondary-700">
+					<Text className="text-[14.5px] sm:text-[16.5px] font-quicksand-bold text-secondary-700">
 						{loggedUser?.username}
 					</Text>
 				</View>
 			</View>
 
 			{/* Right Side: Icon and Points */}
-			<View className="flex flex-row items-center space-x-2 border-2 border-secondary-700 rounded-full px-3 py-1">
+			<View className="flex flex-row items-center space-x-2 border-2 border-secondary-700 rounded-full px-2 py-1 sm:px-3 sm:py-1">
 				{/* Heart Icon */}
 				<View className="flex items-center">
-					<Icon icon={AppI} width={24} height={24} />
+					<Icon
+						icon={AppI}
+						className="w-[24px] h-[24px] 
+							sm:w-[24px] sm:h-[24px] 
+							md:w-[28px] md:h-[28px] 
+							lg:w-[32px] lg:h-[32px] 
+						"
+					/>
 				</View>
 
 				{/* Points */}
 				<View>
-					<Text className="text-[16px] font-quicksand-bold text-secondary-700">
+					<Text className="text-[14px] sm:text-[16px] font-quicksand-semi-bold text-secondary-700">
 						{loggedUser?.points ?? '0'}
 					</Text>
 				</View>

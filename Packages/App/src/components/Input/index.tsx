@@ -56,11 +56,11 @@ const Input: React.FC<Props> = ({
 
 	return (
 		<View
-			className={`flex flex-row items-center w-[250px] h-[50px] rounded-[20px] border-2 border-secondary-700 ${className}`}
+			className={`flex flex-row items-center w-full max-w-[300px] h-[50px] rounded-[20px] border-2 border-secondary-700 ${className}`}
 		>
 			{/* Icon Container */}
 			{icon && (
-				<View className={`pl-[10px] ${iconClassName}`}>
+				<View className={`pl-2 ${iconClassName}`}>
 					<Icon width={23} height={23} icon={icon} onPress={() => inputRef.current?.focus()} />
 				</View>
 			)}

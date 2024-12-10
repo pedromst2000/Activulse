@@ -22,25 +22,25 @@ const Lifestyle: React.FC = (): React.JSX.Element => {
 		<AnimatedComponent animation="FadeIn">
 			<TopBar />
 			<ScrollView keyboardShouldPersistTaps="handled" className="flex-1 bg-primary-50">
-				<View className="flex-1 bg-primary-50 px-4 mb-4">
+				<View className="w-full flex-1 bg-primary-50 px-4 mb-4">
 					{/* Title & Subtitle */}
 					<View className="mt-8 mb-6">
 						<Text
-							className="text-[22px] sm:text-[20px] md:text-[22px] text-secondary-700 font-merriweather-bold
-			  leading-[24px] sm:leading-[26px] md:leading-[28px] text-center tracking-[0.8px]"
+							className="text-[22px] sm:text-[20px] md:text-[22px] lg:text-[24px] xl:text-[26px] text-secondary-700 font-merriweather-bold
+			  leading-[24px] sm:leading-[26px] md:leading-[28px] lg:leading-[30px] xl:leading-[32px] text-center tracking-[0.8px]"
 						>
 							Ready to Change Your Lifestyle
 						</Text>
 						<Text
-							className="text-[14px] sm:text-[13px] md:text-[14px] text-secondary-700 font-quicksand-medium
-              leading-[22px] text-center tracking-[0.8px] mt-2"
+							className="text-[14px] sm:text-[13px] md:text-[14px] lg:text-[15px] xl:text-[16px] text-secondary-700 font-quicksand-medium
+			  leading-[22px] sm:leading-[24px] md:leading-[26px] lg:leading-[28px] xl:leading-[30px] text-center tracking-[0.8px] mt-2"
 						>
 							Select your preference section
 						</Text>
 					</View>
 
 					{/* Cards */}
-					<View className="flex flex-col items-center">
+					<View className="flex flex-col items-center space-y-4">
 						{/* Fitness Card */}
 						<OptionCard
 							label="Fitness"

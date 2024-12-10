@@ -139,6 +139,7 @@ const DietSelection: React.FC<DietSelectionProps> = ({
 						sourceImg={require('../../../assets/images/DashDiet.png')}
 						onPress={() => handleDietSelection('DASH')}
 						description="Discover the DASH Diet: a heart-healthy plan rich in fruits, vegetables, and low-fat dairy, proven to help lower blood pressure."
+						styleClass="w-full md:w-1/3 lg:w-1/4"
 					/>
 
 					{/* VEGAN CARD */}
@@ -147,6 +148,7 @@ const DietSelection: React.FC<DietSelectionProps> = ({
 						sourceImg={require('../../../assets/images/VeganDiet.png')}
 						onPress={() => handleDietSelection('Vegan')}
 						description=" Elevate your plate with our Vegetarian Diet, where every bite is a celebration of plant-based goodness."
+						styleClass="w-full md:w-1/3 lg:w-1/4"
 					/>
 
 					{/* MEDITERRANEAN CARD */}
@@ -155,6 +157,7 @@ const DietSelection: React.FC<DietSelectionProps> = ({
 						sourceImg={require('../../../assets/images/MediterraneanDiet.png')}
 						onPress={() => handleDietSelection('Mediterranean')}
 						description=" Embark on a sensory journey through the sun-kissed lands of the Mediterranean with our diet rich in tradition and taste."
+						styleClass="w-full md:w-1/3 lg:w-1/4"
 					/>
 				</View>
 			</View>

@@ -12,7 +12,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { BonusAssessmentStackParamList } from '@/src/navigation/BonusAssessment';
 import utils from '@/src/utils';
-import { useUserContext } from '@/src/context/user';
+import SelectCard from '../../SelectCard';
 
 type FastFoodSelectionProps = {
 	FastFoodState: 'Rare' | 'Sometimes' | 'Frequently' | null;
@@ -41,7 +41,6 @@ const FastFoodSelection: React.FC<FastFoodSelectionProps> = ({
 	const [showError, setShowError] = React.useState<boolean>(false);
 	const [errorMessage, setErrorMessage] = React.useState<string>('');
 	const timeoutRef = useRef<NodeJS.Timeout | null>(null); // Manage the timeout for the error message
-	const { loggedUser, updateUser } = useUserContext();
 
 	const { mutateAsync } = useExtraAssessment({
 		stress: stressState,
@@ -126,60 +125,43 @@ const FastFoodSelection: React.FC<FastFoodSelectionProps> = ({
 				</View>
 
 				{/* Cards Container */}
-				<View className="flex justify-center items-center flex-wrap flex-row py-4 px-4 gap-[20px] mr-[30px]">
+				<View className="flex justify-center items-center flex-wrap flex-row px-4 gap-[20px] mr-[30px]">
 					<View className="flex flex-row justify-center gap-4 w-full">
 						{/* Rare Card */}
-						<TouchableOpacity activeOpacity={0.7} onPress={() => handleSelection('Rare')}>
-							<View
-								className={`bg-accent-100 rounded-2xl w-32 h-48 md:w-36 md:h-52 lg:w-40 lg:h-56 flex items-center justify-center mx-1 ${
-									isRareSelected ? 'border-4 border-accent-700 bg-primary-50' : ''
-								}`}
-							>
-								<Ilustration ilustration={RareIlus} width={60} height={60} />
-								<View className="flex flex-col items-center justify-center bg-accent-500 rounded-2xl px-2 py-1 mt-3">
-									<Text className="font-quicksand-bold text-xs md:text-sm lg:text-base text-secondary-700">
-										Rare
-									</Text>
-								</View>
-							</View>
-						</TouchableOpacity>
+
+						<View>
+							<SelectCard
+								type="Status"
+								ilustration={RareIlus}
+								onPress={() => handleSelection('Rare')}
+								isSelected={isRareSelected}
+								label="Rare"
+							/>
+						</View>
 
 						{/* Sometimes Card */}
-						<TouchableOpacity activeOpacity={0.7} onPress={() => handleSelection('Sometimes')}>
-							<View
-								className={`bg-accent-100 rounded-2xl w-32 h-48 md:w-36 md:h-52 lg:w-40 lg:h-56 flex items-center justify-center mx-1 ${
-									isSometimesSelected ? 'border-4 border-accent-700 bg-primary-50' : ''
-								}`}
-							>
-								<Ilustration ilustration={SometimesIlus} width={60} height={60} />
-								<View className="flex flex-col items-center justify-center bg-accent-500 rounded-2xl px-2 py-1 mt-3">
-									<Text className="font-quicksand-bold text-xs md:text-sm lg:text-base text-secondary-700">
-										Sometimes
-									</Text>
-								</View>
-							</View>
-						</TouchableOpacity>
+						<View>
+							<SelectCard
+								type="Status"
+								ilustration={SometimesIlus}
+								onPress={() => handleSelection('Sometimes')}
+								isSelected={isSometimesSelected}
+								label="Sometimes"
+							/>
+						</View>
 					</View>
 
 					<View className="flex flex-row justify-center mt-4 w-full">
 						{/* Frequently Card */}
-						<TouchableOpacity
-							activeOpacity={0.7}
-							onPress={() => handleSelection('Frequently')}
-						>
-							<View
-								className={`bg-accent-100 rounded-2xl w-32 h-48 md:w-36 md:h-52 lg:w-40 lg:h-56 flex items-center justify-center mx-1 ${
-									isFrequentlySelected ? 'border-4 border-accent-700 bg-primary-50' : ''
-								}`}
-							>
-								<Ilustration ilustration={FrequentlyIlus} width={60} height={60} />
-								<View className="flex flex-col items-center justify-center bg-accent-500 rounded-2xl px-2 py-1 mt-3">
-									<Text className="font-quicksand-bold text-xs md:text-sm lg:text-base text-secondary-700">
-										Frequently
-									</Text>
-								</View>
-							</View>
-						</TouchableOpacity>
+						<View>
+							<SelectCard
+								type="Status"
+								ilustration={FrequentlyIlus}
+								onPress={() => handleSelection('Frequently')}
+								isSelected={isFrequentlySelected}
+								label="Frequently"
+							/>
+						</View>
 					</View>
 				</View>
 
@@ -195,14 +177,16 @@ const FastFoodSelection: React.FC<FastFoodSelectionProps> = ({
 				)}
 
 				{/* Next Button */}
-				<View className="w-full">
+				<View className="w-full px-4 md:px-8 lg:px-16">
 					<Button
 						disabled={FastFoodState === null}
 						onPress={() => {
 							handleExtraAssessment();
 						}}
 					>
-						<Text className="font-quicksand-bold text-secondary-700 text-base">Finish</Text>
+						<Text className="font-quicksand-bold text-secondary-700 text-base md:text-lg lg:text-xl">
+							Finish
+						</Text>
 					</Button>
 				</View>
 			</View>

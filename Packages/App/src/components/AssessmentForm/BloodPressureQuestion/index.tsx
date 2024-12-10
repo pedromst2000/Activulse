@@ -39,7 +39,7 @@ const BloodPressureQuestion: React.FC<BloodPressureQuestionProps> = ({
 
 	return (
 		<AnimatedComponent
-			animation="FadeIn"
+			animation="SlideInFromRight"
 			className="flex justify-center items-center p-4 bg-primary-50"
 		>
 			<View className="flex justify-center items-center p-4">
@@ -51,16 +51,14 @@ const BloodPressureQuestion: React.FC<BloodPressureQuestionProps> = ({
 				<View className="mb-2 w-full flex justify-center items-center">
 					<Ilustration
 						ilustration={BloodPressureIlus}
-						width={250}
-						height={250}
-						className="md:w-64 md:h-64 lg:w-72 lg:h-72"
+						styleClass="w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96"
 					/>
 				</View>
 				{/* ERROR MESSAGE */}
 				{showError && (
 					<AnimatedComponent animation="FadeIn">
 						<View className="mb-2">
-							<Text className="font-quicksand-bold text-red-500 text-xs md:text-sm lg:text-base text-center">
+							<Text className="font-quicksand-bold text-red-500 text-xs sm:text-sm md:text-base lg:text-lg text-center">
 								SBP must be between 70 and 230 mmHg
 							</Text>
 						</View>
@@ -73,15 +71,15 @@ const BloodPressureQuestion: React.FC<BloodPressureQuestionProps> = ({
 							value={bloodPressure}
 							onChange={(text) => setBloodPressure(text)}
 							keyboardType="numeric"
-							className=" w-[70%] sm:w-[80%] md:w-[70%] lg:w-[60%]"
+							className="w-[60%] sm:w-[70%] md:w-[60%] lg:w-[50%] xl:w-[40%]"
 						/>
-						<Text className="ml-2 font-quicksand-bold text-secondary-700 text-xs sm:text-sm md:text-base">
+						<Text className="ml-2 font-quicksand-bold text-secondary-700 text-xs sm:text-sm md:text-base lg:text-lg">
 							mmHg
 						</Text>
 					</View>
 				</View>
 
-				<View className="w-full mb-4 mt-4  flex justify-center items-center">
+				<View className="w-full mb-4 mt-4 flex justify-center items-center">
 					<Button
 						disabled={bloodPressure === ''}
 						onPress={() => {
@@ -94,6 +92,7 @@ const BloodPressureQuestion: React.FC<BloodPressureQuestionProps> = ({
 								handleNext();
 							}
 						}}
+						styleClass="w-full sm:w-3/4 md:w-2/3 lg:w-1/2"
 					>
 						<Text className="font-quicksand-bold text-secondary-700 text-sm sm:text-base md:text-lg lg:text-xl text-center">
 							Next

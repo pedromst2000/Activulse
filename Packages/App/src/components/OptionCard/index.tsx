@@ -6,6 +6,7 @@ type OptionCardProps = {
 	description: string;
 	sourceImg: ImageSourcePropType;
 	onPress: () => void;
+	styleClass?: string;
 };
 
 const OptionCard: React.FC<OptionCardProps> = ({
@@ -13,9 +14,14 @@ const OptionCard: React.FC<OptionCardProps> = ({
 	description,
 	sourceImg,
 	onPress,
+	styleClass,
 }: OptionCardProps): React.JSX.Element => {
 	return (
-		<TouchableOpacity className="mb-[30px]" activeOpacity={0.8} onPress={onPress}>
+		<TouchableOpacity
+			className={`mb-[30px] ${styleClass}`}
+			activeOpacity={0.8}
+			onPress={onPress}
+		>
 			<View
 				className="relative rounded-[16px] sm:rounded-[18px] md:rounded-[20px] overflow-hidden 
                 w-[310px] sm:w-[300px] md:w-[320px] h-[230px] sm:h-[210px] md:h-[220px]"

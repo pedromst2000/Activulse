@@ -36,11 +36,11 @@ const SelectBoxInput: React.FC<Props> = ({
 				onPress={handlePress}
 				className={`w-4 h-4 border-2 rounded-sm border-secondary-700 ${
 					selected ? 'bg-secondary-700' : 'bg-transparent'
-				} ${squareClassName}`}
+				} ${squareClassName} md:w-5 md:h-5 lg:w-6 lg:h-6`}
 			/>
 			<TouchableOpacity activeOpacity={0.9} onPress={handlePress}>
 				<Text
-					className={`ml-2 text-[14.2px] font-quicksand-bold text-secondary-700 mb-0.5 ${textClassName}`}
+					className={`ml-2 text-[14.2px] font-quicksand-bold text-secondary-700 mb-0.5 ${textClassName} md:text-[16px] lg:text-[18px]`}
 				>
 					{text}
 				</Text>

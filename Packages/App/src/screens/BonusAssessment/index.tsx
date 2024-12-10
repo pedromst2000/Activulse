@@ -24,17 +24,20 @@ const InitBonusAssessment: React.FC = (): React.JSX.Element => {
 
 	return (
 		<AnimatedComponent animation="FadeIn">
-			<ScrollView keyboardShouldPersistTaps="handled" className="bg-primary-50">
+			<ScrollView keyboardShouldPersistTaps="handled">
 				<View className="flex-1 justify-center items-center min-h-screen px-4 py-5 gap-4 bg-primary-50">
 					{/* Heading Section */}
-					<View>
-						<Text className="font-merriweather-bold text-[25px] text-secondary-700 text-center">
+					<View className="w-full px-4">
+						<Text className="font-merriweather-bold text-[22px] text-secondary-700 text-center sm:text-[22px] md:text-[25px] lg:text-[28px]">
 							Personalized Heart
 						</Text>
 					</View>
 					{/* Ilustration Section */}
 					<View className="w-full items-center">
-						<Ilustration ilustration={PersonalizedHeartIlus} width={340} height={250} />
+						<Ilustration
+							ilustration={PersonalizedHeartIlus}
+							styleClass="w-[300px] h-[220px] sm:w-[320px] sm:h-[240px] md:w-[340px] md:h-[250px] lg:w-[360px] lg:h-[270px]"
+						/>
 					</View>
 
 					{/* Start Assessment Description */}

@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { View, Text, Image, useWindowDimensions, StyleSheet } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 
 type SlideProps = {
 	id: number;
@@ -26,28 +27,30 @@ const OnboardingItem: React.FC<SlideProps> = React.memo(({ id, title, descriptio
 	}, [id]);
 
 	return (
-		<View style={[styles.container, { width }]}>
-			{/* Illustration */}
-			<View style={styles.imageContainer}>
-				<Image
-					source={illustrationSource}
-					resizeMode="contain"
-					style={[styles.image, { width: width * 0.8, height: width * 0.6 }]}
-				/>
-			</View>
+		<ScrollView keyboardShouldPersistTaps="handled">
+			<View style={[styles.container, { width }]}>
+				{/* Illustration */}
+				<View style={styles.imageContainer}>
+					<Image
+						source={illustrationSource}
+						resizeMode="contain"
+						style={[styles.image, { width: width * 0.9, height: width * 0.6 }]}
+					/>
+				</View>
 
-			{/* Title & Description Container */}
-			<View style={styles.textContainer}>
-				{/* Title */}
-				<View style={styles.titleContainer}>
-					<Text style={styles.title}>{title}</Text>
-				</View>
-				{/* Description */}
-				<View>
-					<Text style={styles.description}>{description}</Text>
+				{/* Title & Description Container */}
+				<View style={styles.textContainer}>
+					{/* Title */}
+					<View style={styles.titleContainer}>
+						<Text style={styles.title}>{title}</Text>
+					</View>
+					{/* Description */}
+					<View>
+						<Text style={styles.description}>{description}</Text>
+					</View>
 				</View>
 			</View>
-		</View>
+		</ScrollView>
 	);
 });
 
@@ -64,7 +67,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 	},
 	image: {
-		marginTop: 8,
+		marginTop: 30,
 	},
 	textContainer: {
 		justifyContent: 'center',
@@ -82,12 +85,13 @@ const styles = StyleSheet.create({
 		color: '#0C2C7E',
 		fontSize: 25.6,
 		textAlign: 'center',
+		width: 300,
 	},
 	description: {
 		fontFamily: 'Quicksand-Medium',
 		color: '#0C2C7E',
 		fontSize: 14.22,
 		textAlign: 'center',
-		width: 315,
+		width: 290,
 	},
 });
