@@ -16,6 +16,7 @@ type Props = {
 	isError: boolean;
 	isRefetching: boolean;
 	category?: string | undefined;
+	search?: string | undefined;
 	messageAPI?: string;
 };
 
@@ -26,6 +27,7 @@ const Feed: React.FC<Props> = ({
 	isError,
 	isRefetching,
 	category,
+	search,
 	messageAPI,
 }): React.JSX.Element => {
 	return (
@@ -57,7 +59,7 @@ const Feed: React.FC<Props> = ({
 
 			{!isLoading &&
 				!isRefetching &&
-				(messageAPI === 'No Recipes Found' ? (
+				(messageAPI === 'No Recipes Found' && search !== '' ? (
 					<EmptyState
 						type="NotFound"
 						_ilustration_={NotFoundRecipeIlus}

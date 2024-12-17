@@ -90,11 +90,6 @@ const SignIn: React.FC = (): React.JSX.Element => {
 		}
 	};
 
-	const handleRememberMe = async (newValue: boolean): Promise<void> => {
-		setRememberMe(newValue);
-		await utils.storage.setItem('rememberMe', newValue.toString());
-	};
-
 	useEffect(() => {
 		return () => {
 			clearTimeout(timeoutRef.current!); // Clear the timeout when the component unmounts
@@ -168,7 +163,7 @@ const SignIn: React.FC = (): React.JSX.Element => {
 								<View className="flex flex-col justify-between items-center pt-4 sm:pt-5 md:pt-6 lg:pt-7 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
 									<SelectBoxInput
 										value={rememberMe}
-										onPress={handleRememberMe}
+										onPress={(newValue: boolean) => setRememberMe(newValue)}
 										text="Remember Me"
 										className="flex-row items-center"
 									/>

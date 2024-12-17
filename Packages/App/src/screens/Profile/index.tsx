@@ -18,7 +18,7 @@ import TopBar from '@/src/components/TopBar';
 
 const Profile: React.FC = (): React.JSX.Element => {
 	const navigation = useNavigation();
-	const { setLoggedUser, removeSession } = useUserContext();
+	const { setLoggedUser } = useUserContext();
 	const { isLoading, data, isError, isRefetching, refetch } = useGetLoggedUser();
 
 	const handleOnRefresh = (): void => {
@@ -30,7 +30,9 @@ const Profile: React.FC = (): React.JSX.Element => {
 	};
 
 	const handleSignOut = async (): Promise<void> => {
-		removeSession();
+		await utils.storage.removeItem('authToken');
+		await utils.storage.removeItem('refreshToken');
+		setLoggedUser(null);
 	};
 
 	useEffect(() => {

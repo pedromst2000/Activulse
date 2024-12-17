@@ -4,13 +4,15 @@ import { IOScrollView } from 'react-native-intersection-observer';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { LifestyleStackParamList } from '@/src/navigation/Lifestyle';
 import useGetRecipesFeedData, { Recipe } from '@/src/hooks/ReactQuery/recipes/feed';
-import SearchI from '@/src/assets/svg/icons/SearchIcon.svg';
+import config from '@/src/config';
 import AnimatedComponent from '../../../../components/Animated';
 import ScreenTitle from '@/src/components/ScreenTitle';
 import Input from '@/src/components/Input';
 import FeedMenu from '@/src/components/FeedMenu';
 import Feed from '@/src/components/Feed';
-import config from '@/src/config';
+import Ilustration from '@/src/components/Ilustration';
+import SearchI from '@/src/assets/svg/icons/SearchIcon.svg';
+import LogoIlus from '@/src/assets/svg/ilustrations/Logo.svg';
 
 type NutritionFeedRouteProp = RouteProp<LifestyleStackParamList, 'NutritionFeed'>;
 
@@ -30,10 +32,6 @@ const NutritionFeed: React.FC = (): React.JSX.Element => {
 		title: search,
 	});
 
-	useEffect(() => {
-		console.log(`messageAPI: ${data?.message}`);
-	}, []);
-
 	// If one of the filters changes, resetting the page to 1
 	useEffect(() => {
 		setRecipes([]);
@@ -45,12 +43,11 @@ const NutritionFeed: React.FC = (): React.JSX.Element => {
 	const handleOnChange = (inView: boolean, id: number): void => {
 		// Checking if it's the last item in the list
 		if (recipes && !isLoading && !isError && inView && id === recipes[recipes.length - 1].id) {
-			// Checking if there are more recipes to fetch
-			if (recipes?.length >= total) {
-				return;
-			}
-
 			setPage((prev: number) => prev + 1);
+		}
+		// not incrementing the page if the user is searching
+		if (search.length > 0) {
+			setPage(1);
 		}
 	};
 
@@ -71,7 +68,7 @@ const NutritionFeed: React.FC = (): React.JSX.Element => {
 		}
 
 		if (data && data.data && data.data.recipes?.length > 0) {
-			// Check if there are duplicates (if so, remove them)
+			// // Check if there are duplicates (if so, remove them)
 			const filteredRecipes = data?.data?.recipes?.filter((recipe: Recipe) => {
 				return recipes.findIndex((a: Recipe) => a.id === recipe.id) === -1;
 			});
@@ -133,8 +130,18 @@ const NutritionFeed: React.FC = (): React.JSX.Element => {
 						isRefetching={isRefetching}
 						isError={isError}
 						category={selectedCategory}
+						search={search}
 						messageAPI={data?.message}
 					/>
+
+					{!isLoading && recipes.length > 0 && recipes.length >= total && (
+						<View className="flex-1 w-full items-center pb-8 pt-8 sm:pb-10 sm:pt-10 md:pb-12 md:pt-12 lg:pb-14 lg:pt-14">
+							<Ilustration
+								ilustration={LogoIlus}
+								styleClass="w-36 h-14 sm:w-40 sm:h-16 md:w-44 md:h-18 lg:w-48 lg:h-20"
+							/>
+						</View>
+					)}
 				</View>
 			</IOScrollView>
 		</AnimatedComponent>

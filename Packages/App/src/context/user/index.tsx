@@ -33,6 +33,8 @@ const UserProvider: React.FC<PropsWithChildren> = ({ children }): React.JSX.Elem
 			if (loggedUser) {
 				await AsyncStorage.setItem('loggedUser', JSON.stringify(loggedUser));
 			} else {
+				console.log('Removing the user from storage');
+
 				await AsyncStorage.removeItem('loggedUser');
 			}
 		} catch (error) {
@@ -43,13 +45,6 @@ const UserProvider: React.FC<PropsWithChildren> = ({ children }): React.JSX.Elem
 	const updateUserStorage = (user: LoggedUser): void => {
 		AsyncStorage.setItem('loggedUser', JSON.stringify(user));
 		setLoggedUser(user);
-	};
-
-	const removeSessionStorage = async (): Promise<void> => {
-		await utils.storage.removeItem('authToken');
-		await utils.storage.removeItem('refreshToken');
-		await utils.storage.removeItem('rememberMe');
-		setLoggedUser(null);
 	};
 
 	useEffect(() => {
@@ -71,7 +66,6 @@ const UserProvider: React.FC<PropsWithChildren> = ({ children }): React.JSX.Elem
 			loggedUser: loggedUser,
 			setLoggedUser,
 			updateUser: updateUserStorage,
-			removeSession: removeSessionStorage,
 		}),
 		[loggedUser, setLoggedUser],
 	);
