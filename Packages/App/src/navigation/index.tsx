@@ -111,20 +111,6 @@ const MainTabNavigator: React.FC = (): React.JSX.Element => {
 const AppNavigator: React.FC = (): React.JSX.Element => {
 	const { loggedUser } = useUserContext();
 
-	useEffect(() => {
-		AsyncStorage.getItem('authToken').then((res) => {
-			console.log('authToken', res);
-		});
-
-		AsyncStorage.getItem('refreshToken').then((res) => {
-			console.log('refreshToken', res);
-		});
-
-		AsyncStorage.getItem('rememberMe').then((res) => {
-			console.log('rememberMe', res);
-		});
-	}, [loggedUser]);
-
 	return (
 		<Stack.Navigator screenOptions={{ headerShown: false }}>
 			{!loggedUser ? (
