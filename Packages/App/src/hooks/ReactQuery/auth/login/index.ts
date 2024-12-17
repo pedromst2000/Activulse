@@ -19,9 +19,15 @@ export interface LoginData extends APIResponse {
 }
 
 const login = async (bodyData: BodyData): Promise<LoginData> => {
-	const { data }: AxiosResponse<LoginData> = await api.post('/auth/login', bodyData);
-
-	return data;
+	try {
+		const { data }: AxiosResponse<LoginData> = await api.post('/auth/login', bodyData);
+		return data;
+	} catch (error: any) {
+		if (error.data) {
+			return error.data;
+		}
+		throw error;
+	}
 };
 
 const useLogin = (bodyData: BodyData): UseMutationResult<LoginData, Error> => {

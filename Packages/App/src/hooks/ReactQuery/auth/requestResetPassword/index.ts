@@ -8,12 +8,19 @@ export type BodyData = {
 };
 
 const requestResetPassword = async (bodyData: BodyData): Promise<APIResponse> => {
-	const { data }: AxiosResponse<APIResponse> = await api.post(
-		'/auth/users/request-reset-password',
-		bodyData,
-	);
+	try {
+		const { data }: AxiosResponse<APIResponse> = await api.post(
+			'/auth/users/request-reset-password',
+			bodyData,
+		);
 
-	return data;
+		return data;
+	} catch (error: any) {
+		if (error.data) {
+			return error.data;
+		}
+		throw error;
+	}
 };
 
 const useRequestResetPassword = (

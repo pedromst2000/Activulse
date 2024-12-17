@@ -15,7 +15,11 @@ const HowItWorks: React.FC = (): React.JSX.Element => {
 
 	return (
 		<AnimatedComponent animation="SlideInFromRight">
-			<ScrollView keyboardShouldPersistTaps="handled" className="flex-1 bg-primary-50">
+			<ScrollView
+				keyboardShouldPersistTaps="handled"
+				showsVerticalScrollIndicator={false}
+				className="flex-1 bg-primary-50"
+			>
 				<ScreenTitle label="How It Works" onPress={() => navigation.goBack()} />
 
 				{/* Layout Assessment Content */}

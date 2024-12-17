@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { View } from 'react-native';
-import Error from './src/components/Error';
+import EmptyState from './src/components/EmptyState';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useUserContext } from './src/context/user';
 import Loading from './src/components/Loading';
 import SplashScreen from './src/components/splashScreen';
 import AppNavigator from './src/navigation';
+import ErrorIlus from './src/assets/svg/ilustrations/EmptyStates/ErrorServer.svg';
 
 const MainApp: React.FC = (): React.JSX.Element => {
 	const [animationComplete, setAnimationComplete] = useState<boolean>(false);
@@ -44,7 +45,14 @@ const MainApp: React.FC = (): React.JSX.Element => {
 	if (anErrorOccurred) {
 		console.log('An error occurred while loading the user from storage');
 
-		return <Error />;
+		return (
+			<EmptyState
+				type="Error"
+				_ilustration_={ErrorIlus}
+				message="Oops! Internal Server Error"
+				description="Uh-oh! It looks like something went wrong on our end. Our tech team is already working hard to fix it. Please try again later. Thanks for your patience and understanding!"
+			/>
+		);
 	}
 
 	// // Show a loading screen while fetching the user from storage

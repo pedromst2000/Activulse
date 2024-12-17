@@ -67,9 +67,11 @@ const getLoggedUser = async (): Promise<GetLoggedUserData> => {
 	try {
 		const { data }: AxiosResponse<GetLoggedUserData> = await api.get('/users/me');
 		return data;
-	} catch (error) {
-		console.error('Error fetching logged user:', error);
-		throw new Error('Error fetching logged user');
+	} catch (error: any) {
+		if (error.data) {
+			return error.data;
+		}
+		throw error;
 	}
 };
 

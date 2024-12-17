@@ -58,7 +58,7 @@ const validateToken = (token, type) => {
 /**
  * Checks if a token has expired
  * @param {string} token - The token to check
- * @param {string} type - The type of token to check
+ * @param {"authToken" | "refreshToken"} type - The type of token to check
  * @returns {boolean} True if the token has expired, false otherwise
  */
 const didTokenExpire = (token, type) => {

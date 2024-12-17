@@ -27,7 +27,7 @@ const OnboardingItem: React.FC<SlideProps> = React.memo(({ id, title, descriptio
 	}, [id]);
 
 	return (
-		<ScrollView keyboardShouldPersistTaps="handled">
+		<ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled">
 			<View style={[styles.container, { width }]}>
 				{/* Illustration */}
 				<View style={styles.imageContainer}>

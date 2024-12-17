@@ -138,7 +138,11 @@ const VerifyEmail: React.FC = (): React.JSX.Element => {
 				behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
 				keyboardVerticalOffset={Platform.OS === 'ios' ? 80 : 0}
 			>
-				<ScrollView ref={scrollViewRef} keyboardShouldPersistTaps="handled">
+				<ScrollView
+					ref={scrollViewRef}
+					showsVerticalScrollIndicator={false}
+					keyboardShouldPersistTaps="handled"
+				>
 					<View className="p-4 sm:p-6 md:p-8 lg:p-10 justify-between flex-1 bg-primary-50">
 						{/* Message */}
 						<AnimatedComponent animation="FadeIn">

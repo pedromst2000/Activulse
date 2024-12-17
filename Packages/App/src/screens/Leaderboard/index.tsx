@@ -9,7 +9,11 @@ const Leaderboard: React.FC = (): React.JSX.Element => {
 
 	return (
 		<AnimatedComponent animation="FadeIn">
-			<ScrollView keyboardShouldPersistTaps="handled" className="flex-1 bg-primary-50">
+			<ScrollView
+				keyboardShouldPersistTaps="handled"
+				showsVerticalScrollIndicator={false}
+				className="flex-1 bg-primary-50"
+			>
 				<ScreenTitle label="Leaderboard" onPress={() => navigation.goBack()} />
 			</ScrollView>
 		</AnimatedComponent>

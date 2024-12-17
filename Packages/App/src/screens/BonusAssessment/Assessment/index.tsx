@@ -33,7 +33,11 @@ const BonusAssessment: React.FC = (): React.JSX.Element => {
 
 	return (
 		<AnimatedComponent animation="FadeIn">
-			<ScrollView keyboardShouldPersistTaps="handled" className="bg-primary-50">
+			<ScrollView
+				keyboardShouldPersistTaps="handled"
+				showsVerticalScrollIndicator={false}
+				className="bg-primary-50"
+			>
 				{/* Heading  */}
 				<View className="items-center my-5">
 					{/* Back Button */}

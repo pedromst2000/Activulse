@@ -11,12 +11,19 @@ type BodyData = {
 };
 
 const extraAssessment = async (bodyData: BodyData): Promise<APIResponse> => {
-	const { data }: AxiosResponse<APIResponse> = await api.patch(
-		`/users/extra-assessment`,
-		bodyData,
-	);
+	try {
+		const { data }: AxiosResponse<APIResponse> = await api.patch(
+			`/users/extra-assessment`,
+			bodyData,
+		);
 
-	return data;
+		return data;
+	} catch (error: any) {
+		if (error.data) {
+			return error.data;
+		}
+		throw error;
+	}
 };
 
 const useExtraAssessment = (bodyData: BodyData): UseMutationResult<APIResponse, Error> => {

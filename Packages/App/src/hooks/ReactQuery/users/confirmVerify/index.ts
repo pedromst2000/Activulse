@@ -8,9 +8,16 @@ type BodyData = {
 };
 
 const confirmVerify = async (bodyData: BodyData): Promise<APIResponse> => {
-	const { data }: AxiosResponse<APIResponse> = await api.post(`/users/verify`, bodyData);
+	try {
+		const { data }: AxiosResponse<APIResponse> = await api.post(`/users/verify`, bodyData);
 
-	return data;
+		return data;
+	} catch (error: any) {
+		if (error.data) {
+			return error.data;
+		}
+		throw error;
+	}
 };
 
 const useConfirmVerify = (bodyData: BodyData): UseMutationResult<APIResponse, Error> => {

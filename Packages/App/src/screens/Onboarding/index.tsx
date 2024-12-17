@@ -29,7 +29,11 @@ const Onboarding: React.FC = (): React.JSX.Element => {
 
 	return (
 		<AnimatedComponent animation="FadeIn">
-			<ScrollView keyboardShouldPersistTaps="handled" className="flex-1 bg-primary-50">
+			<ScrollView
+				keyboardShouldPersistTaps="handled"
+				showsVerticalScrollIndicator={false}
+				className="flex-1 bg-primary-50"
+			>
 				<View className=" py-5 justify-center items-center">
 					<View className="w-full px-4 py-2 sm:px-8 sm:py-4 flex-row justify-end">
 						{currentIndex < slides.length - 1 && (

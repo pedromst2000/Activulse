@@ -6,7 +6,7 @@ import { QueryClient } from '@tanstack/react-query';
 import { createAsyncStoragePersister } from '@tanstack/query-async-storage-persister';
 import FontsProvider from './src/context/FontsProvider';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { UserProvider } from './src/context/user';
+import { UserProvider, useUserContext } from './src/context/user';
 import { NavigationContainer } from '@react-navigation/native';
 import MainApp from './Main';
 import config from './src/config';
@@ -34,6 +34,7 @@ const asyncStoragePersister = createAsyncStoragePersister({
  * @returns {React.JSX.Element} The root component of the application.
  */
 const App: React.FC = (): React.JSX.Element => {
+
 	useEffect(() => {
 		//unmount
 		return () => {
@@ -48,7 +49,7 @@ const App: React.FC = (): React.JSX.Element => {
 		<GestureHandlerRootView style={{ flex: 1 }}>
 			<StatusBar style="auto" />
 
-			<NavigationContainer theme={config.navigator.theme}>
+			<NavigationContainer theme={config.navigator.options.theme}>
 				<PersistQueryClientProvider
 					client={queryClient}
 					persistOptions={{ persister: asyncStoragePersister }}

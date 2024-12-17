@@ -27,7 +27,7 @@ const InitAssessment: React.FC = (): React.JSX.Element => {
 
 	return (
 		<AnimatedComponent animation="FadeIn">
-			<ScrollView keyboardShouldPersistTaps="handled">
+			<ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled">
 				<View className="flex-1 justify-center items-center min-h-screen px-4 py-5 gap-4 bg-primary-50 mt-2">
 					{/* Heading Section */}
 					<View className="w-full px-4 sm:px-8">

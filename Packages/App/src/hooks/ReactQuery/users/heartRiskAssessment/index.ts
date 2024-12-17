@@ -15,11 +15,18 @@ type BodyData = {
 };
 
 const heartRiskAssessment = async (bodyData: BodyData): Promise<APIResponse> => {
-	const { data }: AxiosResponse<APIResponse> = await api.post(
-		'/users/heart-risk-assessment',
-		bodyData,
-	);
-	return data; // Return the full data object here.
+	try {
+		const { data }: AxiosResponse<APIResponse> = await api.post(
+			'/users/heart-risk-assessment',
+			bodyData,
+		);
+		return data;
+	} catch (error: any) {
+		if (error.data) {
+			return error.data;
+		}
+		throw error;
+	}
 };
 
 const useHeartRiskAssessment = (bodyData: BodyData): UseMutationResult<APIResponse, Error> => {

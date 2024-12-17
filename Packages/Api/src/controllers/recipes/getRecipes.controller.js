@@ -262,16 +262,15 @@ async function getRecipes(req, res) {
 				updateAt: parsedRecipe.updatedAt,
 			}));
 
-		if (category === "Premium") {
-			if (PREMIUM_RECIPES.length === 0) {
-				utils.handleResponse(res, utils.http.StatusNotFound, "No Premium Recipes Found");
-				return;
-			}
-		} else {
-			if (resultRecipes.length === 0) {
-				utils.handleResponse(res, utils.http.StatusNotFound, "No Recipes Found");
-				return;
-			}
+		if (
+			(category === "Premium" && PREMIUM_RECIPES.length === 0 && title !== "") ||
+			resultRecipes.length === 0
+		) {
+			utils.handleResponse(res, utils.http.StatusNotFound, "No Recipes Found");
+			return;
+		} else if (PREMIUM_RECIPES.length === 0 && category === "Premium") {
+			utils.handleResponse(res, utils.http.StatusNotFound, "No Premium Recipes Found");
+			return;
 		}
 
 		utils.handleResponse(res, utils.http.StatusOK, "Recipes retrieved successfully", {

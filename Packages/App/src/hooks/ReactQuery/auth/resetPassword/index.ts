@@ -10,12 +10,19 @@ export type BodyData = {
 };
 
 const resetPassword = async (bodyData: BodyData): Promise<APIResponse> => {
-	const { data }: AxiosResponse<APIResponse> = await api.patch(
-		`/auth/users/reset-password`,
-		bodyData,
-	);
+	try {
+		const { data }: AxiosResponse<APIResponse> = await api.patch(
+			`/auth/users/reset-password`,
+			bodyData,
+		);
 
-	return data;
+		return data;
+	} catch (error: any) {
+		if (error.data) {
+			return error.data;
+		}
+		throw error;
+	}
 };
 
 const useResetPassword = (bodyData: BodyData): UseMutationResult<APIResponse, Error> => {

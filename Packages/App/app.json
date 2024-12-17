@@ -4,7 +4,7 @@
     "slug": "activulse",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "src/assets/images/Icon.svg",
+    "icon": "src/assets/images/AppIcon/Icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "src/assets/images/splash.png",
@@ -21,7 +21,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "src/assets/images/Icon.svg",
+        "foregroundImage": "src/assets/images/AppIcon/Icon.png",
         "backgroundColor": "#ffffff"
       },
       "permissions": [

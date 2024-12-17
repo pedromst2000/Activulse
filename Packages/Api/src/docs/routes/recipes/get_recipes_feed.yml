@@ -34,14 +34,14 @@ parameters:
   - name: diet
     in: query
     description: Type of the diet (DASH, Vegan, Mediterranean) and is only mandatory if the user has not a diet assigned
-    required: false
+    required: true
     schema:
       type: string
       example: "DASH"
   - name: category
     in: query
     description: category of the recipe (All, Soups, Main Dishes, Salads, Desserts, Premium)
-    required: false
+    required: true
     schema:
       type: string
       example: "Soups"
@@ -106,7 +106,7 @@ responses:
                   - id: 31
                     isPremium: false
                     title: "Creamy Mushroom and Almond Soup"
-                    confTime: 25,
+                    confTime: 25
                     category: "Soups"
                     diet: "Vegan"
                     imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399644/activevulse/dev/recipes/Creamy_Mushroom_and_Almond_Soup_neqjzn.png"
@@ -115,7 +115,7 @@ responses:
                   - id: 35
                     isPremium: false
                     title: "Butternut Squash and Sage Risotto"
-                    confTime: 45,
+                    confTime: 45
                     category: "Main Dishes"
                     diet: "Vegan"
                     imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399641/activevulse/dev/recipes/Butternut_Squash_and_Sage_Risotto_hyuxfp.png"
@@ -124,7 +124,7 @@ responses:
                   - id: 32
                     isPremium: false
                     title: "Hearty Bean and Vegetable Soup"
-                    confTime: 30,
+                    confTime: 30
                     category: "Soups"
                     diet: "Vegan"
                     imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399649/activevulse/dev/recipes/Hearty_Bean_and_Vegetable_Soup_uczfsy.png"
@@ -133,7 +133,7 @@ responses:
                   - id: 36
                     isPremium: false
                     title: "Sweet Potato and Black Bean Enchiladas"
-                    confTime: 45,
+                    confTime: 45
                     category: "Main Dishes"
                     diet: "Vegan"
                     imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399675/activevulse/dev/recipes/Sweet_Potato_and_Black_Bean_Enchiladas_cm2cqa.png"
@@ -142,7 +142,7 @@ responses:
                   - id: 33
                     isPremium: false
                     title: "Creamy Seitan and Vegetable Chowder"
-                    confTime: 25,
+                    confTime: 25
                     category: "Soups"
                     diet: "Vegan"
                     imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399644/activevulse/dev/recipes/Creamy_Seitan_and_Vegetable_Chowder_fe4tij.png"
@@ -151,7 +151,7 @@ responses:
                   - id: 34
                     isPremium: false
                     title: "Nutty Almond and Flaxseed Soup"
-                    confTime: 30,
+                    confTime: 30
                     category: "Soups"
                     diet: "Vegan"
                     imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399656/activevulse/dev/recipes/Nutty_Almond_and_Flaxseed_Soup_heytuy.png"
@@ -306,7 +306,7 @@ responses:
           No Recipes Found:
             value:
               success: false
-              message: No recipes found
+              message: No Recipes Found
           No Premium Recipes Found:
             value:
               success: false
