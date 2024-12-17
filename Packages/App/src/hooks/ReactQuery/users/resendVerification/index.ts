@@ -8,12 +8,19 @@ type BodyData = {
 };
 
 const resendVerification = async (bodyData: BodyData): Promise<APIResponse> => {
-	const { data }: AxiosResponse<APIResponse> = await api.post(
-		`/users/resend-verify`,
-		bodyData,
-	);
+	try {
+		const { data }: AxiosResponse<APIResponse> = await api.post(
+			`/users/resend-verify`,
+			bodyData,
+		);
 
-	return data;
+		return data;
+	} catch (error: any) {
+		if (error.data) {
+			return error.data;
+		}
+		throw error;
+	}
 };
 
 const useResendVerification = (bodyData: BodyData): UseMutationResult<APIResponse, Error> => {

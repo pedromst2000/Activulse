@@ -4,10 +4,6 @@ const getMessage = (error: any): string => {
 			? error.response.data.data[0].msg
 			: error.response.data.message;
 	} else {
-		console.log('Error:', error);
-		console.log('Error Request:', error.request);
-		console.log('Error Response:', error.response);
-
 		return 'An error occurred';
 	}
 };

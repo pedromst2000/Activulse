@@ -35,9 +35,16 @@ export interface getUserData extends APIResponse {
 }
 
 const getUser = async (params: Params): Promise<getUserData> => {
-	const { data }: AxiosResponse<getUserData> = await api.get(`/users/${params.id}`);
+	try {
+		const { data }: AxiosResponse<getUserData> = await api.get(`/users/${params.id}`);
 
-	return data;
+		return data;
+	} catch (error: any) {
+		if (error.data) {
+			return error.data;
+		}
+		throw error;
+	}
 };
 
 const useGetUser = (params: Params): UseQueryResult<getUserData, Error> => {

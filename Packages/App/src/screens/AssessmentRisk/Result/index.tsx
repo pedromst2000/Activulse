@@ -42,6 +42,7 @@ const Result: React.FC = (): React.JSX.Element => {
 		<AnimatedComponent animation="SlideInFromRight">
 			<ScrollView
 				keyboardShouldPersistTaps="handled"
+				showsVerticalScrollIndicator={false}
 				contentContainerStyle={{
 					flexGrow: 1,
 					justifyContent: 'center',

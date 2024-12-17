@@ -15,6 +15,10 @@ type Props = {
 	className?: string;
 	iconClassName?: string;
 	textInputClassName?: string;
+	widthIcon?: number;
+	heightIcon?: number;
+	heightInput?: string;
+	widthInput?: string;
 	multiLine?: boolean;
 	numberOfLines?: number;
 	keyboardType?: KeyboardTypeOptions;
@@ -30,6 +34,10 @@ const Input: React.FC<Props> = ({
 	className,
 	iconClassName,
 	textInputClassName,
+	widthIcon,
+	heightIcon,
+	heightInput,
+	widthInput,
 	multiLine,
 	numberOfLines,
 	keyboardType,
@@ -56,12 +64,23 @@ const Input: React.FC<Props> = ({
 
 	return (
 		<View
-			className={`flex flex-row items-center w-full max-w-[300px] h-[50px] rounded-[20px] border-2 border-secondary-700 ${className}`}
+			className={`flex flex-row items-center w-full ${widthInput || 'max-w-[300px]'} ${heightInput || 'h-[50px]'} rounded-[20px] border-2 border-secondary-700 ${className}`}
 		>
 			{/* Icon Container */}
 			{icon && (
 				<View className={`pl-2 ${iconClassName}`}>
-					<Icon width={23} height={23} icon={icon} onPress={() => inputRef.current?.focus()} />
+					{/* w-23 h-23 */}
+
+					<Icon
+						width={
+							widthIcon || 23 // default value
+						}
+						height={
+							heightIcon || 23 // default value
+						}
+						icon={icon}
+						onPress={() => inputRef.current?.focus()}
+					/>
 				</View>
 			)}
 

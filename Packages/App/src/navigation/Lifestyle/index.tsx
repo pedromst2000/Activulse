@@ -5,7 +5,7 @@ import NutritionFeed from '@/src/screens/Lifestyle/Nutrition/Feed';
 import Lifestyle from '@/src/screens/Lifestyle';
 import Leaderboard from '@/src/screens/Leaderboard';
 import Activity from '@/src/screens/Lifestyle/Fitness/Activity';
-import Recipe from '@/src/screens/Lifestyle/Nutrition/Recipe';
+import Recipe from '@/src/screens/Lifestyle/Nutrition/RecipeDetails';
 import SelectFeed from '@/src/screens/Lifestyle/Nutrition/SelectFeed';
 
 export type LifestyleStackParamList = {

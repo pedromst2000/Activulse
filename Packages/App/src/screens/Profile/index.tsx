@@ -18,7 +18,7 @@ import TopBar from '@/src/components/TopBar';
 
 const Profile: React.FC = (): React.JSX.Element => {
 	const navigation = useNavigation();
-	const { setLoggedUser } = useUserContext();
+	const { setLoggedUser, removeSession } = useUserContext();
 	const { isLoading, data, isError, isRefetching, refetch } = useGetLoggedUser();
 
 	const handleOnRefresh = (): void => {
@@ -30,18 +30,12 @@ const Profile: React.FC = (): React.JSX.Element => {
 	};
 
 	const handleSignOut = async (): Promise<void> => {
-		// Remove the tokens from the device storage
-		await utils.storage.removeItem('authToken');
-		await utils.storage.removeItem('refreshToken');
-
-		// Update the global state
-		setLoggedUser(null);
+		removeSession();
 	};
 
 	useEffect(() => {
 		if (isError) {
 			navigation.navigate('Home' as never);
-			// get the error message from the hook
 			console.log('Error:', data);
 		}
 	}, [isError, navigation]);

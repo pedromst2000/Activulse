@@ -63,7 +63,6 @@ const SignIn: React.FC = (): React.JSX.Element => {
 							await utils.storage.setItem('authToken', resData.data.authToken);
 							await utils.storage.setItem('refreshToken', resData.data.refreshToken);
 						} else {
-							// Handle failure
 							setValidationError(resData.message);
 							setPassword('');
 							setShowError(true); // Show error message
@@ -91,6 +90,11 @@ const SignIn: React.FC = (): React.JSX.Element => {
 		}
 	};
 
+	const handleRememberMe = async (newValue: boolean): Promise<void> => {
+		setRememberMe(newValue);
+		await utils.storage.setItem('rememberMe', newValue.toString());
+	};
+
 	useEffect(() => {
 		return () => {
 			clearTimeout(timeoutRef.current!); // Clear the timeout when the component unmounts
@@ -111,7 +115,11 @@ const SignIn: React.FC = (): React.JSX.Element => {
 				behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
 				keyboardVerticalOffset={Platform.OS === 'ios' ? 80 : 0}
 			>
-				<ScrollView ref={scrollViewRef} keyboardShouldPersistTaps="handled">
+				<ScrollView
+					ref={scrollViewRef}
+					showsVerticalScrollIndicator={false}
+					keyboardShouldPersistTaps="handled"
+				>
 					<View className="p-4 sm:p-6 md:p-8 justify-between flex-1 bg-primary-50">
 						<View className="absolute top-3 left-2 mt-6 ml-4 sm:top-4 sm:left-3 sm:mt-8 sm:ml-5 md:top-5 md:left-4 md:mt-10 md:ml-6 lg:top-6 lg:left-5 lg:mt-12 lg:ml-7">
 							<GoBackBtn onPress={() => navigation.goBack()} isRounded={true} />
@@ -160,7 +168,7 @@ const SignIn: React.FC = (): React.JSX.Element => {
 								<View className="flex flex-col justify-between items-center pt-4 sm:pt-5 md:pt-6 lg:pt-7 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
 									<SelectBoxInput
 										value={rememberMe}
-										onPress={(newValue: boolean) => setRememberMe(newValue)}
+										onPress={handleRememberMe}
 										text="Remember Me"
 										className="flex-row items-center"
 									/>

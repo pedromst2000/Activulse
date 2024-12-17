@@ -10,9 +10,16 @@ type BodyData = {
 };
 
 const register = async (bodyData: BodyData): Promise<APIResponse> => {
-	const { data }: AxiosResponse<APIResponse> = await api.post('/auth/register', bodyData);
+	try {
+		const { data }: AxiosResponse<APIResponse> = await api.post('/auth/register', bodyData);
 
-	return data;
+		return data;
+	} catch (error: any) {
+		if (error.data) {
+			return error.data;
+		}
+		throw error;
+	}
 };
 
 const useRegister = (bodyData: BodyData): UseMutationResult<APIResponse, Error> => {

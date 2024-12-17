@@ -21,7 +21,11 @@ const Lifestyle: React.FC = (): React.JSX.Element => {
 	return (
 		<AnimatedComponent animation="FadeIn">
 			<TopBar />
-			<ScrollView keyboardShouldPersistTaps="handled" className="flex-1 bg-primary-50">
+			<ScrollView
+				keyboardShouldPersistTaps="handled"
+				showsVerticalScrollIndicator={false}
+				className="flex-1 bg-primary-50"
+			>
 				<View className="w-full flex-1 bg-primary-50 px-4 mb-4">
 					{/* Title & Subtitle */}
 					<View className="mt-8 mb-6">

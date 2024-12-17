@@ -9,12 +9,19 @@ export type BodyData = {
 };
 
 const verifyOTP = async (bodyData: BodyData): Promise<APIResponse> => {
-	const { data }: AxiosResponse<APIResponse> = await api.post(
-		`/auth/users/verify-OTP`,
-		bodyData,
-	);
+	try {
+		const { data }: AxiosResponse<APIResponse> = await api.post(
+			`/auth/users/verify-OTP`,
+			bodyData,
+		);
 
-	return data;
+		return data;
+	} catch (error: any) {
+		if (error.data) {
+			return error.data;
+		}
+		throw error;
+	}
 };
 
 const useVerifyOTP = (bodyData: BodyData): UseMutationResult<APIResponse, Error> => {

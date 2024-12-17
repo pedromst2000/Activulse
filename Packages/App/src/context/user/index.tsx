@@ -2,6 +2,7 @@ import React, { PropsWithChildren, createContext, useMemo, useState, useEffect }
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { LoggedUser, UserContextProps } from './types';
 import SplashScreen from '@/src/components/splashScreen';
+import utils from '@/src/utils';
 
 const UserContext = createContext<UserContextProps | undefined>(undefined);
 
@@ -44,9 +45,22 @@ const UserProvider: React.FC<PropsWithChildren> = ({ children }): React.JSX.Elem
 		setLoggedUser(user);
 	};
 
+	const removeSessionStorage = async (): Promise<void> => {
+		await utils.storage.removeItem('authToken');
+		await utils.storage.removeItem('refreshToken');
+		await utils.storage.removeItem('rememberMe');
+		setLoggedUser(null);
+	};
+
 	useEffect(() => {
 		loadUserFromStorage();
 	}, []);
+
+	useEffect(() => {
+		if (loggedUser) {
+			updateUserStorage(loggedUser);
+		}
+	}, [loggedUser]);
 
 	useEffect(() => {
 		saveUserToStorage();
@@ -57,6 +71,7 @@ const UserProvider: React.FC<PropsWithChildren> = ({ children }): React.JSX.Elem
 			loggedUser: loggedUser,
 			setLoggedUser,
 			updateUser: updateUserStorage,
+			removeSession: removeSessionStorage,
 		}),
 		[loggedUser, setLoggedUser],
 	);

@@ -138,7 +138,11 @@ const ChangePassword: React.FC = (): React.JSX.Element => {
 				behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
 				keyboardVerticalOffset={Platform.OS === 'ios' ? 80 : 0}
 			>
-				<ScrollView ref={scrollViewRef} keyboardShouldPersistTaps="handled">
+				<ScrollView
+					ref={scrollViewRef}
+					showsVerticalScrollIndicator={false}
+					keyboardShouldPersistTaps="handled"
+				>
 					<View className="p-4 sm:p-8 justify-between flex-1 bg-primary-50">
 						<View className="absolute top-3 left-2 mt-6 ml-4 sm:mt-8 sm:ml-6 md:mt-10 md:ml-8 lg:mt-12 lg:ml-10">
 							<GoBackBtn onPress={() => navigation.goBack()} isRounded={true} />

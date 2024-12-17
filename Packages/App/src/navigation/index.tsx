@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import { useUserContext } from '../context/user';
 import AuthStack, { AuthStackParamList } from './Auth';
 import AssessmentRiskStack, { AssessmentRiskStackParamList } from './AssessmentRisk';
 import BonusAssessmentStack, { BonusAssessmentStackParamList } from './BonusAssessment';
@@ -21,6 +20,9 @@ import StoreIS from '../assets/svg/icons/BottomTab/StoreIcon_Selected.svg';
 import StoreINS from '../assets/svg/icons/BottomTab/StoreIcon_N_Selected.svg';
 import ProfileIS from '../assets/svg/icons/BottomTab/ProfileIcon_Selected.svg';
 import ProfileINS from '../assets/svg/icons/BottomTab/ProfileIcon_N_Selected.svg';
+import utils from '../utils';
+import { useUserContext } from '../context/user';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export type MainTabParamList = {
 	Home: undefined;
@@ -109,6 +111,20 @@ const MainTabNavigator: React.FC = (): React.JSX.Element => {
 const AppNavigator: React.FC = (): React.JSX.Element => {
 	const { loggedUser } = useUserContext();
 
+	useEffect(() => {
+		AsyncStorage.getItem('authToken').then((res) => {
+			console.log('authToken', res);
+		});
+
+		AsyncStorage.getItem('refreshToken').then((res) => {
+			console.log('refreshToken', res);
+		});
+
+		AsyncStorage.getItem('rememberMe').then((res) => {
+			console.log('rememberMe', res);
+		});
+	}, [loggedUser]);
+
 	return (
 		<Stack.Navigator screenOptions={{ headerShown: false }}>
 			{!loggedUser ? (
@@ -127,7 +143,9 @@ const AppNavigator: React.FC = (): React.JSX.Element => {
 					<Stack.Screen name="BonusAssessmentStack" component={BonusAssessmentStack} />
 				</>
 			) : (
-				<Stack.Screen name="MainTabs" component={MainTabNavigator} />
+				<>
+					<Stack.Screen name="MainTabs" component={MainTabNavigator} />
+				</>
 			)}
 		</Stack.Navigator>
 	);

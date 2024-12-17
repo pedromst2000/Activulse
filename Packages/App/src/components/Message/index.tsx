@@ -4,7 +4,7 @@ import SucccessI from '../../assets/svg/icons/SuccessIconV2.svg';
 import ErrorI from '../../assets/svg/icons/ErrorIcon_V2.svg';
 
 type MessageProps = {
-	type?: 'success' | 'error';
+	type?: 'success' | 'error' | 'AddFav' | 'RemoveFav' | 'Workout';
 	message?: string;
 };
 
@@ -18,9 +18,13 @@ const Message: React.FC<MessageProps> = ({ type, message }): React.JSX.Element =
 				<View className="mr-4">
 					{type === 'success' ? (
 						<SucccessI width={19} height={15} />
-					) : (
+					) : type === 'error' || type === 'RemoveFav' ? (
 						<ErrorI width={19} height={15} />
-					)}
+					) : type === 'AddFav' || type === 'Workout' ? (
+						<Text className="w-6 h-6 flex items-center justify-center text-white text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl bg-primary-50 rounded-full">
+							{type === 'AddFav' ? '⭐' : type === 'Workout' ? '💥' : null}
+						</Text>
+					) : null}
 				</View>
 
 				<Text className="font-quicksand-bold text-primary-50 text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl">

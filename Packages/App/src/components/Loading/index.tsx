@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { View, Text, Animated } from 'react-native';
-import AppIcon from '../../assets/images/Icon.svg';
+import AppIcon from '@/src/assets/images/AppIcon/Icon.svg';
 
 const Loading: React.FC = (): React.JSX.Element => {
 	const scaleAnim = useRef(new Animated.Value(1)).current;

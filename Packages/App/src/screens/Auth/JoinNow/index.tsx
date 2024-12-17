@@ -143,7 +143,11 @@ const JoinNow: React.FC = (): React.JSX.Element => {
 				behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
 				keyboardVerticalOffset={Platform.OS === 'ios' ? 80 : 0}
 			>
-				<ScrollView ref={scrollViewRef} keyboardShouldPersistTaps="handled">
+				<ScrollView
+					ref={scrollViewRef}
+					showsVerticalScrollIndicator={false}
+					keyboardShouldPersistTaps="handled"
+				>
 					<View className="p-4 sm:p-6 md:p-8 justify-between flex-1 bg-primary-50">
 						<View className="absolute top-3 left-2 mt-6 ml-4 sm:top-4 sm:left-3 sm:mt-7 sm:ml-5 md:top-5 md:left-4 md:mt-8 md:ml-6 lg:top-6 lg:left-5 lg:mt-9 lg:ml-7">
 							<GoBackBtn onPress={() => navigation.goBack()} isRounded={true} />
