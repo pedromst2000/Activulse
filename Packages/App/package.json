@@ -35,6 +35,7 @@
     "expo-status-bar": "2.0.0",
     "expo-system-ui": "4.0.5",
     "lottie-react-native": "7.1.0",
+    "moment": "^2.30.1",
     "nativewind": "^2.0.11",
     "react": "18.3.1",
     "react-dom": "^18.3.1",

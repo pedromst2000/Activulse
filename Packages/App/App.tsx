@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
 import { QueryClient } from '@tanstack/react-query';
 import { createAsyncStoragePersister } from '@tanstack/query-async-storage-persister';
 import FontsProvider from './src/context/FontsProvider';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { UserProvider, useUserContext } from './src/context/user';
+import { UserProvider } from './src/context/user';
 import { NavigationContainer } from '@react-navigation/native';
 import MainApp from './Main';
 import config from './src/config';
+import utils from './src/utils';
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -20,7 +20,7 @@ const queryClient = new QueryClient({
 });
 
 const asyncStoragePersister = createAsyncStoragePersister({
-	storage: AsyncStorage,
+	storage: utils.storage,
 });
 
 /**
@@ -34,14 +34,13 @@ const asyncStoragePersister = createAsyncStoragePersister({
  * @returns {React.JSX.Element} The root component of the application.
  */
 const App: React.FC = (): React.JSX.Element => {
-
 	useEffect(() => {
 		//unmount
 		return () => {
-			AsyncStorage.removeItem('selectedGender');
-			AsyncStorage.removeItem('selectedSmoke');
-			AsyncStorage.removeItem('selectedDiabetes');
-			AsyncStorage.removeItem('selectedHypertension');
+			utils.storage.removeItem('selectedGender');
+			utils.storage.removeItem('selectedSmoke');
+			utils.storage.removeItem('selectedDiabetes');
+			utils.storage.removeItem('selectedHypertension');
 		};
 	}, []);
 

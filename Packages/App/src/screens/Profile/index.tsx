@@ -1,15 +1,15 @@
 import { RefreshControl, ScrollView, Text, View, Image } from 'react-native';
 import { useEffect, useState } from 'react';
 import AnimatedComponent from '@/src/components/Animated';
-import config from '@/src/config';
 import useGetLoggedUser, {
 	GetLoggedUserData,
 } from '../../hooks/ReactQuery/users/GetLoggedUser';
 import { useUserContext } from '../../context/user';
 import { useNavigation } from '@react-navigation/native';
 import Button from '@/src/components/Button';
-import utils from '@/src/utils';
 import TopBar from '@/src/components/TopBar';
+import Modal from '@/src/components/Modal';
+import infoIlus from '@/src/assets/svg/ilustrations/Modals/Info.svg';
 
 // type Props = {
 // 	id?: number;
@@ -18,8 +18,23 @@ import TopBar from '@/src/components/TopBar';
 
 const Profile: React.FC = (): React.JSX.Element => {
 	const navigation = useNavigation();
-	const { setLoggedUser } = useUserContext();
+	const [modalVisible, setModalVisible] = useState<boolean>(false);
+	const { signOut } = useUserContext();
 	const { isLoading, data, isError, isRefetching, refetch } = useGetLoggedUser();
+
+	useEffect(() => {
+		if (
+			isError ||
+			data?.message == 'Missing auth token or refresh token' ||
+			data?.message == 'Refresh token has expired'
+		) {
+			setModalVisible(true);
+		}
+	}, [isError, data?.message, modalVisible]);
+
+	const toogleModal = (): void => {
+		setModalVisible(!modalVisible);
+	};
 
 	const handleOnRefresh = (): void => {
 		if (isRefetching || isLoading) {
@@ -28,19 +43,6 @@ const Profile: React.FC = (): React.JSX.Element => {
 
 		refetch();
 	};
-
-	const handleSignOut = async (): Promise<void> => {
-		await utils.storage.removeItem('authToken');
-		await utils.storage.removeItem('refreshToken');
-		setLoggedUser(null);
-	};
-
-	useEffect(() => {
-		if (isError) {
-			navigation.navigate('Home' as never);
-			console.log('Error:', data);
-		}
-	}, [isError, navigation]);
 
 	return (
 		<AnimatedComponent animation="FadeIn">
@@ -75,13 +77,23 @@ const Profile: React.FC = (): React.JSX.Element => {
 						</Text>
 					</Button>
 
-					<Button className="px-12 py-2" onPress={handleSignOut}>
+					<Button className="px-12 py-2" onPress={signOut}>
 						<Text className="font-quicksand-bold text-secondary-700 text-base md:text-lg lg:text-xl">
 							Sign Out
 						</Text>
 					</Button>
 				</View>
 			</View>
+
+			<Modal
+				type="ExpiredWarning"
+				ilustration={infoIlus}
+				message="Your session has expired ! Sign Out and Sign In again to continue."
+				toogleModal={toogleModal}
+				isModalVisible={modalVisible}
+				setModalVisible={setModalVisible}
+				onPress={signOut}
+			/>
 		</AnimatedComponent>
 	);
 };

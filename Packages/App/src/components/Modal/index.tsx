@@ -7,7 +7,7 @@ import EarnPointsI from '../../assets/svg/icons/EarnPointsIcon.svg';
 import { SvgProps } from 'react-native-svg';
 
 type ModalProps = {
-	type: 'Auth' | 'Warning' | 'Claim' | 'info' | 'Confirmation';
+	type: 'Auth' | 'Warning' | 'Claim' | 'info' | 'Confirmation' | 'ExpiredWarning';
 	ilustration: React.FC<SvgProps>;
 	message: string;
 	heartPoints?: string | undefined;
@@ -54,7 +54,7 @@ const Modal: React.FC<ModalProps> = ({
 						</Text>
 					</View>
 
-					{type === 'Auth' || type === 'Claim' ? (
+					{type === 'Auth' || type === 'Claim' || type === 'ExpiredWarning' ? (
 						<View className="mt-4 md:mt-6 lg:mt-8 flex justify-center items-center pt-4 md:pt-5 lg:pt-6">
 							<TouchableOpacity
 								activeOpacity={0.8}
@@ -62,9 +62,9 @@ const Modal: React.FC<ModalProps> = ({
 								onPress={onPress}
 								className="bg-accent-500 rounded-full p-2.5 md:p-3 lg:p-3.5 items-center justify-center w-32 md:w-36 lg:w-40 py-2 md:py-2.5 lg:py-3"
 							>
-								{type === 'Auth' ? (
+								{type === 'Auth' || type === 'ExpiredWarning' ? (
 									<Text className="text-secondary-700 font-quicksand-bold text-sm md:text-base lg:text-lg tracking-wide">
-										Continue
+										{type === 'Auth' ? 'Continue' : 'Sign Out'}
 									</Text>
 								) : type === 'Claim' ? (
 									<View className="flex flex-row items-center justify-center space-x-2 md:space-x-3 lg:space-x-4">

@@ -15,14 +15,6 @@ export default (api: AxiosInstance): void => {
 				await utils.storage.setItem('refreshToken', refreshToken);
 			}
 
-			// const rememberMe: string | null = await utils.storage.getItem('rememberMe');
-			// const timeExpiresIn: number =
-			// 	rememberMe === 'true'
-			// 		? utils.tokenSession.refreshExpiresInRememberMe
-			// 		: utils.tokenSession.refreshExpiresIn;
-
-			// console.log('timeExpiresIn', timeExpiresIn);
-
 			return response;
 		},
 		async (error: any) => {

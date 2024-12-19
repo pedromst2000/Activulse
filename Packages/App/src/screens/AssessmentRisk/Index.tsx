@@ -1,29 +1,19 @@
-import AnimatedComponent from '@/src/components/Animated';
 import React from 'react';
 import { View, Text } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { ScrollView } from 'react-native-gesture-handler';
+import { useUserContext } from '@/src/context/user';
+import AnimatedComponent from '@/src/components/Animated';
 import Ilustration from '@/src/components/Ilustration';
 import Icon from '@/src/components/Icon';
 import HeartAssessmentIlus from '../../assets/svg/ilustrations/heartRiskAssessment/HeartAssessment.svg';
 import InfoI from '../../assets/svg/icons/InfoIcon.svg';
 import Button from '@/src/components/Button';
 import LastSlideButton from '@/src/components/Onboarding/LastSlideBtn';
-import { useNavigation } from '@react-navigation/native';
-import { ScrollView } from 'react-native-gesture-handler';
-import utils from '@/src/utils';
-import { useUserContext } from '@/src/context/user';
 
 const InitAssessment: React.FC = (): React.JSX.Element => {
 	const navigation = useNavigation();
-	const { setLoggedUser } = useUserContext();
-
-	const handleSignOut = async (): Promise<void> => {
-		// Remove the tokens from the device storage
-		await utils.storage.removeItem('authToken');
-		await utils.storage.removeItem('refreshToken');
-
-		// Update the global state
-		setLoggedUser(null);
-	};
+	const { signOut } = useUserContext();
 
 	return (
 		<AnimatedComponent animation="FadeIn">
@@ -86,7 +76,7 @@ const InitAssessment: React.FC = (): React.JSX.Element => {
 							/>
 						</View>
 						<Button
-							onPress={handleSignOut}
+							onPress={signOut}
 							className="flex-1 bg-primary-50 border-2 border-accent-500 py-2 sm:py-3"
 						>
 							<Text className="font-quicksand-bold text-secondary-700 text-base sm:text-lg text-center">
