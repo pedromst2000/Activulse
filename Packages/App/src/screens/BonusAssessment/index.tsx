@@ -1,26 +1,16 @@
-import AnimatedComponent from '@/src/components/Animated';
 import React from 'react';
 import { View, Text } from 'react-native';
-import Ilustration from '@/src/components/Ilustration';
-import PersonalizedHeartIlus from '../../assets/svg/ilustrations/PersonalizedAssessment/PersonalizedHeart.svg';
-import Button from '@/src/components/Button';
 import { useNavigation } from '@react-navigation/native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useUserContext } from '@/src/context/user';
-import utils from '@/src/utils';
+import AnimatedComponent from '@/src/components/Animated';
+import Ilustration from '@/src/components/Ilustration';
+import PersonalizedHeartIlus from '../../assets/svg/ilustrations/PersonalizedAssessment/PersonalizedHeart.svg';
+import Button from '@/src/components/Button';
 
 const InitBonusAssessment: React.FC = (): React.JSX.Element => {
 	const navigation = useNavigation();
-	const { setLoggedUser, loggedUser } = useUserContext();
-
-	const handleSignOut = async (): Promise<void> => {
-		// Remove the tokens from the device storage
-		await utils.storage.removeItem('authToken');
-		await utils.storage.removeItem('refreshToken');
-
-		// Update the global state
-		setLoggedUser(null);
-	};
+	const { signOut } = useUserContext();
 
 	return (
 		<AnimatedComponent animation="FadeIn">
@@ -53,9 +43,6 @@ const InitBonusAssessment: React.FC = (): React.JSX.Element => {
 							<Button
 								onPress={() => {
 									navigation.navigate('BonusAssessment' as never);
-									console.log(
-										`User state before starting the assessment: ${JSON.stringify(loggedUser, null, 2)}`,
-									);
 								}}
 							>
 								<Text className="font-quicksand-bold text-secondary-700 text-base">Start</Text>
@@ -63,7 +50,7 @@ const InitBonusAssessment: React.FC = (): React.JSX.Element => {
 						</View>
 						<View>
 							<Button
-								onPress={handleSignOut}
+								onPress={signOut}
 								className="flex-1 bg-primary-50 border-2 border-accent-500"
 							>
 								<Text className="font-quicksand-bold text-secondary-700 text-base text-center">

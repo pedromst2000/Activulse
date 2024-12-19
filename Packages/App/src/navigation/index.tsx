@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import AuthStack, { AuthStackParamList } from './Auth';
@@ -20,9 +20,7 @@ import StoreIS from '../assets/svg/icons/BottomTab/StoreIcon_Selected.svg';
 import StoreINS from '../assets/svg/icons/BottomTab/StoreIcon_N_Selected.svg';
 import ProfileIS from '../assets/svg/icons/BottomTab/ProfileIcon_Selected.svg';
 import ProfileINS from '../assets/svg/icons/BottomTab/ProfileIcon_N_Selected.svg';
-import utils from '../utils';
 import { useUserContext } from '../context/user';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export type MainTabParamList = {
 	Home: undefined;

@@ -1,8 +1,7 @@
 import React, { PropsWithChildren, createContext, useMemo, useState, useEffect } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import utils from '@/src/utils';
 import { LoggedUser, UserContextProps } from './types';
 import SplashScreen from '@/src/components/splashScreen';
-import utils from '@/src/utils';
 
 const UserContext = createContext<UserContextProps | undefined>(undefined);
 
@@ -14,7 +13,7 @@ const UserProvider: React.FC<PropsWithChildren> = ({ children }): React.JSX.Elem
 	// To load the user from storage when the app starts
 	const loadUserFromStorage = async () => {
 		try {
-			const storedUser = await AsyncStorage.getItem('loggedUser');
+			const storedUser = await utils.storage.getItem('loggedUser');
 			if (storedUser) {
 				// If there is a user in storage, set it
 				setLoggedUser(JSON.parse(storedUser));
@@ -31,20 +30,26 @@ const UserProvider: React.FC<PropsWithChildren> = ({ children }): React.JSX.Elem
 	const saveUserToStorage = async () => {
 		try {
 			if (loggedUser) {
-				await AsyncStorage.setItem('loggedUser', JSON.stringify(loggedUser));
+				await utils.storage.setItem('loggedUser', JSON.stringify(loggedUser));
 			} else {
 				console.log('Removing the user from storage');
 
-				await AsyncStorage.removeItem('loggedUser');
+				await utils.storage.removeItem('loggedUser');
 			}
 		} catch (error) {
 			console.error('Error saving the user in the storage:', error);
 		}
 	};
 
-	const updateUserStorage = (user: LoggedUser): void => {
-		AsyncStorage.setItem('loggedUser', JSON.stringify(user));
+	const updateUserStorage = async (user: LoggedUser): Promise<void> => {
+		await utils.storage.setItem('loggedUser', JSON.stringify(user));
 		setLoggedUser(user);
+	};
+
+	const handleSignOut = async (): Promise<void> => {
+		await utils.storage.removeItem('authToken');
+		await utils.storage.removeItem('refreshToken');
+		setLoggedUser(null);
 	};
 
 	useEffect(() => {
@@ -66,6 +71,7 @@ const UserProvider: React.FC<PropsWithChildren> = ({ children }): React.JSX.Elem
 			loggedUser: loggedUser,
 			setLoggedUser,
 			updateUser: updateUserStorage,
+			signOut: handleSignOut,
 		}),
 		[loggedUser, setLoggedUser],
 	);

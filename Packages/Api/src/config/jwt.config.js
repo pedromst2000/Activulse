@@ -6,6 +6,8 @@ const config = {
 
 	refreshExpiresIn: 24 * 60 * 60, // 1 day in seconds
 
+	// refreshExpiresIn: 20, // 1 minute in seconds
+
 	refreshExpiresInRememberMe: 30 * 24 * 60 * 60, // 30 days in seconds
 
 	// The refresh token will be regenerated if the token will expire in less than this value

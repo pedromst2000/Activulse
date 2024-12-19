@@ -8,10 +8,11 @@ export type LoggedUser = {
 	username: string;
 	points: number;
 	avatar: string;
-};
+} | null;
 
 export type UserContextProps = {
 	loggedUser: LoggedUser | null;
 	setLoggedUser: React.Dispatch<React.SetStateAction<LoggedUser | null>>;
 	updateUser: (user: LoggedUser) => void;
+	signOut: () => void;
 };

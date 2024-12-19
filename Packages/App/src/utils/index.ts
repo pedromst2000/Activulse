@@ -4,7 +4,6 @@ import navigation from './navigation';
 import screen from './screen';
 import storage from './storage';
 import validateData from './validateData';
-import tokenSession from './tokens';
 
 export default {
 	storage,
@@ -13,5 +12,4 @@ export default {
 	animation,
 	screen,
 	validateData,
-	tokenSession,
 };

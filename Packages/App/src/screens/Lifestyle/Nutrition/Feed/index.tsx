@@ -10,9 +10,12 @@ import ScreenTitle from '@/src/components/ScreenTitle';
 import Input from '@/src/components/Input';
 import FeedMenu from '@/src/components/FeedMenu';
 import Feed from '@/src/components/Feed';
+import Modal from '@/src/components/Modal';
 import Ilustration from '@/src/components/Ilustration';
 import SearchI from '@/src/assets/svg/icons/SearchIcon.svg';
 import LogoIlus from '@/src/assets/svg/ilustrations/Logo.svg';
+import infoIlus from '@/src/assets/svg/ilustrations/Modals/Info.svg';
+import { useUserContext } from '@/src/context/user';
 
 type NutritionFeedRouteProp = RouteProp<LifestyleStackParamList, 'NutritionFeed'>;
 
@@ -24,6 +27,8 @@ const NutritionFeed: React.FC = (): React.JSX.Element => {
 	const [recipes, setRecipes] = useState<Recipe[]>([]);
 	const [search, setSearch] = useState<string>('');
 	const [selectedCategory, setSelectedCategory] = useState<string>('All');
+	const [modalVisible, setModalVisible] = useState<boolean>(false);
+	const { signOut } = useUserContext();
 	const { refetch, data, isLoading, isError, isRefetching } = useGetRecipesFeedData({
 		page,
 		limit: config.pagination.recipes.feed.defaultLimit,
@@ -31,6 +36,20 @@ const NutritionFeed: React.FC = (): React.JSX.Element => {
 		category: selectedCategory,
 		title: search,
 	});
+
+	useEffect(() => {
+		if (
+			isError ||
+			data?.message == 'Missing auth token or refresh token' ||
+			data?.message == 'Refresh token has expired'
+		) {
+			setModalVisible(true);
+		}
+	}, [isError, data?.message, modalVisible]);
+
+	const toogleModal = (): void => {
+		setModalVisible(!modalVisible);
+	};
 
 	// If one of the filters changes, resetting the page to 1
 	useEffect(() => {
@@ -144,6 +163,17 @@ const NutritionFeed: React.FC = (): React.JSX.Element => {
 					)}
 				</View>
 			</IOScrollView>
+			{/* Session Expire Warning  */}
+
+			<Modal
+				type="ExpiredWarning"
+				ilustration={infoIlus}
+				message="Your session has expired ! Sign Out and Sign In again to continue."
+				toogleModal={toogleModal}
+				isModalVisible={modalVisible}
+				setModalVisible={setModalVisible}
+				onPress={signOut}
+			/>
 		</AnimatedComponent>
 	);
 };
