@@ -38,8 +38,8 @@ const getRecipesFeedData = async (params: Params): Promise<GetRecipesFeedData> =
 	url.searchParams.append('limit', params.limit.toString());
 
 	params.title?.toLowerCase() && url.searchParams.append('title', params.title);
-	params.diet?.toLowerCase() && url.searchParams.append('diet', params.diet);
-	params.category?.toLowerCase() && url.searchParams.append('category', params.category);
+	params.diet && url.searchParams.append('diet', params.diet);
+	params.category && url.searchParams.append('category', params.category);
 
 	try {
 		const { data }: AxiosResponse<GetRecipesFeedData> = await api.get('/recipes', {

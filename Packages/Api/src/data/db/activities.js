@@ -81,7 +81,7 @@ module.exports = [
 		category_id: 1,
 	},
 	{
-		title: "Scenic Spin",
+		title: "Scenic Spin Session",
 		intensity: 4,
 		duration: 45,
 		description:

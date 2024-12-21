@@ -39,7 +39,6 @@ const NutritionFeed: React.FC = (): React.JSX.Element => {
 
 	useEffect(() => {
 		if (
-			isError ||
 			data?.message == 'Missing auth token or refresh token' ||
 			data?.message == 'Refresh token has expired'
 		) {
@@ -137,12 +136,14 @@ const NutritionFeed: React.FC = (): React.JSX.Element => {
 						/>
 					</View>
 					<FeedMenu
+						type="Nutrition"
 						items={['All', 'Soups', 'Main Dishes', 'Salads', 'Desserts', 'Premium']}
 						setSelectedCategory={setSelectedCategory}
 						category={selectedCategory}
 					/>
 
 					<Feed
+						type="recipes"
 						data={recipes}
 						handleOnChange={handleOnChange}
 						isLoading={isLoading}

@@ -3,7 +3,7 @@ import AnimatedComponent from '@/src/components/Animated';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import Icon from '@/src/components/Icon';
-import IntensityI from '../../../assets/svg/icons/FrequencyIcon.svg';
+import IntensityI from '../../../assets/svg/icons/FrequencyIconBlue.svg';
 import TimeI from '../../../assets/svg/icons/TimeIcon.svg';
 import CalendarI from '../../../assets/svg/icons/CalendarIcon.svg';
 import ScreenTitle from '@/src/components/ScreenTitle';
