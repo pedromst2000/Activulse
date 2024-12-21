@@ -3,6 +3,7 @@ import { TouchableOpacity, Text, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 type Props = {
+	type: 'Fitness' | 'Nutrition';
 	activeOpacity?: number;
 	label: string;
 	category?: string;
@@ -10,6 +11,7 @@ type Props = {
 } & React.ComponentProps<typeof TouchableOpacity>;
 
 const LabelItem: React.FC<Props> = ({
+	type,
 	activeOpacity,
 	label,
 	category,
@@ -29,7 +31,11 @@ const LabelItem: React.FC<Props> = ({
 					style={{ flex: 1, borderRadius: 100 }}
 				>
 					<TouchableOpacity
-						className="px-4 py-2 rounded-full mx-1 md:mx-2 lg:mx-3 xl:mx-4"
+						className={
+							type === 'Fitness'
+								? 'px-6 py-2 rounded-full mx-1 md:mx-2 lg:mx-3 xl:mx-4'
+								: 'px-4 py-2 rounded-full mx-1 md:mx-2 lg:mx-3 xl:mx-4'
+						}
 						style={{ elevation: 5 }}
 						activeOpacity={activeOpacity || 0.75}
 						onPress={onPress}
@@ -47,7 +53,7 @@ const LabelItem: React.FC<Props> = ({
 		<TouchableOpacity
 			className={`self-start ${
 				isSelected ? 'bg-accent-700' : 'bg-primary-50 border-[2px] border-accent-700'
-			} px-[18px] py-2 rounded-full mx-1 md:mx-2 lg:mx-3 xl:mx-4`}
+			}  ${type === 'Fitness' ? 'px-6' : 'px-4'}  py-2 rounded-full mx-1 md:mx-2 lg:mx-3 xl:mx-4`}
 			style={{ elevation: 5 }}
 			activeOpacity={activeOpacity || 0.75}
 			onPress={onPress}

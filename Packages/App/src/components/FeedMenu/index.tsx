@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import LabelItem from './Label';
 
 type Props = {
+	type: 'Fitness' | 'Nutrition';
 	items: string[];
 	setSelectedCategory?: Dispatch<React.SetStateAction<string>>;
 	category?: string;
@@ -10,6 +11,7 @@ type Props = {
 };
 
 const FeedMenu: React.FC<Props> = ({
+	type,
 	items,
 	setSelectedCategory,
 	category,
@@ -25,10 +27,15 @@ const FeedMenu: React.FC<Props> = ({
 			{items.map((item, index) => {
 				return (
 					<View
-						className="px-[3px] py-[7px] sm:px-1 sm:py-2 md:px-2 md:py-3 lg:px-3 lg:py-4"
+						className={
+							type === 'Fitness'
+								? 'px-[8px] py-[10px]'
+								: 'px-[6px] py-[10px] sm:px-1 sm:py-2 md:px-2 md:py-3 lg:px-3 lg:py-4'
+						}
 						key={index}
 					>
 						<LabelItem
+							type={type}
 							key={index}
 							label={item}
 							onPress={() => setSelectedCategory && setSelectedCategory(item)}

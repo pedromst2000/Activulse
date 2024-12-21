@@ -24,7 +24,6 @@ const Profile: React.FC = (): React.JSX.Element => {
 
 	useEffect(() => {
 		if (
-			isError ||
 			data?.message == 'Missing auth token or refresh token' ||
 			data?.message == 'Refresh token has expired'
 		) {

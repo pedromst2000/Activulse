@@ -3,9 +3,10 @@ import { View, Text, TouchableOpacity, Image } from 'react-native';
 import TimeI from '@/src/assets/svg/icons/TimeIcon.svg';
 import VideoTimeI from '@/src/assets/svg/icons/VideoTimeIcon.svg';
 import Icon from '../../Icon';
+import Intensity from '../../Intensity';
 
 type Props = {
-	type?: 'Recipe' | 'Workout' | 'StoreRecipe' | 'StoreWorkout';
+	type?: 'Recipe' | 'Activity' | 'StoreRecipe' | 'StoreActivity';
 	_item_: any;
 };
 
@@ -14,6 +15,7 @@ const Card: React.FC<Props> = ({ type, _item_ }): React.JSX.Element => {
 		<TouchableOpacity
 			activeOpacity={0.8}
 			onPress={() => {
+				// TODO - TO REPLACE WITH NAVIGATION FOR DETAIL PAGE PASSING THE ID OF THE ITEM (Recipe/Activity)
 				console.log(`Card-ID: ${_item_.id}`);
 			}}
 		>
@@ -22,12 +24,13 @@ const Card: React.FC<Props> = ({ type, _item_ }): React.JSX.Element => {
 			w-[320px] sm:w-[300px] md:w-[320px] h-[255px] sm:h-[210px] md:h-[220px]"
 			>
 				{/* Background Image */}
-				{/* TODO - Implement Lazy Loading Fast Image for Better performance */}
 
 				<Image className="w-full h-full" source={{ uri: _item_.imageUrl }} />
 
 				{/* Dark Overlay */}
-				<View className="absolute top-0 left-0 w-full h-full bg-black opacity-40" />
+				<View
+					className={`absolute top-0 left-0 w-full h-full bg-black ${type === 'Recipe' ? 'opacity-[0.32]' : 'opacity-[0.28]'}`}
+				/>
 
 				{/* Content Container */}
 				<View className="absolute top-0 left-0 w-full h-full flex flex-col justify-between px-4 py-4">
@@ -41,7 +44,6 @@ const Card: React.FC<Props> = ({ type, _item_ }): React.JSX.Element => {
 							{_item_.title}
 						</Text>
 					</View>
-
 					{/* Labels */}
 					<View className="flex flex-row flex-wrap items-center space-x-2 mb-[130px]">
 						{_item_?.isPremium && (
@@ -57,24 +59,50 @@ const Card: React.FC<Props> = ({ type, _item_ }): React.JSX.Element => {
 							</Text>
 						</View>
 					</View>
+					{/* Time Display && Intensity */}
+					<View className="flex flex-row justify-between items-center">
+						{/* Time Display */}
+						<View className="flex-row items-center space-x-2">
+							{_item_?.isPremium ? (
+								<Icon
+									icon={VideoTimeI}
+									className="w-[18px] h-[18px] md:w-[16px] lg:w-[18px] md:h-[16px] lg:h-[18px]"
+								/>
+							) : (
+								<Icon
+									icon={TimeI}
+									className="w-[18px] h-[18px] md:w-[16px] lg:w-[18px] md:h-[16px] lg:h-[18px]"
+								/>
+							)}
 
-					{/* Time Display */}
-					<View className="flex-row items-center space-x-2">
-						{_item_?.isPremium ? (
-							<Icon
-								icon={VideoTimeI}
-								className="w-[18px] h-[18px] md:w-[16px] lg:w-[18px] md:h-[16px] lg:h-[18px]"
-							/>
-						) : (
-							<Icon
-								icon={TimeI}
-								className="w-[18px] h-[18px] md:w-[16px] lg:w-[18px] md:h-[16px] lg:h-[18px]"
+							<Text className="font-quicksand-bold text-primary-50 text-[14px] sm:text-[13px] md:text-[14px] leading-[20px] tracking-[0.4px]">
+								{_item_?.isPremium
+									? _item_?.videoTime
+									: type === 'Recipe'
+										? _item_.confTime
+										: _item_.duration}{' '}
+								minutes
+							</Text>
+						</View>
+
+						{type === 'Activity' && (
+							<Intensity
+								typeBullet="orange"
+								intensityVal={
+									_item_.intensity === 'Light'
+										? 1
+										: _item_.intensity === 'Moderate I'
+											? 2
+											: _item_.intensity === 'Moderate II'
+												? 3
+												: _item_.intensity === 'Moderate III'
+													? 4
+													: 5
+								}
+								iconStyles="w-[28px] h-[28px] md:w-[24px] lg:w-[28px] md:h-[24px] lg:h-[28px]"
+								bulletSizes="w-[11px] h-[11px] sm:w-[10px] sm:h-[10px] md:w-[11px] md:h-[11px] lg:w-[12px] lg:h-[12px]"
 							/>
 						)}
-
-						<Text className="font-quicksand-bold text-primary-50 text-[14px] sm:text-[13px] md:text-[14px] leading-[20px] tracking-[0.4px]">
-							{_item_?.isPremium ? _item_?.videoTime : _item_?.confTime} minutes
-						</Text>
 					</View>
 				</View>
 			</View>
