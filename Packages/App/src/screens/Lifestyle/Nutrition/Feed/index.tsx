@@ -40,9 +40,8 @@ const NutritionFeed: React.FC = (): React.JSX.Element => {
 	});
 
 	useEffect(() => {
-
 		console.log(`data?.success: ${data?.success}`);
-		
+
 		console.log(`data?.message: ${data?.message}`);
 
 		// if (

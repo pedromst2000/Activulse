@@ -40,9 +40,7 @@ const FitnessFeed: React.FC = (): React.JSX.Element => {
 		intensity: route.params?.intensity,
 	});
 
-	useEffect(() => {
-	
-	}, [isError, error, modalVisible]);
+	useEffect(() => {}, [isError, error, modalVisible]);
 
 	const toogleModal = (): void => {
 		setModalVisible(!modalVisible);

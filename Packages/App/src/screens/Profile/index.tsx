@@ -24,8 +24,7 @@ const Profile: React.FC = (): React.JSX.Element => {
 
 	useEffect(() => {
 		if (
-			(isError &&
-				error?.message === 'Missing auth token or refresh token') ||
+			(isError && error?.message === 'Missing auth token or refresh token') ||
 			error?.message === 'Refresh token has expired'
 		) {
 			setModalVisible(true);
