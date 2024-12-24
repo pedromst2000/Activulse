@@ -26,7 +26,9 @@ const NutritionFeed: React.FC = (): React.JSX.Element => {
 	const [total, setTotal] = useState<number>(0);
 	const [recipes, setRecipes] = useState<Recipe[]>([]);
 	const [search, setSearch] = useState<string>('');
-	const [selectedCategory, setSelectedCategory] = useState<string>('All');
+	const [selectedCategory, setSelectedCategory] = useState<
+		'All' | 'Soups' | 'Main Dishes' | 'Salads' | 'Desserts' | 'Premium'
+	>('All');
 	const [modalVisible, setModalVisible] = useState<boolean>(false);
 	const { signOut } = useUserContext();
 	const { refetch, data, isLoading, isError, isRefetching } = useGetRecipesFeedData({
@@ -38,13 +40,18 @@ const NutritionFeed: React.FC = (): React.JSX.Element => {
 	});
 
 	useEffect(() => {
-		if (
-			data?.message == 'Missing auth token or refresh token' ||
-			data?.message == 'Refresh token has expired'
-		) {
-			setModalVisible(true);
-		}
-	}, [isError, data?.message, modalVisible]);
+
+		console.log(`data?.success: ${data?.success}`);
+		
+		console.log(`data?.message: ${data?.message}`);
+
+		// if (
+		// 	data?.message == 'Missing auth token or refresh token' ||
+		// 	data?.message == 'Refresh token has expired'
+		// ) {
+		// 	setModalVisible(true);
+		// }
+	}, [data?.message, modalVisible]);
 
 	const toogleModal = (): void => {
 		setModalVisible(!modalVisible);
@@ -138,8 +145,8 @@ const NutritionFeed: React.FC = (): React.JSX.Element => {
 					<FeedMenu
 						type="Nutrition"
 						items={['All', 'Soups', 'Main Dishes', 'Salads', 'Desserts', 'Premium']}
-						setSelectedCategory={setSelectedCategory}
-						category={selectedCategory}
+						setSelectedNutritionCategory={setSelectedCategory}
+						nutritionCategory={selectedCategory}
 					/>
 
 					<Feed
@@ -149,6 +156,7 @@ const NutritionFeed: React.FC = (): React.JSX.Element => {
 						isLoading={isLoading}
 						isRefetching={isRefetching}
 						isError={isError}
+						// isError={true}
 						category={selectedCategory}
 						search={search}
 						messageAPI={data?.message}
