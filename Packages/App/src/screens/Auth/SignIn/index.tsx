@@ -62,7 +62,11 @@ const SignIn: React.FC = (): React.JSX.Element => {
 							// Save the tokens on the device storage
 							await utils.storage.setItem('authToken', resData.data.authToken);
 							await utils.storage.setItem('refreshToken', resData.data.refreshToken);
-						} else {
+						} 
+						
+						// TODO: REMOVE REPEATED CODE BLOCK FOR HANDLING THE ERROR ON onError Function
+						
+						else {
 							console.log(`resData.message: ${JSON.stringify(resData, null, 2)}`);
 
 							setValidationError(resData.message);
