@@ -93,7 +93,7 @@ const StressSelection: React.FC<StressSelectionProps> = ({
 
 					<View className="flex flex-row justify-center mt-4 w-full">
 						{/* Frequently Card */}
-						<View>
+						<View className="w-5/12 sm:w-4/12 md:w-3/12 lg:w-2/12">
 							<SelectCard
 								type="Status"
 								ilustration={FrequentlyIlus}
