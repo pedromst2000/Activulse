@@ -6,8 +6,8 @@ import { APIResponse } from '@/src/api/types';
 type Params = {
 	page: number;
 	limit: number;
-	category?: string | undefined;
-	intensity?: string | undefined;
+	category?: 'All' | 'Cardio' | 'Yoga' | 'Muscles' | 'Premium';
+	intensity?: 'Light' | 'Moderate' | 'Vigorous' | null;
 };
 
 export type Activity = {
@@ -16,8 +16,8 @@ export type Activity = {
 	isPremium: boolean;
 	duration: number;
 	videoTime?: number;
-	category: string;
-	intensity: string;
+	category: 'Cardio' | 'Yoga' | 'Muscles' | 'Premium';
+	intensity: 'Light' | 'Moderate' | 'Vigorous';
 	imageUrl: string;
 	createdAt: string;
 	updatedAt: string;
@@ -49,7 +49,7 @@ const getActivitiesFeedData = async (params: Params): Promise<GetActivitiesFeedD
 		if (error.data) {
 			return error.data;
 		}
-		throw error;
+		return error;
 	}
 };
 

@@ -24,9 +24,11 @@ const login = async (bodyData: BodyData): Promise<LoginData> => {
 		return data;
 	} catch (error: any) {
 		if (error.data) {
+			// console.log(`--L----error.data: ${JSON.stringify(error.data, null, 2)}`);
+
 			return error.data;
 		}
-		throw error;
+		return error;
 	}
 };
 

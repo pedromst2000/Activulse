@@ -6,8 +6,8 @@ import { APIResponse } from '@/src/api/types';
 type Params = {
 	page: number;
 	limit: number;
-	diet?: string | undefined;
-	category?: string | undefined;
+	diet: 'DASH' | 'Vegan' | 'Mediterranean';
+	category: 'All' | 'Soups' | 'Main Dishes' | 'Salads' | 'Desserts' | 'Premium';
 	title?: string | undefined;
 };
 
@@ -15,10 +15,10 @@ export type Recipe = {
 	id: number;
 	isPremium: boolean;
 	title: string;
-	confTime?: number | null;
+	confTime: number | null;
 	videoTime?: number | null;
-	category: string;
-	diet: string;
+	category: 'All' | 'Soups' | 'Main Dishes' | 'Salads' | 'Desserts' | 'Premium';
+	diet: 'DASH' | 'Vegan' | 'Mediterranean';
 	imageUrl: string;
 	createdAt: string;
 	updatedAt: string;
@@ -51,7 +51,7 @@ const getRecipesFeedData = async (params: Params): Promise<GetRecipesFeedData> =
 		if (error.data) {
 			return error.data;
 		}
-		throw error;
+		return error;
 	}
 };
 

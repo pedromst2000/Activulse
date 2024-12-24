@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View } from 'react-native';
 import { InView } from 'react-native-intersection-observer';
 import config from '@/src/config';
@@ -92,7 +92,8 @@ const Feed: React.FC<Props> = ({
 						styleClass="pb-20 mt-4 sm:mt-6 md:mt-8 lg:mt-10 xl:mt-12"
 					/>
 				) : (
-					isError && (
+					isError &&
+					messageAPI === 'Network Error' && (
 						<EmptyState
 							type="Error"
 							_ilustration_={ErrorIlus}

@@ -20,16 +20,16 @@ const Profile: React.FC = (): React.JSX.Element => {
 	const navigation = useNavigation();
 	const [modalVisible, setModalVisible] = useState<boolean>(false);
 	const { signOut } = useUserContext();
-	const { isLoading, data, isError, isRefetching, refetch } = useGetLoggedUser();
+	const { isLoading, data, isError, error, isRefetching, refetch } = useGetLoggedUser();
 
 	useEffect(() => {
 		if (
-			data?.message == 'Missing auth token or refresh token' ||
-			data?.message == 'Refresh token has expired'
+			(isError && error?.message === 'Missing auth token or refresh token') ||
+			error?.message === 'Refresh token has expired'
 		) {
 			setModalVisible(true);
 		}
-	}, [isError, data?.message, modalVisible]);
+	}, [isError, error, modalVisible]);
 
 	const toogleModal = (): void => {
 		setModalVisible(!modalVisible);
@@ -59,12 +59,12 @@ const Profile: React.FC = (): React.JSX.Element => {
 							height={100}
 						/> */}
 					</View>
-					<Text className="text-lg md:text-xl lg:text-2xl">{data?.data.username}</Text>
-					<Text className="text-lg md:text-xl lg:text-2xl">{data?.data.email}</Text>
-					<Text className="text-lg md:text-xl lg:text-2xl">{data?.data.tag}</Text>
-					<Text className="text-lg md:text-xl lg:text-2xl">{data?.data.points}</Text>
+					<Text className="text-lg md:text-xl lg:text-2xl">{data?.data?.username}</Text>
+					<Text className="text-lg md:text-xl lg:text-2xl">{data?.data?.email}</Text>
+					<Text className="text-lg md:text-xl lg:text-2xl">{data?.data?.tag}</Text>
+					<Text className="text-lg md:text-xl lg:text-2xl">{data?.data?.points}</Text>
 					{/* <Text>{data?.data.diet.name}</Text> */}
-					<Text className="text-lg md:text-xl lg:text-2xl">{data?.data.gender}</Text>
+					<Text className="text-lg md:text-xl lg:text-2xl">{data?.data?.gender}</Text>
 				</View>
 				<View className="flex-1 justify-center items-center space-y-4 md:space-y-6 lg:space-y-8">
 					<Button

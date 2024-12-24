@@ -11,9 +11,9 @@ import IntensityFilter from '@/src/screens/Lifestyle/Fitness/IntensityFilter';
 
 export type LifestyleStackParamList = {
 	LifestyleScreen: undefined; // main screen
-	FitnessFeed: { intensity?: string | undefined };
+	FitnessFeed: { intensity?: 'Light' | 'Moderate' | 'Vigorous' | null };
 	IntensityFilter: undefined;
-	NutritionFeed: { diet?: string | undefined };
+	NutritionFeed: { diet: 'DASH' | 'Vegan' | 'Mediterranean' };
 	Leaderboard: undefined;
 	Activity: undefined;
 	Recipe: undefined;

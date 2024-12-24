@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, TouchableOpacity, Text } from 'react-native';
+import { View, Text } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AnimatedComponent from '../../Animated';
 import useExtraAssessment from '@/src/hooks/ReactQuery/users/extraAssessment';
 import RareIlus from '../../../assets/svg/ilustrations/Easy.svg';
 import SometimesIlus from '../../../assets/svg/ilustrations/Sometimes.svg';
 import FrequentlyIlus from '../../../assets/svg/ilustrations/HardIcon.svg';
-import Ilustration from '../../Ilustration';
 import Button from '../../Button';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -153,7 +152,7 @@ const FastFoodSelection: React.FC<FastFoodSelectionProps> = ({
 
 					<View className="flex flex-row justify-center mt-4 w-full">
 						{/* Frequently Card */}
-						<View>
+						<View className="w-5/12 sm:w-4/12 md:w-3/12 lg:w-2/12">
 							<SelectCard
 								type="Status"
 								ilustration={FrequentlyIlus}

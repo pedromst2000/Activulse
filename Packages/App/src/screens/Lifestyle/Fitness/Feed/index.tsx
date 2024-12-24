@@ -28,26 +28,19 @@ const FitnessFeed: React.FC = (): React.JSX.Element => {
 	const [page, setPage] = useState<number>(1);
 	const [total, setTotal] = useState<number>(0);
 	const [activities, setActivities] = useState<Activity[]>([]);
-	const [selectedCategory, setSelectedCategory] = useState<string>('All');
-	const [intensity, setIntensity] = useState<string>('');
+	const [selectedCategory, setSelectedCategory] = useState<
+		'All' | 'Cardio' | 'Yoga' | 'Muscles' | 'Premium'
+	>('All');
 	const [modalVisible, setModalVisible] = useState<boolean>(false);
 	const { signOut } = useUserContext();
-	const { refetch, data, isLoading, isError, isRefetching } = useGetActivitiesFeedData({
+	const { refetch, data, isLoading, isError, error, isRefetching } = useGetActivitiesFeedData({
 		page,
 		limit: config.pagination.activities.feed.defaultLimit,
 		category: selectedCategory,
 		intensity: route.params?.intensity,
 	});
 
-	useEffect(() => {
-		if (
-			isError ||
-			data?.message == 'Missing auth token or refresh token' ||
-			data?.message == 'Refresh token has expired'
-		) {
-			setModalVisible(true);
-		}
-	}, [isError, data?.message, modalVisible]);
+	useEffect(() => {}, [isError, error, modalVisible]);
 
 	const toogleModal = (): void => {
 		setModalVisible(!modalVisible);
@@ -59,7 +52,7 @@ const FitnessFeed: React.FC = (): React.JSX.Element => {
 		setTotal(0);
 		setPage(1);
 		refetch();
-	}, [intensity, selectedCategory]);
+	}, [route.params?.intensity, selectedCategory]);
 
 	const handleOnChange = (inView: boolean, id: number): void => {
 		// Checking if it's the last item in the list
@@ -73,7 +66,7 @@ const FitnessFeed: React.FC = (): React.JSX.Element => {
 			setPage((prev: number) => prev + 1);
 		}
 		// not incrementing the page if the user is filtering by intensity
-		if (intensity) {
+		if (route.params?.intensity) {
 			setPage(1);
 		}
 	};
@@ -133,14 +126,14 @@ const FitnessFeed: React.FC = (): React.JSX.Element => {
 					type="Filter"
 					label="Fitness"
 					onPress={() => navigation.goBack()}
-					onFilterBtnPress={() => console.log('Filter button pressed')}
+					onFilterBtnPress={() => navigation.navigate('IntensityFilter')}
 				/>
 				<View className="flex-1 mt-4 px-2 sm:px-4 md:px-6 lg:px-8">
 					<FeedMenu
 						type="Fitness"
 						items={['All', 'Cardio', 'Yoga', 'Muscles', 'Premium']}
-						setSelectedCategory={setSelectedCategory}
-						category={selectedCategory}
+						setSelectedFitnessCategory={setSelectedCategory}
+						fitnessCategory={selectedCategory}
 					/>
 
 					<Feed
