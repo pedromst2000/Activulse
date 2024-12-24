@@ -63,6 +63,8 @@ const SignIn: React.FC = (): React.JSX.Element => {
 							await utils.storage.setItem('authToken', resData.data.authToken);
 							await utils.storage.setItem('refreshToken', resData.data.refreshToken);
 						} else {
+							console.log(`resData.message: ${JSON.stringify(resData, null, 2)}`);
+
 							setValidationError(resData.message);
 							setPassword('');
 							setShowError(true); // Show error message
@@ -71,8 +73,12 @@ const SignIn: React.FC = (): React.JSX.Element => {
 							}, 5000);
 						}
 					},
-					onError: (error) => {
+					onError: (error: any) => {
+						console.log(`errorKKKK: ${JSON.stringify(error, null, 2)}`);
+
 						const errorMessage = utils.error.getMessage(error);
+						console.log(`errorMessage: ${errorMessage}`);
+
 						setValidationError(errorMessage);
 						setShowError(true); // Show error message
 						timeoutRef.current = setTimeout(() => {
@@ -81,7 +87,7 @@ const SignIn: React.FC = (): React.JSX.Element => {
 					},
 				},
 			);
-		} catch (error) {
+		} catch (error: any) {
 			setValidationError(utils.error.getMessage(error));
 			setShowError(true);
 			timeoutRef.current = setTimeout(() => {

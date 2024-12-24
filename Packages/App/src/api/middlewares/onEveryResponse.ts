@@ -18,16 +18,21 @@ export default (api: AxiosInstance): void => {
 			return response;
 		},
 		async (error: any) => {
+			// Extract the error data for structured handling
+			const errorData = {
+				status: error.response?.status || 500,
+				message: error.response?.data?.message || error.message || 'Unknown error occurred',
+				data: error.response?.data || null,
+			};
+
+			// Handle token-related errors (if needed)
 			if (error.response?.status === 401) {
 				await utils.storage.removeItem('authToken');
 				await utils.storage.removeItem('refreshToken');
 			}
 
-			if (error.response?.status === 404) {
-				return Promise.reject(error.response);
-			}
-
-			return Promise.reject(error);
+			// Return a structured error response
+			return Promise.reject(errorData);
 		},
 	);
 };
