@@ -71,7 +71,7 @@ const getLoggedUser = async (): Promise<GetLoggedUserData> => {
 		if (error.data) {
 			return error.data;
 		}
-		throw error;
+		return error;
 	}
 };
 

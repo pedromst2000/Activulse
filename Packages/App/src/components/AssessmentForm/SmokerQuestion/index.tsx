@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
+import utils from '@/src/utils';
 import AnimatedComponent from '../../Animated';
 import Ilustration from '../../Ilustration';
 import SmokeIlus from '../../../assets/svg/ilustrations/heartRiskAssessment/Smoker.svg';
 import LastSlideButton from '../../Onboarding/LastSlideBtn';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type SmokerQuestionProps = {
 	isSmoker: boolean;
@@ -23,7 +23,7 @@ const SmokerQuestion: React.FC<SmokerQuestionProps> = ({
 	useEffect(() => {
 		const loadSmokeSelection = async () => {
 			try {
-				const savedSelection = await AsyncStorage.getItem('selectedSmoke');
+				const savedSelection = await utils.storage.getItem('selectedSmoke');
 				if (savedSelection) {
 					setIsSmoker(savedSelection === 'Yes');
 					setIsYesSelected(savedSelection === 'Yes');
@@ -39,7 +39,7 @@ const SmokerQuestion: React.FC<SmokerQuestionProps> = ({
 
 	const handleSmokeSelection = async (smoker: 'Yes' | 'No') => {
 		try {
-			await AsyncStorage.setItem('selectedSmoke', smoker);
+			await utils.storage.setItem('selectedSmoke', smoker);
 			setIsSmoker(smoker === 'Yes');
 			setIsYesSelected(smoker === 'Yes');
 			setIsNoSelected(smoker === 'No');

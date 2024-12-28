@@ -53,7 +53,7 @@ const InitAssessment: React.FC = (): React.JSX.Element => {
 					</View>
 
 					{/* Start Assessment Options */}
-					<View className="flex w-full px-4 py-1 gap-4 sm:px-8 sm:py-4">
+					<View className="flex w-full px-4 py-1 space-y-6 sm:px-8 sm:py-4 md:space-y-8">
 						<View className="flex-1">
 							<Button
 								onPress={() => {

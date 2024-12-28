@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import timers from '@/src/utils/timers';
 import {
 	Text,
 	View,
@@ -7,6 +8,7 @@ import {
 	Platform,
 	ActivityIndicator,
 } from 'react-native';
+import { APIResponse } from '@/src/api/types';
 import { RouteProp, useNavigation, useRoute, useFocusEffect } from '@react-navigation/native';
 import useVerifyOTP from '@/src/hooks/ReactQuery/auth/verifyOTP';
 import useRequestResetPassword from '@/src/hooks/ReactQuery/auth/requestResetPassword';
@@ -69,77 +71,80 @@ const VerifyOTP: React.FC = (): React.JSX.Element => {
 	};
 
 	const handleVerifyOTP = async (): Promise<void> => {
-		try {
-			clearTimeout(timeoutRef.current!);
-			setValidationError('');
-			setShowError(false);
+		clearTimeout(timeoutRef.current!);
+		setValidationError('');
+		setShowError(false);
 
-			// Send the OTP verification request
-			const resData = await mutateAsync({
+		await mutateAsync(
+			{
 				OTP,
 				email: route.params.email,
-			});
-			if (resData.success) {
-				setSuccessMessage(resData.message);
-				setShowSuccess(true);
+			},
+			{
+				onSuccess: async (resData: APIResponse): Promise<void> => {
+					if (resData.success) {
+						setSuccessMessage(resData.message);
+						setShowSuccess(true);
+						// Navigate to ChangePassword screen after 2 seconds
+						timeoutRef.current = setTimeout(() => {
+							setShowSuccess(false);
+							navigation.navigate('ChangePassword', { email: route.params.email });
+						}, timers.SUCCESS_DELAY);
+					}
+				},
+				onError: (error: any): void => {
+					const errorMessage = utils.error.getMessage(error as Error);
+					const statusCode = error?.status || null;
 
-				// Navigate to ChangePassword screen after 2 seconds
-				timeoutRef.current = setTimeout(() => {
-					setShowSuccess(false);
-					navigation.navigate('ChangePassword', { email: route.params.email });
-				}, 2000);
-			}
-		} catch (error: any) {
-			const errorMessage = utils.error.getMessage(error);
-			const statusCode = error.response?.status || null;
-			setErrorCode(statusCode);
-
-			if (statusCode === 409 && errorMessage === 'Already verified!') {
-				setSuccessMessage('Already verified!');
-				setShowSuccess(true);
-
-				timeoutRef.current = setTimeout(() => {
-					setShowSuccess(false);
-					navigation.navigate('ChangePassword', { email: route.params.email });
-				}, 2000); // Navigate to ChangePassword screen after 2 seconds
-			} else {
-				setValidationError(errorMessage);
-				setShowError(true);
-				timeoutRef.current = setTimeout(() => {
-					setShowError(false);
-				}, 2600); // Hide the error message after 2.6 seconds
-			}
-		}
+					setErrorCode(statusCode);
+					if (statusCode === 409 && errorMessage === 'Already verified!') {
+						setValidationError('Resent Again the Email !');
+						setShowError(true);
+						timeoutRef.current = setTimeout(() => {
+							setShowError(false);
+						}, timers.ERROR_MESSAGE_TIMEOUT);
+					} else {
+						setValidationError(errorMessage);
+						setShowError(true);
+						timeoutRef.current = setTimeout(() => {
+							setShowError(false);
+						}, timers.ERROR_MESSAGE_TIMEOUT);
+					}
+				},
+			},
+		);
 	};
 
 	const handleResendEmail = async (): Promise<void> => {
-		try {
-			clearTimeout(timeoutRef.current!);
-			setValidationError('');
-			setShowError(false);
+		clearTimeout(timeoutRef.current!);
+		setValidationError('');
+		setShowError(false);
 
-			// Send the request to resend the email
-			const resData = await resendMutate({
+		await resendMutate(
+			{
 				email: route.params.email,
-			});
-			if (resData.success) {
-				setSuccessMessage('Email sent successfully');
-				setShowSuccess(true);
-
-				// Hide the success message after 2 seconds
-				timeoutRef.current = setTimeout(() => {
-					setShowSuccess(false);
-				}, 2000);
-			}
-		} catch (error: any) {
-			const errorMessage = utils.error.getMessage(error);
-			setValidationError(errorMessage);
-			setShowError(true);
-
-			timeoutRef.current = setTimeout(() => {
-				setShowError(false);
-			}, 2600);
-		}
+			},
+			{
+				onSuccess: async (resData: APIResponse): Promise<void> => {
+					if (resData.success) {
+						setSuccessMessage('Email sent successfully');
+						setShowSuccess(true);
+						// Hide the success message after 2 seconds
+						timeoutRef.current = setTimeout(() => {
+							setShowSuccess(false);
+						}, timers.SUCCESS_DELAY);
+					}
+				},
+				onError: (error: any): void => {
+					const errorMessage = utils.error.getMessage(error as Error);
+					setValidationError(errorMessage);
+					setShowError(true);
+					timeoutRef.current = setTimeout(() => {
+						setShowError(false);
+					}, timers.ERROR_MESSAGE_TIMEOUT);
+				},
+			},
+		);
 	};
 
 	useEffect(() => {

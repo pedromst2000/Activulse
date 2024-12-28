@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import utils from '@/src/utils';
 import AnimatedComponent from '../../Animated';
 import MaleIlus from '../../../assets/svg/ilustrations/heartRiskAssessment/maleGender.svg';
 import FemaleIlus from '../../../assets/svg/ilustrations/heartRiskAssessment/femaleGender.svg';
@@ -24,7 +24,7 @@ const GenderSelection: React.FC<GenderSelectionProps> = ({
 	useEffect(() => {
 		const loadGenderSelection = async () => {
 			try {
-				const savedGender = await AsyncStorage.getItem('selectedGender');
+				const savedGender = await utils.storage.getItem('selectedGender');
 				if (savedGender) {
 					setSelectedGender(savedGender as 'Male' | 'Female');
 					setIsMaleSelected(savedGender === 'Male');
@@ -40,7 +40,7 @@ const GenderSelection: React.FC<GenderSelectionProps> = ({
 
 	const handleGenderSelection = async (gender: 'Male' | 'Female') => {
 		try {
-			await AsyncStorage.setItem('selectedGender', gender);
+			await utils.storage.setItem('selectedGender', gender);
 			setSelectedGender(gender);
 			setIsMaleSelected(gender === 'Male');
 			setIsFemaleSelected(gender === 'Female');

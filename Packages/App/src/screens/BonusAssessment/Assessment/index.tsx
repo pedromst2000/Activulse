@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import AnimatedComponent from '@/src/components/Animated';
 import ProgressBar from '@/src/components/AssessmentForm/ProgressBar';
@@ -10,6 +10,7 @@ import StressSelection from '@/src/components/AssessmentForm/StressQuestion';
 import KnowDietQuestion from '@/src/components/AssessmentForm/KnowDietQuestion';
 import FastFoodSelection from '@/src/components/AssessmentForm/FastFoodQuestion';
 import DietSelection from '@/src/components/AssessmentForm/SelectDietQuestion';
+import utils from '@/src/utils';
 
 const BonusAssessment: React.FC = (): React.JSX.Element => {
 	const navigation = useNavigation();
@@ -30,6 +31,20 @@ const BonusAssessment: React.FC = (): React.JSX.Element => {
 	const handlePrev = (): void => {
 		if (step > 1) setStep(step - 1);
 	};
+
+	useEffect(() => {
+		//unmount
+		return () => {
+			//reseting the form
+			setStressState(null);
+			setKnowDietState(false);
+			setFastFoodState(null);
+
+			utils.storage.removeItem('selectedStress');
+			utils.storage.removeItem('selectedKnowDiet');
+			utils.storage.removeItem('FastFoodState');
+		};
+	}, []);
 
 	return (
 		<AnimatedComponent animation="FadeIn">

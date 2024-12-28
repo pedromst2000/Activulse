@@ -23,11 +23,6 @@ const login = async (bodyData: BodyData): Promise<LoginData> => {
 		const { data }: AxiosResponse<LoginData> = await api.post('/auth/login', bodyData);
 		return data;
 	} catch (error: any) {
-		if (error.data) {
-			// console.log(`--L----error.data: ${JSON.stringify(error.data, null, 2)}`);
-
-			return error.data;
-		}
 		return error;
 	}
 };

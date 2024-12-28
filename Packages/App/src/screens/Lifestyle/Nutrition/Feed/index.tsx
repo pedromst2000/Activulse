@@ -25,13 +25,14 @@ const NutritionFeed: React.FC = (): React.JSX.Element => {
 	const [page, setPage] = useState<number>(1);
 	const [total, setTotal] = useState<number>(0);
 	const [recipes, setRecipes] = useState<Recipe[]>([]);
+	const [isError, setIsError] = useState<boolean>(false);
 	const [search, setSearch] = useState<string>('');
 	const [selectedCategory, setSelectedCategory] = useState<
 		'All' | 'Soups' | 'Main Dishes' | 'Salads' | 'Desserts' | 'Premium'
 	>('All');
 	const [modalVisible, setModalVisible] = useState<boolean>(false);
 	const { signOut } = useUserContext();
-	const { refetch, data, isLoading, isError, isRefetching } = useGetRecipesFeedData({
+	const { refetch, data, isLoading, isRefetching } = useGetRecipesFeedData({
 		page,
 		limit: config.pagination.recipes.feed.defaultLimit,
 		diet: route.params.diet,
@@ -40,21 +41,30 @@ const NutritionFeed: React.FC = (): React.JSX.Element => {
 	});
 
 	useEffect(() => {
-		console.log(`data?.success: ${data?.success}`);
+		if (data?.success === false || data?.message === 'Network Error') {
+			setIsError(true);
+		}
 
-		console.log(`data?.message: ${data?.message}`);
-
-		// if (
-		// 	data?.message == 'Missing auth token or refresh token' ||
-		// 	data?.message == 'Refresh token has expired'
-		// ) {
-		// 	setModalVisible(true);
-		// }
-	}, [data?.message, modalVisible]);
+		if (data?.success === true) {
+			setIsError(false);
+		} else if (
+			data?.message == 'Missing auth token or refresh token' ||
+			data?.message == 'Refresh token has expired'
+		) {
+			setModalVisible(true);
+		}
+	}, [isError, data?.success, data?.message, modalVisible]);
 
 	const toogleModal = (): void => {
 		setModalVisible(!modalVisible);
 	};
+
+	/**
+	 * TODO
+	 * 1. TESTING WHEN THE SESSION EXPIRES
+	 * 2. CHECKING ERROR (401, 500, NETWORK ERROR) EMPTY STATE
+	 * 3. WHEN THE USER HAS NOT INTERNET CONNECTION (NETWORK ERROR) DISPLAY A MODAL (EXIT THE APP)
+	 */
 
 	// If one of the filters changes, resetting the page to 1
 	useEffect(() => {
@@ -67,8 +77,13 @@ const NutritionFeed: React.FC = (): React.JSX.Element => {
 	const handleOnChange = (inView: boolean, id: number): void => {
 		// Checking if it's the last item in the list
 		if (recipes && !isLoading && !isError && inView && id === recipes[recipes.length - 1].id) {
+			if (total >= 1 && total <= 3) {
+				return;
+			}
+
 			setPage((prev: number) => prev + 1);
 		}
+
 		// not incrementing the page if the user is searching
 		if (search.length > 0) {
 			setPage(1);
@@ -101,7 +116,7 @@ const NutritionFeed: React.FC = (): React.JSX.Element => {
 			setTotal(data?.data?.total);
 		}
 
-		if (isError) {
+		if (isError && data?.success === false) {
 			setRecipes([]);
 			setTotal(0);
 		}
@@ -154,10 +169,9 @@ const NutritionFeed: React.FC = (): React.JSX.Element => {
 						handleOnChange={handleOnChange}
 						isLoading={isLoading}
 						isRefetching={isRefetching}
-						isError={isError}
-						// isError={true}
 						category={selectedCategory}
 						search={search}
+						isError={isError}
 						messageAPI={data?.message}
 					/>
 

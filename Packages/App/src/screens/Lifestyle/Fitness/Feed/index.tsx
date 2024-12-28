@@ -46,6 +46,15 @@ const FitnessFeed: React.FC = (): React.JSX.Element => {
 		setModalVisible(!modalVisible);
 	};
 
+	/**
+	 * TODO
+	 * 1. TESTING WHEN THE SESSION EXPIRES
+	 * 2. CHECKING ERROR (401, 500, NETWORK ERROR) EMPTY STATE
+	 * 3. WHEN THE USER HAS NOT INTERNET CONNECTION (NETWORK ERROR) DISPLAY A MODAL (EXIT THE APP)
+	 * 4. RESETING THE FILTER WITH BUTTON RESET (CLEARING THE FILTER)
+	 * 5. EMPTY STATE WHEN THERE ARE NO ACTIVITIES FOR THE SELECTED FILTER
+	 */
+
 	// If one of the filters changes, resetting the page to 1
 	useEffect(() => {
 		setActivities([]);

@@ -4,6 +4,7 @@ import navigation from './navigation';
 import screen from './screen';
 import storage from './storage';
 import validateData from './validateData';
+import timers from './timers';
 
 export default {
 	storage,
@@ -12,4 +13,5 @@ export default {
 	animation,
 	screen,
 	validateData,
+	timers,
 };

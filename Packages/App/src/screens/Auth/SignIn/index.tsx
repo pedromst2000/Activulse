@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import timers from '@/src/utils/timers';
 import {
 	Text,
 	View,
@@ -43,61 +44,37 @@ const SignIn: React.FC = (): React.JSX.Element => {
 	});
 
 	const handleSignIn = async (): Promise<void> => {
-		try {
-			setValidationError('');
-			setShowError(false); // Hide the error message before new validation
-			clearTimeout(timeoutRef.current!);
+		setValidationError('');
+		setShowError(false); // Hide the error message before new validation
+		clearTimeout(timeoutRef.current!);
 
-			// Send the request
-			await mutateAsync(
-				{},
-				{
-					onSuccess: async (resData: LoginData): Promise<void> => {
-						if (resData.success && resData.data) {
-							setShowSuccess(true);
-							timeoutRef.current = setTimeout(() => {
-								setLoggedUser(resData.data.user);
-							}, 2000); // delaying the navigation for 2 seconds after navigating to the risk assessment screen (new user) or home screen
-
-							// Save the tokens on the device storage
-							await utils.storage.setItem('authToken', resData.data.authToken);
-							await utils.storage.setItem('refreshToken', resData.data.refreshToken);
-						} 
-						
-						// TODO: REMOVE REPEATED CODE BLOCK FOR HANDLING THE ERROR ON onError Function
-						
-						else {
-							console.log(`resData.message: ${JSON.stringify(resData, null, 2)}`);
-
-							setValidationError(resData.message);
-							setPassword('');
-							setShowError(true); // Show error message
-							timeoutRef.current = setTimeout(() => {
-								setShowError(false); // Hide error message after 5 seconds
-							}, 5000);
-						}
-					},
-					onError: (error: any) => {
-						console.log(`errorKKKK: ${JSON.stringify(error, null, 2)}`);
-
-						const errorMessage = utils.error.getMessage(error);
-						console.log(`errorMessage: ${errorMessage}`);
-
-						setValidationError(errorMessage);
-						setShowError(true); // Show error message
+		// Send the request
+		await mutateAsync(
+			{},
+			{
+				onSuccess: async (resData: LoginData): Promise<void> => {
+					if (resData.success && resData.data) {
+						setShowSuccess(true);
 						timeoutRef.current = setTimeout(() => {
-							setShowError(false); // Hide error message after 5 seconds
-						}, 5000);
-					},
+							setLoggedUser(resData.data.user);
+						}, timers.SUCCESS_DELAY); // delaying the navigation for 2 seconds
+
+						// Saving the tokens on the device
+						await utils.storage.setItem('authToken', resData.data.authToken);
+						await utils.storage.setItem('refreshToken', resData.data.refreshToken);
+					}
 				},
-			);
-		} catch (error: any) {
-			setValidationError(utils.error.getMessage(error));
-			setShowError(true);
-			timeoutRef.current = setTimeout(() => {
-				setShowError(false);
-			}, 5000);
-		}
+				onError: (error: any): void => {
+					const errorMessage = utils.error.getMessage(error as Error);
+
+					setValidationError(errorMessage);
+					setShowError(true);
+					timeoutRef.current = setTimeout(() => {
+						setShowError(false); // Hide error message after 5 seconds
+					}, timers.ERROR_MESSAGE_TIMEOUT);
+				},
+			},
+		);
 	};
 
 	useEffect(() => {

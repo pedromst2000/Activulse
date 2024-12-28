@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
+import utils from '@/src/utils';
 import AnimatedComponent from '../../Animated';
 import Ilustration from '../../Ilustration';
 import HypertensionIlus from '../../../assets/svg/ilustrations/heartRiskAssessment/TreatmentHypertension.svg';
 import LastSlideButton from '../../Onboarding/LastSlideBtn';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type HypertensionQuestionProps = {
 	isHypertensive: boolean;
@@ -23,7 +23,7 @@ const HypertensionQuestion: React.FC<HypertensionQuestionProps> = ({
 	useEffect(() => {
 		const loadHypertensionSelection = async () => {
 			try {
-				const savedSelection = await AsyncStorage.getItem('selectedHypertension');
+				const savedSelection = await utils.storage.getItem('selectedHypertension');
 				if (savedSelection) {
 					setIsHypertensive(savedSelection === 'Yes');
 					setIsYesSelected(savedSelection === 'Yes');
@@ -39,7 +39,7 @@ const HypertensionQuestion: React.FC<HypertensionQuestionProps> = ({
 
 	const handleHypertensionSelection = async (hypertension: 'Yes' | 'No') => {
 		try {
-			await AsyncStorage.setItem('selectedHypertension', hypertension);
+			await utils.storage.setItem('selectedHypertension', hypertension);
 			setIsHypertensive(hypertension === 'Yes');
 			setIsYesSelected(hypertension === 'Yes');
 			setIsNoSelected(hypertension === 'No');

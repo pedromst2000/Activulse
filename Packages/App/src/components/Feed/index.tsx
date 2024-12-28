@@ -93,7 +93,10 @@ const Feed: React.FC<Props> = ({
 					/>
 				) : (
 					isError &&
-					messageAPI === 'Network Error' && (
+					(messageAPI === 'Network Error' ||
+						messageAPI === 'Something went wrong!' ||
+						messageAPI === 'Missing auth token or refresh token' ||
+						messageAPI === 'Refresh token has expired') && (
 						<EmptyState
 							type="Error"
 							_ilustration_={ErrorIlus}

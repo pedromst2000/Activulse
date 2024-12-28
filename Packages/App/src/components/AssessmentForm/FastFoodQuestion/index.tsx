@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Text } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import utils from '@/src/utils';
 import AnimatedComponent from '../../Animated';
 import useExtraAssessment from '@/src/hooks/ReactQuery/users/extraAssessment';
 import RareIlus from '../../../assets/svg/ilustrations/Easy.svg';
@@ -10,8 +10,8 @@ import Button from '../../Button';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { BonusAssessmentStackParamList } from '@/src/navigation/BonusAssessment';
-import utils from '@/src/utils';
 import SelectCard from '../../SelectCard';
+import { APIResponse } from '@/src/api/types';
 
 type FastFoodSelectionProps = {
 	FastFoodState: 'Rare' | 'Sometimes' | 'Frequently' | null;
@@ -50,7 +50,7 @@ const FastFoodSelection: React.FC<FastFoodSelectionProps> = ({
 	useEffect(() => {
 		const loadSelection = async () => {
 			try {
-				const savedState = await AsyncStorage.getItem('FastFoodState');
+				const savedState = await utils.storage.getItem('FastFoodState');
 				if (savedState) {
 					setFastFoodState(savedState as 'Rare' | 'Sometimes' | 'Frequently');
 					if (savedState === 'Rare') setIsRareSelected(true);
@@ -81,7 +81,7 @@ const FastFoodSelection: React.FC<FastFoodSelectionProps> = ({
 
 	const handleSelection = async (selection: 'Rare' | 'Sometimes' | 'Frequently') => {
 		try {
-			await AsyncStorage.setItem('FastFoodState', selection);
+			await utils.storage.setItem('FastFoodState', selection);
 			setFastFoodState(selection);
 			setIsRareSelected(selection === 'Rare');
 			setIsSometimesSelected(selection === 'Sometimes');
@@ -92,26 +92,31 @@ const FastFoodSelection: React.FC<FastFoodSelectionProps> = ({
 	};
 
 	const handleExtraAssessment = async (): Promise<void> => {
-		try {
-			const resData = await mutateAsync({
+		await mutateAsync(
+			{
 				stress: stressState,
 				havesDiet: KnowDietState,
 				fastFoodStatus: FastFoodState,
-			});
+			},
+			{
+				onSuccess: async (resData: APIResponse): Promise<void> => {
+					if (resData.success) {
+						navigation.navigate('BonusOnboarding', {
+							isFastFood:
+								FastFoodState === 'Frequently' || FastFoodState === 'Sometimes' ? true : false,
+							fastFoodState: FastFoodState,
+							stressState: stressState,
+						});
+					}
+				},
+				onError: (error: any): void => {
+					const errorMessage = utils.error.getMessage(error as Error);
 
-			if (resData.success) {
-				navigation.navigate('BonusOnboarding', {
-					isFastFood:
-						FastFoodState === 'Frequently' || FastFoodState === 'Sometimes' ? true : false,
-					fastFoodState: FastFoodState,
-					stressState: stressState,
-				});
-			}
-		} catch (error: any) {
-			const errorMessage = utils.error.getMessage(error);
-			setErrorMessage(errorMessage);
-			setShowError(true);
-		}
+					setShowError(true);
+					setErrorMessage(errorMessage);
+				},
+			},
+		);
 	};
 
 	return (

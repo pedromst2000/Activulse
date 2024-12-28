@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import timers from '../../../utils/timers';
 import {
 	Text,
 	View,
@@ -53,74 +54,45 @@ const JoinNow: React.FC = (): React.JSX.Element => {
 	};
 
 	const handleRegister = async (): Promise<void> => {
-		try {
-			setValidationError('');
-			setLongErrorMessage(null);
-			setShowError(false); // Hide the error message before new validation
-			clearTimeout(timeoutRef.current!);
+		setValidationError('');
+		setLongErrorMessage(null);
+		setShowError(false); // Hide the error message before new validation
+		clearTimeout(timeoutRef.current!);
 
-			// Send the request
-			await mutateAsync(
-				{},
-				{
-					onSuccess: async (resData: APIResponse): Promise<void> => {
-						if (resData.success) {
-							setModalVisible(true); // Show the modal on success
-						} else {
-							// Handle failure
-							setValidationError(resData.message);
-							setPassword('');
-							setShowError(true); // Show error message
-							timeoutRef.current = setTimeout(() => {
-								setShowError(false); // Hide error message after 2.6 seconds
-							}, 2600);
-						}
-					},
-					onError: (error: Error): void => {
-						const errorMessage = utils.error.getMessage(error);
-
-						// Determine whether the message is long or short
-						if (
-							errorMessage.includes('Username must be at least 3 characters long') ||
-							errorMessage.includes('Username must contain only letters') ||
-							errorMessage.includes('must contain at least one lowercase letter') ||
-							errorMessage.includes('must contain at least one uppercase letter') ||
-							errorMessage.includes('must contain at least one digit') ||
-							errorMessage.includes('be at least 8 characters long')
-						) {
-							// Long error message handling
-							setLongErrorMessage(errorMessage);
-						} else {
-							// Short error message handling
-							setValidationError(errorMessage);
-							setShowError(true);
-							timeoutRef.current = setTimeout(() => {
-								setShowError(false);
-							}, 10000);
-						}
-					},
+		// Send the request
+		mutateAsync(
+			{},
+			{
+				onSuccess: async (resData: APIResponse): Promise<void> => {
+					if (resData.success) {
+						setModalVisible(true); // Show the modal on success
+					}
 				},
-			);
-		} catch (error) {
-			const errorMessage = utils.error.getMessage(error);
-			// Handle the error similar to the onError method above
-			if (
-				errorMessage.includes('Username must be at least 3 characters long') ||
-				errorMessage.includes('Username must contain only letters') ||
-				errorMessage.includes('must contain at least one lowercase letter') ||
-				errorMessage.includes('must contain at least one uppercase letter') ||
-				errorMessage.includes('must contain at least one digit') ||
-				errorMessage.includes('be at least 8 characters long')
-			) {
-				setLongErrorMessage(errorMessage);
-			} else {
-				setValidationError(errorMessage);
-				setShowError(true);
-				timeoutRef.current = setTimeout(() => {
-					setShowError(false);
-				}, 10000);
-			}
-		}
+				onError: (error: any): void => {
+					const errorMessage = utils.error.getMessage(error as Error);
+
+					// Determine whether the message is long or short
+					if (
+						errorMessage.includes('Username must be at least 3 characters long') ||
+						errorMessage.includes('Username must contain only letters') ||
+						errorMessage.includes('must contain at least one lowercase letter') ||
+						errorMessage.includes('must contain at least one uppercase letter') ||
+						errorMessage.includes('must contain at least one digit') ||
+						errorMessage.includes('be at least 8 characters long')
+					) {
+						// Long error message handling
+						setLongErrorMessage(errorMessage);
+					} else {
+						// Short error message handling
+						setValidationError(errorMessage);
+						setShowError(true);
+						timeoutRef.current = setTimeout(() => {
+							setShowError(false);
+						}, timers.LONG_ERROR_MESSAGE_TIMEOUT);
+					}
+				},
+			},
+		);
 	};
 
 	useEffect(() => {

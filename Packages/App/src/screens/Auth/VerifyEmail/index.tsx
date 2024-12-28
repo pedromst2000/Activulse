@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import timers from '@/src/utils/timers';
 import {
 	Text,
 	View,
@@ -43,79 +44,64 @@ const VerifyEmail: React.FC = (): React.JSX.Element => {
 	});
 
 	const handleConfirmVerify = async (): Promise<void> => {
-		try {
-			setValidationError('');
-			setShowError(false);
-			clearTimeout(timeoutRef.current!);
+		setValidationError('');
+		setShowError(false);
+		clearTimeout(timeoutRef.current!);
 
-			await mutateConfirm(
-				{},
-				{
-					onSuccess: (resData: APIResponse): void => {
-						if (resData.success) {
-							setSuccessMessage(resData.message);
-							setShowSuccess(true);
+		await mutateConfirm(
+			{},
+			{
+				onSuccess: async (resData: APIResponse): Promise<void> => {
+					if (resData.success) {
+						setSuccessMessage(resData.message);
+						setShowSuccess(true);
 
-							timeoutRef.current = setTimeout(() => {
-								navigation.navigate('SignIn');
-							}, 2000); // delaying the navigation for 2 seconds after navigating to the SignIn screen
-						}
-					},
-					onError: (error: Error): void => {
-						const errorMessage = utils.error.getMessage(error);
-						setValidationError(errorMessage);
-						setShowError(true); // Show error message
 						timeoutRef.current = setTimeout(() => {
-							setShowError(false); // Hide error message after 5 seconds
-						}, 5000);
-					},
+							navigation.navigate('SignIn');
+						}, timers.SUCCESS_DELAY); // delaying the navigation for 2 seconds after navigating to the SignIn screen
+					}
 				},
-			);
-		} catch (error) {
-			setValidationError(utils.error.getMessage(error));
-			setShowError(true);
-			timeoutRef.current = setTimeout(() => {
-				setShowError(false);
-			}, 3000);
-		}
+				onError: (error: any): void => {
+					const errorMessage = utils.error.getMessage(error as Error);
+					setValidationError(errorMessage);
+					setShowError(true); // Show error message
+					timeoutRef.current = setTimeout(() => {
+						setShowError(false); // Hide error message after 5 seconds
+					}, timers.ERROR_MESSAGE_TIMEOUT);
+				},
+			},
+		);
 	};
 
 	const handleResendVerify = async (): Promise<void> => {
-		try {
-			setValidationError('');
-			setShowError(false);
-			clearTimeout(timeoutRef.current!);
+		setValidationError('');
+		setShowError(false);
+		clearTimeout(timeoutRef.current!);
 
-			await mutateResend(
-				{},
-				{
-					onSuccess: (resData: APIResponse): void => {
-						if (resData.success) {
-							setSuccessMessage(resData.message);
-							setShowSuccess(true);
+		await mutateResend(
+			{},
+			{
+				onSuccess: async (resData: APIResponse): Promise<void> => {
+					if (resData.success) {
+						setSuccessMessage(resData.message);
+						setShowSuccess(true);
 
-							timeoutRef.current = setTimeout(() => {
-								setShowSuccess(false); // Hide success message after 2 seconds
-							}, 2000);
-						}
-					},
-					onError: (error: Error): void => {
-						const errorMessage = utils.error.getMessage(error);
-						setValidationError(errorMessage);
-						setShowError(true); // Show error message
 						timeoutRef.current = setTimeout(() => {
-							setShowError(false); // Hide error message after 5 seconds
-						}, 5000);
-					},
+							setShowSuccess(false); // Hide success message after 3.5 seconds
+						}, timers.SUCCESS_DELAY + 1500);
+					}
 				},
-			);
-		} catch (error) {
-			setValidationError(utils.error.getMessage(error));
-			setShowError(true);
-			timeoutRef.current = setTimeout(() => {
-				setShowError(false);
-			}, 3000);
-		}
+				// !! This will only happen with Network Error (No Internet Connection) or Server Error
+				onError: (error: any): void => {
+					const errorMessage = utils.error.getMessage(error as Error);
+					setValidationError(errorMessage);
+					setShowError(true); // Show error message
+					timeoutRef.current = setTimeout(() => {
+						setShowError(false); // Hide error message after 5 seconds
+					}, timers.ERROR_MESSAGE_TIMEOUT);
+				},
+			},
+		);
 	};
 
 	useEffect(() => {
