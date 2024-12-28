@@ -77,7 +77,7 @@ const NutritionFeed: React.FC = (): React.JSX.Element => {
 	const handleOnChange = (inView: boolean, id: number): void => {
 		// Checking if it's the last item in the list
 		if (recipes && !isLoading && !isError && inView && id === recipes[recipes.length - 1].id) {
-			if (total >= 1 && total <= 3) {
+			if (total >= 1 && total <= 4) {
 				return;
 			}
 
