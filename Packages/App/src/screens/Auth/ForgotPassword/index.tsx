@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import timers from '@/src/utils/timers';
 import {
 	Text,
 	View,
@@ -42,38 +43,30 @@ const ForgotPassword: React.FC = (): React.JSX.Element => {
 	});
 
 	const handleRequestPassword = async (): Promise<void> => {
-		try {
-			setValidationError('');
-			setShowError(false); // Hide the error message before new validation
-			clearTimeout(timeoutRef.current!);
+		setValidationError('');
+		setShowError(false); // Hide the error message before new validation
+		clearTimeout(timeoutRef.current!);
 
-			// Send the request
-			await mutateAsync(
-				{},
-				{
-					onSuccess: (resData: APIResponse): void => {
-						if (resData.success) {
-							setEmail(''); // Clear the email input
-							navigation.navigate('VerifyOTP', { email: email.trim() });
-						}
-					},
-					onError: (error: Error): void => {
-						const errorMessage = utils.error.getMessage(error);
-						setValidationError(errorMessage);
-						setShowError(true); // Show error message
-						timeoutRef.current = setTimeout(() => {
-							setShowError(false); // Hide error message after 3 seconds
-						}, 3000);
-					},
+		// Send the request
+		await mutateAsync(
+			{},
+			{
+				onSuccess: async (resData: APIResponse): Promise<void> => {
+					if (resData.success) {
+						setEmail(''); // Clear the email input
+						navigation.navigate('VerifyOTP', { email: email.trim() });
+					}
 				},
-			);
-		} catch (error) {
-			setValidationError(utils.error.getMessage(error));
-			setShowError(true);
-			timeoutRef.current = setTimeout(() => {
-				setShowError(false);
-			}, 3000);
-		}
+				onError: (error: any): void => {
+					const errorMessage = utils.error.getMessage(error as Error);
+					setValidationError(errorMessage);
+					setShowError(true); // Show error message
+					timeoutRef.current = setTimeout(() => {
+						setShowError(false); // Hide error message after 5 seconds
+					}, timers.ERROR_MESSAGE_TIMEOUT);
+				},
+			},
+		);
 	};
 
 	useEffect(() => {

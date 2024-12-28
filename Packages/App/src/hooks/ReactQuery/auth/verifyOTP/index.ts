@@ -17,10 +17,7 @@ const verifyOTP = async (bodyData: BodyData): Promise<APIResponse> => {
 
 		return data;
 	} catch (error: any) {
-		if (error.data) {
-			return error.data;
-		}
-		throw error;
+		return error;
 	}
 };
 

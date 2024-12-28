@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
+import utils from '@/src/utils';
 import AnimatedComponent from '../../Animated';
 import Ilustration from '../../Ilustration';
 import KnowDietIlus from '../../../assets/svg/ilustrations/PersonalizedAssessment/KnowDiet.svg';
 import LastSlideButton from '../../Onboarding/LastSlideBtn';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type KnowDietQuestionProps = {
 	knowDietState: boolean;
@@ -23,7 +23,7 @@ const KnowDietQuestion: React.FC<KnowDietQuestionProps> = ({
 	useEffect(() => {
 		const loadKnowDietSelection = async () => {
 			try {
-				const savedSelection = await AsyncStorage.getItem('selectedKnowDiet');
+				const savedSelection = await utils.storage.getItem('selectedKnowDiet');
 				if (savedSelection) {
 					setKnowDietState(savedSelection === 'Yes');
 					setIsYesSelected(savedSelection === 'Yes');
@@ -39,7 +39,7 @@ const KnowDietQuestion: React.FC<KnowDietQuestionProps> = ({
 
 	const handleKnowDietSelection = async (knowDiet: 'Yes' | 'No') => {
 		try {
-			await AsyncStorage.setItem('selectedKnowDiet', knowDiet);
+			await utils.storage.setItem('selectedKnowDiet', knowDiet);
 			setKnowDietState(knowDiet === 'Yes');
 			setIsYesSelected(knowDiet === 'Yes');
 			setIsNoSelected(knowDiet === 'No');

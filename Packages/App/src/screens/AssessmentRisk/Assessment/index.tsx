@@ -13,7 +13,7 @@ import DiabetesQuestion from '@/src/components/AssessmentForm/DiabetesQuestion';
 import HypertensionQuestion from '@/src/components/AssessmentForm/HypertensionQuestion';
 import BloodPressureQuestion from '@/src/components/AssessmentForm/BloodPressureQuestion';
 import CholesterolQuestion from '@/src/components/AssessmentForm/CholesterolQuestion';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import utils from '@/src/utils';
 
 const Assessment: React.FC = (): React.JSX.Element => {
 	const navigation = useNavigation();
@@ -49,10 +49,10 @@ const Assessment: React.FC = (): React.JSX.Element => {
 			setHDL('');
 			setTotalCholesterol('');
 
-			AsyncStorage.removeItem('selectedGender');
-			AsyncStorage.removeItem('selectedSmoke');
-			AsyncStorage.removeItem('selectedDiabetes');
-			AsyncStorage.removeItem('selectedHypertension');
+			utils.storage.removeItem('selectedGender');
+			utils.storage.removeItem('selectedSmoke');
+			utils.storage.removeItem('selectedDiabetes');
+			utils.storage.removeItem('selectedHypertension');
 		};
 	}, []);
 

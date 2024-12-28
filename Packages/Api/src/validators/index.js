@@ -19,12 +19,10 @@ const validateResult = (req, res, next) => {
 	const errors = validationResult(req);
 
 	if (!errors.isEmpty()) {
-		utils.handleResponse(
-			res,
-			utils.http.StatusBadRequest,
-			"Validation Error",
-			errors.array(),
-		);
+		const firstError = errors.array()[0];
+		utils.handleResponse(res, utils.http.StatusBadRequest, "Validation Error", [
+			firstError,
+		]);
 		return;
 	}
 

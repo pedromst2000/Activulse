@@ -1,5 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { View, Text } from 'react-native';
+import timers from '@/src/utils/timers';
+import { APIResponse } from '@/src/hooks/ReactQuery/users/heartRiskAssessment/BodyResponse';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { AssessmentRiskStackParamList } from '@/src/navigation/AssessmentRisk';
 import utils from '@/src/utils';
 import useHeartRiskAssessment from '@/src/hooks/ReactQuery/users/heartRiskAssessment';
 import Ilustration from '../../Ilustration';
@@ -8,9 +13,6 @@ import InfoI from '../../../assets/svg/icons/InfoIcon.svg';
 import AnimatedComponent from '../../Animated';
 import Input from '../../Input';
 import Button from '../../Button';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { AssessmentRiskStackParamList } from '@/src/navigation/AssessmentRisk';
 import Icon from '../../Icon';
 
 type CholesterolQuestiondNavigationProp = NativeStackNavigationProp<
@@ -43,10 +45,8 @@ const CholesterolQuestion: React.FC<CholesterolQuestionProps> = ({
 	totalCholesterol,
 	setTotalCholesterol,
 }): React.JSX.Element => {
-	const [isValidHDL, setIsValidHDL] = React.useState<boolean>(true);
-	const [isValidTotalCholesterol, setIsValidTotalCholesterol] = React.useState<boolean>(true);
-	const [showError, setShowError] = React.useState<boolean>(false);
-	const [errorMessage, setErrorMessage] = React.useState<string>('');
+	const [showError, setShowError] = useState<boolean>(false);
+	const [errorMessage, setErrorMessage] = useState<string>('');
 	const timeoutRef = useRef<NodeJS.Timeout | null>(null); // Manage the timeout for the error message
 	const navigation = useNavigation<CholesterolQuestiondNavigationProp>();
 	const { mutateAsync } = useHeartRiskAssessment({
@@ -64,7 +64,7 @@ const CholesterolQuestion: React.FC<CholesterolQuestionProps> = ({
 		if (showError) {
 			timeoutRef.current = setTimeout(() => {
 				setShowError(false);
-			}, 5000); // Hide the error message after 5 seconds
+			}, timers.ERROR_MESSAGE_TIMEOUT); // Hide the error message after 5 seconds
 		}
 
 		return () => {
@@ -74,32 +74,9 @@ const CholesterolQuestion: React.FC<CholesterolQuestionProps> = ({
 		};
 	}, [showError]);
 
-	const handleValidation = (): void => {
-		// Validate HDL
-		const isHDLValid = utils.validateData.isValid(HDL, 'HDL');
-		const isTotalCholesterolValid = utils.validateData.isValid(
-			totalCholesterol,
-			'TotalCholesterol',
-		);
-
-		if (!isHDLValid) {
-			setIsValidHDL(false);
-			setErrorMessage('HDL must be between 20 and 100');
-			setShowError(true);
-		} else if (!isTotalCholesterolValid) {
-			setIsValidTotalCholesterol(false);
-			setErrorMessage('Total Cholesterol must be between 100 and 300');
-			setShowError(true);
-		} else {
-			setIsValidHDL(true);
-			setIsValidTotalCholesterol(true);
-			setShowError(false);
-		}
-	};
-
 	const handleAssessment = async (): Promise<void> => {
-		try {
-			const resData = await mutateAsync({
+		await mutateAsync(
+			{
 				gender,
 				age: parseInt(age),
 				smoker: isSmoker,
@@ -108,33 +85,36 @@ const CholesterolQuestion: React.FC<CholesterolQuestionProps> = ({
 				systolic_blood_pressure: parseInt(bloodPressure),
 				HDL_cholesterol: parseInt(HDL),
 				total_cholesterol: parseInt(totalCholesterol),
-			});
+			},
+			{
+				onSuccess: async (resData: APIResponse): Promise<void> => {
+					if (resData.success && resData.data) {
+						const { riskScore, typeRisk, health_data } = resData.data;
 
-			if (resData.success && resData.data) {
-				const { riskScore, typeRisk, health_data } = resData.data;
+						navigation.navigate('AssessmentRiskResult', {
+							riskScore,
+							typeRisk,
+							health_data: {
+								gender: health_data.gender,
+								age: health_data.age,
+								smoker: health_data.smoker,
+								diabetes: health_data.diabetes,
+								treatment_for_hypertension: health_data.treatment_for_hypertension,
+								systolic_blood_pressure: health_data.systolic_blood_pressure,
+								HDL_cholesterol: health_data.HDL_cholesterol,
+								total_cholesterol: health_data.total_cholesterol,
+							},
+						});
+					}
+				},
+				onError: (error: any): void => {
+					const errorMessage = utils.error.getMessage(error as Error);
 
-				navigation.navigate('AssessmentRiskResult', {
-					riskScore,
-					typeRisk,
-					health_data: {
-						gender: health_data.gender,
-						age: health_data.age,
-						smoker: health_data.smoker,
-						diabetes: health_data.diabetes,
-						treatment_for_hypertension: health_data.treatment_for_hypertension,
-						systolic_blood_pressure: health_data.systolic_blood_pressure,
-						HDL_cholesterol: health_data.HDL_cholesterol,
-						total_cholesterol: health_data.total_cholesterol,
-					},
-				});
-			} else {
-				console.error('Error: Data is undefined.');
-			}
-		} catch (error: any) {
-			const errorMessage = utils.error.getMessage(error);
-			setErrorMessage(errorMessage);
-			setShowError(true);
-		}
+					setShowError(true);
+					setErrorMessage(errorMessage);
+				},
+			},
+		);
 	};
 
 	return (
@@ -168,7 +148,7 @@ const CholesterolQuestion: React.FC<CholesterolQuestionProps> = ({
 				{/* ERROR MESSAGE */}
 				{showError && (
 					<AnimatedComponent animation="FadeIn">
-						<View className="mb-2">
+						<View className="mb-4">
 							<Text className="font-quicksand-bold text-red-500 text-xs sm:text-sm md:text-base lg:text-lg text-center">
 								{errorMessage}
 							</Text>
@@ -177,7 +157,7 @@ const CholesterolQuestion: React.FC<CholesterolQuestionProps> = ({
 				)}
 
 				<View className="mb-4 w-full flex flex-col justify-center items-center gap-4">
-					{['HDL', 'Total'].map((label, index) => (
+					{['HDL Chol.', 'Total Chol.'].map((label, index) => (
 						<View
 							key={index}
 							className="relative flex-1 flex flex-row justify-center items-center max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg"
@@ -188,9 +168,9 @@ const CholesterolQuestion: React.FC<CholesterolQuestionProps> = ({
 
 							<Input
 								placeholder={`Insert your ${label}`}
-								value={label === 'HDL' ? HDL : totalCholesterol}
+								value={label === 'HDL Chol.' ? HDL : totalCholesterol}
 								onChange={(text) =>
-									label === 'HDL' ? setHDL(text) : setTotalCholesterol(text)
+									label === 'HDL Chol.' ? setHDL(text) : setTotalCholesterol(text)
 								}
 								keyboardType="numeric"
 								className="w-[60%] sm:w-[70%] md:w-[60%] lg:w-[50%]"
@@ -206,7 +186,6 @@ const CholesterolQuestion: React.FC<CholesterolQuestionProps> = ({
 					<Button
 						disabled={HDL === '' || totalCholesterol === ''}
 						onPress={() => {
-							handleValidation();
 							handleAssessment();
 						}}
 						styleClass="w-full sm:w-3/4 md:w-2/3 lg:w-1/2"

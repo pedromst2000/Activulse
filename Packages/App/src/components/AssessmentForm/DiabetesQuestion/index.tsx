@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
+import utils from '@/src/utils';
 import AnimatedComponent from '../../Animated';
 import Ilustration from '../../Ilustration';
 import DiabetesIlus from '../../../assets/svg/ilustrations/heartRiskAssessment/Diabetes.svg';
 import LastSlideButton from '../../Onboarding/LastSlideBtn';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type DiabetesQuestionProps = {
 	isDiabetic: boolean;
@@ -23,7 +23,7 @@ const DiabetesQuestion: React.FC<DiabetesQuestionProps> = ({
 	useEffect(() => {
 		const loadDiabetesSelection = async () => {
 			try {
-				const savedSelection = await AsyncStorage.getItem('selectedDiabetes');
+				const savedSelection = await utils.storage.getItem('selectedDiabetes');
 				if (savedSelection) {
 					setIsDiabetic(savedSelection === 'Yes');
 					setIsYesSelected(savedSelection === 'Yes');
@@ -39,7 +39,7 @@ const DiabetesQuestion: React.FC<DiabetesQuestionProps> = ({
 
 	const handleDiabetesSelection = async (diabetes: 'Yes' | 'No') => {
 		try {
-			await AsyncStorage.setItem('selectedDiabetes', diabetes);
+			await utils.storage.setItem('selectedDiabetes', diabetes);
 			setIsDiabetic(diabetes === 'Yes');
 			setIsYesSelected(diabetes === 'Yes');
 			setIsNoSelected(diabetes === 'No');

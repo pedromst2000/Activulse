@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import timers from '@/src/utils/timers';
 import {
 	Text,
 	View,
@@ -50,72 +51,54 @@ const ChangePassword: React.FC = (): React.JSX.Element => {
 	});
 
 	const handleResetPassword = async (): Promise<void> => {
-		try {
-			// Reset previous error states
-			setValidationError('');
-			setLongErrorMessage(null);
-			setShowError(false);
-			clearTimeout(timeoutRef.current!);
+		// Reset previous error states
+		setValidationError('');
+		setLongErrorMessage(null);
+		setShowError(false);
+		clearTimeout(timeoutRef.current!);
 
-			// Send the request
-			await mutateAsync(
-				{
-					new_password: newPassword,
-					confirm_password: confirmPassword,
-					email: route.params.email,
+		// Send the request
+		await mutateAsync(
+			{
+				new_password: newPassword,
+				confirm_password: confirmPassword,
+				email: route.params.email,
+			},
+			{
+				onSuccess: async (resData: APIResponse): Promise<void> => {
+					if (resData.success) {
+						setSuccessMessage(resData.message);
+						setShowSuccess(true);
+						timeoutRef.current = setTimeout(() => {
+							// TODO : !! If the user his logged in, will not redirect to the signIn
+
+							navigation.navigate('SignIn');
+						}, timers.SUCCESS_DELAY);
+					}
 				},
-				{
-					onSuccess: (resData: APIResponse): void => {
-						if (resData.success) {
-							setSuccessMessage(resData.message);
-							setShowSuccess(true);
-							timeoutRef.current = setTimeout(() => {
-								navigation.navigate('SignIn');
-							}, 2000);
-						}
-					},
-					onError: (error: Error): void => {
-						const errorMessage = utils.error.getMessage(error);
-						// Determine whether the message is long or short
-						if (
-							errorMessage.includes('cannot be the same as the old password') ||
-							errorMessage.includes('must contain at least one lowercase letter') ||
-							errorMessage.includes('must contain at least one uppercase letter') ||
-							errorMessage.includes('must contain at least one digit') ||
-							errorMessage.includes('be at least 8 characters long')
-						) {
-							// Long error message handling
-							setLongErrorMessage(errorMessage);
-						} else {
-							// Short error message handling
-							setValidationError(errorMessage);
-							setShowError(true);
-							timeoutRef.current = setTimeout(() => {
-								setShowError(false);
-							}, 10000);
-						}
-					},
+				onError: (error: any): void => {
+					const errorMessage = utils.error.getMessage(error as Error);
+					// Determine whether the message is long or short
+					if (
+						errorMessage.includes('cannot be the same as the old password') ||
+						errorMessage.includes('must contain at least one lowercase letter') ||
+						errorMessage.includes('must contain at least one uppercase letter') ||
+						errorMessage.includes('must contain at least one digit') ||
+						errorMessage.includes('be at least 8 characters long')
+					) {
+						// Long error message handling
+						setLongErrorMessage(errorMessage);
+					} else {
+						// Short error message handling
+						setValidationError(errorMessage);
+						setShowError(true);
+						timeoutRef.current = setTimeout(() => {
+							setShowError(false);
+						}, timers.ERROR_MESSAGE_TIMEOUT);
+					}
 				},
-			);
-		} catch (error) {
-			const errorMessage = utils.error.getMessage(error);
-			// Handle the error similar to the onError method above
-			if (
-				errorMessage.includes('cannot be the same as the old password') ||
-				errorMessage.includes('must contain at least one lowercase letter') ||
-				errorMessage.includes('must contain at least one uppercase letter') ||
-				errorMessage.includes('must contain at least one digit') ||
-				errorMessage.includes('be at least 8 characters long')
-			) {
-				setLongErrorMessage(errorMessage);
-			} else {
-				setValidationError(errorMessage);
-				setShowError(true);
-				timeoutRef.current = setTimeout(() => {
-					setShowError(false);
-				}, 10000);
-			}
-		}
+			},
+		);
 	};
 
 	useEffect(() => {
@@ -187,6 +170,7 @@ const ChangePassword: React.FC = (): React.JSX.Element => {
 									<View className="sm:pt-9 md:pt-10 lg:pt-12 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
 										<Input
 											placeholder="New Password"
+											hideText
 											icon={PasswordI}
 											onChange={(text: string) => setNewPassword(text)}
 											value={newPassword}

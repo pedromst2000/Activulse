@@ -43,7 +43,7 @@ const getUser = async (params: Params): Promise<getUserData> => {
 		if (error.data) {
 			return error.data;
 		}
-		throw error;
+		return error;
 	}
 };
 

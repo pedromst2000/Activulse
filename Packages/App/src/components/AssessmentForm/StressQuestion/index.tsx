@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import utils from '@/src/utils';
 import AnimatedComponent from '../../Animated';
 import RareIlus from '../../../assets/svg/ilustrations/Easy.svg';
 import SometimesIlus from '../../../assets/svg/ilustrations/Sometimes.svg';
@@ -28,7 +28,7 @@ const StressSelection: React.FC<StressSelectionProps> = ({
 	useEffect(() => {
 		const loadSelection = async () => {
 			try {
-				const savedSelection = await AsyncStorage.getItem('selectedStress');
+				const savedSelection = await utils.storage.getItem('selectedStress');
 				if (savedSelection) {
 					setSelectedStress(savedSelection as 'Rare' | 'Sometimes' | 'Frequently');
 					if (savedSelection === 'Rare') setIsRareSelected(true);
@@ -45,7 +45,7 @@ const StressSelection: React.FC<StressSelectionProps> = ({
 
 	const handleSelection = async (selection: 'Rare' | 'Sometimes' | 'Frequently') => {
 		try {
-			await AsyncStorage.setItem('selectedStress', selection);
+			await utils.storage.setItem('selectedStress', selection);
 			setSelectedStress(selection);
 			setIsRareSelected(selection === 'Rare');
 			setIsSometimesSelected(selection === 'Sometimes');

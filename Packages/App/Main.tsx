@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { View } from 'react-native';
-import EmptyState from './src/components/EmptyState';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import utils from './src/utils';
+import AppNavigator from './src/navigation';
 import { useUserContext } from './src/context/user';
+import EmptyState from './src/components/EmptyState';
 import Loading from './src/components/Loading';
 import SplashScreen from './src/components/splashScreen';
-import AppNavigator from './src/navigation';
 import ErrorIlus from './src/assets/svg/ilustrations/EmptyStates/ErrorServer.svg';
 
 const MainApp: React.FC = (): React.JSX.Element => {
@@ -18,7 +18,7 @@ const MainApp: React.FC = (): React.JSX.Element => {
 	useEffect(() => {
 		const loadUserFromStorage = async () => {
 			try {
-				const storedUser = await AsyncStorage.getItem('loggedUser');
+				const storedUser = await utils.storage.getItem('loggedUser');
 				if (storedUser) {
 					setLoggedUser(JSON.parse(storedUser));
 				}
