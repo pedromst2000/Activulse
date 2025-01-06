@@ -182,7 +182,7 @@ const NutritionFeed: React.FC = (): React.JSX.Element => {
 			{/* Session Expire Warning  */}
 
 			<Modal
-				type="ExpiredWarning"
+				type="expiredWarning"
 				ilustration={infoIlus}
 				message="Your session has expired ! Sign Out and Sign In again to continue."
 				isModalVisible={modalVisible}
