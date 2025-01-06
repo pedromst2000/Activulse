@@ -1,4 +1,5 @@
 import React, { PropsWithChildren, createContext, useMemo, useState, useEffect } from 'react';
+import { BackHandler } from 'react-native';
 import utils from '@/src/utils';
 import { LoggedUser, UserContextProps } from './types';
 import SplashScreen from '@/src/components/splashScreen';
@@ -32,7 +33,7 @@ const UserProvider: React.FC<PropsWithChildren> = ({ children }): React.JSX.Elem
 			if (loggedUser) {
 				await utils.storage.setItem('loggedUser', JSON.stringify(loggedUser));
 			} else {
-				console.log('Removing the user from storage');
+				console.info('Removing the user from storage');
 
 				await utils.storage.removeItem('loggedUser');
 			}
@@ -49,7 +50,12 @@ const UserProvider: React.FC<PropsWithChildren> = ({ children }): React.JSX.Elem
 	const handleSignOut = async (): Promise<void> => {
 		await utils.storage.removeItem('authToken');
 		await utils.storage.removeItem('refreshToken');
+		await utils.storage.removeItem('loggedUser');
 		setLoggedUser(null);
+	};
+
+	const handleExitApp = async (): Promise<void> => {
+		BackHandler.exitApp();
 	};
 
 	useEffect(() => {
@@ -72,6 +78,7 @@ const UserProvider: React.FC<PropsWithChildren> = ({ children }): React.JSX.Elem
 			setLoggedUser,
 			updateUser: updateUserStorage,
 			signOut: handleSignOut,
+			exitApp: handleExitApp,
 		}),
 		[loggedUser, setLoggedUser],
 	);
