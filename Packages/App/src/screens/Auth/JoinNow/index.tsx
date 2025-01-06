@@ -219,7 +219,7 @@ const JoinNow: React.FC = (): React.JSX.Element => {
 				</ScrollView>
 				{/* Auth Modal */}
 				<Modal
-					type="Auth"
+					type="successRegistration"
 					ilustration={SucessIlus}
 					message="Success! You're one step closer to better heart health."
 					toogleModal={toogleModal}

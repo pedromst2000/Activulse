@@ -15,4 +15,5 @@ export type UserContextProps = {
 	setLoggedUser: React.Dispatch<React.SetStateAction<LoggedUser | null>>;
 	updateUser: (user: LoggedUser) => void;
 	signOut: () => void;
+	exitApp: () => void;
 };

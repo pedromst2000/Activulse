@@ -285,6 +285,7 @@ async function getRecipes(req, res) {
 								isPremium: parsedRecipe.isPremium,
 								title: parsedRecipe.title,
 								confTime: parsedRecipe.duration_conf,
+								videoTime: parsedRecipe.video_time,
 								category: parsedRecipe.recipe_category.category,
 								diet: parsedRecipe.diet.diet_name,
 								imageUrl: parsedRecipe.asset.provider_image_url,

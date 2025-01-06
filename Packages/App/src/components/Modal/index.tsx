@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { default as ModalView } from 'react-native-modal';
 import Ilustration from '../Ilustration';
@@ -7,15 +7,20 @@ import EarnPointsI from '../../assets/svg/icons/EarnPointsIcon.svg';
 import { SvgProps } from 'react-native-svg';
 
 type ModalProps = {
-	type: 'Auth' | 'Warning' | 'Claim' | 'info' | 'Confirmation' | 'ExpiredWarning';
+	type:
+		| 'successRegistration'
+		| 'warning'
+		| 'claim'
+		| 'info'
+		| 'confirmation'
+		| 'expiredWarning'
+		| 'noInternetWarning';
 	ilustration: React.FC<SvgProps>;
 	message: string;
 	heartPoints?: string | undefined;
 	challengePoints?: string | undefined;
-	setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
 	onPress?: () => void;
-	toogleModal: () => void;
-	isModalVisible: boolean;
+	isModalVisible: any;
 };
 
 const Modal: React.FC<ModalProps> = ({
@@ -24,9 +29,7 @@ const Modal: React.FC<ModalProps> = ({
 	message,
 	heartPoints,
 	challengePoints,
-	setModalVisible,
 	onPress,
-	toogleModal,
 	isModalVisible,
 }): React.JSX.Element => {
 	return (
@@ -54,7 +57,10 @@ const Modal: React.FC<ModalProps> = ({
 						</Text>
 					</View>
 
-					{type === 'Auth' || type === 'Claim' || type === 'ExpiredWarning' ? (
+					{type === 'successRegistration' ||
+					type === 'claim' ||
+					type === 'expiredWarning' ||
+					type === 'noInternetWarning' ? (
 						<View className="mt-4 md:mt-6 lg:mt-8 flex justify-center items-center pt-4 md:pt-5 lg:pt-6">
 							<TouchableOpacity
 								activeOpacity={0.8}
@@ -62,11 +68,17 @@ const Modal: React.FC<ModalProps> = ({
 								onPress={onPress}
 								className="bg-accent-500 rounded-full p-2.5 md:p-3 lg:p-3.5 items-center justify-center w-32 md:w-36 lg:w-40 py-2 md:py-2.5 lg:py-3"
 							>
-								{type === 'Auth' || type === 'ExpiredWarning' ? (
+								{type === 'successRegistration' ||
+								type === 'expiredWarning' ||
+								type === 'noInternetWarning' ? (
 									<Text className="text-secondary-700 font-quicksand-bold text-sm md:text-base lg:text-lg tracking-wide">
-										{type === 'Auth' ? 'Continue' : 'Sign Out'}
+										{type === 'successRegistration'
+											? 'Continue'
+											: type === 'expiredWarning'
+												? 'Sign Out'
+												: 'Exit App'}
 									</Text>
-								) : type === 'Claim' ? (
+								) : type === 'claim' ? (
 									<View className="flex flex-row items-center justify-center space-x-2 md:space-x-3 lg:space-x-4">
 										<EarnPointsI
 											width={16}

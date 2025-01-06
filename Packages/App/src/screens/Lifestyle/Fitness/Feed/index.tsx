@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { RefreshControl, View } from 'react-native';
+import { RefreshControl, View, Text } from 'react-native';
 import { IOScrollView } from 'react-native-intersection-observer';
 import config from '@/src/config';
 import useGetActivitiesFeedData, { Activity } from '@/src/hooks/ReactQuery/activities/feed';
@@ -12,9 +12,11 @@ import ScreenTitle from '@/src/components/ScreenTitle';
 import FeedMenu from '@/src/components/FeedMenu';
 import Feed from '@/src/components/Feed';
 import Modal from '@/src/components/Modal';
+import Button from '@/src/components/Button';
 import Ilustration from '@/src/components/Ilustration';
 import LogoIlus from '@/src/assets/svg/ilustrations/Logo.svg';
 import infoIlus from '@/src/assets/svg/ilustrations/Modals/Info.svg';
+import RemoveIcon from '@/src/assets/svg/icons/ErrorIcon.svg';
 
 type FitnessFeedRouteProp = RouteProp<LifestyleStackParamList, 'FitnessFeed'>;
 type FitnessFeedNavigationProp = NativeStackNavigationProp<
@@ -25,37 +27,51 @@ type FitnessFeedNavigationProp = NativeStackNavigationProp<
 const FitnessFeed: React.FC = (): React.JSX.Element => {
 	const navigation = useNavigation<FitnessFeedNavigationProp>();
 	const route = useRoute<FitnessFeedRouteProp>();
+	const [activities, setActivities] = useState<Activity[]>([]);
 	const [page, setPage] = useState<number>(1);
 	const [total, setTotal] = useState<number>(0);
-	const [activities, setActivities] = useState<Activity[]>([]);
+	const [isError, setIsError] = useState<boolean>(false);
+	const [modalVisible, setModalVisible] = useState<boolean>(false);
+	const [isClearFilter, setIsClearFilter] = useState<boolean>(false);
 	const [selectedCategory, setSelectedCategory] = useState<
 		'All' | 'Cardio' | 'Yoga' | 'Muscles' | 'Premium'
 	>('All');
-	const [modalVisible, setModalVisible] = useState<boolean>(false);
 	const { signOut } = useUserContext();
-	const { refetch, data, isLoading, isError, error, isRefetching } = useGetActivitiesFeedData({
+	const { refetch, data, isLoading, isRefetching } = useGetActivitiesFeedData({
 		page,
 		limit: config.pagination.activities.feed.defaultLimit,
 		category: selectedCategory,
 		intensity: route.params?.intensity,
 	});
 
-	useEffect(() => {}, [isError, error, modalVisible]);
+	useEffect(() => {
+		setIsClearFilter(!!route.params?.intensity);
 
-	const toogleModal = (): void => {
-		setModalVisible(!modalVisible);
-	};
+		return () => {
+			setIsClearFilter(false);
+		};
+	}, [route.params?.intensity]);
 
-	/**
-	 * TODO
-	 * 1. TESTING WHEN THE SESSION EXPIRES
-	 * 2. CHECKING ERROR (401, 500, NETWORK ERROR) EMPTY STATE
-	 * 3. WHEN THE USER HAS NOT INTERNET CONNECTION (NETWORK ERROR) DISPLAY A MODAL (EXIT THE APP)
-	 * 4. RESETING THE FILTER WITH BUTTON RESET (CLEARING THE FILTER)
-	 * 5. EMPTY STATE WHEN THERE ARE NO ACTIVITIES FOR THE SELECTED FILTER
-	 */
+	// !! TO BE REFRACTORED
+	useEffect(() => {
+		if (data?.success === false || data?.message === 'Network Error') {
+			setIsError(true);
+		}
 
-	// If one of the filters changes, resetting the page to 1
+		if (data?.success === true) {
+			setIsError(false);
+		} else if (
+			data?.message == 'Missing auth token or refresh token' ||
+			data?.message == 'Refresh token has expired'
+		) {
+			setModalVisible(true);
+		}
+
+		return () => {
+			setModalVisible(false);
+		};
+	}, [isError, data?.success, data?.message, modalVisible]);
+
 	useEffect(() => {
 		setActivities([]);
 		setTotal(0);
@@ -81,14 +97,16 @@ const FitnessFeed: React.FC = (): React.JSX.Element => {
 	};
 
 	const handleOnRefresh = (): void => {
-		if (isRefetching || isLoading) {
-			return;
-		}
-
 		setActivities([]);
 		setPage(1);
 		setTotal(0);
 		refetch();
+	};
+
+	const handleClearFilter = (): void => {
+		refetch();
+		setIsClearFilter(true);
+		navigation.setParams({ intensity: null });
 	};
 
 	useEffect(() => {
@@ -97,7 +115,7 @@ const FitnessFeed: React.FC = (): React.JSX.Element => {
 		}
 
 		if (data && data.data && data.data.activities?.length > 0) {
-			// // Checking if there are duplicates (if so, remove them)
+			// Checking if there are duplicates (if so, remove them)
 			const filteredActivities = data?.data?.activities?.filter((activity: Activity) => {
 				return activities.findIndex((a: Activity) => a.id === activity.id) === -1;
 			});
@@ -107,14 +125,17 @@ const FitnessFeed: React.FC = (): React.JSX.Element => {
 			setTotal(data?.data?.total);
 		}
 
-		if (isError) {
-			setActivities([]);
-			setTotal(0);
-		}
-
 		//! Do not add activities to the dependencies array (it will cause an infinite loop)
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [data, isRefetching]);
+
+	/**
+	 * TODO
+	 * BE (Back-End) || FE (Front-End) - To be checked either in the Back-End or Front-End side
+	 * 4. BE - Checking if are returning all recipes including the premium ones (only the bought ones)
+	 * 5. BE - Remove the premium recipes that the user hasn't bought
+	 * 6. FE - Fix Glitch Bug of Modal Showing unecessary!
+	 */
 
 	return (
 		<AnimatedComponent animation="FadeIn">
@@ -145,6 +166,25 @@ const FitnessFeed: React.FC = (): React.JSX.Element => {
 						fitnessCategory={selectedCategory}
 					/>
 
+					{/* Clear Intensity Filter Option Feed */}
+					{isClearFilter && (
+						<View
+							className="flex  justify-center items-center pt-4 pb-4
+						sm:pt-6 sm:pb-6 md:pt-8 md:pb-8 lg:pt-10 lg:pb-10 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg"
+						>
+							<Button
+								onPress={handleClearFilter}
+								styleClass="px-6 py-2 space-x-2  sm:px-6 sm:py-4 md:px-8 md:py-5 lg:px-10 lg:py-6 rounded-[30px]"
+							>
+								<RemoveIcon height={15} width={15} />
+
+								<Text className="font-quicksand-bold text-secondary-700 text-[14.2px] sm:text-[16px] md:text-[18px] lg:text-[20px]">
+									Clear Filter
+								</Text>
+							</Button>
+						</View>
+					)}
+
 					<Feed
 						type="activities"
 						data={activities}
@@ -169,13 +209,14 @@ const FitnessFeed: React.FC = (): React.JSX.Element => {
 			{/* Session Expire Warning  */}
 
 			<Modal
-				type="ExpiredWarning"
+				type="expiredWarning"
 				ilustration={infoIlus}
 				message="Your session has expired ! Sign Out and Sign In again to continue."
-				toogleModal={toogleModal}
 				isModalVisible={modalVisible}
-				setModalVisible={setModalVisible}
-				onPress={signOut}
+				onPress={() => {
+					setModalVisible(false);
+					signOut();
+				}}
 			/>
 		</AnimatedComponent>
 	);

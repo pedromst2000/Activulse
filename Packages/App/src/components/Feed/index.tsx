@@ -7,6 +7,7 @@ import EmptyState from '../EmptyState';
 import LoadingSkeleton from '../LoadingSkeleton';
 import ErrorIlus from '../../assets/svg/ilustrations/EmptyStates/ErrorServer.svg';
 import NoRecipesIlus from '../../assets/svg/ilustrations/EmptyStates/FilterEmptyState.svg';
+import NoActivitiesIlus from '../../assets/svg/ilustrations/EmptyStates/NoActivitiesFound.svg';
 import NoPremiumRecipes from '../../assets/svg/ilustrations/EmptyStates/NoPremiumRecipes.svg';
 import NoPremiumActivities from '../../assets/svg/ilustrations/EmptyStates/NoPremiumActivities.svg';
 
@@ -19,6 +20,7 @@ type Props = {
 	isRefetching: boolean;
 	category?: string | undefined;
 	search?: string | undefined;
+	filter?: string | undefined;
 	messageAPI?: string;
 };
 
@@ -31,6 +33,7 @@ const Feed: React.FC<Props> = ({
 	isRefetching,
 	category,
 	search,
+	filter,
 	messageAPI,
 }): React.JSX.Element => {
 	return (
@@ -72,8 +75,16 @@ const Feed: React.FC<Props> = ({
 					<EmptyState
 						type="NotFound"
 						_ilustration_={NoRecipesIlus}
-						message="No Recipes Found"
+						message={messageAPI}
 						description="Oops! It seems like we couldn't find any recipes that match your search criteria. How about exploring new culinary adventures? Your next delicious discovery is just around the corner!"
+						styleClass="pb-20 mt-4 sm:mt-6 md:mt-8 lg:mt-10 xl:mt-12"
+					/>
+				) : messageAPI === 'No Activities Found' && !filter ? (
+					<EmptyState
+						type="NotFound"
+						_ilustration_={NoActivitiesIlus}
+						message={messageAPI}
+						description="It looks like there are no activities that match your filter criteria. Try adjusting your filters or explore other ways to keep your heart healthy!"
 						styleClass="pb-20 mt-4 sm:mt-6 md:mt-8 lg:mt-10 xl:mt-12"
 					/>
 				) : messageAPI === 'No Premium Recipes Found' ||
@@ -81,9 +92,7 @@ const Feed: React.FC<Props> = ({
 					<EmptyState
 						type="NotFound"
 						_ilustration_={type === 'recipes' ? NoPremiumRecipes : NoPremiumActivities}
-						message={
-							type === 'recipes' ? 'No Premium Recipes Found' : 'No Premium Activities Found'
-						}
+						message={messageAPI}
 						description={
 							type === 'recipes'
 								? " Uh-oh! It seems like your premium pursuits are still under lock and key. Haven't unlocked premium activities yet? No worries! Head over to the store to discover exclusive offerings and elevate your nourishing journey."

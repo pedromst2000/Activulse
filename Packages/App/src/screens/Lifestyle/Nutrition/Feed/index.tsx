@@ -22,15 +22,15 @@ type NutritionFeedRouteProp = RouteProp<LifestyleStackParamList, 'NutritionFeed'
 const NutritionFeed: React.FC = (): React.JSX.Element => {
 	const navigation = useNavigation();
 	const route = useRoute<NutritionFeedRouteProp>();
+	const [recipes, setRecipes] = useState<Recipe[]>([]);
 	const [page, setPage] = useState<number>(1);
 	const [total, setTotal] = useState<number>(0);
-	const [recipes, setRecipes] = useState<Recipe[]>([]);
 	const [isError, setIsError] = useState<boolean>(false);
+	const [modalVisible, setModalVisible] = useState<boolean>(false);
 	const [search, setSearch] = useState<string>('');
 	const [selectedCategory, setSelectedCategory] = useState<
 		'All' | 'Soups' | 'Main Dishes' | 'Salads' | 'Desserts' | 'Premium'
 	>('All');
-	const [modalVisible, setModalVisible] = useState<boolean>(false);
 	const { signOut } = useUserContext();
 	const { refetch, data, isLoading, isRefetching } = useGetRecipesFeedData({
 		page,
@@ -53,18 +53,11 @@ const NutritionFeed: React.FC = (): React.JSX.Element => {
 		) {
 			setModalVisible(true);
 		}
+
+		return () => {
+			setModalVisible(false);
+		};
 	}, [isError, data?.success, data?.message, modalVisible]);
-
-	const toogleModal = (): void => {
-		setModalVisible(!modalVisible);
-	};
-
-	/**
-	 * TODO
-	 * 1. TESTING WHEN THE SESSION EXPIRES
-	 * 2. CHECKING ERROR (401, 500, NETWORK ERROR) EMPTY STATE
-	 * 3. WHEN THE USER HAS NOT INTERNET CONNECTION (NETWORK ERROR) DISPLAY A MODAL (EXIT THE APP)
-	 */
 
 	// If one of the filters changes, resetting the page to 1
 	useEffect(() => {
@@ -77,10 +70,6 @@ const NutritionFeed: React.FC = (): React.JSX.Element => {
 	const handleOnChange = (inView: boolean, id: number): void => {
 		// Checking if it's the last item in the list
 		if (recipes && !isLoading && !isError && inView && id === recipes[recipes.length - 1].id) {
-			if (total >= 1 && total <= 4) {
-				return;
-			}
-
 			setPage((prev: number) => prev + 1);
 		}
 
@@ -116,14 +105,18 @@ const NutritionFeed: React.FC = (): React.JSX.Element => {
 			setTotal(data?.data?.total);
 		}
 
-		if (isError && data?.success === false) {
-			setRecipes([]);
-			setTotal(0);
-		}
-
 		//! Do not add recipes to the dependencies array (it will cause an infinite loop)
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [data, isRefetching]);
+
+	/**
+	 * TODO:
+	 * BE (Back-End) || FE (Front-End) - To be checked either in the Back-End or Front-End side
+	 * 1. Fix Glitch Bug of Modal Showing unecessary!
+	 * 2. BE - Checking if are returning all recipes including the premium ones (only the bought ones)
+	 * 3. BE - Remove the premium recipes that the user hasn't bought
+	 * 4. FE - Checking the filter by title (search)
+	 */
 
 	return (
 		<AnimatedComponent animation="FadeIn">
@@ -144,7 +137,8 @@ const NutritionFeed: React.FC = (): React.JSX.Element => {
 				<View className="flex-1 mt-2 bg-primary-50">
 					<View className="w-full flex-1 justify-center items-center p-4 sm:p-6 md:p-8 lg:p-10">
 						<Input
-							placeholder="Search Recipe"
+							// placeholder={`isModalVisible=${modalVisible}`}
+							placeholder="Search for recipe"
 							onChange={(text: string) => setSearch(text)}
 							value={search}
 							icon={SearchI}
@@ -188,13 +182,14 @@ const NutritionFeed: React.FC = (): React.JSX.Element => {
 			{/* Session Expire Warning  */}
 
 			<Modal
-				type="ExpiredWarning"
+				type="expiredWarning"
 				ilustration={infoIlus}
 				message="Your session has expired ! Sign Out and Sign In again to continue."
-				toogleModal={toogleModal}
 				isModalVisible={modalVisible}
-				setModalVisible={setModalVisible}
-				onPress={signOut}
+				onPress={() => {
+					setModalVisible(false);
+					signOut();
+				}}
 			/>
 		</AnimatedComponent>
 	);
