@@ -73,6 +73,12 @@ const NutritionFeed: React.FC = (): React.JSX.Element => {
 			setPage((prev: number) => prev + 1);
 		}
 
+		if (selectedCategory === 'Premium') {
+			if (search.length == 0) {
+				setPage(1);
+			}
+		}
+
 		// not incrementing the page if the user is searching
 		if (search.length > 0) {
 			setPage(1);
@@ -111,11 +117,7 @@ const NutritionFeed: React.FC = (): React.JSX.Element => {
 
 	/**
 	 * TODO:
-	 * BE (Back-End) || FE (Front-End) - To be checked either in the Back-End or Front-End side
-	 * 1. Fix Glitch Bug of Modal Showing unecessary!
-	 * 2. BE - Checking if are returning all recipes including the premium ones (only the bought ones)
-	 * 3. BE - Remove the premium recipes that the user hasn't bought
-	 * 4. FE - Checking the filter by title (search)
+	 * 4. Fix Glitch Bug of Modal Showing unecessary!
 	 */
 
 	return (

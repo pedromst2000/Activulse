@@ -51,24 +51,66 @@ async function GetQueryOptions(options) {
 						attributes: ["diet_ID"],
 					});
 
-					diet ? (query.diet_id = { [Op.eq]: diet.diet_ID }) : null; // if the diet exists, add the diet_id to the query
+					diet ? (query.diet_id = { [Op.eq]: diet.diet_ID }) : null; // if the diet exists, adding the diet_id to the query
 				}
 				break;
+
 			case "category":
-				if (value && value !== "All") {
+				if (value && value !== "All" && value !== "Premium") {
+					// Finding the category by name if it's not "All" or "Premium"
 					const category = await db.mysql.RecipeCategory.findOne({
 						where: {
 							category: value,
 						},
 						attributes: ["recipe_category_ID"],
 					});
+					// If the category exists, adding the category_id to the query
 					category
-						? (query.category_id = { [Op.eq]: category.recipe_category_ID }) // if the category exists, add the category_id to the query
+						? (query.category_id = { [Op.eq]: category.recipe_category_ID })
 						: null;
+				}
+
+				// !! Category Premium does not exist , so its needed to handle it separately. To return the proper premium recipes bought by the user.
+				else if (value === "Premium") {
+					// If the category is "Premium", getting the premium recipes bought by the user
+					const userPremiumRecipes = await db.mysql.Buyer.findAll({
+						where: {
+							user_id: options.user_ID,
+							recipe_id: {
+								[Op.ne]: null,
+							},
+						},
+						attributes: ["recipe_id"],
+					});
+
+					// Extracting the IDs of the premium recipes bought by the user
+					const premiumRecipeIds = userPremiumRecipes.map((recipe) => recipe.recipe_id);
+
+					// Adding the premium recipe IDs to the query
+					query.recipe_ID = { [Op.in]: premiumRecipeIds };
+
+					// If a diet is provided, updating the query with the diet ID
+					if (options.diet) {
+						const diet = await db.mysql.Diet.findOne({
+							where: {
+								diet_name: options.diet,
+							},
+							attributes: ["diet_ID"],
+						});
+						diet ? (query.diet_id = { [Op.eq]: diet.diet_ID }) : null;
+					}
+
+					// If a title is provided, updating the query with the title
+					if (options.title) {
+						query.title = {
+							[Op.like]: `%${options.title}%`,
+						};
+					}
 				}
 				break;
 			case "title":
 				if (value) {
+					// If a title is provided, adding it to the query with a LIKE operator for partial matching
 					query.title = {
 						[Op.like]: `%${value}%`,
 					};
@@ -135,8 +177,8 @@ async function getRecipes(req, res) {
 					title,
 					diet: diet,
 					category: category,
+					user_ID: loggedUser,
 				})),
-				isPremium: !1, // not premium recipes
 			},
 
 			include: [
@@ -164,31 +206,12 @@ async function getRecipes(req, res) {
 					[Op.ne]: null,
 				},
 			},
-			include: {
-				model: db.mysql.Recipe,
-				attributes: RECIPE_ATTRIBUTES,
-				include: [
-					{
-						model: db.mysql.Diet,
-						attributes: ["diet_ID", "diet_name"],
-					},
-					{
-						model: db.mysql.RecipeCategory,
-						attributes: ["recipe_category_ID", "category"],
-					},
-					{
-						model: db.mysql.Asset,
-						attributes: ["provider_image_url"],
-					},
-				],
-			},
+			attributes: ["recipe_id"],
 		});
 
 		//To avoid duplicate recipes
 		const uniqueRecipes = [];
-		const uniqueUserPremiumRecipes = [];
 		const recipeIds = new Set();
-		const userPremiumRecipeIds = new Set();
 
 		for (const recipe of findRecipes.rows) {
 			if (!recipeIds.has(recipe.recipe_ID)) {
@@ -197,25 +220,26 @@ async function getRecipes(req, res) {
 			}
 		}
 
-		for (const recipe of findUserPremiumRecipes.rows) {
-			if (!userPremiumRecipeIds.has(recipe.recipe.recipe_ID)) {
-				uniqueUserPremiumRecipes.push(recipe);
-				userPremiumRecipeIds.add(recipe.recipe.recipe_ID);
-			}
-		}
-
 		const recipes = {
 			count: uniqueRecipes.length,
 			rows: uniqueRecipes,
 		};
 
-		const premiumUserRecipes = {
-			count: uniqueUserPremiumRecipes.length,
-			rows: uniqueUserPremiumRecipes,
-		};
-
 		let resultRecipes = recipes.rows;
-		const resultUserPremiumRecipes = premiumUserRecipes.rows;
+
+		let resultUserPremiumRecipes = findUserPremiumRecipes.rows;
+
+		resultRecipes = resultRecipes.filter((recipe) => {
+			if (recipe.isPremium) {
+				//returning only the bought premium recipes by the user
+				return resultUserPremiumRecipes.some(
+					(userRecipe) => userRecipe.recipe_id === recipe.recipe_ID,
+				);
+			}
+
+			// // returning all the free recipes and the premium recipes bought by the user
+			return true;
+		});
 
 		// Randomize the recipes feed to avoid showing the same recipes in the same order
 		const categorizedRecipes = {
@@ -247,53 +271,34 @@ async function getRecipes(req, res) {
 
 		resultRecipes = randomizedRecipes;
 
-		const PREMIUM_RECIPES = uniqueUserPremiumRecipes
-			.map((recipe) => recipe.recipe)
-			.filter((recipe) => recipe.title.includes(title))
-			.map((parsedRecipe) => ({
+		const RECIPES = resultRecipes.map((recipe) => {
+			const parsedRecipe = recipe.toJSON();
+
+			return {
 				id: parsedRecipe.recipe_ID,
 				isPremium: parsedRecipe.isPremium,
 				title: parsedRecipe.title,
+				confTime: parsedRecipe.duration_conf,
 				videoTime: parsedRecipe.video_time,
 				category: parsedRecipe.recipe_category.category,
 				diet: parsedRecipe.diet.diet_name,
 				imageUrl: parsedRecipe.asset.provider_image_url,
 				createdAt: parsedRecipe.createdAt,
 				updateAt: parsedRecipe.updatedAt,
-			}));
+			};
+		});
 
-		if (
-			(category === "Premium" && PREMIUM_RECIPES.length === 0 && title !== "") ||
-			resultRecipes.length === 0
-		) {
+		if (RECIPES.length === 0 && title !== "") {
 			utils.handleResponse(res, utils.http.StatusNotFound, "No Recipes Found");
 			return;
-		} else if (PREMIUM_RECIPES.length === 0 && category === "Premium") {
+		} else if (RECIPES.length === 0 && category === "Premium" && title.length === 0) {
 			utils.handleResponse(res, utils.http.StatusNotFound, "No Premium Recipes Found");
 			return;
 		}
 
 		utils.handleResponse(res, utils.http.StatusOK, "Recipes retrieved successfully", {
-			recipes:
-				category === "Premium"
-					? PREMIUM_RECIPES
-					: resultRecipes.map((recipe) => {
-							const parsedRecipe = recipe.toJSON();
-
-							return {
-								id: parsedRecipe.recipe_ID,
-								isPremium: parsedRecipe.isPremium,
-								title: parsedRecipe.title,
-								confTime: parsedRecipe.duration_conf,
-								videoTime: parsedRecipe.video_time,
-								category: parsedRecipe.recipe_category.category,
-								diet: parsedRecipe.diet.diet_name,
-								imageUrl: parsedRecipe.asset.provider_image_url,
-								createdAt: parsedRecipe.createdAt,
-								updateAt: parsedRecipe.updatedAt,
-							};
-						}),
-			total: category === "Premium" ? PREMIUM_RECIPES.length : resultRecipes.length,
+			recipes: RECIPES,
+			total: RECIPES.length,
 		});
 	} catch (error) {
 		utils.handleError(res, error, __filename);
