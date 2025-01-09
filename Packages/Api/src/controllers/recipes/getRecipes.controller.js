@@ -83,29 +83,11 @@ async function GetQueryOptions(options) {
 						attributes: ["recipe_id"],
 					});
 
-					// Extracting the IDs of the premium recipes bought by the user
+					// // Extracting the IDs of the premium recipes bought by the user
 					const premiumRecipeIds = userPremiumRecipes.map((recipe) => recipe.recipe_id);
 
 					// Adding the premium recipe IDs to the query
 					query.recipe_ID = { [Op.in]: premiumRecipeIds };
-
-					// If a diet is provided, updating the query with the diet ID
-					if (options.diet) {
-						const diet = await db.mysql.Diet.findOne({
-							where: {
-								diet_name: options.diet,
-							},
-							attributes: ["diet_ID"],
-						});
-						diet ? (query.diet_id = { [Op.eq]: diet.diet_ID }) : null;
-					}
-
-					// If a title is provided, updating the query with the title
-					if (options.title) {
-						query.title = {
-							[Op.like]: `%${options.title}%`,
-						};
-					}
 				}
 				break;
 			case "title":

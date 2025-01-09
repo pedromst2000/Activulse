@@ -35,6 +35,7 @@ const ACTIVITY_ATTRIBUTES = [
  * @param {GetQueryOptions} options
  * @returns {import("sequelize").WhereOptions}
  */
+
 async function GetQueryOptions(options) {
 	const query = {};
 
@@ -44,24 +45,48 @@ async function GetQueryOptions(options) {
 				if (value) {
 					if (value === "Light") {
 						query.intensity = { [Op.eq]: 1 };
-					}
-					if (value === "Moderate") {
+					} else if (value === "Moderate") {
 						query.intensity = { [Op.between]: [2, 4] };
 					} else if (value === "Vigorous") {
 						query.intensity = { [Op.eq]: 5 };
 					}
 				}
+				break;
 			case "category":
-				if (value && value !== "All") {
+				if (value && value !== "All" && value !== "Premium") {
+					// Finding the category by name if it's not "All" or "Premium"
 					const category = await db.mysql.ActivityCategory.findOne({
 						where: {
 							category: value,
 						},
 						attributes: ["activity_category_ID"],
 					});
-					category
-						? (query.category_id = { [Op.eq]: category.activity_category_ID }) // if the category exists, add the category_id to the query
-						: null;
+					// If the category exists, adding the category_id to the query
+					if (category) {
+						query.category_id = { [Op.eq]: category.activity_category_ID };
+					}
+				}
+
+				// !! Category Premium does not exist , so its needed to handle it separately. To return the proper premium activities bought by the user.
+				else if (value === "Premium") {
+					// If the category is "Premium", getting the premium activities bought by the user
+					const userPremiumActivities = await db.mysql.Buyer.findAll({
+						where: {
+							user_id: options.user_ID,
+							activity_id: {
+								[Op.ne]: null,
+							},
+						},
+						attributes: ["activity_id"],
+					});
+
+					// Extracting the IDs of the premium activities bought by the user
+					const premiumActivityIds = userPremiumActivities.map(
+						(activity) => activity.activity_id,
+					);
+
+					// Adding the premium activity IDs to the query
+					query.activity_ID = { [Op.in]: premiumActivityIds };
 				}
 				break;
 			default:
@@ -99,8 +124,8 @@ async function getActivities(req, res) {
 				...(await GetQueryOptions({
 					category: category,
 					intensity: intensity,
+					user_ID: loggedUser,
 				})),
-				isPremium: !1, // not premium activities
 			},
 
 			include: [
@@ -124,27 +149,12 @@ async function getActivities(req, res) {
 					[Op.ne]: null,
 				},
 			},
-			include: {
-				model: db.mysql.Activity,
-				attributes: ACTIVITY_ATTRIBUTES,
-				include: [
-					{
-						model: db.mysql.ActivityCategory,
-						attributes: ["activity_category_ID", "category"],
-					},
-					{
-						model: db.mysql.Asset,
-						attributes: ["provider_image_url"],
-					},
-				],
-			},
+			attributes: ["activity_id"],
 		});
 
 		//To avoid duplicate activities
 		const uniqueActivities = [];
-		const uniqueUserPremiumActivities = [];
 		const activityIds = new Set();
-		const userPremiumActivityIds = new Set();
 
 		for (const activity of findActivities.rows) {
 			if (!activityIds.has(activity.activity_ID)) {
@@ -153,31 +163,32 @@ async function getActivities(req, res) {
 			}
 		}
 
-		for (const activity of findUserPremiumActivities.rows) {
-			if (!userPremiumActivityIds.has(activity.activity.activity_ID)) {
-				uniqueUserPremiumActivities.push(activity);
-				userPremiumActivityIds.add(activity.activity.activity_ID);
-			}
-		}
-
 		const activities = {
 			count: uniqueActivities.length,
 			rows: uniqueActivities,
 		};
 
-		const premiumUserActivities = {
-			count: uniqueUserPremiumActivities.length,
-			rows: uniqueUserPremiumActivities,
-		};
-
 		let resultActivities = activities.rows;
-		const resultUserPremiumActivities = premiumUserActivities.rows;
+		let resultUserPremiumActivities = findUserPremiumActivities.rows;
 
-		// Randomize the activities feed to avoid showing the same activities in the same order
+		resultActivities = resultActivities.filter((activity) => {
+			if (activity.isPremium) {
+				//returning only the bought premium activities by the user
+				return resultUserPremiumActivities.some(
+					(userActivity) => userActivity.activity_id === activity.activity_ID,
+				);
+			}
+
+			// returning all the free activities and the premium activities bought by the user
+			return true;
+		});
+
+		// // Randomize the activities feed to avoid showing the same activities in the same order
 		const categories = {
 			Cardio: [],
 			Yoga: [],
 			Muscles: [],
+			Premium: [],
 		};
 
 		resultActivities.forEach((activity) => {
@@ -205,11 +216,12 @@ async function getActivities(req, res) {
 
 		resultActivities = randomizedActivities;
 
-		const ALL_ACTIVITIES = resultActivities.map((parsedActivity) => ({
+		const ACTIVITIES = resultActivities.map((parsedActivity) => ({
 			id: parsedActivity.activity_ID,
 			title: parsedActivity.title,
 			isPremium: parsedActivity.isPremium,
 			duration: parsedActivity.duration,
+			videoTime: parsedActivity.video_time,
 			category: parsedActivity.activity_category.category,
 			intensity:
 				parsedActivity.intensity === 1
@@ -226,56 +238,12 @@ async function getActivities(req, res) {
 			updateAt: parsedActivity.updatedAt,
 		}));
 
-		const PREMIUM_ACTIVITIES = uniqueUserPremiumActivities
-			.map((activity) => activity.activity)
-			.filter((activity) => {
-				if (!intensity) return true; // If no intensity filter is provided, include all activities
-				switch (intensity) {
-					case "Light":
-						return activity.intensity === 1;
-					case "Moderate":
-						return activity.intensity >= 2 && activity.intensity <= 4;
-					case "Vigorous":
-						return activity.intensity === 5;
-					default:
-						return false;
-				}
-			})
-			.map((parsedActivity) => ({
-				id: parsedActivity.activity_ID,
-				title: parsedActivity.title,
-				isPremium: parsedActivity.isPremium,
-				videoTime: parsedActivity.video_time,
-				category: parsedActivity.activity_category.category,
-				intensity:
-					parsedActivity.intensity === 1
-						? "Light"
-						: parsedActivity.intensity === 2
-							? "Moderate I"
-							: parsedActivity.intensity === 3
-								? "Moderate II"
-								: parsedActivity.intensity === 4
-									? "Moderate III"
-									: "Vigorous",
-				imageUrl: parsedActivity.asset.provider_image_url,
-				createdAt: parsedActivity.createdAt,
-				updateAt: parsedActivity.updatedAt,
-			}));
-
-		if (category === "Premium") {
-			if (PREMIUM_ACTIVITIES.length === 0) {
-				utils.handleResponse(
-					res,
-					utils.http.StatusNotFound,
-					"No Premium Activities Found",
-				);
-				return;
-			}
-		} else {
-			if (resultActivities.length === 0) {
-				utils.handleResponse(res, utils.http.StatusNotFound, "No Activities Found");
-				return;
-			}
+		if (intensity !== "" && ACTIVITIES.length === 0) {
+			utils.handleResponse(res, utils.http.StatusNotFound, "No Activities Found");
+			return;
+		} else if (category === "Premium" && ACTIVITIES.length === 0) {
+			utils.handleResponse(res, utils.http.StatusNotFound, "No Premium Activities Found");
+			return;
 		}
 
 		return utils.handleResponse(
@@ -283,8 +251,8 @@ async function getActivities(req, res) {
 			utils.http.StatusOK,
 			"Activities retrieved successfully",
 			{
-				activities: category === "Premium" ? PREMIUM_ACTIVITIES : ALL_ACTIVITIES,
-				total: category === "Premium" ? PREMIUM_ACTIVITIES.length : ALL_ACTIVITIES.length,
+				activities: ACTIVITIES,
+				total: ACTIVITIES.length,
 			},
 		);
 	} catch (error) {
