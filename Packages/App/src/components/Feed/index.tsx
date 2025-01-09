@@ -22,6 +22,8 @@ type Props = {
 	search?: string | undefined;
 	filter?: string | undefined;
 	messageAPI?: string;
+	activities?: any[];
+	recipes?: any[];
 };
 
 const Feed: React.FC<Props> = ({
@@ -35,6 +37,8 @@ const Feed: React.FC<Props> = ({
 	search,
 	filter,
 	messageAPI,
+	activities,
+	recipes,
 }): React.JSX.Element => {
 	return (
 		<>
@@ -71,7 +75,7 @@ const Feed: React.FC<Props> = ({
 
 			{!isLoading &&
 				!isRefetching &&
-				(messageAPI === 'No Recipes Found' && search !== '' ? (
+				(messageAPI === 'No Recipes Found' && search !== '' && recipes?.length == 0 ? (
 					<EmptyState
 						type="NotFound"
 						_ilustration_={NoRecipesIlus}
@@ -79,7 +83,9 @@ const Feed: React.FC<Props> = ({
 						description="Oops! It seems like we couldn't find any recipes that match your search criteria. How about exploring new culinary adventures? Your next delicious discovery is just around the corner!"
 						styleClass="pb-20 mt-4 sm:mt-6 md:mt-8 lg:mt-10 xl:mt-12"
 					/>
-				) : messageAPI === 'No Activities Found' && !filter ? (
+				) : messageAPI === 'No Activities Found' &&
+				  filter !== '' &&
+				  activities?.length == 0 ? (
 					<EmptyState
 						type="NotFound"
 						_ilustration_={NoActivitiesIlus}
@@ -87,8 +93,8 @@ const Feed: React.FC<Props> = ({
 						description="It looks like there are no activities that match your filter criteria. Try adjusting your filters or explore other ways to keep your heart healthy!"
 						styleClass="pb-20 mt-4 sm:mt-6 md:mt-8 lg:mt-10 xl:mt-12"
 					/>
-				) : messageAPI === 'No Premium Recipes Found' ||
-				  messageAPI === 'No Premium Activities Found' ? (
+				) : (messageAPI === 'No Premium Recipes Found' && recipes?.length == 0) ||
+				  (messageAPI === 'No Premium Activities Found' && activities?.length == 0) ? (
 					<EmptyState
 						type="NotFound"
 						_ilustration_={type === 'recipes' ? NoPremiumRecipes : NoPremiumActivities}

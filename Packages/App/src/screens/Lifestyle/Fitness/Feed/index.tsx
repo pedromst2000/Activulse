@@ -90,10 +90,6 @@ const FitnessFeed: React.FC = (): React.JSX.Element => {
 		) {
 			setPage((prev: number) => prev + 1);
 		}
-		// not incrementing the page if the user is filtering by intensity
-		if (route.params?.intensity) {
-			setPage(1);
-		}
 	};
 
 	const handleOnRefresh = (): void => {
@@ -131,10 +127,7 @@ const FitnessFeed: React.FC = (): React.JSX.Element => {
 
 	/**
 	 * TODO
-	 * BE (Back-End) || FE (Front-End) - To be checked either in the Back-End or Front-End side
-	 * 4. BE - Checking if are returning all recipes including the premium ones (only the bought ones)
-	 * 5. BE - Remove the premium recipes that the user hasn't bought
-	 * 6. FE - Fix Glitch Bug of Modal Showing unecessary!
+	 * 6. Fix Glitch Bug of Modal Showing unecessary!
 	 */
 
 	return (
@@ -194,6 +187,7 @@ const FitnessFeed: React.FC = (): React.JSX.Element => {
 						isError={isError}
 						category={selectedCategory}
 						messageAPI={data?.message}
+						activities={activities}
 					/>
 
 					{!isLoading && activities.length > 0 && activities.length >= total && (

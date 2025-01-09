@@ -40,6 +40,7 @@ const NutritionFeed: React.FC = (): React.JSX.Element => {
 		title: search,
 	});
 
+	// !! TO BE REFRACTORED
 	useEffect(() => {
 		if (data?.success === false || data?.message === 'Network Error') {
 			setIsError(true);
@@ -71,17 +72,6 @@ const NutritionFeed: React.FC = (): React.JSX.Element => {
 		// Checking if it's the last item in the list
 		if (recipes && !isLoading && !isError && inView && id === recipes[recipes.length - 1].id) {
 			setPage((prev: number) => prev + 1);
-		}
-
-		if (selectedCategory === 'Premium') {
-			if (search.length == 0) {
-				setPage(1);
-			}
-		}
-
-		// not incrementing the page if the user is searching
-		if (search.length > 0) {
-			setPage(1);
 		}
 	};
 
@@ -169,6 +159,7 @@ const NutritionFeed: React.FC = (): React.JSX.Element => {
 						search={search}
 						isError={isError}
 						messageAPI={data?.message}
+						recipes={recipes}
 					/>
 
 					{!isLoading && recipes.length > 0 && recipes.length >= total && (
