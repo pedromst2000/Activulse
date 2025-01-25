@@ -102,63 +102,49 @@ async function recipeDetails(req, res) {
 			},
 		});
 
-		const responseData =
+		const responseData = {
+			recipe_id: recipe.recipe_ID,
+			isPremium: recipe.isPremium,
+			isMyPremium: !!isMyPremium,
+			title: recipe.title,
+			description: recipe.description,
+			diet: {
+				id: recipe.diet.diet_ID,
+				name: recipe.diet.diet_name,
+			},
+			category: {
+				id: recipe.recipe_category.recipe_category_ID,
+				name: recipe.recipe_category.category,
+			},
+		};
+
+		utils.handleResponse(
+			res,
+			utils.http.StatusOK,
+			"Recipe Data retrieved successfully",
 			isMyPremium && recipe?.isPremium
 				? {
-						recipe_id: recipe.recipe_ID,
-						isPremium: recipe.isPremium,
-						isMyPremium: !!isMyPremium,
+						...responseData,
 						isMyFavorite: !!isMyFavorite,
-						title: recipe.title,
-						description: recipe.description,
-						video: {
-							url: findRecipeVideo?.provider_video_url,
-						},
-						diet: {
-							id: recipe.diet.diet_ID,
-							name: recipe.diet.diet_name,
-						},
-						category: {
-							id: recipe.recipe_category.recipe_category_ID,
-							name: recipe.recipe_category.category,
-						},
+						video: { url: findRecipeVideo?.provider_video_url },
 						videoTime: recipe.video_time,
 						createdAt: recipe.createdAt,
 						updatedAt: recipe.updatedAt,
 					}
 				: !isMyPremium && recipe?.isPremium
 					? {
-							recipe_id: recipe.recipe_ID,
-							isPremium: recipe.isPremium,
-							isMyPremium: !!isMyPremium,
-							title: recipe.title,
-							description: recipe.description,
-							diet: {
-								id: recipe.diet.diet_ID,
-								name: recipe.diet.diet_name,
-							},
+							...responseData,
+							image: { url: findRecipeImage?.provider_image_url },
 							price: recipe.price,
 							videoTime: recipe.video_time,
-							image: {
-								url: findRecipeImage?.provider_image_url,
-							},
 							createdAt: recipe.createdAt,
 							updatedAt: recipe.updatedAt,
 						}
 					: {
-							recipe_id: recipe.recipe_ID,
-							isPremium: recipe.isPremium,
+							...responseData,
 							isMyFavorite: !!isMyFavorite,
-							title: recipe.title,
-							description: recipe.description,
-							category: {
-								id: recipe.recipe_category.recipe_category_ID,
-								name: recipe.recipe_category.category,
-							},
 							durationConf: recipe.duration_conf,
-							image: {
-								url: findRecipeImage?.provider_image_url,
-							},
+							image: { url: findRecipeImage?.provider_image_url },
 							ingredients: recipe.ingredients.map((ingredient) => ({
 								id: ingredient.ingredient_ID,
 								ingredient: ingredient.ingredient,
@@ -169,13 +155,7 @@ async function recipeDetails(req, res) {
 							})),
 							createdAt: recipe.createdAt,
 							updatedAt: recipe.updatedAt,
-						};
-
-		utils.handleResponse(
-			res,
-			utils.http.StatusOK,
-			"Recipe Data retrieved successfully",
-			responseData,
+						},
 		);
 		return;
 	} catch (error) {

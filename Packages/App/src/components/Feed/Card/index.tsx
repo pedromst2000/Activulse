@@ -1,23 +1,21 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
-import TimeI from '@/src/assets/svg/icons/TimeIcon.svg';
-import VideoTimeI from '@/src/assets/svg/icons/VideoTimeIcon.svg';
+import TimeI from '@/src/assets/svg/icons/TimeIconV2.svg';
+import VideoTimeI from '@/src/assets/svg/icons/VideoTimeIconV2.svg';
 import Icon from '../../Icon';
 import Intensity from '../../Intensity';
 
 type Props = {
 	type?: 'Recipe' | 'Activity' | 'StoreRecipe' | 'StoreActivity';
 	_item_: any;
+	onPressCard?: (id: number) => void;
 };
 
-const Card: React.FC<Props> = ({ type, _item_ }): React.JSX.Element => {
+const Card: React.FC<Props> = ({ type, _item_, onPressCard }): React.JSX.Element => {
 	return (
 		<TouchableOpacity
 			activeOpacity={0.8}
-			onPress={() => {
-				// TODO - TO REPLACE WITH NAVIGATION FOR DETAIL PAGE PASSING THE ID OF THE ITEM (Recipe/Activity)
-				console.log(`Card-ID: ${_item_.id}`);
-			}}
+			onPress={() => onPressCard && onPressCard(_item_.id)}
 		>
 			<View
 				className="relative rounded-[30px] sm:rounded-[18px] md:rounded-[20px] overflow-hidden

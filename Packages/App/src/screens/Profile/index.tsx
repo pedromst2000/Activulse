@@ -85,12 +85,10 @@ const Profile: React.FC = (): React.JSX.Element => {
 			</View>
 
 			<Modal
-				type="ExpiredWarning"
+				type="expiredWarning"
 				ilustration={infoIlus}
 				message="Your session has expired ! Sign Out and Sign In again to continue."
-				toogleModal={toogleModal}
 				isModalVisible={modalVisible}
-				setModalVisible={setModalVisible}
 				onPress={signOut}
 			/>
 		</AnimatedComponent>

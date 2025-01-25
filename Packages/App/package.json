@@ -29,6 +29,7 @@
     "expo-font": "13.0.1",
     "expo-image": "2.0.3",
     "expo-linear-gradient": "14.0.1",
+    "expo-screen-orientation": "~8.0.4",
     "expo-secure-store": "14.0.0",
     "expo-sensors": "14.0.1",
     "expo-splash-screen": "0.29.13",
@@ -39,7 +40,8 @@
     "nativewind": "^2.0.11",
     "react": "18.3.1",
     "react-dom": "^18.3.1",
-    "react-native": "0.76.3",
+    "react-native": "0.76.6",
+    "react-native-fs": "^2.20.0",
     "react-native-gesture-handler": "2.20.2",
     "react-native-image-picker": "^7.1.2",
     "react-native-intersection-observer": "^0.2.0",
@@ -54,7 +56,8 @@
     "react-native-swiper": "^1.6.0",
     "react-native-tab-view": "^3.5.2",
     "react-native-view-shot": "4.0.2",
-    "react-native-web": "~0.19.10"
+    "react-native-web": "~0.19.10",
+    "expo-video": "~2.0.5"
   },
   "devDependencies": {
     "@babel/cli": "^7.24.8",

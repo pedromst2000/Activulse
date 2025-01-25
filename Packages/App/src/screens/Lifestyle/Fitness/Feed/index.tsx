@@ -36,7 +36,7 @@ const FitnessFeed: React.FC = (): React.JSX.Element => {
 	const [selectedCategory, setSelectedCategory] = useState<
 		'All' | 'Cardio' | 'Yoga' | 'Muscles' | 'Premium'
 	>('All');
-	const { signOut } = useUserContext();
+	const { signOutExpired } = useUserContext();
 	const { refetch, data, isLoading, isRefetching } = useGetActivitiesFeedData({
 		page,
 		limit: config.pagination.activities.feed.defaultLimit,
@@ -209,7 +209,7 @@ const FitnessFeed: React.FC = (): React.JSX.Element => {
 				isModalVisible={modalVisible}
 				onPress={() => {
 					setModalVisible(false);
-					signOut();
+					signOutExpired();
 				}}
 			/>
 		</AnimatedComponent>

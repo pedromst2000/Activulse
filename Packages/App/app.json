@@ -17,7 +17,8 @@
         "NSCameraUsageDescription": "This app needs access to the camera to take photos.",
         "NSLocationWhenInUseUsageDescription": "This app needs access to your location.",
         "NSPhotoLibraryUsageDescription": "This app needs access to your photo library."
-      }
+      },
+      "requiresFullScreen": true
     },
     "android": {
       "adaptiveIcon": {
@@ -35,7 +36,20 @@
     },
     "plugins": [
       "expo-font",
-      "expo-secure-store"
+      "expo-secure-store",
+      [
+        "expo-screen-orientation",
+        {
+          "initialOrientation": "DEFAULT"
+        }
+      ],
+      [
+        "expo-video",
+        {
+          "supportsBackgroundPlayback": true,
+          "supportsPictureInPicture": true
+        }
+      ]
     ],
     "web": {
       "favicon": "src/assets/images/favicon.png"

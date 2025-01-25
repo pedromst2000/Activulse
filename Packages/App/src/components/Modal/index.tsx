@@ -14,8 +14,10 @@ type ModalProps = {
 		| 'info'
 		| 'confirmation'
 		| 'expiredWarning'
-		| 'noInternetWarning';
-	ilustration: React.FC<SvgProps>;
+		| 'addFavorite'
+		| 'removeFavorite';
+
+	ilustration: React.FC<SvgProps> | null;
 	message: string;
 	heartPoints?: string | undefined;
 	challengePoints?: string | undefined;
@@ -59,8 +61,9 @@ const Modal: React.FC<ModalProps> = ({
 
 					{type === 'successRegistration' ||
 					type === 'claim' ||
-					type === 'expiredWarning' ||
-					type === 'noInternetWarning' ? (
+					type === 'addFavorite' ||
+					type === 'removeFavorite' ||
+					type === 'expiredWarning' ? (
 						<View className="mt-4 md:mt-6 lg:mt-8 flex justify-center items-center pt-4 md:pt-5 lg:pt-6">
 							<TouchableOpacity
 								activeOpacity={0.8}
@@ -70,13 +73,14 @@ const Modal: React.FC<ModalProps> = ({
 							>
 								{type === 'successRegistration' ||
 								type === 'expiredWarning' ||
-								type === 'noInternetWarning' ? (
+								type === 'addFavorite' ||
+								type === 'removeFavorite' ? (
 									<Text className="text-secondary-700 font-quicksand-bold text-sm md:text-base lg:text-lg tracking-wide">
 										{type === 'successRegistration'
 											? 'Continue'
 											: type === 'expiredWarning'
 												? 'Sign Out'
-												: 'Exit App'}
+												: 'Ok'}
 									</Text>
 								) : type === 'claim' ? (
 									<View className="flex flex-row items-center justify-center space-x-2 md:space-x-3 lg:space-x-4">
