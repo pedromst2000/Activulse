@@ -60,7 +60,7 @@ responses:
                       type: string
                 tag:
                   type: string
-                description:
+                workouts:
                   oneOf:
                     - type: string
                     - type: array
@@ -130,7 +130,7 @@ responses:
                   id: 3
                   name: "Muscles"
                 tag: "Shoulders"
-                description:
+                workouts:
                   - id: 28
                     workout: "Warm-up: 10 minutes of light cardio"
                   - id: 29

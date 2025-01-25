@@ -150,7 +150,7 @@ async function activityDetails(req, res) {
 								name: activity.activity_category.category,
 							},
 							tag: activity.tag,
-							description:
+							workouts:
 								activity.activity_category.category === "Muscles"
 									? activity.workouts.map((workout) => ({
 											id: workout.workout_ID,
