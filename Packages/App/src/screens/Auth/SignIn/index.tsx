@@ -58,10 +58,15 @@ const SignIn: React.FC = (): React.JSX.Element => {
 						timeoutRef.current = setTimeout(() => {
 							setLoggedUser(resData.data.user);
 						}, timers.SUCCESS_DELAY); // delaying the navigation for 2 seconds
-
-						// Saving the tokens on the device
-						await utils.storage.setItem('authToken', resData.data.authToken);
-						await utils.storage.setItem('refreshToken', resData.data.refreshToken);
+						// Saving the tokens on the device only if they don't exist
+						const authToken = await utils.storage.getItem('authToken');
+						const refreshToken = await utils.storage.getItem('refreshToken');
+						if (!authToken) {
+							await utils.storage.setItem('authToken', resData.data.authToken);
+						}
+						if (!refreshToken) {
+							await utils.storage.setItem('refreshToken', resData.data.refreshToken);
+						}
 					}
 				},
 				onError: (error: any): void => {
