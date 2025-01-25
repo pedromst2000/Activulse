@@ -12,7 +12,7 @@ import NoPremiumRecipes from '../../assets/svg/ilustrations/EmptyStates/NoPremiu
 import NoPremiumActivities from '../../assets/svg/ilustrations/EmptyStates/NoPremiumActivities.svg';
 
 type Props = {
-	type: 'recipes' | 'activities';
+	type: 'recipes' | 'activities' | 'storeRecipes' | 'storeActivities';
 	data: any[];
 	handleOnChange: (inView: boolean, id: number) => void;
 	isLoading: boolean;
@@ -24,6 +24,7 @@ type Props = {
 	messageAPI?: string;
 	activities?: any[];
 	recipes?: any[];
+	onPressCard?: (id: number) => void;
 };
 
 const Feed: React.FC<Props> = ({
@@ -39,6 +40,7 @@ const Feed: React.FC<Props> = ({
 	messageAPI,
 	activities,
 	recipes,
+	onPressCard,
 }): React.JSX.Element => {
 	return (
 		<>
@@ -48,7 +50,19 @@ const Feed: React.FC<Props> = ({
 					key={`${item.id}-${index}`}
 					onChange={(inView: boolean) => handleOnChange(inView, item.id)}
 				>
-					<Card type={type === 'recipes' ? 'Recipe' : 'Activity'} _item_={item} />
+					<Card
+						onPressCard={onPressCard}
+						type={
+							type === 'recipes'
+								? 'Recipe'
+								: type === 'activities'
+									? 'Activity'
+									: type === 'storeRecipes'
+										? 'StoreRecipe'
+										: 'StoreActivity'
+						}
+						_item_={item}
+					/>
 				</InView>
 			))}
 
@@ -108,10 +122,10 @@ const Feed: React.FC<Props> = ({
 					/>
 				) : (
 					isError &&
-					(messageAPI === 'Network Error' ||
-						messageAPI === 'Something went wrong!' ||
-						messageAPI === 'Missing auth token or refresh token' ||
-						messageAPI === 'Refresh token has expired') && (
+					((messageAPI === 'Network Error' && recipes?.length == 0) ||
+						(messageAPI === 'Something went wrong!' && recipes?.length == 0) ||
+						(messageAPI === 'Missing auth token or refresh token' && recipes?.length == 0) ||
+						(messageAPI === 'Refresh token has expired' && recipes?.length == 0)) && (
 						<EmptyState
 							type="Error"
 							_ilustration_={ErrorIlus}

@@ -24,26 +24,15 @@ const asyncStoragePersister = createAsyncStoragePersister({
 	storage: utils.storage,
 });
 
-/**
- * The main application component.
- *
- * This component sets up the root view for gesture handling, navigation, and context providers.
- * It ensures that the assessment form data is reset when the user leaves the assessment screen
- * without completing it or closes the app. This prevents the next user from seeing previous data
- * that might be stored in async storage from other users who signed in on the same device.
- *l
- * @returns {React.JSX.Element} The root component of the application.
- */
 const App: React.FC = (): React.JSX.Element => {
 	const [appState, setAppState] = useState<AppStateStatus>(AppState.currentState);
 
 	useEffect(() => {
 		const handleAppStateChange = (nextAppState: AppStateStatus) => {
-			if (appState.match(/active/) && nextAppState === 'background') {
-				console.info('The app is going to the background.');
+			if (appState === 'active' && nextAppState === 'background') {
+				console.info('App transitioning to the background.');
 
-				// !! To remove the data selected when the app goes to the background (exit the app)
-
+				// Clear sensitive data or reset state
 				utils.storage.removeItem('selectedStress');
 				utils.storage.removeItem('selectedKnowDiet');
 				utils.storage.removeItem('FastFoodState');
@@ -65,7 +54,6 @@ const App: React.FC = (): React.JSX.Element => {
 	return (
 		<GestureHandlerRootView style={{ flex: 1 }}>
 			<StatusBar style="auto" />
-
 			<NavigationContainer theme={config.navigator.options.theme}>
 				<PersistQueryClientProvider
 					client={queryClient}

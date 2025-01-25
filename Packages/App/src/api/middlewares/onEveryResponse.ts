@@ -25,14 +25,16 @@ export default (api: AxiosInstance): void => {
 				method: error.config?.method || 'UNKNOWN METHOD',
 			};
 
-			if (
-				errorData.status === 401 &&
-				(errorData.message === 'Missing auth token or refresh token' ||
-					errorData.message === 'Refresh token has expired')
-			) {
-				await utils.storage.removeItem('authToken');
-				await utils.storage.removeItem('refreshToken');
-				await utils.storage.removeItem('loggedUser');
+			if (errorData.status === 401) {
+				const refreshToken = await utils.storage.getItem('refreshToken');
+
+				if (errorData.message === 'Refresh token has expired') {
+					console.info('Token expired. Removing tokens...');
+					await utils.storage.removeItem('authToken');
+					await utils.storage.removeItem('refreshToken');
+				} else if (!refreshToken) {
+					console.warn('Missing refresh token, user needs to reauthenticate.');
+				}
 			}
 
 			if (errorData.method == 'get') {

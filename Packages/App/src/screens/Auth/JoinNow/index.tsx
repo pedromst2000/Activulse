@@ -222,9 +222,7 @@ const JoinNow: React.FC = (): React.JSX.Element => {
 					type="successRegistration"
 					ilustration={SucessIlus}
 					message="Success! You're one step closer to better heart health."
-					toogleModal={toogleModal}
 					isModalVisible={modalVisible}
-					setModalVisible={setModalVisible}
 					onPress={() => {
 						setModalVisible(false);
 						navigation.navigate('VerifyEmail', { email: email.trim() });

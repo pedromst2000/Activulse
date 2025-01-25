@@ -3,8 +3,10 @@ import { RefreshControl, View } from 'react-native';
 import { IOScrollView } from 'react-native-intersection-observer';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { LifestyleStackParamList } from '@/src/navigation/Lifestyle';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import useGetRecipesFeedData, { Recipe } from '@/src/hooks/ReactQuery/recipes/feed';
 import config from '@/src/config';
+import { useUserContext } from '@/src/context/user';
 import AnimatedComponent from '../../../../components/Animated';
 import ScreenTitle from '@/src/components/ScreenTitle';
 import Input from '@/src/components/Input';
@@ -15,12 +17,16 @@ import Ilustration from '@/src/components/Ilustration';
 import SearchI from '@/src/assets/svg/icons/SearchIcon.svg';
 import LogoIlus from '@/src/assets/svg/ilustrations/Logo.svg';
 import infoIlus from '@/src/assets/svg/ilustrations/Modals/Info.svg';
-import { useUserContext } from '@/src/context/user';
 
 type NutritionFeedRouteProp = RouteProp<LifestyleStackParamList, 'NutritionFeed'>;
 
+type NutritionFeedNavigationProp = NativeStackNavigationProp<
+	LifestyleStackParamList,
+	'NutritionFeed'
+>;
+
 const NutritionFeed: React.FC = (): React.JSX.Element => {
-	const navigation = useNavigation();
+	const navigation = useNavigation<NutritionFeedNavigationProp>();
 	const route = useRoute<NutritionFeedRouteProp>();
 	const [recipes, setRecipes] = useState<Recipe[]>([]);
 	const [page, setPage] = useState<number>(1);
@@ -31,7 +37,7 @@ const NutritionFeed: React.FC = (): React.JSX.Element => {
 	const [selectedCategory, setSelectedCategory] = useState<
 		'All' | 'Soups' | 'Main Dishes' | 'Salads' | 'Desserts' | 'Premium'
 	>('All');
-	const { signOut } = useUserContext();
+	const { signOutExpired } = useUserContext();
 	const { refetch, data, isLoading, isRefetching } = useGetRecipesFeedData({
 		page,
 		limit: config.pagination.recipes.feed.defaultLimit,
@@ -86,6 +92,10 @@ const NutritionFeed: React.FC = (): React.JSX.Element => {
 		refetch();
 	};
 
+	const handleOnPressCard = (id: number): void => {
+		navigation.navigate('Recipe', { recipeId: id });
+	};
+
 	useEffect(() => {
 		if (isLoading || isRefetching) {
 			return;
@@ -104,6 +114,13 @@ const NutritionFeed: React.FC = (): React.JSX.Element => {
 		//! Do not add recipes to the dependencies array (it will cause an infinite loop)
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [data, isRefetching]);
+
+	useEffect(() => {
+		if (modalVisible) {
+			const timeout = setTimeout(() => setModalVisible(false), 5000); // Optional timeout to auto-hide modal
+			return () => clearTimeout(timeout);
+		}
+	}, [modalVisible]);
 
 	/**
 	 * TODO:
@@ -160,6 +177,7 @@ const NutritionFeed: React.FC = (): React.JSX.Element => {
 						isError={isError}
 						messageAPI={data?.message}
 						recipes={recipes}
+						onPressCard={handleOnPressCard}
 					/>
 
 					{!isLoading && recipes.length > 0 && recipes.length >= total && (
@@ -181,7 +199,7 @@ const NutritionFeed: React.FC = (): React.JSX.Element => {
 				isModalVisible={modalVisible}
 				onPress={() => {
 					setModalVisible(false);
-					signOut();
+					signOutExpired();
 				}}
 			/>
 		</AnimatedComponent>

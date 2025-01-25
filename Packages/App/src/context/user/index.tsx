@@ -47,9 +47,25 @@ const UserProvider: React.FC<PropsWithChildren> = ({ children }): React.JSX.Elem
 		setLoggedUser(user);
 	};
 
+	const handleSignInExpired = async (): Promise<void> => {
+		setLoggedUser(null);
+	};
+
 	const handleSignOut = async (): Promise<void> => {
-		await utils.storage.removeItem('authToken');
-		await utils.storage.removeItem('refreshToken');
+		const refreshToken = await utils.storage.getItem('refreshToken');
+		const authToken = await utils.storage.getItem('authToken');
+
+		// removing only if the token exists
+		if (authToken) {
+			console.log('removing authToken ...');
+			await utils.storage.removeItem('authToken');
+		}
+		if (refreshToken) {
+			console.log('removing refreshToken ...');
+			await utils.storage.removeItem('refreshToken');
+		}
+
+		console.log('removing loggedUser ...');
 		await utils.storage.removeItem('loggedUser');
 		setLoggedUser(null);
 	};
@@ -77,6 +93,7 @@ const UserProvider: React.FC<PropsWithChildren> = ({ children }): React.JSX.Elem
 			loggedUser: loggedUser,
 			setLoggedUser,
 			updateUser: updateUserStorage,
+			signOutExpired: handleSignInExpired,
 			signOut: handleSignOut,
 			exitApp: handleExitApp,
 		}),
