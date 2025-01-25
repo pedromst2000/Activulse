@@ -19,6 +19,11 @@ const FavBtn: React.FC<Props> = ({
 	isMyFav,
 	disable,
 }): React.JSX.Element => {
+
+	useEffect(() => {
+		console.log('isMyFav', isMyFav);
+	}, [isMyFav]);
+
 	return (
 		<TouchableOpacity
 			activeOpacity={0.8}

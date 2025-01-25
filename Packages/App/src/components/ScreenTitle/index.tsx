@@ -28,12 +28,12 @@ const ScreenTitle: React.FC<ScreenTitleProps> = ({
 			<Text
 				className={`font-merriweather-bold text-[22px] text-secondary-700 ${
 					['DASH', 'Vegan'].some((diet) => label?.includes(diet))
-						? 'ml-[80px] sm:ml-[60px] md:ml-[70px] lg:ml-[80px] xl:ml-[90px]'
+						? 'ml-[100px]'
 						: label === 'Mediterranean'
 							? 'ml-[55px] sm:ml-[35px] md:ml-[45px] lg:ml-[55px] xl:ml-[65px]'
 							: label === 'Fitness'
 								? ''
-								: 'ml-14 sm:ml-10 md:ml-12 lg:ml-14 xl:ml-16'
+								: 'ml-20'
 				}`}
 			>
 				{label}

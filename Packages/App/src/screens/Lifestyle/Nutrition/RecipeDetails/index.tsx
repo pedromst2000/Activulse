@@ -37,6 +37,7 @@ const RecipeDetails: React.FC = (): React.JSX.Element => {
 	const { isLoading, data, isRefetching, refetch } = useGetRecipeDetails({
 		id: route.params.recipeId,
 	});
+
 	const { mutateAsync: mutateAsyncAdd, data: addData } = useAddFavoriteRecipe({
 		id: route.params.recipeId,
 	});
@@ -105,7 +106,7 @@ const RecipeDetails: React.FC = (): React.JSX.Element => {
 		setIsMyFav(!isMyFav);
 
 		try {
-			if (newToggleFav) {
+			if (isMyFav === false) {
 				await mutateAsyncAdd(
 					{ id: route.params.recipeId },
 					{
@@ -152,8 +153,9 @@ const RecipeDetails: React.FC = (): React.JSX.Element => {
 	};
 
 	/**
-	 * TODO
+	 * TODO (bugs)
 	 4. Fix Glitch Bug of Modal Showing unecessary!
+	 5. Fix removing from favorites not working properly (when returning to the screen after adding!)
 	 * 
 	 */
 
@@ -236,10 +238,10 @@ const RecipeDetails: React.FC = (): React.JSX.Element => {
 				}
 				isModalVisible={modalVisible}
 				onPress={() => {
-					setModalVisible(false);
 					if (addData?.message.includes('added') || deleteData?.message.includes('removed')) {
-						refetch();
-					} else {
+						console.log('Modal Closed');
+						setModalVisible(false);
+					} else if (data?.message == 'Network Error' || data?.message.includes('expired')) {
 						signOut();
 					}
 				}}
