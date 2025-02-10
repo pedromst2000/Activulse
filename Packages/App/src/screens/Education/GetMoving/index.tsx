@@ -3,7 +3,7 @@ import AnimatedComponent from '@/src/components/Animated';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import Icon from '@/src/components/Icon';
-import IntensityI from '../../../assets/svg/icons/FrequencyIconBlue.svg';
+import Intensity from '@/src/components/Intensity';
 import TimeI from '../../../assets/svg/icons/TimeIcon.svg';
 import CalendarI from '../../../assets/svg/icons/CalendarIcon.svg';
 import ScreenTitle from '@/src/components/ScreenTitle';
@@ -56,17 +56,12 @@ const GetMoving: React.FC = (): React.JSX.Element => {
 					</View>
 
 					<View className="flex-row justify-between mt-4">
-						<View className="flex-row items-center">
-							<Icon icon={IntensityI} width={35} height={35} />
-							<View className="flex-row ml-2">
-								{[...Array(5)].map((_, index) => (
-									<View
-										key={index}
-										className={`w-3 h-3 rounded-full mx-1 ${index < 2 ? 'bg-secondary-700' : 'bg-secondary-50'}`}
-									/>
-								))}
-							</View>
-						</View>
+						<Intensity
+							typeBullet="blue"
+							intensityVal={2}
+							iconStyles="w-8 h-8"
+							bulletSizes="w-3 h-3"
+						/>
 						<View className="flex-row items-center gap-2">
 							<Icon icon={TimeI} width={22} height={22} />
 							<Text className="font-quicksand-medium text-secondary-700 text-sm md:text-base lg:text-lg leading-6">
@@ -75,17 +70,12 @@ const GetMoving: React.FC = (): React.JSX.Element => {
 						</View>
 					</View>
 					<View className="flex-row justify-between mt-4">
-						<View className="flex-row items-center">
-							<Icon icon={IntensityI} width={35} height={35} />
-							<View className="flex-row ml-2">
-								{[...Array(5)].map((_, index) => (
-									<View
-										key={index}
-										className={`w-3 h-3 rounded-full mx-1 ${index < 5 ? 'bg-secondary-700' : 'bg-secondary-50'}`}
-									/>
-								))}
-							</View>
-						</View>
+						<Intensity
+							typeBullet="blue"
+							intensityVal={5}
+							iconStyles="w-8 h-8"
+							bulletSizes="w-3 h-3"
+						/>
 						<View className="flex-row items-center gap-2">
 							<Icon icon={TimeI} width={22} height={22} />
 							<Text className="font-quicksand-medium text-secondary-700 text-sm md:text-base lg:text-lg leading-6">
@@ -110,17 +100,12 @@ const GetMoving: React.FC = (): React.JSX.Element => {
 					</Text>
 
 					<View className="flex-row justify-between mt-4">
-						<View className="flex-row items-center">
-							<Icon icon={IntensityI} width={35} height={35} />
-							<View className="flex-row ml-2">
-								{[...Array(5)].map((_, index) => (
-									<View
-										key={index}
-										className={`w-3 h-3 rounded-full mx-1 ${index < 2 ? 'bg-secondary-700' : 'bg-secondary-50'}`}
-									/>
-								))}
-							</View>
-						</View>
+						<Intensity
+							typeBullet="blue"
+							intensityVal={2}
+							iconStyles="w-8 h-8"
+							bulletSizes="w-3 h-3"
+						/>
 						<View className="flex-row items-center gap-2">
 							<Icon icon={CalendarI} width={22} height={22} />
 							<Text className="font-quicksand-medium text-secondary-700 text-sm md:text-base lg:text-lg leading-6">
@@ -129,17 +114,12 @@ const GetMoving: React.FC = (): React.JSX.Element => {
 						</View>
 					</View>
 					<View className="flex-row justify-between mt-4">
-						<View className="flex-row items-center">
-							<Icon icon={IntensityI} width={35} height={35} />
-							<View className="flex-row ml-2">
-								{[...Array(5)].map((_, index) => (
-									<View
-										key={index}
-										className={`w-3 h-3 rounded-full mx-1 ${index < 5 ? 'bg-secondary-700' : 'bg-secondary-50'}`}
-									/>
-								))}
-							</View>
-						</View>
+						<Intensity
+							typeBullet="blue"
+							intensityVal={5}
+							iconStyles="w-8 h-8"
+							bulletSizes="w-3 h-3"
+						/>
 						<View className="flex-row items-center gap-2">
 							<Icon icon={CalendarI} width={22} height={22} />
 							<Text className="font-quicksand-medium text-secondary-700 text-sm md:text-base lg:text-lg leading-6">
@@ -164,17 +144,12 @@ const GetMoving: React.FC = (): React.JSX.Element => {
 					</Text>
 
 					<View className="flex-row justify-between mt-4">
-						<View className="flex-row items-center">
-							<Icon icon={IntensityI} width={35} height={35} />
-							<View className="flex-row ml-2">
-								{[...Array(5)].map((_, index) => (
-									<View
-										key={index}
-										className={`w-3 h-3 rounded-full mx-1 ${index < 2 ? 'bg-secondary-700' : 'bg-secondary-50'}`}
-									/>
-								))}
-							</View>
-						</View>
+						<Intensity
+							typeBullet="blue"
+							intensityVal={2}
+							iconStyles="w-8 h-8"
+							bulletSizes="w-3 h-3"
+						/>
 						<View className="flex-row items-center gap-2">
 							<Icon icon={TimeI} width={22} height={22} />
 							<Text className="font-quicksand-medium text-secondary-700 text-sm md:text-base lg:text-lg leading-6">
@@ -183,17 +158,12 @@ const GetMoving: React.FC = (): React.JSX.Element => {
 						</View>
 					</View>
 					<View className="flex-row justify-between mt-4">
-						<View className="flex-row items-center">
-							<Icon icon={IntensityI} width={35} height={35} />
-							<View className="flex-row ml-2">
-								{[...Array(5)].map((_, index) => (
-									<View
-										key={index}
-										className={`w-3 h-3 rounded-full mx-1 ${index < 5 ? 'bg-secondary-700' : 'bg-secondary-50'}`}
-									/>
-								))}
-							</View>
-						</View>
+						<Intensity
+							typeBullet="blue"
+							intensityVal={5}
+							iconStyles="w-8 h-8"
+							bulletSizes="w-3 h-3"
+						/>
 						<View className="flex-row items-center gap-2">
 							<Icon icon={TimeI} width={22} height={22} />
 							<Text className="font-quicksand-medium text-secondary-700 text-sm md:text-base lg:text-lg leading-6">

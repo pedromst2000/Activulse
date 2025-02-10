@@ -75,26 +75,36 @@ async function activityDetails(req, res) {
 			},
 		});
 
-		const responseData =
+		const responseData = {
+			activity_id: activity.activity_ID,
+			isPremium: activity.isPremium,
+			isMyPremium: !!isMyPremium,
+			isMyFavorite: !!isMyFavorite,
+			intensity:
+				activity.intensity === 1
+					? "Low"
+					: activity.intensity === 2
+						? "Moderate I"
+						: activity.intensity === 3
+							? "Moderate II"
+							: activity.intensity === 4
+								? "Moderate III"
+								: "Vigorous",
+			title: activity.title,
+			category: {
+				id: activity.activity_category.activity_category_ID,
+				name: activity.activity_category.category,
+			},
+			tag: activity.tag,
+		};
+
+		utils.handleResponse(
+			res,
+			utils.http.StatusOK,
+			"Activity Data retrieved successfully",
 			isMyPremium && activity?.isPremium
 				? {
-						activity_id: activity.activity_ID,
-						isPremium: activity.isPremium,
-						isMyPremium: !!isMyPremium,
-						isMyFavorite: !!isMyFavorite,
-						intensity:
-							activity.intensity === 1
-								? "Low"
-								: activity.intensity === 2
-									? "Moderate I"
-									: activity.intensity === 3
-										? "Moderate II"
-										: activity.intensity === 4
-											? "Moderate III"
-											: "Vigorous",
-						title: activity.title,
-						category: "Premium",
-						tag: activity.tag,
+						...responseData,
 						description: activity.description,
 						video: {
 							url: findActivityVideo?.provider_video_url,
@@ -105,21 +115,7 @@ async function activityDetails(req, res) {
 					}
 				: !isMyPremium && activity?.isPremium
 					? {
-							activity_id: activity.activity_ID,
-							isPremium: activity.isPremium,
-							isMyPremium: !!isMyPremium,
-							intensity:
-								activity.intensity === 1
-									? "Low"
-									: activity.intensity === 2
-										? "Moderate I"
-										: activity.intensity === 3
-											? "Moderate II"
-											: activity.intensity === 4
-												? "Moderate III"
-												: "Vigorous",
-							title: activity.title,
-							tag: activity.tag,
+							...responseData,
 							description: activity.description,
 							price: activity.price,
 							videoTime: activity.video_time,
@@ -129,47 +125,30 @@ async function activityDetails(req, res) {
 							createdAt: activity.createdAt,
 							updatedAt: activity.updatedAt,
 						}
-					: {
-							activity_id: activity.activity_ID,
-							isPremium: activity.isPremium,
-							isMyPremium: !!isMyPremium,
-							isMyFavorite: !!isMyFavorite,
-							intensity:
-								activity.intensity === 1
-									? "Low"
-									: activity.intensity === 2
-										? "Moderate I"
-										: activity.intensity === 3
-											? "Moderate II"
-											: activity.intensity === 4
-												? "Moderate III"
-												: "Vigorous",
-							title: activity.title,
-							category: {
-								id: activity.activity_category.activity_category_ID,
-								name: activity.activity_category.category,
+					: activity.activity_category.category === "Muscles"
+						? {
+								...responseData,
+								workouts: activity.workouts.map((workout, index) => ({
+									id: index + 1,
+									workout: workout.workout,
+								})),
+								image: {
+									url: findActivityImage?.provider_image_url,
+								},
+								duration: activity.duration,
+								createdAt: activity.createdAt,
+								updatedAt: activity.updatedAt,
+							}
+						: {
+								...responseData,
+								description: activity.description,
+								image: {
+									url: findActivityImage?.provider_image_url,
+								},
+								duration: activity.duration,
+								createdAt: activity.createdAt,
+								updatedAt: activity.updatedAt,
 							},
-							tag: activity.tag,
-							workouts:
-								activity.activity_category.category === "Muscles"
-									? activity.workouts.map((workout) => ({
-											id: workout.workout_ID,
-											workout: workout.workout,
-										}))
-									: activity.description,
-							image: {
-								url: findActivityImage?.provider_image_url,
-							},
-							duration: activity.duration,
-							createdAt: activity.createdAt,
-							updatedAt: activity.updatedAt,
-						};
-
-		utils.handleResponse(
-			res,
-			utils.http.StatusOK,
-			"Activity Data retrieved successfully",
-			responseData,
 		);
 		return;
 	} catch (error) {

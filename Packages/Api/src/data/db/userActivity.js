@@ -11,4 +11,16 @@ module.exports = [
 		weekly_total_time_workout: 0,
 		user_id: 2,
 	},
+	{
+		total_steps: 0,
+		total_distance: 0,
+		weekly_total_time_workout: 0,
+		user_id: 3,
+	},
+	{
+		total_steps: 0,
+		total_distance: 0,
+		weekly_total_time_workout: 0,
+		user_id: 4,
+	},
 ];

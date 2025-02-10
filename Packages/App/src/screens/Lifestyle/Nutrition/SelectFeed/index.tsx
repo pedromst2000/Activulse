@@ -32,9 +32,7 @@ const SelectFeed: React.FC = (): React.JSX.Element => {
 				showsVerticalScrollIndicator={false}
 				className="flex-1 bg-primary-50"
 			>
-				<ScreenTitle label="Nutrition" onPress={() => navigation.goBack()} 
-					
-					/>
+				<ScreenTitle label="Nutrition" onPress={() => navigation.goBack()} />
 
 				<View className="flex-1 bg-primary-50 px-4 mb-4">
 					{/* Title & Subtitle */}

@@ -159,9 +159,7 @@ responses:
                 isMyFavorite: false
                 intensity: "Low"
                 title: "Hatha Yoga Practice I"
-                category:
-                  id: 2
-                  name: "Premium"
+                category: "Premium"
                 tag: "Hatha Yoga"
                 description: "Flow with serene rhythm in calming Hatha yoga. Harmonize mind and body through purposeful postures, melting away stress and realigning equilibrium. Suitable for all levels, experience revitalization and invigoration."
                 video:
@@ -179,6 +177,7 @@ responses:
                 isMyPremium: false
                 intensity: "Moderate III"
                 title: "Arms Workout II"
+                category: "Premium"
                 tag: "Arms"
                 description: "Dive into our Beginner's Arms Workout! Target your arms with curls to overhead presses. Perfect for newcomers, build strength and definition with proper form every step. Feel the burn and see results on your path to stronger, toned arms!"
                 price: 3400

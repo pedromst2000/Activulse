@@ -14,8 +14,7 @@ const GoBackBtn: React.FC<Props> = ({ onPress, isRounded, disable }): React.JSX.
 		<TouchableOpacity
 			onPress={onPress}
 			disabled={disable}
-			className={`flex flex-row items-center justify-center 
-                w-[44px] h-[44px] ${isRounded ? 'rounded-full bg-accent-500' : null} `}
+			className={`flex flex-row items-center justify-center w-[44px] h-[44px] ${isRounded ? 'rounded-full' : null} bg-accent-500 ${disable ? 'opacity-50' : null}`}
 		>
 			<Icon icon={ArrowLeftI} width={28} height={28} />
 		</TouchableOpacity>

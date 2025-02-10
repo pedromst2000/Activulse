@@ -15,6 +15,7 @@ type ModalProps = {
 		| 'confirmation'
 		| 'expiredWarning'
 		| 'addFavorite'
+		| 'finishedExercise'
 		| 'removeFavorite';
 
 	ilustration: React.FC<SvgProps> | null;
@@ -48,7 +49,11 @@ const Modal: React.FC<ModalProps> = ({
 					<View className="flex items-center justify-center">
 						<Ilustration
 							ilustration={ilustration}
-							styleClass="w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20"
+							styleClass={
+								type === 'finishedExercise'
+									? 'w-14 h-14'
+									: 'w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20'
+							}
 						/>
 					</View>
 
@@ -63,6 +68,7 @@ const Modal: React.FC<ModalProps> = ({
 					type === 'claim' ||
 					type === 'addFavorite' ||
 					type === 'removeFavorite' ||
+					type === 'finishedExercise' ||
 					type === 'expiredWarning' ? (
 						<View className="mt-4 md:mt-6 lg:mt-8 flex justify-center items-center pt-4 md:pt-5 lg:pt-6">
 							<TouchableOpacity
@@ -74,7 +80,8 @@ const Modal: React.FC<ModalProps> = ({
 								{type === 'successRegistration' ||
 								type === 'expiredWarning' ||
 								type === 'addFavorite' ||
-								type === 'removeFavorite' ? (
+								type === 'removeFavorite' ||
+								type === 'finishedExercise' ? (
 									<Text className="text-secondary-700 font-quicksand-bold text-sm md:text-base lg:text-lg tracking-wide">
 										{type === 'successRegistration'
 											? 'Continue'

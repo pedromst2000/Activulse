@@ -49,6 +49,12 @@
           "supportsBackgroundPlayback": true,
           "supportsPictureInPicture": true
         }
+      ],
+      [
+        "expo-audio",
+        {
+          "microphonePermission": "Allow activulse to access your microphone."
+        }
       ]
     ],
     "web": {
