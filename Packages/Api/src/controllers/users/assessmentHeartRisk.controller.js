@@ -121,6 +121,13 @@ async function assessmentHeartRisk(req, res) {
 				user_id: loggedUserId,
 			});
 
+			await db.mysql.UserActivity.create({
+				user_id: loggedUserId,
+				total_steps: 0,
+				total_distance: 0,
+				weekly_total_time_workout: 0,
+			});
+
 			return utils.handleResponse(
 				res,
 				utils.http.StatusCreated,

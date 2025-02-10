@@ -91,12 +91,10 @@ async function activityDetails(req, res) {
 								? "Moderate III"
 								: "Vigorous",
 			title: activity.title,
-			category: activity.isPremium
-				? "Premium"
-				: {
-						id: activity.activity_category.activity_category_ID,
-						name: activity.activity_category.category,
-					},
+			category: {
+				id: activity.activity_category.activity_category_ID,
+				name: activity.activity_category.category,
+			},
 			tag: activity.tag,
 		};
 
@@ -147,6 +145,7 @@ async function activityDetails(req, res) {
 								image: {
 									url: findActivityImage?.provider_image_url,
 								},
+								duration: activity.duration,
 								createdAt: activity.createdAt,
 								updatedAt: activity.updatedAt,
 							},
