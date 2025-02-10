@@ -10,6 +10,7 @@ type Props = {
 		| 'RecipeDetails'
 		| 'ActivityDetails'
 		| 'WorkoutPlanDetails'
+		| 'StoreDetails'
 		| 'StoreFeed';
 	category?: string;
 };
@@ -45,8 +46,6 @@ const LoadingSkeleton: React.FC<Props> = ({ type, category }): React.JSX.Element
 	};
 
 	/**TODO
-	 * 2. Add a loading Skeleton for the Activity Details
-	 * 3. Add a loading Skeleton for the Workout Plan Details
 	 *
 	 */
 
@@ -164,7 +163,6 @@ const LoadingSkeleton: React.FC<Props> = ({ type, category }): React.JSX.Element
 									className="bg-gray-500 px-3 py-1 rounded-full w-20 h-6 sm:w-18 sm:h-5 md:w-16 md:h-4 lg:w-14 lg:h-3"
 								/>
 							</View>
-
 							<View className="flex-row items-center space-x-2">
 								{/* Icon Time */}
 								<Animated.View
@@ -179,16 +177,51 @@ const LoadingSkeleton: React.FC<Props> = ({ type, category }): React.JSX.Element
 								/>
 							</View>
 						</View>
-						{/* Text Description */}
-						<View className="">
-							{[...Array(8)].map((_, index) => (
+
+						{/* Intensity */}
+						{type === 'ActivityDetails' ||
+						type === 'WorkoutPlanDetails' ||
+						type === 'StoreDetails' ? (
+							<View className="flex-row ml-2">
+								{[...Array(5)].map((_, index) => (
+									<Animated.View
+										key={index}
+										style={animatedStyle}
+										className="w-[15px] h-[15px] bg-gray-300 rounded-full mx-1"
+									/>
+								))}
+							</View>
+						) : null}
+
+						{/* Plan Workout Plan */}
+						{type === 'WorkoutPlanDetails' && (
+							<View className="flex-col justify-center items-center space-y-4">
 								<Animated.View
-									key={index}
 									style={animatedStyle}
-									className="h-2 bg-gray-300 rounded w-full mb-2"
+									className="w-16 h-16 bg-gray-300 rounded-full"
 								/>
-							))}
-						</View>
+								{[...Array(5)].map((_, index) => (
+									<Animated.View
+										key={index}
+										style={animatedStyle}
+										className="w-full h-2 bg-gray-300 rounded"
+									/>
+								))}
+							</View>
+						)}
+
+						{/* Text Description */}
+						{type !== 'WorkoutPlanDetails' && (
+							<View>
+								{[...Array(8)].map((_, index) => (
+									<Animated.View
+										key={index}
+										style={animatedStyle}
+										className="h-2 bg-gray-300 rounded w-full mb-2"
+									/>
+								))}
+							</View>
+						)}
 					</View>
 				</View>
 			) : null}

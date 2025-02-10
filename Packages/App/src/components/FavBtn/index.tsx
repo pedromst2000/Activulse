@@ -15,15 +15,9 @@ type Props = {
 const FavBtn: React.FC<Props> = ({
 	onPress,
 	isRounded,
-	isToogleFav,
 	isMyFav,
 	disable,
 }): React.JSX.Element => {
-
-	useEffect(() => {
-		console.log('isMyFav', isMyFav);
-	}, [isMyFav]);
-
 	return (
 		<TouchableOpacity
 			activeOpacity={0.8}
@@ -32,11 +26,7 @@ const FavBtn: React.FC<Props> = ({
 			className={`flex flex-row items-center justify-center 
                 w-[44px] h-[44px] ${isRounded ? 'rounded-full bg-accent-500' : null} `}
 		>
-			<Icon
-				icon={isMyFav ? FavSelectedI : isToogleFav ? FavSelectedI : FavNotSelectedI}
-				width={28}
-				height={28}
-			/>
+			<Icon icon={isMyFav ? FavSelectedI : FavNotSelectedI} width={28} height={28} />
 		</TouchableOpacity>
 	);
 };

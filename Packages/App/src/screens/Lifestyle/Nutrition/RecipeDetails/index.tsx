@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { RefreshControl, View } from 'react-native';
+import utils from '@/src/utils';
 import { IOScrollView } from 'react-native-intersection-observer';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { LifestyleStackParamList } from '@/src/navigation/Lifestyle';
 import { useUserContext } from '@/src/context/user';
-import { APIResponse } from '@/src/api/types';
 import useGetRecipeDetails, { Recipe } from '@/src/hooks/ReactQuery/recipes/details';
 import useAddFavoriteRecipe from '@/src/hooks/ReactQuery/recipes/addFavoriteRecipe';
 import useDeleteFavoriteRecipe from '@/src/hooks/ReactQuery/recipes/deleteFavoriteRecipe';
@@ -48,47 +48,37 @@ const RecipeDetails: React.FC = (): React.JSX.Element => {
 	useEffect(() => {
 		if (data?.data) {
 			setRecipe(data.data);
-			setIsMyFav(data.data.isMyFavorite || false);
+			setIsMyFav(data.data.isMyFavorite ?? false);
 		}
-	}, [data?.data, recipe, showMessage]);
+	}, [data?.data]);
 
-	// !! TO BE REFRACTORED
+	//  TO BE REFRACTORED
 	useEffect(() => {
 		if (data?.success === false || data?.message === 'Network Error') {
 			setIsError(true);
+		} else if (data?.success === true) {
+			setIsError(false);
 		}
 
-		if (data?.success === true) {
-			setIsError(false);
-		} else if (
-			data?.message == 'Missing auth token or refresh token' ||
-			data?.message == 'Refresh token has expired'
+		if (
+			data?.message === 'Missing auth token or refresh token' ||
+			data?.message === 'Refresh token has expired'
 		) {
 			setModalVisible(true);
 		}
-	}, [
-		isError,
-		data?.success,
-		data?.message,
-		modalVisible,
-		addData?.message,
-		deleteData?.message,
-	]);
+	}, [data?.success, data?.message]);
 
 	useEffect(() => {
 		if (
-			addData?.message == 'Missing auth token or refresh token' ||
-			addData?.message == 'Refresh token has expired' ||
-			deleteData?.message == 'Missing auth token or refresh token' ||
-			deleteData?.message == 'Refresh token has expired' ||
-			addData?.message == 'Recipe added to favorites !' ||
-			deleteData?.message == 'Recipe removed from favorites !'
-		)
+			addData?.message === 'Missing auth token or refresh token' ||
+			addData?.message === 'Refresh token has expired' ||
+			deleteData?.message === 'Missing auth token or refresh token' ||
+			deleteData?.message === 'Refresh token has expired' ||
+			addData?.message === 'Recipe added to favorites !' ||
+			deleteData?.message === 'Recipe removed from favorites !'
+		) {
 			setModalVisible(true);
-
-		return () => {
-			setModalVisible(false);
-		};
+		}
 	}, [addData?.message, deleteData?.message]);
 
 	const handleOnRefresh = (): void => {
@@ -96,67 +86,32 @@ const RecipeDetails: React.FC = (): React.JSX.Element => {
 			return;
 		}
 
-		setRecipe(null);
-		refetch();
+		refetch().then((result) => {
+			if (result.data) {
+				setRecipe(result.data.data);
+				setIsMyFav(result.data.data.isMyFavorite ?? false);
+			}
+		});
 	};
 
-	const handleOnToogleFav = async (): Promise<void> => {
-		const newToggleFav = !isToogleFav;
-		setIsToogleFav(newToggleFav);
-		setIsMyFav(!isMyFav);
-
-		try {
-			if (isMyFav === false) {
-				await mutateAsyncAdd(
-					{ id: route.params.recipeId },
-					{
-						onSuccess: async (resData: APIResponse): Promise<void> => {
-							if (resData.success) {
-								setIsMyFav(true);
-								setShowMessage(resData.message || 'Added to your Favorites List');
-								setModalVisible(true);
-							}
-						},
-						onError: (error: any): void => {
-							if (error.status === 409) {
-								setShowMessage('Recipe is already in your Favorites List');
-								setModalVisible(true);
-							} else {
-								setIsMyFav(false);
-								console.info('error', error);
-							}
-						},
-					},
-				);
-			} else {
-				await mutateAsyncDelete(
-					{ id: route.params.recipeId },
-					{
-						onSuccess: async (resData: APIResponse): Promise<void> => {
-							if (resData.success) {
-								setIsMyFav(false);
-								setShowMessage(resData.message || 'Removed from your Favorites List');
-								setModalVisible(true);
-							}
-						},
-						onError: (error: any): void => {
-							setIsMyFav(true);
-							console.info('error', error);
-						},
-					},
-				);
-			}
-		} catch (error) {
-			console.info('Unexpected error:', error);
-			setIsMyFav(!newToggleFav);
-		}
+	const handleOnToogleFav = (): void => {
+		utils.toogleFav({
+			id: route.params.recipeId,
+			isToogleFav,
+			setIsToogleFav,
+			isMyFav,
+			setIsMyFav,
+			setModalVisible,
+			setShowMessage,
+			mutateAsyncAdd,
+			mutateAsyncDelete,
+		});
 	};
 
 	/**
-	 * TODO (bugs)
-	 4. Fix Glitch Bug of Modal Showing unecessary!
-	 5. Fix removing from favorites not working properly (when returning to the screen after adding!)
-	 * 
+	 *  * TODO (bugs)
+	 * 4. Fix Glitch Bug of Modal Showing unecessary!
+	 * 5. Add Accordion skeleton loader
 	 */
 
 	return (
@@ -177,11 +132,7 @@ const RecipeDetails: React.FC = (): React.JSX.Element => {
 					<LoadingSkeleton type="RecipeDetails" />
 				) : !isError && !isLoading && !isRefetching ? (
 					<View className="flex-1 bg-primary-50 pb-8">
-						<DetailsHeader
-							onToggleFav={handleOnToogleFav}
-							isToogleFav={isToogleFav}
-							isMyFav={isMyFav}
-						/>
+						<DetailsHeader onToggleFav={handleOnToogleFav} isMyFav={isMyFav} />
 
 						<DetailsMedia
 							type={recipe?.image?.url ? 'image' : 'video'}
@@ -197,11 +148,7 @@ const RecipeDetails: React.FC = (): React.JSX.Element => {
 				  data?.message === 'Missing auth token or refresh token' ||
 				  data?.message.includes('expired') ? (
 					<View>
-						<View
-							className="
-						absolute top-12 left-4 z-10
-								"
-						>
+						<View className="absolute top-12 left-4 z-10">
 							<GoBackBtn onPress={() => navigation.goBack()} isRounded={true} />
 						</View>
 						<EmptyState
@@ -227,7 +174,7 @@ const RecipeDetails: React.FC = (): React.JSX.Element => {
 						? FavoriteIlus
 						: showMessage.includes('removed')
 							? RemoveIlus
-							: data?.message == 'Network Error' || data?.message.includes('expired')
+							: data?.message === 'Network Error' || data?.message.includes('expired')
 								? InfoIlus
 								: null
 				}
@@ -241,7 +188,7 @@ const RecipeDetails: React.FC = (): React.JSX.Element => {
 					if (addData?.message.includes('added') || deleteData?.message.includes('removed')) {
 						console.log('Modal Closed');
 						setModalVisible(false);
-					} else if (data?.message == 'Network Error' || data?.message.includes('expired')) {
+					} else if (data?.message === 'Network Error' || data?.message.includes('expired')) {
 						signOut();
 					}
 				}}

@@ -5,6 +5,7 @@ import screen from './screen';
 import storage from './storage';
 import validateData from './validateData';
 import timers from './timers';
+import toogleFav from './toogleFav';
 
 export default {
 	storage,
@@ -14,4 +15,5 @@ export default {
 	screen,
 	validateData,
 	timers,
+	toogleFav,
 };

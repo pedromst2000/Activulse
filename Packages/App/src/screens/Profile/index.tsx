@@ -76,7 +76,7 @@ const Profile: React.FC = (): React.JSX.Element => {
 						</Text>
 					</Button>
 
-					<Button className="px-12 py-2" onPress={signOut}>
+					<Button className="px-12 py-2" isRounded={false} onPress={signOut}>
 						<Text className="font-quicksand-bold text-secondary-700 text-base md:text-lg lg:text-xl">
 							Sign Out
 						</Text>

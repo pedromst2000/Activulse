@@ -105,6 +105,10 @@ const FitnessFeed: React.FC = (): React.JSX.Element => {
 		navigation.setParams({ intensity: null });
 	};
 
+	const handleOnPressCard = (id: number): void => {
+		navigation.navigate('Activity', { activityId: id });
+	};
+
 	useEffect(() => {
 		if (isLoading || isRefetching) {
 			return;
@@ -125,9 +129,17 @@ const FitnessFeed: React.FC = (): React.JSX.Element => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [data, isRefetching]);
 
+	useEffect(() => {
+		if (modalVisible) {
+			const timeout = setTimeout(() => setModalVisible(false), 5000); // Optional timeout to auto-hide modal
+			return () => clearTimeout(timeout);
+		}
+	}, [modalVisible]);
+
 	/**
 	 * TODO
 	 * 6. Fix Glitch Bug of Modal Showing unecessary!
+	 * 7. Fix blank screen while fetching data after showing the loading skeleton and the data is not yet fetched
 	 */
 
 	return (
@@ -188,6 +200,7 @@ const FitnessFeed: React.FC = (): React.JSX.Element => {
 						category={selectedCategory}
 						messageAPI={data?.message}
 						activities={activities}
+						onPressCard={handleOnPressCard}
 					/>
 
 					{!isLoading && activities.length > 0 && activities.length >= total && (
