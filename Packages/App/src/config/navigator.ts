@@ -67,6 +67,7 @@ const hiddenScreens: string[] = [
 	'QuitSmoking',
 	'SelectFeed',
 	'IntensityFilter',
+	'PracticeActivity',
 ];
 
 export default {
