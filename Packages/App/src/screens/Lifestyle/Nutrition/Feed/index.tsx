@@ -41,7 +41,7 @@ const NutritionFeed: React.FC = (): React.JSX.Element => {
 	const { refetch, data, isLoading, isRefetching } = useGetRecipesFeedData({
 		page,
 		limit: config.pagination.recipes.feed.defaultLimit,
-		diet: route.params.diet,
+		diet: route.params.diet || 'DASH',
 		category: selectedCategory,
 		title: search,
 	});

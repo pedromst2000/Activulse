@@ -61,14 +61,14 @@ const Lifestyle: React.FC = (): React.JSX.Element => {
 							onPress={() =>
 								loggedUser?.diet === 'Unknown'
 									? navigation.navigate('SelectFeed' as never)
-									: navigation.navigate('NutritionFeed', { diet: loggedUser?.diet })
+									: navigation.navigate('NutritionFeed', { diet: loggedUser?.diet } as never)
 							}
 						/>
 					</View>
 				</View>
 			</ScrollView>
 			{/* Leaderboard Button */}
-			<View className="absolute bottom-4 right-4 md:bottom-8 md:right-8">
+			<View className="absolute bottom-6 right-4 md:bottom-20 md:right-8">
 				<LeaderboardBtn onPress={() => navigation.navigate('Leaderboard' as never)} />
 			</View>
 		</AnimatedComponent>

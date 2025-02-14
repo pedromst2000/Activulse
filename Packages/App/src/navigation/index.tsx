@@ -6,9 +6,9 @@ import AssessmentRiskStack, { AssessmentRiskStackParamList } from './AssessmentR
 import BonusAssessmentStack, { BonusAssessmentStackParamList } from './BonusAssessment';
 import HomeStack, { HomeStackParamList } from './Home';
 import LifestyleStack, { LifestyleStackParamList } from './Lifestyle';
+import StoreStack, { StoreStackParamList } from './Store';
 import Onboarding from '../screens/Onboarding';
 import Profile from '../screens/Profile';
-import Store from '../screens/Store';
 import config from '../config/navigator';
 import utilsNav from '../utils/navigation';
 import Icon from '../components/Icon';
@@ -25,7 +25,7 @@ import { useUserContext } from '../context/user';
 export type MainTabParamList = {
 	Home: undefined;
 	Lifestyle: undefined;
-	Store: undefined; // to convert to StoreStack later
+	Store: undefined;
 	Profile: undefined; // to convert to ProfileStack later
 };
 
@@ -46,6 +46,9 @@ export type RootStackParamList = {
 	};
 	LifestyleStack: {
 		screen: keyof LifestyleStackParamList; // 'FitnessFeed' | 'NutritionFeed' | 'Leaderboard' | 'Activity' | 'Recipe' | 'SelectFeed';
+	};
+	StoreStack: {
+		screen: keyof StoreStackParamList; // 'selectPremiumFeed' | 'FitnessPremiumFeed' | 'NutritionPremiumFeed' | 'Banners';
 	};
 };
 
@@ -86,7 +89,7 @@ const MainTabNavigator: React.FC = (): React.JSX.Element => {
 			/>
 			<Tab.Screen
 				name="Store"
-				component={Store}
+				component={StoreStack}
 				options={{
 					tabBarIcon: ({ focused }) => (
 						<Icon icon={focused ? StoreIS : StoreINS} width={30} height={30} />
