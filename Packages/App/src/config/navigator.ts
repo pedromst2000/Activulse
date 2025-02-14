@@ -50,11 +50,10 @@ const options: Options = {
 		paddingBottom: 7,
 		paddingTop: 7,
 	},
-	// Todo: Add Options for TopBar Navigation (Store)
 };
 
 /**
- * @description List of screens that should hide the tab bar.
+ * @description List of screens that should hide the bottom tab bar.
  */
 const hiddenScreens: string[] = [
 	'FitnessFeed',
@@ -68,6 +67,8 @@ const hiddenScreens: string[] = [
 	'SelectFeed',
 	'IntensityFilter',
 	'PracticeActivity',
+	'FitnessStoreFeed',
+	'NutritionStoreFeed',
 ];
 
 export default {
