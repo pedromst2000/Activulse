@@ -50,6 +50,13 @@ const config = {
 			maxLimit: 10,
 		},
 	},
+	banners: {
+		feed: {
+			defaultPage: 1,
+			defaultLimit: 2,
+			maxLimit: 3,
+		},
+	},
 };
 
 module.exports = config;

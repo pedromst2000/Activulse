@@ -178,7 +178,7 @@ async function getRecipes(req, res) {
 				},
 			],
 			limit: limit,
-			offset: (page - 1) * limit,
+			offset: page * limit,
 		});
 
 		const findUserPremiumRecipes = await db.mysql.Buyer.findAndCountAll({
