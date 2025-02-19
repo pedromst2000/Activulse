@@ -27,7 +27,7 @@ const FeedMenu: React.FC<Props> = ({
 }): React.JSX.Element => {
 	return (
 		<View
-			className="flex flex-row flex-wrap justify-center items-center w-full
+			className="flex flex-row flex-wrap justify-center items-center space-x-2
 				sm:justify-start sm:px-2
 				md:justify-center md:px-4
 				lg:justify-end lg:px-6"

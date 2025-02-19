@@ -58,7 +58,7 @@ async function buyBanner(req, res) {
 			utils.handleResponse(
 				res,
 				utils.http.StatusForbidden,
-				"you do not have enough points to buy this banner !",
+				"Not enough points to buy it !",
 			);
 			return;
 		} else {

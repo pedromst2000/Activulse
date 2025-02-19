@@ -59,15 +59,15 @@ const paginationConfig: PaginationConfig = {
 		activities: {
 			feed: {
 				defaultPage: 1,
-				defaultLimit: 3,
-				maxLimit: 6,
+				defaultLimit: 2,
+				maxLimit: 3,
 			},
 		},
 		recipes: {
 			feed: {
 				defaultPage: 1,
-				defaultLimit: 3,
-				maxLimit: 6,
+				defaultLimit: 2,
+				maxLimit: 3,
 			},
 		},
 	},

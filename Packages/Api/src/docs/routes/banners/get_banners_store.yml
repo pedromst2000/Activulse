@@ -139,11 +139,13 @@ responses:
               data:
                 banners:
                   - id: 2
+                    title: "Serene Voyage"
                     price: 350
                     imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399556/activevulse/dev/banners/image_141_v6nv2i.png"
                     createdAt: "2021-09-20T14:00:00.000Z"
                     updatedAt: "2021-09-20T14:00:00.000Z"
                   - id: 3
+                    title: "Frozen Majesty"
                     price: 1200
                     imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399557/activevulse/dev/banners/image_144_s70roa.png"
                     createdAt: "2021-09-20T14:00:00.000Z"

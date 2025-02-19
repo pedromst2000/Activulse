@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 import { InView } from 'react-native-intersection-observer';
 import config from '@/src/config';
@@ -8,11 +8,12 @@ import LoadingSkeleton from '../LoadingSkeleton';
 import ErrorIlus from '../../assets/svg/ilustrations/EmptyStates/ErrorServer.svg';
 import NoRecipesIlus from '../../assets/svg/ilustrations/EmptyStates/FilterEmptyState.svg';
 import NoActivitiesIlus from '../../assets/svg/ilustrations/EmptyStates/NoActivitiesFound.svg';
-import NoPremiumRecipes from '../../assets/svg/ilustrations/EmptyStates/NoPremiumRecipes.svg';
-import NoPremiumActivities from '../../assets/svg/ilustrations/EmptyStates/NoPremiumActivities.svg';
+import NoPremiumRecipesIlus from '../../assets/svg/ilustrations/EmptyStates/NoPremiumRecipes.svg';
+import NoPremiumActivitiesIlus from '../../assets/svg/ilustrations/EmptyStates/NoPremiumActivities.svg';
+import NoBannersIlus from '../../assets/svg/ilustrations/EmptyStates/EmptyBannersStore.svg';
 
 type Props = {
-	type: 'recipes' | 'activities' | 'storeRecipes' | 'storeActivities';
+	type: 'recipes' | 'activities' | 'storeRecipes' | 'storeActivities' | 'storeBanners';
 	data: any[];
 	handleOnChange: (inView: boolean, id: number) => void;
 	isLoading: boolean;
@@ -24,6 +25,7 @@ type Props = {
 	messageAPI?: string;
 	activities?: any[];
 	recipes?: any[];
+	banners?: any[];
 	onPressCard?: (id: number) => void;
 };
 
@@ -40,13 +42,14 @@ const Feed: React.FC<Props> = ({
 	messageAPI,
 	activities,
 	recipes,
+	banners,
 	onPressCard,
 }): React.JSX.Element => {
 	return (
 		<>
 			{data.map((item: any, index: number) => (
 				<InView
-					className="w-full flex items-center justify-center p-3 sm:p-6 md:p-8 lg:p-10 xl:p-12"
+					className={`w-full flex items-center justify-center p-3 sm:p-6 md:p-8 lg:p-10 xl:p-12`}
 					key={`${item.id}-${index}`}
 					onChange={(inView: boolean) => handleOnChange(inView, item.id)}
 				>
@@ -59,7 +62,9 @@ const Feed: React.FC<Props> = ({
 									? 'Activity'
 									: type === 'storeRecipes'
 										? 'StoreRecipe'
-										: 'StoreActivity'
+										: type === 'storeActivities'
+											? 'StoreActivity'
+											: 'StoreBanner'
 						}
 						_item_={item}
 					/>
@@ -72,14 +77,26 @@ const Feed: React.FC<Props> = ({
 						length:
 							type === 'recipes'
 								? config.pagination.recipes.feed.defaultLimit
-								: config.pagination.activities.feed.defaultLimit,
+								: type === 'activities'
+									? config.pagination.activities.feed.defaultLimit
+									: type === 'storeBanners'
+										? config.pagination.banners.feed.defaultLimit
+										: 0,
 					}).map((_, index) => (
 						<View
 							key={index}
 							className="w-full flex items-center justify-center p-3 sm:p-6 md:p-8 lg:p-10 xl:p-12"
 						>
 							<LoadingSkeleton
-								type={type === 'recipes' ? 'FeedRecipes' : 'FeedActivities'}
+								type={
+									type === 'recipes'
+										? 'FeedRecipes'
+										: type === 'activities'
+											? 'FeedActivities'
+											: type === 'storeBanners'
+												? 'Banners'
+												: null
+								}
 								category={category}
 							/>
 						</View>
@@ -111,7 +128,7 @@ const Feed: React.FC<Props> = ({
 				  (messageAPI === 'No Premium Activities Found' && activities?.length == 0) ? (
 					<EmptyState
 						type="NotFound"
-						_ilustration_={type === 'recipes' ? NoPremiumRecipes : NoPremiumActivities}
+						_ilustration_={type === 'recipes' ? NoPremiumRecipesIlus : NoPremiumActivitiesIlus}
 						message={messageAPI}
 						description={
 							type === 'recipes'
@@ -120,12 +137,20 @@ const Feed: React.FC<Props> = ({
 						}
 						styleClass="pb-20 mt-4 sm:mt-6 md:mt-8 lg:mt-10 xl:mt-12"
 					/>
+				) : messageAPI === 'No banners to buy it !' && banners?.length == 0 ? (
+					<EmptyState
+						type="NotFound"
+						_ilustration_={NoBannersIlus}
+						message="Banner Collection Complete!"
+						description="You've collected every banner we have to offer! Your profile has never looked better. Stay tuned for new designs and updates. Keep shining bright on your health journey!"
+						styleClass="pb-20 mt-4 sm:mt-6 md:mt-8 lg:mt-10 xl:mt-12"
+					/>
 				) : (
 					isError &&
-					((messageAPI === 'Network Error' && recipes?.length == 0) ||
-						(messageAPI === 'Something went wrong!' && recipes?.length == 0) ||
-						(messageAPI === 'Missing auth token or refresh token' && recipes?.length == 0) ||
-						(messageAPI === 'Refresh token has expired' && recipes?.length == 0)) && (
+					((messageAPI === 'Network Error' && data?.length == 0) ||
+						(messageAPI === 'Something went wrong!' && data?.length == 0) ||
+						(messageAPI === 'Missing auth token or refresh token' && data?.length == 0) ||
+						(messageAPI === 'Refresh token has expired' && data?.length == 0)) && (
 						<EmptyState
 							type="Error"
 							_ilustration_={ErrorIlus}

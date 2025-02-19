@@ -3,7 +3,7 @@ const db = require("../../db");
 const { Op } = require("sequelize");
 const config = require("../../config");
 
-const BANNER_ATTRIBUTES = ["banner_ID", "price", "createdAt", "updatedAt"];
+const BANNER_ATTRIBUTES = ["banner_ID", "title", "price", "createdAt", "updatedAt"];
 
 /**
  * Get the Banners from the store.
@@ -37,8 +37,6 @@ async function getStoreBanners(req, res) {
 					attributes: ["provider_image_url"],
 				},
 			],
-			limit: limit,
-			offset: (page - 1) * limit + 2,
 		});
 
 		const findUserBanners = await db.mysql.Buyer.findAll({
@@ -50,42 +48,33 @@ async function getStoreBanners(req, res) {
 			},
 		});
 
-		//To avoid duplicate banners
-		const uniqueBanners = [];
-		const bannerIds = new Set();
-
-		for (const banner of findBanners.rows) {
-			if (!bannerIds.has(banner.banner_ID)) {
-				uniqueBanners.push(banner);
-				bannerIds.add(banner.banner_ID);
-			}
-		}
-
 		const banners = {
-			count: uniqueBanners.length,
-			rows: uniqueBanners,
+			count: findBanners.count,
+			rows: findBanners.rows,
 		};
 
 		let resultBanners = banners.rows;
 
 		let resultUserBanners = findUserBanners;
 
-		resultBanners = resultBanners.filter((banner) => {
-			// returning only the banners that the user doesn't own
-			return !resultUserBanners.find(
-				(userBanner) => userBanner.banner_id === banner.banner_ID,
-			);
-		});
-
-		const BANNERS = resultBanners.map((banner) => {
-			return {
-				id: banner.banner_ID,
-				price: banner.price,
-				imageUrl: banner.asset.provider_image_url,
-				createdAt: banner.createdAt,
-				updatedAt: banner.updatedAt,
-			};
-		});
+		let BANNERS = resultBanners
+			.map((banner) => {
+				return {
+					id: banner.banner_ID,
+					price: banner.price,
+					imageUrl: banner.asset.provider_image_url,
+					createdAt: banner.createdAt,
+					updatedAt: banner.updatedAt,
+				};
+			})
+			.filter((banner) => {
+				// returning only the banners that the user doesn't own
+				return !resultUserBanners.find(
+					(userBanner) => userBanner.banner_id === banner.id,
+				);
+			})
+			// Paginate the results based on the page and limit
+			.slice((page - 1) * limit, page * limit);
 
 		if (BANNERS.length === 0) {
 			utils.handleResponse(res, utils.http.StatusNotFound, "No banners to buy it !");

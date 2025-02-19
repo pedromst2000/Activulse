@@ -5,7 +5,7 @@ import LabelTop from '../LabelTop';
 type Props = {
 	items: string[];
 	setSelectedTopBarOpt?: Dispatch<React.SetStateAction<'Premium' | 'Banners'>>;
-	selectedTopBarOpt?: 'Premium' | 'Banners';
+	selectedTopBarOpt?: 'Premium' | 'Banners' | string;
 };
 
 const TopBarNav: React.FC<Props> = ({
