@@ -22,7 +22,6 @@ import Message from '../../Message';
  * TODO:
  * 4. Fix Glitch Bug of Modal Showing unecessary!
  * Fix blank screen while fetching data after showing the loading skeleton and the data is not yet fetched
- * Fix issue not showing sucess message after buying a banner
  */
 
 type selectedBanner = {
@@ -44,7 +43,7 @@ const BannersLayout: React.FC = (): React.JSX.Element => {
 	const [showSuccess, setShowSuccess] = useState<boolean>(false);
 	const [messageAPI, setMessageAPI] = useState<string>('');
 
-	const { signOutExpired } = useUserContext();
+	const { signOutExpired, loggedUser, updateUser } = useUserContext();
 	const {
 		refetch,
 		data: getBannersData,
@@ -138,7 +137,19 @@ const BannersLayout: React.FC = (): React.JSX.Element => {
 						timeoutRef.current = setTimeout(() => {
 							setShowSuccess(false);
 						}, timers.SUCCESS_DELAY);
-						refetch();
+						// deleting the banner from the list after buying it
+						const updatedBanners = banners.filter((a: Banner) => a.id !== selectedBanner?.id);
+						setBanners(updatedBanners);
+						// updating the user points
+						const discount = selectedBanner?.price ?? 0;
+
+						const update = {
+							points: loggedUser?.points! - discount,
+						};
+
+						if (loggedUser) {
+							updateUser({ ...loggedUser, ...update });
+						}
 					}
 				},
 				onError: (error: any): void => {
@@ -154,7 +165,6 @@ const BannersLayout: React.FC = (): React.JSX.Element => {
 	};
 
 	useEffect(() => {
-	
 		if (isLoading || isRefetching) {
 			return;
 		}
@@ -164,15 +174,13 @@ const BannersLayout: React.FC = (): React.JSX.Element => {
 				return banners.findIndex((a: Banner) => a.id === banner.id) === -1;
 			});
 
-			console.log(`banners: ${banners.length} | filtered: ${filteredBanners.length}`);
-
 			setBanners((prev: Banner[]) => [...prev, ...filteredBanners]);
 			setTotal(getBannersData?.data?.total);
 		}
 
 		//! Do not add banners to the dependencies array (it will cause an infinite loop)
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [getBannersData, isRefetching]);
+	}, [getBannersData, isRefetching, isLoading]);
 
 	useEffect(() => {
 		return () => {

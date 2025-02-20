@@ -61,6 +61,7 @@ async function getStoreBanners(req, res) {
 			.map((banner) => {
 				return {
 					id: banner.banner_ID,
+					title: banner.title,
 					price: banner.price,
 					imageUrl: banner.asset.provider_image_url,
 					createdAt: banner.createdAt,

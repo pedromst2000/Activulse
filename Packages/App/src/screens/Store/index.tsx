@@ -16,7 +16,6 @@ const Store: React.FC = (): React.JSX.Element => {
 	 * TODO:
 	 * 4. Fix Glitch Bug of Modal Showing unecessary!
 	 * Fix blank screen while fetching data after showing the loading skeleton and the data is not yet fetched
-	 * Refetch the data of the TopBar when there is some data (points) change in the local storage of the user data
 	 */
 
 	return (

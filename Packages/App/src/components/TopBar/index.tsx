@@ -4,13 +4,6 @@ import { useUserContext } from '../../context/user';
 import Icon from '../Icon';
 import AppI from '../../assets/svg/ilustrations/Icon.svg';
 
-/**
- * TODO:
- * The data shoud be fetched aswell and not only hardcoded
- * Add skeleton loading for the top bar
- * When the component mounts, refetch the data to update the points
- */
-
 const TopBar: React.FC = (): React.JSX.Element => {
 	const { loggedUser } = useUserContext();
 
@@ -31,7 +24,7 @@ const TopBar: React.FC = (): React.JSX.Element => {
 							loggedUser?.avatar !== null
 								? { uri: loggedUser?.avatar }
 								: {
-										uri: 'https://res.cloudinary.com/dvthg2763/image/upload/v1732390121/activevulse/dev/avatars/Profile_avatar_placeholder_large_inh11z.png',
+										uri: 'https://res.cloudinary.com/dvthg2763/image/upload/v1716397591/activevulse/dev/avatars/male_default_avatar_h6oh4l.png',
 									}
 						}
 						resizeMode="cover"
