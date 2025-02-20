@@ -24,7 +24,7 @@ const TopBar: React.FC = (): React.JSX.Element => {
 							loggedUser?.avatar !== null
 								? { uri: loggedUser?.avatar }
 								: {
-										uri: 'https://res.cloudinary.com/dvthg2763/image/upload/v1732390121/activevulse/dev/avatars/Profile_avatar_placeholder_large_inh11z.png',
+										uri: 'https://res.cloudinary.com/dvthg2763/image/upload/v1716397591/activevulse/dev/avatars/male_default_avatar_h6oh4l.png',
 									}
 						}
 						resizeMode="cover"

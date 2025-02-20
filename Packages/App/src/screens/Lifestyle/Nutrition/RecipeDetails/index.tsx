@@ -111,7 +111,6 @@ const RecipeDetails: React.FC = (): React.JSX.Element => {
 	/**
 	 *  * TODO (bugs)
 	 * 4. Fix Glitch Bug of Modal Showing unecessary!
-	 * 5. Add Accordion skeleton loader
 	 */
 
 	return (

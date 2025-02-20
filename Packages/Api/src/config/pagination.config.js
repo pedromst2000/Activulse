@@ -24,15 +24,15 @@ const config = {
 		activities: {
 			feed: {
 				defaultPage: 1,
-				defaultLimit: 3,
-				maxLimit: 6,
+				defaultLimit: 2,
+				maxLimit: 3,
 			},
 		},
 		recipes: {
 			feed: {
 				defaultPage: 1,
-				defaultLimit: 3,
-				maxLimit: 6,
+				defaultLimit: 2,
+				maxLimit: 3,
 			},
 		},
 	},
@@ -48,6 +48,13 @@ const config = {
 			defaultPage: 1,
 			defaultLimit: 4,
 			maxLimit: 10,
+		},
+	},
+	banners: {
+		feed: {
+			defaultPage: 1,
+			defaultLimit: 2,
+			maxLimit: 4,
 		},
 	},
 };

@@ -24,7 +24,7 @@ const OptionCard: React.FC<OptionCardProps> = ({
 		>
 			<View
 				className="relative rounded-[16px] sm:rounded-[18px] md:rounded-[20px] overflow-hidden 
-                w-[310px] sm:w-[300px] md:w-[320px] h-[230px] sm:h-[210px] md:h-[220px]"
+                w-[350px] sm:w-[300px] md:w-[320px] h-[230px] sm:h-[210px] md:h-[220px]"
 			>
 				<Image className="w-full h-full" source={sourceImg} />
 				{/* Overlay */}

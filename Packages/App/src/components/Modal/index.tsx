@@ -16,13 +16,16 @@ type ModalProps = {
 		| 'expiredWarning'
 		| 'addFavorite'
 		| 'finishedExercise'
-		| 'removeFavorite';
+		| 'removeFavorite'
+		| 'buyStoreItem';
 
 	ilustration: React.FC<SvgProps> | null;
 	message: string;
 	heartPoints?: string | undefined;
 	challengePoints?: string | undefined;
 	onPress?: () => void;
+	onPressYes?: () => void;
+	onPressNo?: () => void;
 	isModalVisible: any;
 };
 
@@ -33,6 +36,8 @@ const Modal: React.FC<ModalProps> = ({
 	heartPoints,
 	challengePoints,
 	onPress,
+	onPressYes,
+	onPressNo,
 	isModalVisible,
 }): React.JSX.Element => {
 	return (
@@ -59,7 +64,7 @@ const Modal: React.FC<ModalProps> = ({
 
 					{/* Message */}
 					<View>
-						<Text className="text-center text-xs md:text-sm lg:text-base font-quicksand-bold text-secondary-700 mt-3 md:mt-4 lg:mt-5">
+						<Text className="text-center text-sm font-quicksand-bold text-secondary-700 mt-3 md:mt-4 lg:mt-5">
 							{message}
 						</Text>
 					</View>
@@ -101,6 +106,33 @@ const Modal: React.FC<ModalProps> = ({
 										</Text>
 									</View>
 								) : null}
+							</TouchableOpacity>
+						</View>
+					) : type === 'buyStoreItem' ? (
+						<View
+							className="mt-4 md:mt-6 lg:mt-8 flex justify-center items-center pt-4 md:pt-5 lg:pt-6 space-x-4
+								flex-row items-center justify-center w-full md:w-3/4 lg:w-2/3
+							"
+						>
+							<TouchableOpacity
+								activeOpacity={0.8}
+								disabled={false}
+								onPress={onPressYes}
+								className="bg-accent-500 rounded-full p-2.5 md:p-3 lg:p-3.5 items-center justify-center w-32 md:w-36 lg:w-40 py-2 md:py-2.5 lg:py-3"
+							>
+								<Text className="text-secondary-700 font-quicksand-bold text-sm md:text-base lg:text-lg tracking-wide">
+									Yes
+								</Text>
+							</TouchableOpacity>
+							<TouchableOpacity
+								activeOpacity={0.8}
+								disabled={false}
+								onPress={onPressNo}
+								className="bg-primary-50 border-2 border-accent-700 rounded-full p-2.5 md:p-3 lg:p-3.5 items-center justify-center w-32 md:w-36 lg:w-40 py-2 md:py-2.5 lg:py-3"
+							>
+								<Text className="text-secondary-700 font-quicksand-bold text-sm md:text-base lg:text-lg tracking-wide">
+									No
+								</Text>
 							</TouchableOpacity>
 						</View>
 					) : null}

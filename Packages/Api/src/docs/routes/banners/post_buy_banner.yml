@@ -121,7 +121,7 @@ responses:
           Not enough points:
             value:
               success: false
-              message: you do not have enough coins to buy this banner
+              message: Not enough points to buy it !
   404:
     description: Banner not found
     content:

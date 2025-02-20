@@ -17,6 +17,20 @@ parameters:
       type: string
     required: true
     description: Authorization token
+  - name: page
+    in: query
+    description: Number of the page to retrieve
+    required: true
+    schema:
+      type: number
+      example: 1
+  - name: limit
+    in: query
+    description: Number of banners per page
+    required: true
+    schema:
+      type: number
+      example: 2
 responses:
   200:
     description: Retrieves only the banners that the user not yet purchased from the store
@@ -39,6 +53,8 @@ responses:
                     properties:
                       id:
                         type: number
+                      title:
+                        type: string
                       price:
                         type: number
                       imageUrl:
@@ -57,20 +73,86 @@ responses:
               data:
                 banners:
                   - id: 2
+                    title: "Serene Voyage"
                     price: 350
                     imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399556/activevulse/dev/banners/image_141_v6nv2i.png"
                     createdAt: "2021-09-20T14:00:00.000Z"
                     updatedAt: "2021-09-20T14:00:00.000Z"
-                  - id: 5
+                  - id: 3
+                    title: "Frozen Majesty"
                     price: 1200
                     imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399557/activevulse/dev/banners/image_144_s70roa.png"
                     createdAt: "2021-09-20T14:00:00.000Z"
                     updatedAt: "2021-09-20T14:00:00.000Z"
-                  - id: 6
-                    price: 1600
-                    imageUrl: "https://res.cloudinary.com/dvthg2763/image/upload/v1716399557/activevulse/dev/banners/image_145_vmpsx2.png"
-                    createdAt: "2021-09-20T14:00:00.000Z"
-                    updatedAt: "2021-09-20T14:00:00.000Z"
+                total: 2
+  400:
+    description: Bad Request
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+            data:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  value:
+                    oneOf:
+                      - type: string
+                      - type: integer
+                      - type: boolean
+                  msg:
+                    type: string
+                  path:
+                    type: string
+                  location:
+                    type: string
+        examples:
+          Page Query Parameter Missing:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  msg: "Page Query is required"
+                  path: "page"
+                  location: "query"
+          Invalid Page Query Parameter:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: -1
+                  msg: "Page Query must be a positive number"
+                  path: "page"
+                  location: "query"
+          Limit Query Parameter Missing:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  msg: "Limit Query is required"
+                  path: "limit"
+                  location: "query"
+          Invalid Limit Query Parameter:
+            value:
+              success: false
+              message: Validation Error
+              data:
+                - type: "field"
+                  value: -1
+                  msg: "Limit Query must be a positive number"
+                  path: "limit"
+                  location: "query"
   401:
     description: Unauthorized
     content:
