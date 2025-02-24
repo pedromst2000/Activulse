@@ -11,7 +11,6 @@ type Props = {
 		| 'ActivityDetails'
 		| 'WorkoutPlanDetails'
 		| 'StoreDetails'
-		| 'StoreFeed'
 		| 'Banners'
 		| null;
 	category?: string;
@@ -76,7 +75,7 @@ const LoadingSkeleton: React.FC<Props> = ({ type, category }): React.JSX.Element
 									className="bg-gray-300 px-3 py-1 rounded-full w-20 h-6 sm:w-18 sm:h-5 md:w-16 md:h-4 lg:w-14 lg:h-3"
 								/>
 
-								{category == 'Premium' && (
+								{(category == 'Premium' || type === 'FeedActivities') && (
 									<Animated.View
 										style={animatedStyle}
 										className="bg-gray-500 px-3 py-1 rounded-full w-20 h-6 sm:w-18 sm:h-5 md:w-16 md:h-4 lg:w-14 lg:h-3"

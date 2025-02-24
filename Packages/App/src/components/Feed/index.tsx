@@ -13,7 +13,7 @@ import NoPremiumActivitiesIlus from '../../assets/svg/ilustrations/EmptyStates/N
 import NoBannersIlus from '../../assets/svg/ilustrations/EmptyStates/EmptyBannersStore.svg';
 
 type Props = {
-	type: 'recipes' | 'activities' | 'storeRecipes' | 'storeActivities' | 'storeBanners';
+	type: 'recipes' | 'activities' | 'storeBanners';
 	data: any[];
 	handleOnChange: (inView: boolean, id: number) => void;
 	isLoading: boolean;
@@ -60,11 +60,7 @@ const Feed: React.FC<Props> = ({
 								? 'Recipe'
 								: type === 'activities'
 									? 'Activity'
-									: type === 'storeRecipes'
-										? 'StoreRecipe'
-										: type === 'storeActivities'
-											? 'StoreActivity'
-											: 'StoreBanner'
+									: 'StoreBanner'
 						}
 						_item_={item}
 					/>
@@ -143,6 +139,14 @@ const Feed: React.FC<Props> = ({
 						_ilustration_={NoBannersIlus}
 						message="Banner Collection Complete!"
 						description="You've collected every banner we have to offer! Your profile has never looked better. Stay tuned for new designs and updates. Keep shining bright on your health journey!"
+						styleClass="pb-20 mt-4 sm:mt-6 md:mt-8 lg:mt-10 xl:mt-12"
+					/>
+				) : messageAPI === 'No Store Activities Found' && activities?.length == 0 ? (
+					<EmptyState
+						type="NotFound"
+						_ilustration_={NoPremiumActivitiesIlus}
+						message="No Activities Found"
+						description="Oops! No activities found in this category. But don’t worry—discover exciting options in other categories or explore our premium recipes for something truly special!"
 						styleClass="pb-20 mt-4 sm:mt-6 md:mt-8 lg:mt-10 xl:mt-12"
 					/>
 				) : (

@@ -30,7 +30,11 @@ const Store: React.FC = (): React.JSX.Element => {
 			{/* Store Layout */}
 
 			<AnimatedComponent animation="FadeIn">
-				{selectedTopBarOpt === 'Premium' ? <SelectPremiumLayout /> : <BannersLayout />}
+				{selectedTopBarOpt === 'Premium' ? (
+					<SelectPremiumLayout navigation={navigation} />
+				) : (
+					<BannersLayout />
+				)}
 			</AnimatedComponent>
 
 			{/* Leaderboard Button */}

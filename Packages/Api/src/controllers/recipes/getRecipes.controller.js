@@ -178,7 +178,7 @@ async function getRecipes(req, res) {
 				},
 			],
 			limit: limit,
-			offset: page * limit,
+			offset: (page - 1) * limit,
 		});
 
 		const findUserPremiumRecipes = await db.mysql.Buyer.findAndCountAll({
@@ -191,7 +191,7 @@ async function getRecipes(req, res) {
 			attributes: ["recipe_id"],
 		});
 
-		//To avoid duplicate recipes
+		//To avoid duplicate RECIPES
 		const uniqueRecipes = [];
 		const recipeIds = new Set();
 
@@ -210,6 +210,33 @@ async function getRecipes(req, res) {
 		let resultRecipes = recipes.rows;
 
 		let resultUserPremiumRecipes = findUserPremiumRecipes.rows;
+
+		let RECIPES = resultRecipes
+			.map((recipe) => {
+				return {
+					id: recipe.recipe_ID,
+					isPremium: recipe.isPremium,
+					title: recipe.title,
+					confTime: recipe.duration_conf,
+					videoTime: recipe.video_time,
+					category: recipe.recipe_category.category,
+					diet: recipe.diet.diet_name,
+					imageUrl: recipe.asset.provider_image_url,
+					createdAt: recipe.createdAt,
+					updateAt: recipe.updatedAt,
+				};
+			})
+			.filter((recipe) => {
+				if (recipe.isPremium) {
+					//returning only the bought premium recipes by the user
+					return resultUserPremiumRecipes.some(
+						(userRecipe) => userRecipe.recipe_id === recipe.id,
+					);
+				}
+
+				// // returning all the free recipes and the premium recipes bought by the user
+				return true;
+			});
 
 		resultRecipes = resultRecipes.filter((recipe) => {
 			if (recipe.isPremium) {
@@ -253,7 +280,7 @@ async function getRecipes(req, res) {
 
 		resultRecipes = randomizedRecipes;
 
-		const RECIPES = resultRecipes.map((recipe) => {
+		RECIPES = resultRecipes.map((recipe) => {
 			const parsedRecipe = recipe.toJSON();
 
 			return {

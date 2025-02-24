@@ -24,6 +24,12 @@ type FitnessFeedNavigationProp = NativeStackNavigationProp<
 	'FitnessFeed'
 >;
 
+/**
+ * TODO
+ * 6. Fix Glitch Bug of Modal Showing unecessary!
+ * 7. Fix blank screen while fetching data after showing the loading skeleton and the data is not yet fetched
+ */
+
 const FitnessFeed: React.FC = (): React.JSX.Element => {
 	const navigation = useNavigation<FitnessFeedNavigationProp>();
 	const route = useRoute<FitnessFeedRouteProp>();
@@ -135,12 +141,6 @@ const FitnessFeed: React.FC = (): React.JSX.Element => {
 			return () => clearTimeout(timeout);
 		}
 	}, [modalVisible]);
-
-	/**
-	 * TODO
-	 * 6. Fix Glitch Bug of Modal Showing unecessary!
-	 * 7. Fix blank screen while fetching data after showing the loading skeleton and the data is not yet fetched
-	 */
 
 	return (
 		<AnimatedComponent animation="FadeIn">

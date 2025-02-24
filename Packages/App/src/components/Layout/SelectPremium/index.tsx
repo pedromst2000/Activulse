@@ -3,7 +3,13 @@ import { ScrollView } from 'react-native-gesture-handler';
 import AnimatedComponent from '@/src/components/Animated';
 import OptionCard from '@/src/components/OptionCard';
 
-const SelectPremiumLayout: React.FC = (): React.JSX.Element => {
+type SelectPremiumLayoutProps = {
+	navigation: any;
+};
+
+const SelectPremiumLayout: React.FC<SelectPremiumLayoutProps> = ({
+	navigation,
+}): React.JSX.Element => {
 	return (
 		<AnimatedComponent animation="FadeIn">
 			<ScrollView
@@ -36,7 +42,7 @@ const SelectPremiumLayout: React.FC = (): React.JSX.Element => {
 							label="Fitness"
 							description="Unlock exclusive activities to elevate your fitness journey designed to boost your cardio health."
 							sourceImg={require('../../../assets/images/StoreFitness.png')}
-							onPress={() => console.log('Fitness Card Pressed' as never)}
+							onPress={() => navigation.navigate('FitnessStoreFeed' as never)}
 						/>
 
 						{/* Nutrition Card */}

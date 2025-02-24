@@ -2,7 +2,7 @@ const { query } = require("express-validator");
 const config = require("../../config");
 
 /**
- * Returns an array of validation rules for the get activities feed endpoint
+ * Returns an array of validation rules for the get store activities feed endpoint
  * @returns {Array} An array of validation rules
  */
 
@@ -22,19 +22,11 @@ function validator() {
 			.toInt()
 			.withMessage("Limit must be a positive integer"),
 
-		query("intensity")
-			.optional()
-			.isString()
-			.isIn(["Light", "Moderate", "Vigorous"])
-			.withMessage(`Intensity must be a valid intensity: Light, Moderate, or Vigorous`),
-
 		query("category")
 			.optional()
 			.isString()
-			.isIn(["All", "Cardio", "Yoga", "Muscles", "Premium"])
-			.withMessage(
-				"Category must be a valid category: All, Cardio, Yoga, Muscles, or Premium",
-			),
+			.isIn(["All", "Cardio", "Yoga", "Muscles"])
+			.withMessage("Category must be a valid category: All, Cardio, Yoga, Muscles"),
 	];
 }
 

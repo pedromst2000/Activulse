@@ -7,7 +7,7 @@ import VideoTimeI from '@/src/assets/svg/icons/VideoTimeIconV2.svg';
 import PointsPriceI from '@/src/assets/svg/icons/PointsPrice.svg';
 
 type Props = {
-	type?: 'Recipe' | 'Activity' | 'StoreRecipe' | 'StoreActivity' | 'StoreBanner';
+	type?: 'Recipe' | 'Activity' | 'StoreBanner';
 	_item_: any;
 	onPressCard?: (id: number) => void;
 };
@@ -56,31 +56,44 @@ const Card: React.FC<Props> = ({ type, _item_, onPressCard }): React.JSX.Element
 									</Text>
 								</View>
 							)}
-							<View className="bg-accent-500 px-3 py-1 rounded-full">
-								<Text className="font-quicksand-bold text-secondary-700 text-[14px] sm:text-[13px] md:text-[14px] tracking-[0.4px]">
-									{_item_.category}
-								</Text>
+							<View
+								className="
+							flex flex-row items-center space-x-2
+							"
+							>
+								<View className="bg-accent-500 px-3 py-1 rounded-full justify-center items-center">
+									<Text className="font-quicksand-bold text-secondary-700 text-[14px] sm:text-[13px] md:text-[14px] tracking-[0.4px]">
+										{_item_.category}
+									</Text>
+								</View>
+								{_item_.tag && !_item_.isPremium && (
+									<View className="bg-primary-50 px-3 py-1 rounded-full justify-center items-center">
+										<Text className="font-quicksand-bold text-secondary-700 text-[14px] sm:text-[13px] md:text-[14px] tracking-[0.4px]">
+											{_item_.tag}
+										</Text>
+									</View>
+								)}
 							</View>
 						</View>
 					)}
 
-					{/* Store Banner Price Label */}
-					{type === 'StoreBanner' && (
-						<View className="flex flex-row items-center space-x-2">
-							<Icon
-								icon={PointsPriceI}
-								className="w-[18px] h-[18px] md:w-[16px] lg:w-[18px] md:h-[16px] lg:h-[18px]"
-							/>
-							<Text className="font-quicksand-bold text-primary-50 text-[14px] sm:text-[13px] md:text-[14px] leading-[20px] tracking-[0.4px]">
-								{_item_.price} pts
-							</Text>
-						</View>
-					)}
-
 					{/* Time Display && Intensity */}
-					{type !== 'StoreBanner' && (
-						<View className="flex flex-row justify-between items-center">
-							{/* Time Display */}
+					<View className="flex flex-row justify-between items-center">
+						{/* Store Banner Price Label */}
+						{_item_?.price && (
+							<View className="flex flex-row items-center space-x-2">
+								<Icon
+									icon={PointsPriceI}
+									className="w-[18px] h-[18px] md:w-[16px] lg:w-[18px] md:h-[16px] lg:h-[18px]"
+								/>
+								<Text className="font-quicksand-bold text-primary-50 text-[14px] sm:text-[13px] md:text-[14px] leading-[20px] tracking-[0.4px]">
+									{_item_.price} pts
+								</Text>
+							</View>
+						)}
+
+						{/* Time Display */}
+						{!_item_?.price && (
 							<View className="flex-row items-center space-x-2">
 								{_item_?.isPremium ? (
 									<Icon
@@ -95,7 +108,7 @@ const Card: React.FC<Props> = ({ type, _item_, onPressCard }): React.JSX.Element
 								)}
 
 								<Text className="font-quicksand-bold text-primary-50 text-[14px] sm:text-[13px] md:text-[14px] leading-[20px] tracking-[0.4px]">
-									{_item_?.isPremium
+									{_item_?.price || _item_?.isPremium
 										? _item_?.videoTime
 										: type === 'Recipe'
 											? _item_.confTime
@@ -103,27 +116,27 @@ const Card: React.FC<Props> = ({ type, _item_, onPressCard }): React.JSX.Element
 									minutes
 								</Text>
 							</View>
+						)}
 
-							{type === 'Activity' && (
-								<Intensity
-									typeBullet="orange"
-									intensityVal={
-										_item_.intensity === 'Light'
-											? 1
-											: _item_.intensity === 'Moderate I'
-												? 2
-												: _item_.intensity === 'Moderate II'
-													? 3
-													: _item_.intensity === 'Moderate III'
-														? 4
-														: 5
-									}
-									iconStyles="w-[28px] h-[28px] md:w-[24px] lg:w-[28px] md:h-[24px] lg:h-[28px]"
-									bulletSizes="w-[11px] h-[11px] sm:w-[10px] sm:h-[10px] md:w-[11px] md:h-[11px] lg:w-[12px] lg:h-[12px]"
-								/>
-							)}
-						</View>
-					)}
+						{type === 'Activity' && (
+							<Intensity
+								typeBullet="orange"
+								intensityVal={
+									_item_.intensity === 'Light'
+										? 1
+										: _item_.intensity === 'Moderate I'
+											? 2
+											: _item_.intensity === 'Moderate II'
+												? 3
+												: _item_.intensity === 'Moderate III'
+													? 4
+													: 5
+								}
+								iconStyles="w-[28px] h-[28px] md:w-[24px] lg:w-[28px] md:h-[24px] lg:h-[28px]"
+								bulletSizes="w-[11px] h-[11px] sm:w-[10px] sm:h-[10px] md:w-[11px] md:h-[11px] lg:w-[12px] lg:h-[12px]"
+							/>
+						)}
+					</View>
 				</View>
 			</View>
 		</TouchableOpacity>
