@@ -8,6 +8,7 @@ const ACTIVITY_ATTRIBUTES = [
 	"title",
 	"intensity",
 	"video_time",
+	"tag",
 	"duration",
 	"isPremium",
 	"category_id",
@@ -223,6 +224,7 @@ async function getActivities(req, res) {
 			duration: parsedActivity.duration,
 			videoTime: parsedActivity.video_time,
 			category: parsedActivity.activity_category.category,
+			tag: parsedActivity.tag,
 			intensity:
 				parsedActivity.intensity === 1
 					? "Light"
@@ -246,13 +248,20 @@ async function getActivities(req, res) {
 			return;
 		}
 
+		// Removing null values from the activities
+		const filteredActivities = ACTIVITIES.map((activity) => {
+			return Object.fromEntries(
+				Object.entries(activity).filter(([_, value]) => value !== null),
+			);
+		});
+
 		return utils.handleResponse(
 			res,
 			utils.http.StatusOK,
 			"Activities retrieved successfully",
 			{
-				activities: ACTIVITIES,
-				total: ACTIVITIES.length,
+				activities: filteredActivities,
+				total: filteredActivities.length,
 			},
 		);
 	} catch (error) {

@@ -17,7 +17,7 @@ router.get(
 // Get Store Activities
 router.get(
 	"/store",
-	validators.activities.getActivities(),
+	validators.activities.getStoreActivities(),
 	validators.validateResult,
 	middlewares.validateTokens,
 	controllers.activities.getStoreActivities,

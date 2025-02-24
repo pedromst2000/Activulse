@@ -28,6 +28,12 @@ type ActivityDetailsNavigationProp = NativeStackNavigationProp<
 	'Activity'
 >;
 
+/**
+ *  * TODO (bugs)
+ * 4. Fix Glitch Bug of Modal Showing unecessary!
+ * Add Button skeleton loader (excluding activity details with workouts)
+ */
+
 const ActivityDetails: React.FC = (): React.JSX.Element => {
 	const navigation = useNavigation<ActivityDetailsNavigationProp>();
 	const route = useRoute<ActivityRouteProp>();
@@ -103,12 +109,6 @@ const ActivityDetails: React.FC = (): React.JSX.Element => {
 			mutateAsyncDelete,
 		});
 	};
-
-	/**
-	 *  * TODO (bugs)
-	 * 4. Fix Glitch Bug of Modal Showing unecessary!
-	 * Add Button skeleton loader (excluding activity details with workouts)
-	 */
 
 	return (
 		<AnimatedComponent animation="SlideInFromRight">

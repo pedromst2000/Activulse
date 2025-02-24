@@ -38,12 +38,12 @@ const DetailsCardInfo: React.FC<Props> = ({ type, data, navigateTo }): React.JSX
 				>
 					{/* Tags */}
 					<View className="flex-row items-center gap-2">
-						<View className="border-[1.5px] border-secondary-700 rounded-full px-4 py-1 bg-primary-50">
+						<View className="border-[1.5px] border-accent-500  rounded-full px-4 py-1 bg-accent-500">
 							<Text className="font-quicksand-bold text-secondary-700 text-sm lg:text-xl">
 								{type === 'recipe' ? data?.diet?.name : data?.category?.name}
 							</Text>
 						</View>
-						<View className="border-[1.5px] border-accent-500 rounded-full px-4 py-1 bg-accent-500">
+						<View className="border-[1.5px] border-secondary-700 rounded-full px-4 py-1 bg-primary-50">
 							<Text className="font-quicksand-bold text-secondary-700 text-sm lg:text-xl">
 								{type === 'recipe' ? data?.category?.name : data?.tag}
 							</Text>

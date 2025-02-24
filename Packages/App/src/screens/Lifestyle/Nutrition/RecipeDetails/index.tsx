@@ -23,6 +23,11 @@ import ErrorIlus from '../../../../assets/svg/ilustrations/EmptyStates/ErrorServ
 
 type RecipeRouteProp = RouteProp<LifestyleStackParamList, 'Recipe'>;
 
+/**
+ *  * TODO (bugs)
+ * 4. Fix Glitch Bug of Modal Showing unecessary!
+ */
+
 const RecipeDetails: React.FC = (): React.JSX.Element => {
 	const route = useRoute<RecipeRouteProp>();
 	const navigation = useNavigation();
@@ -107,11 +112,6 @@ const RecipeDetails: React.FC = (): React.JSX.Element => {
 			mutateAsyncDelete,
 		});
 	};
-
-	/**
-	 *  * TODO (bugs)
-	 * 4. Fix Glitch Bug of Modal Showing unecessary!
-	 */
 
 	return (
 		<AnimatedComponent animation="SlideInFromRight">
