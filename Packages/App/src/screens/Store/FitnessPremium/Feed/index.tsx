@@ -129,7 +129,7 @@ const FitnessStoreFeed: React.FC = (): React.JSX.Element => {
 				<ScreenTitle type="Store" label="Fitness" onPress={() => navigation.goBack()} />
 				<View className="flex-1 mt-4 px-2 sm:px-4 md:px-6 lg:px-8">
 					<FeedMenu
-						type="Fitness"
+						type="StoreFitness"
 						items={['All', 'Cardio', 'Yoga', 'Muscles']}
 						setSelectedStoreFitnessCategory={setSelectedCategory}
 						fitnessCategory={selectedCategory}

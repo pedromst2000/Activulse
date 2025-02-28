@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import LabelItem from './Label';
 
 type Props = {
-	type: 'Fitness' | 'Nutrition';
+	type: 'Fitness' | 'Nutrition' | 'StoreFitness' | 'StoreNutrition';
 	items: string[];
 	setSelectedNutritionCategory?: Dispatch<
 		React.SetStateAction<'All' | 'Soups' | 'Main Dishes' | 'Salads' | 'Desserts' | 'Premium'>
@@ -14,9 +14,11 @@ type Props = {
 	setSelectedStoreFitnessCategory?: Dispatch<
 		React.SetStateAction<'All' | 'Cardio' | 'Yoga' | 'Muscles'>
 	>;
+	setSelectedStoreNutritionCategory?: Dispatch<
+		React.SetStateAction<'All' | 'Soups' | 'Main Dishes' | 'Salads' | 'Desserts'>
+	>;
 	fitnessCategory?: 'All' | 'Cardio' | 'Yoga' | 'Muscles' | 'Premium';
 	nutritionCategory?: 'All' | 'Soups' | 'Main Dishes' | 'Salads' | 'Desserts' | 'Premium';
-	styleClass?: string;
 };
 
 const FeedMenu: React.FC<Props> = ({
@@ -25,9 +27,9 @@ const FeedMenu: React.FC<Props> = ({
 	setSelectedFitnessCategory,
 	setSelectedNutritionCategory,
 	setSelectedStoreFitnessCategory,
+	setSelectedStoreNutritionCategory,
 	fitnessCategory,
 	nutritionCategory,
-	styleClass,
 }): React.JSX.Element => {
 	return (
 		<View
@@ -56,12 +58,19 @@ const FeedMenu: React.FC<Props> = ({
 								}
 								if (type === 'Nutrition') {
 									setSelectedNutritionCategory && setSelectedNutritionCategory(item as any);
-								} else {
+								} else if (type === 'StoreNutrition') {
+									setSelectedStoreNutritionCategory &&
+										setSelectedStoreNutritionCategory(item as any);
+								} else if (type === 'StoreFitness') {
 									setSelectedStoreFitnessCategory &&
 										setSelectedStoreFitnessCategory(item as any);
 								}
 							}}
-							category={type === 'Fitness' ? fitnessCategory : nutritionCategory}
+							category={
+								type === 'Fitness' || type === 'StoreFitness'
+									? fitnessCategory
+									: nutritionCategory
+							}
 						/>
 					</View>
 				);

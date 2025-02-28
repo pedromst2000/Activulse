@@ -93,9 +93,9 @@ const Card: React.FC<Props> = ({ type, _item_, onPressCard }): React.JSX.Element
 						)}
 
 						{/* Time Display */}
-						{!_item_?.price && (
+						{!((type === 'Activity' || type === 'StoreBanner') && _item_.price) && (
 							<View className="flex-row items-center space-x-2">
-								{_item_?.isPremium ? (
+								{_item_?.isPremium || _item_?.price ? (
 									<Icon
 										icon={VideoTimeI}
 										className="w-[18px] h-[18px] md:w-[16px] lg:w-[18px] md:h-[16px] lg:h-[18px]"

@@ -10,6 +10,7 @@ const RECIPE_ATTRIBUTES = [
 	"price",
 	"category_id",
 	"diet_id",
+	"isPremium",
 	"createdAt",
 	"updatedAt",
 ];
@@ -146,6 +147,23 @@ async function getStoreRecipes(req, res) {
 			},
 		});
 
+		const findPremiumRecipesIds = await db.mysql.Recipe.findAll({
+			attributes: ["recipe_ID"],
+			where: {
+				isPremium: true,
+			},
+		});
+
+		const findBoughtRecipesIds = await db.mysql.Buyer.findAll({
+			attributes: ["recipe_id"],
+			where: {
+				user_id: loggedUser,
+				recipe_id: {
+					[Op.ne]: null,
+				},
+			},
+		});
+
 		// //To avoid duplicate recipes
 		const uniquePremiumRecipes = [];
 		const uniqueUserPremiumRecipes = [];
@@ -176,6 +194,8 @@ async function getStoreRecipes(req, res) {
 			rows: uniqueUserPremiumRecipes,
 		};
 
+		const totalNotBougth = findPremiumRecipesIds.length - findBoughtRecipesIds.length;
+
 		let PREMIUM_RECIPES = premiumRecipes.rows.filter(
 			(recipe) =>
 				!premiumUserRecipes.rows.some(
@@ -184,6 +204,11 @@ async function getStoreRecipes(req, res) {
 		);
 
 		PREMIUM_RECIPES = PREMIUM_RECIPES.slice((page - 1) * limit, page * limit);
+
+		if (totalNotBougth === 0) {
+			utils.handleResponse(res, utils.http.StatusNotFound, "No recipes to buy it !");
+			return;
+		}
 
 		if (PREMIUM_RECIPES.length === 0) {
 			utils.handleResponse(res, utils.http.StatusNotFound, "No Store Recipes Found");

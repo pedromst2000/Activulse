@@ -81,6 +81,10 @@ const BannersLayout: React.FC = (): React.JSX.Element => {
 		) {
 			setModalVisible(true);
 		}
+
+		return () => {
+			setModalVisible(false);
+		};
 	}, [
 		isError,
 		getBannersData?.success,

@@ -10,7 +10,6 @@ type Props = {
 		| 'RecipeDetails'
 		| 'ActivityDetails'
 		| 'WorkoutPlanDetails'
-		| 'StoreDetails'
 		| 'Banners'
 		| null;
 	category?: string;
@@ -178,9 +177,7 @@ const LoadingSkeleton: React.FC<Props> = ({ type, category }): React.JSX.Element
 						</View>
 
 						{/* Intensity */}
-						{type === 'ActivityDetails' ||
-						type === 'WorkoutPlanDetails' ||
-						type === 'StoreDetails' ? (
+						{type === 'ActivityDetails' || type === 'WorkoutPlanDetails' ? (
 							<View className="flex-row ml-2">
 								{[...Array(5)].map((_, index) => (
 									<Animated.View

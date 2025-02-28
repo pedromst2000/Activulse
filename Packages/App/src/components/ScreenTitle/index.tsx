@@ -36,7 +36,9 @@ const ScreenTitle: React.FC<ScreenTitleProps> = ({
 							? 'ml-[70px]'
 							: label === 'Fitness'
 								? ''
-								: 'ml-20'
+								: type === 'Store' && label === 'Nutrition'
+									? 'ml-22'
+									: 'ml-24'
 				}`}
 			>
 				{label}

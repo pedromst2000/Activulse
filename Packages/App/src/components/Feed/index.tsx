@@ -11,6 +11,8 @@ import NoActivitiesIlus from '../../assets/svg/ilustrations/EmptyStates/NoActivi
 import NoPremiumRecipesIlus from '../../assets/svg/ilustrations/EmptyStates/NoPremiumRecipes.svg';
 import NoPremiumActivitiesIlus from '../../assets/svg/ilustrations/EmptyStates/NoPremiumActivities.svg';
 import NoBannersIlus from '../../assets/svg/ilustrations/EmptyStates/EmptyBannersStore.svg';
+import NoActivitiesToBuyIlus from '../../assets/svg/ilustrations/EmptyStates/NoActivitiesToBuy.svg';
+import NoRecipesToBuyIlus from '../../assets/svg/ilustrations/EmptyStates/NoRecipesToBuy.svg';
 
 type Props = {
 	type: 'recipes' | 'activities' | 'storeBanners';
@@ -133,20 +135,36 @@ const Feed: React.FC<Props> = ({
 						}
 						styleClass="pb-20 mt-4 sm:mt-6 md:mt-8 lg:mt-10 xl:mt-12"
 					/>
-				) : messageAPI === 'No banners to buy it !' && banners?.length == 0 ? (
+				) : messageAPI?.includes('to buy it !') && data?.length == 0 ? (
 					<EmptyState
 						type="NotFound"
-						_ilustration_={NoBannersIlus}
-						message="Banner Collection Complete!"
-						description="You've collected every banner we have to offer! Your profile has never looked better. Stay tuned for new designs and updates. Keep shining bright on your health journey!"
+						_ilustration_={
+							banners?.length == 0
+								? NoBannersIlus
+								: activities?.length == 0
+									? NoActivitiesToBuyIlus
+									: NoRecipesToBuyIlus
+						}
+						message={
+							banners?.length == 0 ? 'Banners Collection Completed!' : "You're All Set!"
+						}
+						description={
+							banners?.length == 0
+								? "You've collected every banner we have to offer! Your profile has never looked better. Stay tuned for new designs and updates. Keep shining bright on your health journey!"
+								: `Congratulations! You've unlocked all our Premium ${
+										activities?.length == 0 ? 'activities' : 'recipes'
+									}. Stay tuned for ${activities?.length == 0 ? 'more exciting updates and new features designed to help you stay on top of' : 'delicious new additions and exciting updates designed to support'} your cardiovascular health. Keep up the great work!`
+						}
 						styleClass="pb-20 mt-4 sm:mt-6 md:mt-8 lg:mt-10 xl:mt-12"
 					/>
-				) : messageAPI === 'No Store Activities Found' && activities?.length == 0 ? (
+				) : messageAPI?.includes('No Store') && data?.length == 0 ? (
 					<EmptyState
 						type="NotFound"
-						_ilustration_={NoPremiumActivitiesIlus}
-						message="No Activities Found"
-						description="Oops! No activities found in this category. But don’t worry—discover exciting options in other categories or explore our premium recipes for something truly special!"
+						_ilustration_={
+							activities?.length == 0 ? NoPremiumActivitiesIlus : NoPremiumRecipesIlus
+						}
+						message={activities?.length == 0 ? 'No Activities Found' : 'No Recipes Found'}
+						description={`Oops! No ${activities?.length == 0 ? 'activities' : 'recipes'} found in this category. But don’t worry—discover exciting options in other categories or explore our premium ${activities?.length == 0 ? 'recipes' : 'activities'} for something truly special!`}
 						styleClass="pb-20 mt-4 sm:mt-6 md:mt-8 lg:mt-10 xl:mt-12"
 					/>
 				) : (

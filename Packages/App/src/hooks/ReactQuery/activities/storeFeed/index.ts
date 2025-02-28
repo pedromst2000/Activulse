@@ -2,6 +2,7 @@ import { UseQueryResult, useQuery } from '@tanstack/react-query';
 import { AxiosResponse } from 'axios';
 import api from '../../../../api';
 import { APIResponse } from '@/src/api/types';
+import utils from '@/src/utils';
 
 type Params = {
 	page: number;
