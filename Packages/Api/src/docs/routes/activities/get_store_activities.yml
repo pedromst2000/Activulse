@@ -235,7 +235,12 @@ responses:
           No Store Activities Found:
             value:
               success: false
-              message: No Store Activities Found
+              message: No Store Activities Found!
+          No activities available:
+            value:
+              success: false
+              message: No activities to buy it !
+            description: Not Found ! When the user already purchased all the activities from the store
   500:
     description: Internal Server Error
     content:

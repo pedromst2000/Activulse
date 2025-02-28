@@ -7,7 +7,7 @@ import Button from '../Button';
 
 type Props = {
 	type: 'Error' | 'NotFound' | 'BadRequest';
-	_ilustration_: React.FC<SvgProps>;
+	_ilustration_: React.FC<SvgProps> | null;
 	message: string;
 	description: string;
 	styleClass?: string | undefined;

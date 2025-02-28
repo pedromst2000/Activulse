@@ -3,7 +3,7 @@ import { TouchableOpacity, Text, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 type Props = {
-	type: 'Fitness' | 'Nutrition';
+	type: 'Fitness' | 'Nutrition' | 'StoreFitness' | 'StoreNutrition';
 	activeOpacity?: number;
 	label: string;
 	category?: string;

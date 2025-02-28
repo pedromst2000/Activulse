@@ -50,7 +50,7 @@ const SelectPremiumLayout: React.FC<SelectPremiumLayoutProps> = ({
 							label="Nutrition"
 							description="Unlock exclusive recipes crafted to nourish your body and support your heart health."
 							sourceImg={require('../../../assets/images/StoreNutrition.png')}
-							onPress={() => console.log('Nutrition Card Pressed' as never)}
+							onPress={() => navigation.navigate('NutritionStoreFeed' as never)}
 						/>
 					</View>
 				</View>

@@ -232,7 +232,12 @@ responses:
           No Store Recipes Found:
             value:
               success: false
-              message: No Store Recipes Found
+              message: No Store Recipes Found!
+          No recipes available:
+            value:
+              success: false
+              message: No recipes to buy it !
+            description: Not Found ! When the user already purchased all the recipes from the store
   500:
     description: Internal Server Error
     content:

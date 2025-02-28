@@ -10,6 +10,7 @@ const ACTIVITY_ATTRIBUTES = [
 	"video_time",
 	"price",
 	"tag",
+	"isPremium",
 	"category_id",
 	"createdAt",
 	"updatedAt",
@@ -125,6 +126,23 @@ async function getStoreActivities(req, res) {
 			},
 		});
 
+		const findPremiumActivitiesIds = await db.mysql.Activity.findAll({
+			attributes: ["activity_ID"],
+			where: {
+				isPremium: true,
+			},
+		});
+
+		const findBoughtActivitiesIds = await db.mysql.Buyer.findAll({
+			attributes: ["activity_id"],
+			where: {
+				user_id: loggedUser,
+				activity_id: {
+					[Op.ne]: null,
+				},
+			},
+		});
+
 		//To avoid duplicate activities
 		const uniquePremiumActivities = [];
 		const uniqueUserPremiumActivities = [];
@@ -150,19 +168,27 @@ async function getStoreActivities(req, res) {
 			rows: uniquePremiumActivities,
 		};
 
-		const premiumUserActivities = {
+		const userPremiumActivities = {
 			count: uniqueUserPremiumActivities.length,
 			rows: uniqueUserPremiumActivities,
 		};
 
-		let PREMIUM_ACTIVITIES = premiumActivities.rows.filter(
-			(activity) =>
-				!premiumUserActivities.rows.some(
-					(userActivity) => userActivity.activity.activity_ID === activity.activity_ID,
-				),
-		);
+		const totalNotBougth =
+			findPremiumActivitiesIds.length - findBoughtActivitiesIds.length;
 
-		PREMIUM_ACTIVITIES = PREMIUM_ACTIVITIES.slice((page - 1) * limit, page * limit);
+		let PREMIUM_ACTIVITIES = premiumActivities.rows
+			.filter(
+				(activity) =>
+					!userPremiumActivities.rows.some(
+						(userActivity) => userActivity.activity.activity_ID === activity.activity_ID,
+					),
+			)
+			.slice((page - 1) * limit, page * limit);
+
+		if (totalNotBougth === 0) {
+			utils.handleResponse(res, utils.http.StatusNotFound, "No activities to buy it !");
+			return;
+		}
 
 		if (PREMIUM_ACTIVITIES.length === 0) {
 			utils.handleResponse(res, utils.http.StatusNotFound, "No Store Activities Found");
