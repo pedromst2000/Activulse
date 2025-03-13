@@ -69,6 +69,7 @@ const hiddenScreens: string[] = [
 	'PracticeActivity',
 	'FitnessStoreFeed',
 	'NutritionStoreFeed',
+	'RecipeStore',
 ];
 
 export default {

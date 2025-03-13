@@ -9,6 +9,7 @@ type Props = {
 	onToggleFav?: () => void | Promise<void>;
 	isToogleFav?: boolean;
 	isMyFav?: boolean;
+	showFavBtn?: boolean;
 };
 
 const DetailsHeader: React.FC<Props> = ({
@@ -16,6 +17,7 @@ const DetailsHeader: React.FC<Props> = ({
 	onToggleFav,
 	isToogleFav,
 	isMyFav,
+	showFavBtn = true,
 }): React.JSX.Element => {
 	const navigation = useNavigation();
 
@@ -26,12 +28,15 @@ const DetailsHeader: React.FC<Props> = ({
 				${className}`}
 		>
 			<GoBackBtn onPress={() => navigation.goBack()} isRounded={true} />
-			<FavBtn
-				onPress={onToggleFav}
-				isToogleFav={isToogleFav}
-				isMyFav={isMyFav}
-				isRounded={true}
-			/>
+
+			{showFavBtn && (
+				<FavBtn
+					onPress={onToggleFav}
+					isToogleFav={isToogleFav}
+					isMyFav={isMyFav}
+					isRounded={true}
+				/>
+			)}
 		</View>
 	);
 };

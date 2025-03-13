@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { RefreshControl, View, Text } from 'react-native';
 import { IOScrollView } from 'react-native-intersection-observer';
-import { useNavigation } from '@react-navigation/native';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { useUserContext } from '@/src/context/user';
+import { StoreStackParamList } from '@/src/navigation/Store';
 import useGetStoreRecipesFeedData, { Recipe } from '@/src/hooks/ReactQuery/recipes/storeFeed';
 import config from '@/src/config';
 import AnimatedComponent from '../../../../components/Animated';
@@ -13,6 +14,14 @@ import Modal from '@/src/components/Modal';
 import Ilustration from '@/src/components/Ilustration';
 import LogoIlus from '@/src/assets/svg/ilustrations/Logo.svg';
 import infoIlus from '@/src/assets/svg/ilustrations/Modals/Info.svg';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+type NutritionFeedRouteProp = RouteProp<StoreStackParamList, 'NutritionStoreFeed'>;
+
+type NutritionFeedNavigationProp = NativeStackNavigationProp<
+	StoreStackParamList,
+	'RecipeStore'
+>;
 
 /**
  * TODO
@@ -21,7 +30,8 @@ import infoIlus from '@/src/assets/svg/ilustrations/Modals/Info.svg';
  */
 
 const FitnessStoreFeed: React.FC = (): React.JSX.Element => {
-	const navigation = useNavigation();
+	const navigation = useNavigation<NutritionFeedNavigationProp>();
+	const route = useRoute<NutritionFeedRouteProp>();
 	const [storeRecipes, setStoreRecipes] = useState<Recipe[]>([]);
 	const [page, setPage] = useState<number>(1);
 	const [total, setTotal] = useState<number>(0);
@@ -30,7 +40,7 @@ const FitnessStoreFeed: React.FC = (): React.JSX.Element => {
 	const [selectedCategory, setSelectedCategory] = useState<
 		'All' | 'Soups' | 'Main Dishes' | 'Salads' | 'Desserts'
 	>('All');
-	const { signOutExpired } = useUserContext();
+	const { signOutExpired, loggedUser } = useUserContext();
 	const { refetch, data, isLoading, isRefetching } = useGetStoreRecipesFeedData({
 		page,
 		limit: config.pagination.recipes.feed.defaultLimit,
@@ -63,7 +73,7 @@ const FitnessStoreFeed: React.FC = (): React.JSX.Element => {
 		setTotal(0);
 		setPage(1);
 		refetch();
-	}, [selectedCategory]);
+	}, [selectedCategory, route?.params?.recipeBoughtId]);
 
 	const handleOnChange = (inView: boolean, id: number): void => {
 		// Checking if it's the last item in the list
@@ -86,14 +96,13 @@ const FitnessStoreFeed: React.FC = (): React.JSX.Element => {
 	};
 
 	const handleOnPressCard = (id: number): void => {
-		console.log('Card Pressed', id);
+		navigation.navigate('RecipeStore', { recipeId: id });
 	};
 
 	useEffect(() => {
 		if (isLoading || isRefetching) {
 			return;
 		}
-
 		if (data && data.data && data.data.recipes?.length > 0) {
 			// Checking if there are duplicates (if so, remove them)
 			const filteredStoreRecipes = data?.data?.recipes?.filter((recipe: Recipe) => {
@@ -104,7 +113,6 @@ const FitnessStoreFeed: React.FC = (): React.JSX.Element => {
 			setStoreRecipes((prev: Recipe[]) => [...prev, ...filteredStoreRecipes]);
 			setTotal(data?.data?.total);
 		}
-
 		//! Do not add store activities (storeRecipes) to the dependencies array (it will cause an infinite loop)
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [data, isRefetching]);
@@ -124,7 +132,12 @@ const FitnessStoreFeed: React.FC = (): React.JSX.Element => {
 					/>
 				}
 			>
-				<ScreenTitle type="Store" label="Nutrition" onPress={() => navigation.goBack()} />
+				<ScreenTitle
+					type="Store"
+					points={loggedUser?.points ?? 0}
+					label="Nutrition"
+					onPress={() => navigation.goBack()}
+				/>
 				<View className="flex-1 mt-4 px-2 sm:px-4 md:px-6 lg:px-8">
 					<FeedMenu
 						type="StoreNutrition"

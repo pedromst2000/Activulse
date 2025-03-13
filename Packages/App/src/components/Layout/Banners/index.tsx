@@ -81,17 +81,12 @@ const BannersLayout: React.FC = (): React.JSX.Element => {
 		) {
 			setModalVisible(true);
 		}
-
-		return () => {
-			setModalVisible(false);
-		};
 	}, [
 		isError,
 		getBannersData?.success,
 		getBannersData?.message,
 		buyData?.success,
 		buyData?.message,
-		modalVisible,
 	]);
 
 	const handleOnChange = (inView: boolean, id: number): void => {
@@ -136,14 +131,6 @@ const BannersLayout: React.FC = (): React.JSX.Element => {
 			{
 				onSuccess: async (resData: APIResponse): Promise<void> => {
 					if (resData.success) {
-						setShowSuccess(true);
-						setMessageAPI(resData.message);
-						timeoutRef.current = setTimeout(() => {
-							setShowSuccess(false);
-						}, timers.SUCCESS_DELAY);
-						// deleting the banner from the list after buying it
-						const updatedBanners = banners.filter((a: Banner) => a.id !== selectedBanner?.id);
-						setBanners(updatedBanners);
 						// updating the user points
 						const discount = selectedBanner?.price ?? 0;
 
@@ -154,6 +141,12 @@ const BannersLayout: React.FC = (): React.JSX.Element => {
 						if (loggedUser) {
 							updateUser({ ...loggedUser, ...update });
 						}
+
+						setShowSuccess(true);
+						setMessageAPI(resData.message);
+						timeoutRef.current = setTimeout(() => {
+							setShowSuccess(false);
+						}, timers.SUCCESS_DELAY);
 					}
 				},
 				onError: (error: any): void => {
@@ -191,6 +184,18 @@ const BannersLayout: React.FC = (): React.JSX.Element => {
 			clearTimeout(timeoutRef.current!); // Clear the timeout when the component unmounts
 		};
 	}, []);
+
+	// When the user buys a banner with sucess, resetting the banners list
+	useEffect(() => {
+		if (buyData?.success === true) {
+			setBanners([]);
+			setTotal(0);
+			setPage(1);
+			refetch();
+		}
+
+		return;
+	}, [buyData?.success]);
 
 	// To scroll to the top when the error message is shown
 	useEffect(() => {
@@ -286,8 +291,8 @@ const BannersLayout: React.FC = (): React.JSX.Element => {
 					signOutExpired();
 				}}
 				onPressYes={() => {
-					setModalVisible(false);
 					handleOnBuyBanner();
+					setModalVisible(false);
 				}}
 				onPressNo={() => {
 					setModalVisible(false);

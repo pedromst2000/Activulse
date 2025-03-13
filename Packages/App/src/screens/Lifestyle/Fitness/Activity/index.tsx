@@ -88,6 +88,10 @@ const ActivityDetails: React.FC = (): React.JSX.Element => {
 		}
 	}, [addData?.message, deleteData?.message]);
 
+	useEffect(() => {
+		console.log(`message: ${data?.message}`);
+	}, [data?.message]);
+
 	const handleOnRefresh = (): void => {
 		if (isRefetching || isLoading) {
 			return;
@@ -124,11 +128,7 @@ const ActivityDetails: React.FC = (): React.JSX.Element => {
 					/>
 				}
 			>
-				{isLoading || isRefetching || activity === null ? (
-					<LoadingSkeleton
-						type={activity?.workouts ? 'WorkoutPlanDetails' : 'ActivityDetails'}
-					/>
-				) : !isLoading && !isRefetching && activity ? (
+				{!isLoading && !isRefetching && data?.success && (
 					<View className="flex-1 bg-primary-50 pb-8">
 						<DetailsHeader onToggleFav={handleOnToogleFav} isMyFav={isMyFav} />
 
@@ -143,28 +143,41 @@ const ActivityDetails: React.FC = (): React.JSX.Element => {
 							data={activity}
 							navigateTo={() =>
 								navigation.navigate('PracticeActivity', {
-									title: activity.title,
-									intensity: activity.intensity,
+									title: activity?.title ?? '',
+									intensity: activity?.intensity ?? '',
 									workouts: activity?.workouts ?? [],
 									duration: activity?.duration ?? 0,
 								})
 							}
 						/>
 					</View>
-				) : (
-					<View>
-						<View className="absolute top-12 left-4 z-10">
-							<GoBackBtn onPress={() => navigation.goBack()} isRounded={true} />
-						</View>
-						<EmptyState
-							type="Error"
-							_ilustration_={ErrorIlus}
-							message="Oops! Something went wrong"
-							description="Uh-oh! It looks like something went wrong on our end. Our tech team is already working hard to fix it. Please try again Later. Thanks for your patience and understanding!"
-							styleClass="mt-20"
-						/>
-					</View>
 				)}
+
+				{(isLoading || isRefetching) && (
+					<LoadingSkeleton
+						type={activity?.workouts ? 'WorkoutPlanDetails' : 'ActivityDetails'}
+					/>
+				)}
+
+				{!isLoading &&
+					!isRefetching &&
+					(data?.message === 'Network Error' ||
+						data?.message === 'Something went wrong!' ||
+						data?.message === 'Missing auth token or refresh token' ||
+						data?.message.includes('expired')) && (
+						<View>
+							<View className="absolute top-12 left-4 z-10">
+								<GoBackBtn onPress={() => navigation.goBack()} isRounded={true} />
+							</View>
+							<EmptyState
+								type="Error"
+								_ilustration_={ErrorIlus}
+								message="Oops! Something went wrong"
+								description="Uh-oh! It looks like something went wrong on our end. Our tech team is already working hard to fix it. Please try again Later. Thanks for your patience and understanding!"
+								styleClass="mt-20"
+							/>
+						</View>
+					)}
 			</IOScrollView>
 			<Modal
 				type={
