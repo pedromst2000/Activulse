@@ -23,6 +23,7 @@ export type Recipe = {
 	};
 	durationConf?: number | null;
 	videoTime?: number | null;
+	price?: number | null;
 	image?: {
 		url: string;
 	} | null;

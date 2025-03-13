@@ -10,12 +10,18 @@ type Props = {
 		| 'RecipeDetails'
 		| 'ActivityDetails'
 		| 'WorkoutPlanDetails'
+		| 'RecipeDetailsStore'
 		| 'Banners'
 		| null;
 	category?: string;
+	havesVideo?: boolean | undefined;
 };
 
-const LoadingSkeleton: React.FC<Props> = ({ type, category }): React.JSX.Element => {
+const LoadingSkeleton: React.FC<Props> = ({
+	type,
+	category,
+	havesVideo = false,
+}): React.JSX.Element => {
 	const navigation = useNavigation();
 	const pulseAnim = useRef(new Animated.Value(1)).current;
 
@@ -136,19 +142,42 @@ const LoadingSkeleton: React.FC<Props> = ({ type, category }): React.JSX.Element
 					</View>
 
 					{/* Favorite Button right side */}
-					<View className="absolute top-12 right-4">
-						<Animated.View
-							style={animatedStyle}
-							className="w-[40px] h-[40px] bg-gray-500 rounded-full"
-						/>
-					</View>
 
-					{/* Title */}
+					{!type?.includes('Store') && (
+						<View className="absolute top-12 right-4">
+							<Animated.View
+								style={animatedStyle}
+								className="w-[40px] h-[40px] bg-gray-500 rounded-full"
+							/>
+						</View>
+					)}
+
 					<View className="mb-20 mt-2 p-6 grid grid-cols-1 gap-6">
-						<Animated.View
-							style={animatedStyle}
-							className="h-4 bg-gray-500 rounded w-[200px] sm:w-[250px] md:w-[300px] lg:w-[350px]"
-						/>
+						<View
+							className="
+							flex-row items-center justify-between
+						"
+						>
+							{/* Title */}
+							<Animated.View
+								style={animatedStyle}
+								className="h-4 bg-gray-500 rounded w-[200px] sm:w-[250px] md:w-[300px] lg:w-[350px]"
+							/>
+							{type === 'RecipeDetailsStore' && (
+								<View className="flex-row items-center space-x-2">
+									<Animated.View
+										style={animatedStyle}
+										className="w-[18px] h-[18px] bg-gray-500 rounded-full sm:w-[16px] sm:h-[16px] md:w-[14px] md:h-[14px] lg:w-[12px] lg:h-[12px]"
+									/>
+
+									<Animated.View
+										style={animatedStyle}
+										className="h-4 bg-gray-300 rounded w-[80px] sm:w-[60px] md:w-[70px] lg:w-[80px]"
+									/>
+								</View>
+							)}
+						</View>
+
 						<View className="flex-row items-center justify-between">
 							<View className="flex-row items-center gap-4 sm:gap-6 md:gap-8 lg:gap-10">
 								<Animated.View
@@ -217,6 +246,24 @@ const LoadingSkeleton: React.FC<Props> = ({ type, category }): React.JSX.Element
 									/>
 								))}
 							</View>
+						)}
+
+						{/* Accordeons */}
+						{type === 'RecipeDetails' && !havesVideo && (
+							<View>
+								{[...Array(2)].map((_, index) => (
+									<Animated.View
+										key={index}
+										style={animatedStyle}
+										className="h-12 bg-gray-300 rounded-full w-full mb-4"
+									/>
+								))}
+							</View>
+						)}
+
+						{/* Button */}
+						{type === 'RecipeDetailsStore' && (
+							<Animated.View style={animatedStyle} className="h-12 bg-gray-300 rounded-full" />
 						)}
 					</View>
 				</View>

@@ -8,18 +8,21 @@ import InfoI from '@/src/assets/svg/icons/InfoIcon.svg';
 import TimeI from '@/src/assets/svg/icons/TimeIcon.svg';
 import VideoTimeI from '@/src/assets/svg/icons/VideoTimeIcon.svg';
 import WorkoutI from '@/src/assets/svg/icons/WorkoutIcon.svg';
+import PointsPriceI from '@/src/assets/svg/icons/PointsPrice.svg';
 
 type Props = {
 	type: 'recipe' | 'activity' | 'store';
 	data: any;
 	navigateTo?: any;
+	onPressBuy?: any;
 };
 
-/**
- * TODO:
- */
-
-const DetailsCardInfo: React.FC<Props> = ({ type, data, navigateTo }): React.JSX.Element => {
+const DetailsCardInfo: React.FC<Props> = ({
+	type,
+	data,
+	navigateTo,
+	onPressBuy,
+}): React.JSX.Element => {
 	return (
 		<View
 			className={`flex-col justify-between items-center w-full bg-primary-50 ${
@@ -27,10 +30,27 @@ const DetailsCardInfo: React.FC<Props> = ({ type, data, navigateTo }): React.JSX
 			} ${data?.video ? 'mt-[208px] lg:mt-[270px]' : 'mt-[235px] lg:mt-[270px]'}`}
 		>
 			<View className="p-6 w-full">
-				{/* Title */}
-				<Text className="font-merriweather-bold text-secondary-700  text-xl lg:text-4xl tracking-[0.5px] leading-8 lg:leading-14 w-full max-w-lg text-left">
-					{data?.title}
-				</Text>
+				<View
+					className={`${data?.price ? 'flex-row justify-between items-center' : 'flex-col items-center'}`}
+				>
+					<View className={`${data?.price ? 'w-8/12' : 'w-full max-w-lg'}`}>
+						{/* Title */}
+						<Text className="font-merriweather-bold text-secondary-700  text-xl lg:text-4xl tracking-[0.5px] leading-8 lg:leading-14 w-full max-w-lg text-left">
+							{data?.title}
+						</Text>
+					</View>
+					{data?.price && (
+						<View className="flex flex-row items-center space-x-2">
+							<Icon
+								icon={PointsPriceI}
+								className="w-[18px] h-[18px] md:w-[16px] lg:w-[18px] md:h-[16px] lg:h-[18px]"
+							/>
+							<Text className="font-quicksand-bold text-secondary-700 text-[14.5px] sm:text-[13px] md:text-[14px] leading-[20px] tracking-[0.4px]">
+								{data?.price} pts
+							</Text>
+						</View>
+					)}
+				</View>
 
 				{/* Second Line */}
 				<View
@@ -40,12 +60,14 @@ const DetailsCardInfo: React.FC<Props> = ({ type, data, navigateTo }): React.JSX
 					<View className="flex-row items-center gap-2">
 						<View className="border-[1.5px] border-accent-500  rounded-full px-4 py-1 bg-accent-500">
 							<Text className="font-quicksand-bold text-secondary-700 text-sm lg:text-xl">
-								{type === 'recipe' ? data?.diet?.name : data?.category?.name}
+								{type === 'recipe' || type === 'store'
+									? data?.diet?.name
+									: data?.category?.name}
 							</Text>
 						</View>
 						<View className="border-[1.5px] border-secondary-700 rounded-full px-4 py-1 bg-primary-50">
 							<Text className="font-quicksand-bold text-secondary-700 text-sm lg:text-xl">
-								{type === 'recipe' ? data?.category?.name : data?.tag}
+								{type === 'recipe' || type === 'store' ? data?.category?.name : data?.tag}
 							</Text>
 						</View>
 					</View>
@@ -145,11 +167,11 @@ const DetailsCardInfo: React.FC<Props> = ({ type, data, navigateTo }): React.JSX
 			)}
 
 			{/* Additional Buttons */}
-			{(type === 'store' || type === 'activity') && !data?.isPremium && (
+			{(type === 'store' || type === 'activity') && !data?.video && (
 				<View className="flex justify-center items-center w-full max-w-lg px-4 pt-8">
 					<Button
 						onPress={() => {
-							type === 'store' ? console.log('Buy Now') : navigateTo();
+							type === 'store' ? onPressBuy() : navigateTo();
 						}}
 						styleClass="w-full"
 					>

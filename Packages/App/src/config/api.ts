@@ -13,7 +13,8 @@ const axiosOptions: CreateAxiosDefaults = {
 		// Pragma: 'no-cache',
 		// Expires: '0',
 	},
-	timeout: 120000, // 2 minutes
+	// timeout: 120000, // 2 minutes
+	timeout: 500, // 5 minutes
 	timeoutErrorMessage: 'Request timed out', // Error message when request times out
 	withCredentials: false, // Disable sending and receiving cookies from the server
 } as const;

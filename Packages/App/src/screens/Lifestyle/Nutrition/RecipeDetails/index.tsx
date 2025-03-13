@@ -127,9 +127,7 @@ const RecipeDetails: React.FC = (): React.JSX.Element => {
 					/>
 				}
 			>
-				{isLoading || isRefetching || recipe === null ? (
-					<LoadingSkeleton type="RecipeDetails" />
-				) : !isError && !isLoading && !isRefetching ? (
+				{!isError && !isLoading && !isRefetching && (
 					<View className="flex-1 bg-primary-50 pb-8">
 						<DetailsHeader onToggleFav={handleOnToogleFav} isMyFav={isMyFav} />
 
@@ -141,24 +139,31 @@ const RecipeDetails: React.FC = (): React.JSX.Element => {
 
 						<DetailsCardInfo type="recipe" data={recipe} />
 					</View>
-				) : (isError && recipe === null) ||
-				  data?.message === 'Network Error' ||
-				  data?.message === 'Something went wrong!' ||
-				  data?.message === 'Missing auth token or refresh token' ||
-				  data?.message.includes('expired') ? (
-					<View>
-						<View className="absolute top-12 left-4 z-10">
-							<GoBackBtn onPress={() => navigation.goBack()} isRounded={true} />
+				)}
+
+				{(isLoading || isRefetching) && (
+					<LoadingSkeleton type="RecipeDetails" havesVideo={!!data?.data?.video} />
+				)}
+
+				{!isLoading &&
+					!isRefetching &&
+					(data?.message === 'Network Error' ||
+						data?.message === 'Something went wrong!' ||
+						data?.message === 'Missing auth token or refresh token' ||
+						data?.message.includes('expired')) && (
+						<View>
+							<View className="absolute top-12 left-4 z-10">
+								<GoBackBtn onPress={() => navigation.goBack()} isRounded={true} />
+							</View>
+							<EmptyState
+								type="Error"
+								_ilustration_={ErrorIlus}
+								message="Oops! Something went wrong"
+								description="Uh-oh! It looks like something went wrong on our end. Our tech team is already working hard to fix it. Please try again Later. Thanks for your patience and understanding!"
+								styleClass="mt-20"
+							/>
 						</View>
-						<EmptyState
-							type="Error"
-							_ilustration_={ErrorIlus}
-							message="Oops! Something went wrong"
-							description="Uh-oh! It looks like something went wrong on our end. Our tech team is already working hard to fix it. Please try again Later. Thanks for your patience and understanding!"
-							styleClass="mt-20"
-						/>
-					</View>
-				) : null}
+					)}
 			</IOScrollView>
 			<Modal
 				type={

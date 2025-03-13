@@ -4,11 +4,13 @@ import Store from '@/src/screens/Store';
 import FitnessStoreFeed from '@/src/screens/Store/FitnessPremium/Feed';
 import NutritionStoreFeed from '@/src/screens/Store/NutritionPremium/Feed';
 import Leaderboard from '@/src/screens/Leaderboard';
+import RecipeStoreDetails from '@/src/screens/Store/NutritionPremium/RecipeDetails';
 
 export type StoreStackParamList = {
 	StoreScreen: undefined; // main screen
 	FitnessStoreFeed: undefined;
-	NutritionStoreFeed: undefined;
+	NutritionStoreFeed: { recipeBoughtId: number };
+	RecipeStore: { recipeId: number };
 	Leaderboard: undefined;
 };
 
@@ -20,6 +22,7 @@ const StoreStack: React.FC = (): React.JSX.Element => {
 			<Stack.Screen name="StoreScreen" component={Store} />
 			<Stack.Screen name="FitnessStoreFeed" component={FitnessStoreFeed} />
 			<Stack.Screen name="NutritionStoreFeed" component={NutritionStoreFeed} />
+			<Stack.Screen name="RecipeStore" component={RecipeStoreDetails} />
 			<Stack.Screen name="Leaderboard" component={Leaderboard} />
 		</Stack.Navigator>
 	);
