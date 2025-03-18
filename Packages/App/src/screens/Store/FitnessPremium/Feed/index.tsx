@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { RefreshControl, View, Text } from 'react-native';
 import { IOScrollView } from 'react-native-intersection-observer';
-import { useNavigation } from '@react-navigation/native';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import { StoreStackParamList } from '@/src/navigation/Store';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useUserContext } from '@/src/context/user';
 import useGetStoreActivitiesFeedData, {
 	Activity,
@@ -22,8 +24,13 @@ import infoIlus from '@/src/assets/svg/ilustrations/Modals/Info.svg';
  * 7. Fix blank screen while fetching data after showing the loading skeleton and the data is not yet fetched
  */
 
+type FitnessFeedRouteProp = RouteProp<StoreStackParamList, 'FitnessStoreFeed'>;
+
+type FitnessFeedNavigationProp = NativeStackNavigationProp<StoreStackParamList, 'RecipeStore'>;
+
 const FitnessStoreFeed: React.FC = (): React.JSX.Element => {
-	const navigation = useNavigation();
+	const navigation = useNavigation<FitnessFeedNavigationProp>();
+	const route = useRoute<FitnessFeedRouteProp>();
 	const [storeActivities, setStoreActivities] = useState<Activity[]>([]);
 	const [page, setPage] = useState<number>(1);
 	const [total, setTotal] = useState<number>(0);
@@ -32,7 +39,7 @@ const FitnessStoreFeed: React.FC = (): React.JSX.Element => {
 	const [selectedCategory, setSelectedCategory] = useState<
 		'All' | 'Cardio' | 'Yoga' | 'Muscles'
 	>('All');
-	const { signOutExpired } = useUserContext();
+	const { signOutExpired, loggedUser } = useUserContext();
 	const { refetch, data, isLoading, isRefetching } = useGetStoreActivitiesFeedData({
 		page,
 		limit: config.pagination.activities.feed.defaultLimit,
@@ -65,7 +72,7 @@ const FitnessStoreFeed: React.FC = (): React.JSX.Element => {
 		setTotal(0);
 		setPage(1);
 		refetch();
-	}, [selectedCategory]);
+	}, [selectedCategory, route?.params?.activityBoughtId]);
 
 	const handleOnChange = (inView: boolean, id: number): void => {
 		// Checking if it's the last item in the list
@@ -88,7 +95,10 @@ const FitnessStoreFeed: React.FC = (): React.JSX.Element => {
 	};
 
 	const handleOnPressCard = (id: number): void => {
-		console.log('Card Pressed', id);
+		// // Navigating to the Activity Details Screen
+		navigation.navigate('ActivityStore', {
+			activityId: id,
+		});
 	};
 
 	useEffect(() => {
@@ -126,7 +136,12 @@ const FitnessStoreFeed: React.FC = (): React.JSX.Element => {
 					/>
 				}
 			>
-				<ScreenTitle type="Store" label="Fitness" onPress={() => navigation.goBack()} />
+				<ScreenTitle
+					type="Store"
+					points={loggedUser?.points ?? 0}
+					label="Fitness"
+					onPress={() => navigation.goBack()}
+				/>
 				<View className="flex-1 mt-4 px-2 sm:px-4 md:px-6 lg:px-8">
 					<FeedMenu
 						type="StoreFitness"
