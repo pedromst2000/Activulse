@@ -19,7 +19,7 @@
 - [:rocket: Getting Started](#rocket-getting-started)
 - [:construction_worker_man: Architecture](#construction_worker_man-architecture)
 - [:writing_hand: Documentation and Deploy](#writing_hand-documentation-and-deploy-report-and-rest-api)
-- [:art: Design and Communication](#art-design-and-communication)
+- [:art: App Design](#art-app-design)
 - [:link: Contact](#link-contact)
 
 ## :bulb: About
@@ -213,7 +213,7 @@ _To be Added the English Version of the Report of the Project_
 
 - API Deploy Documentation: [https://activulse.onrender.com/api-activulse/v1/docs](https://activulse.onrender.com/api-activulse/v1/docs)
 
-## :art: Design and Communication
+## :art: App Design
 
 - Figma Design [https://www.figma.com/design/avpVZFoqroYaPYGoqzPZxo/Activulse-(Beta-Version)?node-id=0-1&t=GLoH1nqs1IlDR3c8-1](https://www.figma.com/design/avpVZFoqroYaPYGoqzPZxo/Activulse-(Beta-Version)?node-id=0-1&t=GLoH1nqs1IlDR3c8-1)
 
