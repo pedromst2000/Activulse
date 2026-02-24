@@ -203,15 +203,11 @@ npm run dev
 
 ## :writing_hand: Documentation and Deploy (Report and Rest API)
 
-_To be Added the English Version of the Report of the Project_
-
 - PT Report: [https://drive.google.com/file/d/166h4hyhhfzWRXDNniusBTGGs_A-B1nBF/view?usp=sharing](https://drive.google.com/file/d/166h4hyhhfzWRXDNniusBTGGs_A-B1nBF/view?usp=sharing)
+  
+- API Deploy URL : [https://activulse.onrender.com/api-activulse/v1](https://activulse.onrender.com/api-activulse/v1) (Status: ❌ -> Current with issues to be fixed!)
 
-- EN Report: Coming Soon
-
-- API Deploy URL : [https://activulse.onrender.com/api-activulse/v1](https://activulse.onrender.com/api-activulse/v1)
-
-- API Deploy Documentation: [https://activulse.onrender.com/api-activulse/v1/docs](https://activulse.onrender.com/api-activulse/v1/docs)
+- API Deploy Documentation: [https://activulse.onrender.com/api-activulse/v1/docs](https://activulse.onrender.com/api-activulse/v1/docs) (Status: ❌ -> Current with issues to be fixed!)
 
 ## :art: App Design
 
