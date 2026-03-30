@@ -1,15 +1,12 @@
 <div align="center" id="top">
   <img src="./images/Logo.png" width="600" alt="activulse-logo">
-
-  <br/>
+  <br><br>
 
   <p>
-    "
-    Empowering Heart Health and Wellness in Every Step with Activulse
-  "
+    "Empowering Heart Health and Wellness in Every Step with Activulse"
   </p>
 
-  <br/>
+  <br>
 
   <p>
     <a href="https://github.com/pedromst2000/Activulse/issues/new?labels=bug&template=bug_report.md">Report Bug</a>
