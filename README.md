@@ -2,7 +2,6 @@
   <img src="./images/Logo.png" width="600" alt="activulse-logo">
   <br/>
     <br/>
-  <h1>Activulse</h1>
   <p>
     "
     Empowering Heart Health and Wellness in Every Step with Activulse
