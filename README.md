@@ -146,7 +146,7 @@ The database model is shown as a DER preview so the main entities and relationsh
 
 <div align="center">
   <p>
-    <strong>Click the image below to view the full database model on Draw.io</strong> 🧩<br>
+  <br>
     <a href="https://viewer.diagrams.net/?tags=%7B%7D&lightbox=1&highlight=0000FF&edit=_blank&layers=1&nav=1&title=ActivulseDB.drawio&dark=auto#Uhttps%3A%2F%2Fdrive.google.com%2Fuc%3Fid%3D1C0cQEVIfZPICy71SqsGCnoju2ym_0VQ-%26export%3Ddownload" target="_blank" rel="noopener noreferrer">
       <img src="./images/DB_Preview.png" alt="Activulse Database Model Preview" width="800" />
     </a>
