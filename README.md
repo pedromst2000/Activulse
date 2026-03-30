@@ -1,14 +1,24 @@
 <div align="center" id="top">
   <img src="./images/Logo.png" width="600" alt="activulse-logo">
+
   <br/>
-    <br/>
+
   <p>
     "
     Empowering Heart Health and Wellness in Every Step with Activulse
   "
   </p>
-    
-  <span>Final College Project | [ESMAD](https://www.esmad.ipp.pt/?set_language=en) </span>
+
+  <br/>
+
+  <p>
+    <a href="https://github.com/pedromst2000/Activulse/issues/new?labels=bug&template=bug_report.md">Report Bug</a>
+    ·
+    <a href="https://github.com/pedromst2000/Activulse/issues/new?labels=enhancement&template=feature_request.md">Request Feature</a>
+  </p>
+
+<span>Final College Project | [ESMAD](https://www.esmad.ipp.pt/?set_language=en) </span>
+
 </div>
 
 ## Table of Contents
@@ -303,9 +313,9 @@ npm run dev
 
 ### Live API
 
-| Resource | Link | Status |
-|---|---|---|
-| Base URL | [![Base URL](https://img.shields.io/badge/Base_URL-Render-030373?style=flat-square&logo=render&logoColor=white)](https://activulse.onrender.com/api-activulse/v1) | [![needs review](https://img.shields.io/badge/needs_review-DC2626?style=flat-square)](https://activulse.onrender.com/api-activulse/v1) |
+| Resource           | Link                                                                                                                                                                        | Status                                                                                                                                      |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| Base URL           | [![Base URL](https://img.shields.io/badge/Base_URL-Render-030373?style=flat-square&logo=render&logoColor=white)](https://activulse.onrender.com/api-activulse/v1)           | [![needs review](https://img.shields.io/badge/needs_review-DC2626?style=flat-square)](https://activulse.onrender.com/api-activulse/v1)      |
 | API Docs (Swagger) | [![API Docs](https://img.shields.io/badge/Swagger_Docs-Render-030373?style=flat-square&logo=swagger&logoColor=white)](https://activulse.onrender.com/api-activulse/v1/docs) | [![needs review](https://img.shields.io/badge/needs_review-DC2626?style=flat-square)](https://activulse.onrender.com/api-activulse/v1/docs) |
 
 ## :writing_hand: Final Reflections
