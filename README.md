@@ -324,5 +324,5 @@ The main challenge was researching a complex health domain and turning that know
 More than delivering a final project, this work became a practical exercise in growth. It pushed me to learn a new area, strengthen my technical judgment, and understand how much careful research matters when building software for health.
 
 <p align="center">
- <a href="#top">Back to top</a>
+ <a href="#top">⬆️ Back to top</a>
 </p>
