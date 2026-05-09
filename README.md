@@ -27,6 +27,8 @@
     - [Health Literacy & Primary Prevention of Cardiovascular Risk](#book-health-literacy--primary-prevention-of-cardiovascular-risk)
     - [Physical Activity Guidelines](#running-physical-activity-guidelines)
     - [Scientific Databases, Journals & Research Organizations](#microscope-scientific-databases-journals--research-organizations)
+    - [Cardiovascular Organizations](#cardiovascular-organizations)
+    - [Health Authorities](#health-authorities)
 - [:video_camera: Demo Video](#video_camera-demo-video)
 - [:art: UI Preview](#art-ui-preview)
   - [Poster](#poster)
@@ -46,12 +48,12 @@ Activulse is a cross-platform [React Native](https://reactnative.dev/) app that 
 
 ### Key Features
 
-- :heart: **Cardiovascular Risk Assessment** - Framingham Risk Score calculation based on age, gender, lipid profile, smoking status, diabetes, blood pressure, and hypertension medication use
-- :footprints: **Smart Activity Tracking** - Step counting, daily goals, and community challenges with reward points and achievement badges
-- :fork_and_knife: **Personalized Nutrition** - Recipe recommendations tailored to dietary preferences (Mediterranean, DASH, Vegan)
-- :yoga: **Fitness & Wellness** - Guided exercises, yoga for stress management, and WHO-aligned physical activity recommendations
-- :bar_chart: **Health Dashboard** - Visual tracking of activity progress and cardiovascular risk evolution over time
-- :book: **Evidence-Based Guidance** - Health literacy content on heart-healthy habits, smoking cessation, sleep hygiene, and stress management
+- :heart: **Cardiovascular Risk Assessment** - Framingham Risk Score calculation for personalized risk stratification
+- :footprints: **Smart Activity Tracking** - Step counting, daily goals, challenges, and gamification with reward badges and leaderboards. Earn points through daily goals and activities!
+- :fork_and_knife: **Personalized Nutrition** - Dietary recommendations (Mediterranean, DASH, Vegan)
+- 🧘🏻‍♀️ **Fitness & Wellness** - Exercises, yoga, and WHO-aligned physical activity guidance
+- :bar_chart: **Health Dashboard** - Visual progress tracking and cardiovascular risk evolution
+- :book: **Evidence-Based Guidance** - Educational content on heart health, lifestyle, and prevention
 
 ### References
 
@@ -76,13 +78,15 @@ The project is grounded in extensive research from peer-reviewed literature and 
 
 #### :microscope: Scientific Databases, Journals & Research Organizations
 
-The research foundation draws from leading medical databases and peer-reviewed journals including:
+[![ACC](https://img.shields.io/badge/ACC-0066CC?style=flat&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgd...=)](https://www.acc.org/) · [![AHA](https://img.shields.io/badge/AHA-DC143C?style=flat)](https://www.ahajournals.org/) · [![ESC](https://img.shields.io/badge/ESC-0066CC?style=flat)](https://www.escardio.org/) · [![MDPI](https://img.shields.io/badge/MDPI-36A6D3?style=flat)](https://www.mdpi.com/) · [![Springer](https://img.shields.io/badge/Springer-CC0000?style=flat)](https://link.springer.com/brands/bmc) · [![WHO](https://img.shields.io/badge/WHO-2E8B57?style=flat)](https://www.who.int/) · [![ADA](https://img.shields.io/badge/ADA-0033A0?style=flat)](https://diabetes.org/) · [![Elsevier](https://img.shields.io/badge/Elsevier-FF6900?style=flat)](https://www.elsevier.com/) · [![CUF](https://img.shields.io/badge/CUF-003D82?style=flat)](https://www.cuf.pt/)
 
-- **Cardiovascular Research Organizations**: [American College of Cardiology (ACC)](https://www.acc.org/), [American Heart Association (AHA)](https://www.ahajournals.org/), [European Society of Cardiology (ESC)](https://www.escardio.org/), [Fundação Portuguesa da Cardiologia](https://www.fpcardiologia.pt), [Sociedade Portuguesa da Hipertensão](https://sphta.org.pt/)
-- **Multidisciplinary & Open Access Publishers**: [MDPI](https://www.mdpi.com/), [Springer Nature & BMC](https://link.springer.com/brands/bmc)
-- **Peer-Reviewed Journals**: [European Heart Journal (EHJ)](https://academic.oup.com/eurheartj), [Journal of the American College of Cardiology (JACC)](https://www.jacc.org/), [Elsevier](https://www.elsevier.com/), [Nutrition, Metabolism and Cardiovascular Diseases (NMCD)](https://www.nmcd-journal.com/)
-- **Health Guidelines**: [World Health Organization (WHO)](https://www.who.int/), [American Diabetes Association (ADA)](https://diabetes.org/), Direção Geral da Saúde (DGS), Serviço Nacional de Saúde (SNS)
-- **Healthcare Providers & Networks**: [CUF Hospitals](https://www.cuf.pt/)
+#### Cardiovascular Organizations
+
+[![FPC](https://img.shields.io/badge/FPC-C41E3A?style=flat)](https://www.fpcardiologia.pt) · [![SPH](https://img.shields.io/badge/SPH-0066CC?style=flat)](https://sphta.org.pt/)
+
+#### Health Authorities
+
+[![DGS](https://img.shields.io/badge/DGS-003D82?style=flat)](https://www.dgs.pt/) · [![SNS](https://img.shields.io/badge/SNS-004B87?style=flat)](https://www.sns.gov.pt/)
 
 ## :video_camera: Demo Video
 
