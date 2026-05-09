@@ -80,11 +80,11 @@ The project is grounded in extensive research from peer-reviewed literature and 
 
 [![ACC](https://img.shields.io/badge/ACC-0066CC?style=flat&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgd...=)](https://www.acc.org/) · [![AHA](https://img.shields.io/badge/AHA-DC143C?style=flat)](https://www.ahajournals.org/) · [![ESC](https://img.shields.io/badge/ESC-0066CC?style=flat)](https://www.escardio.org/) · [![MDPI](https://img.shields.io/badge/MDPI-36A6D3?style=flat)](https://www.mdpi.com/) · [![Springer](https://img.shields.io/badge/Springer-CC0000?style=flat)](https://link.springer.com/brands/bmc) · [![WHO](https://img.shields.io/badge/WHO-2E8B57?style=flat)](https://www.who.int/) · [![ADA](https://img.shields.io/badge/ADA-0033A0?style=flat)](https://diabetes.org/) · [![Elsevier](https://img.shields.io/badge/Elsevier-FF6900?style=flat)](https://www.elsevier.com/) · [![CUF](https://img.shields.io/badge/CUF-003D82?style=flat)](https://www.cuf.pt/)
 
-#### Cardiovascular Organizations
+#### :hospital: Cardiovascular Organizations
 
 [![FPC](https://img.shields.io/badge/FPC-C41E3A?style=flat)](https://www.fpcardiologia.pt) · [![SPH](https://img.shields.io/badge/SPH-0066CC?style=flat)](https://sphta.org.pt/)
 
-#### Health Authorities
+#### :office: Health Authorities
 
 [![DGS](https://img.shields.io/badge/DGS-003D82?style=flat)](https://www.dgs.pt/) · [![SNS](https://img.shields.io/badge/SNS-004B87?style=flat)](https://www.sns.gov.pt/)
 
