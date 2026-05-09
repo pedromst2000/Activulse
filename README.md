@@ -21,6 +21,12 @@
 ## Table of Contents
 
 - [:bulb: About](#bulb-about)
+  - [Key Features](#key-features)
+  - [References](#references)
+    - [Cardiovascular Risk Assessment - Framingham Risk Score](#heart-cardiovascular-risk-assessment---framingham-risk-score)
+    - [Health Literacy & Primary Prevention of Cardiovascular Risk](#book-health-literacy--primary-prevention-of-cardiovascular-risk)
+    - [Physical Activity Guidelines](#running-physical-activity-guidelines)
+    - [Scientific Databases, Journals & Research Organizations](#microscope-scientific-databases-journals--research-organizations)
 - [:video_camera: Demo Video](#video_camera-demo-video)
 - [:art: UI Preview](#art-ui-preview)
   - [Poster](#poster)
@@ -36,11 +42,47 @@
 
 ## :bulb: About
 
-Activulse was my bachelor’s degree final project at **[ESMAD](https://www.esmad.ipp.pt/?set_language=en)** for the **[TSIW](https://www.esmad.ipp.pt/courses/degree/663)** program. It is a cross-platform [React Native](https://reactnative.dev/) app focused on heart health and daily activity tracking, supported by a RESTful backend, database integration, and a layered architecture.
+Activulse is a cross-platform [React Native](https://reactnative.dev/) app that empowers users to take control of their heart health through intelligent risk assessment, personalized activity tracking, and evidence-based wellness guidance. Developed as a bachelor's final project at **[ESMAD](https://www.esmad.ipp.pt/?set_language=en)** (TSIW program), it was created alongside **[academic research](https://app.luminpdf.com/viewer/69c331e265663ae8f32d2968)** in collaboration with **[ESS](https://www.ess.ipp.pt/)** to validate the health problem, align implementation with clinical best practices, and ensure evidence-based feature design.
 
-The project combines product design, mobile development, backend engineering, and data modeling. It was also developed alongside **[thesis](https://app.luminpdf.com/viewer/69c331e265663ae8f32d2968)** and academic research work with a professor from [ESS](https://www.ess.ipp.pt/) to define the problem, validate the goals, and keep the implementation aligned with the academic requirements.
+### Key Features
 
-Beyond the technical scope, Activulse was built to turn a public-health topic into a practical and engaging experience: step tracking, activity goals, wellness guidance, and challenge-based motivation in a single app.
+- :heart: **Cardiovascular Risk Assessment** - Framingham Risk Score calculation based on age, gender, lipid profile, smoking status, diabetes, blood pressure, and hypertension medication use
+- :footprints: **Smart Activity Tracking** - Step counting, daily goals, and community challenges with reward points and achievement badges
+- :fork_and_knife: **Personalized Nutrition** - Recipe recommendations tailored to dietary preferences (Mediterranean, DASH, Vegan)
+- :yoga: **Fitness & Wellness** - Guided exercises, yoga for stress management, and WHO-aligned physical activity recommendations
+- :bar_chart: **Health Dashboard** - Visual tracking of activity progress and cardiovascular risk evolution over time
+- :book: **Evidence-Based Guidance** - Health literacy content on heart-healthy habits, smoking cessation, sleep hygiene, and stress management
+
+### References
+
+The project is grounded in extensive research from peer-reviewed literature and clinical guidelines. Below are the **main references** supporting key features - the full research database includes numerous additional sources across cardiovascular health, nutrition, physical activity, and behavioral science.
+
+#### :heart: Cardiovascular Risk Assessment - Framingham Risk Score
+
+- Framingham Heart Study - 10-Year CVD Risk Prediction: https://www.framinghamheartstudy.org/fhs-risk-functions/cardiovascular-disease-10-year-risk/
+- Validation Study on Risk Stratification: https://www.ahajournals.org/doi/10.1161/JAHA.121.024913
+- Clinical Guidelines Reference: https://www.thieme-connect.de/products/ejournals/abstract/10.1055/s-0044-1782528
+- Algorithm Implementation: [RiskScore.utils.js](https://github.com/pedromst2000/Activulse/blob/master/Packages/Api/src/utils/RiskScore.utils.js)
+
+#### :book: Health Literacy & Primary Prevention of Cardiovascular Risk
+
+- Health Literacy in Heart Disease Prevention: https://www.cardiosmart.org/news/2018/6/health-literacy-is-critical-to-heart-disease-prevention
+- Mediterranean Diet and Cardiovascular Prevention: https://www.mdpi.com/2072-6643/10/1/58
+- Sedentary Behavior and Cardiovascular Prevention: https://www.mdpi.com/1660-4601/20/1/532
+
+#### :running: Physical Activity Guidelines
+
+- WHO Guidelines on Physical Activity and Sedentary Behavior: https://iris.who.int/server/api/core/bitstreams/9e776de6-adc7-46c1-936f-6dd2bb4f7373/content
+
+#### :microscope: Scientific Databases, Journals & Research Organizations
+
+The research foundation draws from leading medical databases and peer-reviewed journals including:
+
+- **Cardiovascular Research Organizations**: [American College of Cardiology (ACC)](https://www.acc.org/), [American Heart Association (AHA)](https://www.ahajournals.org/), [European Society of Cardiology (ESC)](https://www.escardio.org/), [Fundação Portuguesa da Cardiologia](https://www.fpcardiologia.pt), [Sociedade Portuguesa da Hipertensão](https://sphta.org.pt/)
+- **Multidisciplinary & Open Access Publishers**: [MDPI](https://www.mdpi.com/), [Springer Nature & BMC](https://link.springer.com/brands/bmc)
+- **Peer-Reviewed Journals**: [European Heart Journal (EHJ)](https://academic.oup.com/eurheartj), [Journal of the American College of Cardiology (JACC)](https://www.jacc.org/), [Elsevier](https://www.elsevier.com/), [Nutrition, Metabolism and Cardiovascular Diseases (NMCD)](https://www.nmcd-journal.com/)
+- **Health Guidelines**: [World Health Organization (WHO)](https://www.who.int/), [American Diabetes Association (ADA)](https://diabetes.org/), Direção Geral da Saúde (DGS), Serviço Nacional de Saúde (SNS)
+- **Healthcare Providers & Networks**: [CUF Hospitals](https://www.cuf.pt/)
 
 ## :video_camera: Demo Video
 
