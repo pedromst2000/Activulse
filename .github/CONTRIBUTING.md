@@ -69,6 +69,8 @@ Follow these **conventions** for branches and commit messages to keep the projec
 
 Each package (Api, App, Web) has formatting and linting tools. Run these in the package directory you modified:
 
+> **Note:** You can check the `package.json` of each package for available scripts.
+
 ```bash
 # Format code with Prettier
 npm run prettier
