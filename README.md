@@ -379,7 +379,7 @@ We love your input! We want to make contributing to Activulse as easy and transp
 
 This project is licensed under the **MIT License**.
 
-See the [LICENSE](LICENSE) file for details.
+See the [LICENSE](https://github.com/pedromst2000/Activulse/blob/master/LICENSE.md) file for details.
 
 ## :writing_hand: Final Reflections
 
