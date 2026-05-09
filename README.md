@@ -37,9 +37,15 @@
   - [Application Architecture](#application-architecture)
   - [Database Model](#database-model)
 - [:rocket: Getting Started](#rocket-getting-started)
+- [:arrow_forward: Available Commands](#arrow_forward-available-commands)
+  - [API Commands](#api-commands)
+  - [App Commands](#app-commands)
+  - [Web Commands](#web-commands)
 - [:writing_hand: Documentation and Deploy](#writing_hand-documentation-and-deploy)
   - [Report](#report)
   - [Live API](#live-api)
+- [:handshake: Contributing](#handshake-contributing)
+- [:page_facing_up: License](#page_facing_up-license)
 - [:writing_hand: Final Reflections](#writing_hand-final-reflections)
 
 ## :bulb: About
@@ -348,6 +354,54 @@ cd Packages/Web
 npm run dev
 ```
 
+## :arrow_forward: Available Commands
+
+This project is a monorepo with three main packages: **Api** (Express backend), **App** (React Native mobile), and **Web** (Vite + React frontend). Below are the available commands for each package.
+
+### API Commands
+
+| Command         | Purpose                           | Details                                                    |
+| --------------- | --------------------------------- | ---------------------------------------------------------- |
+| `npm start`     | Start API server (production)     | Runs `node src/server.js` - for production deployments     |
+| `npm run dev`   | Start API in development mode     | Uses Nodemon for auto-reload on file changes              |
+| `npm run reset-db` | Reset database to initial state | Useful for development and testing; removes all data      |
+| `npm run prettier` | Format code with Prettier       | Auto-fixes formatting in `src/` directory                 |
+| `npm run prettier-check` | Check formatting    | Verifies formatting without modifying files               |
+| `npm run eslint-check` | Lint JavaScript code | ESLint validation for `.js` files                         |
+| `npm run lint`  | Run all checks                    | Runs prettier-check + eslint-check                        |
+
+**Run from**: `Packages/Api/`
+
+### App Commands
+
+| Command      | Purpose                              | Details                                                        |
+| ------------ | ------------------------------------ | -------------------------------------------------------------- |
+| `npm start`  | Start Expo dev server                | Runs `expo start --dev-client` - scan QR code for mobile app   |
+| `npm run android` | Run app on Android emulator/device | Builds and runs APK on connected Android device               |
+| `npm run ios` | Run app on iOS simulator             | Builds and runs on iOS simulator (macOS only)                  |
+| `npm run web` | Run app in web browser               | Runs `expo start --web` - preview at `http://localhost:19006` |
+| `npm run prettier` | Format code with Prettier      | Auto-fixes formatting in `src/` directory                      |
+| `npm run prettier-check` | Check formatting  | Verifies formatting without modifying files                    |
+| `npm run eslint-check` | Lint JavaScript code | ESLint validation for TypeScript/JavaScript files              |
+| `npm run check-types` | TypeScript type check | Validates TypeScript without emitting files                    |
+| `npm run lint` | Run all checks                       | Runs prettier-check + eslint-check + check-types              |
+
+**Run from**: `Packages/App/`
+
+### Web Commands
+
+| Command      | Purpose                           | Details                                                   |
+| ------------ | --------------------------------- | --------------------------------------------------------- |
+| `npm run dev` | Start development server          | Vite dev server with HMR at `http://localhost:5173`      |
+| `npm run build` | Build for production             | TypeScript compilation + optimized build in `dist/`     |
+| `npm run prettier` | Format code with Prettier    | Auto-fixes formatting in `src/` directory                |
+| `npm run prettier-check` | Check formatting | Verifies formatting without modifying files              |
+| `npm run eslint-check` | Lint JavaScript code | ESLint validation for TypeScript/JavaScript files        |
+| `npm run lint` | Lint TypeScript/JSX               | ESLint with stricter rules for `.ts` and `.tsx` files   |
+| `npm run preview` | Preview production build      | Serves the built `dist/` folder locally                  |
+
+**Run from**: `Packages/Web/`
+
 ## :writing_hand: Documentation and Deploy
 
 ### Report
@@ -360,6 +414,39 @@ npm run dev
 | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | Base URL           | [![Base URL](https://img.shields.io/badge/Base_URL-Render-030373?style=flat-square&logo=render&logoColor=white)](https://activulse.onrender.com/api-activulse/v1)           | [![needs review](https://img.shields.io/badge/needs_review-DC2626?style=flat-square)](https://activulse.onrender.com/api-activulse/v1)      |
 | API Docs (Swagger) | [![API Docs](https://img.shields.io/badge/Swagger_Docs-Render-030373?style=flat-square&logo=swagger&logoColor=white)](https://activulse.onrender.com/api-activulse/v1/docs) | [![needs review](https://img.shields.io/badge/needs_review-DC2626?style=flat-square)](https://activulse.onrender.com/api-activulse/v1/docs) |
+
+## :handshake: Contributing
+
+We love your input! We want to make contributing to Activulse as easy and transparent as possible, whether it's:
+
+- Reporting a bug
+- Discussing the current state of the code
+- Submitting a fix
+- Proposing new features
+- Becoming a maintainer
+
+Please read our [CONTRIBUTING.md](./.github/CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
+
+### Quick Start for Contributors
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+**Before submitting:**
+- Run `npm run lint` in each package to ensure code quality
+- Add tests for new features
+- Update documentation as needed
+
+For more detailed guidelines, see [CONTRIBUTING.md](./.github/CONTRIBUTING.md).
+
+## :page_facing_up: License
+
+This project is licensed under the **MIT License**.
+
+See the [LICENSE](LICENSE) file for details.
 
 ## :writing_hand: Final Reflections
 
