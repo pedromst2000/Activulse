@@ -9,9 +9,11 @@
   <br>
 
   <p>
-    <a href="https://github.com/pedromst2000/Activulse/issues/new?labels=bug&template=bug_report.md">Report Bug</a>
+    <a href="https://www.youtube.com/watch?v=8yQINRjBj68">Video Demo</a>
     ·
     <a href="https://github.com/pedromst2000/Activulse/issues/new?labels=enhancement&template=feature_request.md">Request Feature</a>
+		·
+		 <a href="https://github.com/pedromst2000/Activulse/issues/new?labels=bug&template=bug_report.md">Request Bug</a>
   </p>
 
 <span>Final College Project | [ESMAD](https://www.esmad.ipp.pt/?set_language=en) </span>
