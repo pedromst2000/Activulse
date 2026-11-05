@@ -11,12 +11,14 @@
   <p>
     <a href="https://www.youtube.com/watch?v=8yQINRjBj68">Video Demo</a>
     ·
+    <a href="https://www.luminpdf.com/app/pdf/viewer/8momb-bookofabstracts-6aecbb56162f5416cdfbc68a">Published Abstract</a>
+    ·
     <a href="https://github.com/pedromst2000/Activulse/issues/new?labels=enhancement&template=feature_request.md">Request Feature</a>
 		·
 		 <a href="https://github.com/pedromst2000/Activulse/issues/new?labels=bug&template=bug_report.md">Request Bug</a>
   </p>
 
-<span>Final College Project | [ESMAD](https://www.esmad.ipp.pt/?set_language=en) </span>
+<span>Bachelor's Final Project (2023/2024) | [ESMAD](https://www.esmad.ipp.pt/?set_language=en), P.PORTO</span>
 
 </div>
 
@@ -40,6 +42,7 @@
   - [Database Model](#database-model)
 - [:rocket: Getting Started](#rocket-getting-started)
 - [:writing_hand: Documentation and Deploy](#writing_hand-documentation-and-deploy)
+  - [Published Conference Abstract (2026)](#published-conference-abstract-2026)
   - [Report](#report)
   - [Live API](#live-api)
 - [:handshake: Contributing](#handshake-contributing)
@@ -48,7 +51,7 @@
 
 ## :bulb: About
 
-Activulse is a cross-platform [React Native](https://reactnative.dev/) app that empowers users to take control of their heart health through intelligent risk assessment, personalized activity tracking, and evidence-based wellness guidance. Developed as a bachelor's final project at **[ESMAD](https://www.esmad.ipp.pt/?set_language=en)** (TSIW program), it was created alongside **[academic research](https://app.luminpdf.com/viewer/69c331e265663ae8f32d2968)** in collaboration with **[ESS](https://www.ess.ipp.pt/)** to validate the health problem, align implementation with clinical best practices, and ensure evidence-based feature design.
+Activulse is a cross-platform [React Native](https://reactnative.dev/) application for cardiovascular risk assessment, activity tracking, and personalized wellness guidance. Developed as my **2023/2024 bachelor's final project** in Web Information Systems and Technologies (TSIW) at **[ESMAD](https://www.esmad.ipp.pt/?set_language=en)**, P.PORTO, in collaboration with **[ESS](https://www.ess.ipp.pt/)**, the project combines mobile development with a REST API and database integration. The work was later featured in a **[published conference abstract (2026)](https://www.luminpdf.com/app/pdf/viewer/8momb-bookofabstracts-6aecbb56162f5416cdfbc68a)**.
 
 ### Key Features
 
@@ -353,6 +356,15 @@ npm run dev
 ```
 
 ## :writing_hand: Documentation and Deploy
+
+### Published Conference Abstract (2026)
+
+**“Mobile Application for Cardiovascular Risk Assessment”** — Pedro Teixeira, Leonor Miranda & Mário Pinto. Published in the *Book of Abstracts of the 8th Meeting on Medicinal Biotechnology* (2026), p. 52, School of Health, Polytechnic Institute of Porto.
+
+The abstract presents the academic development of Activulse and explores how accessible mobile technology can support cardiovascular risk assessment, prevention, and health literacy.
+
+[![Read Abstract](https://img.shields.io/badge/Read_Abstract-LuminPDF-2C9EF8?style=for-the-badge)](https://www.luminpdf.com/app/pdf/viewer/8momb-bookofabstracts-6aecbb56162f5416cdfbc68a)
+[![Official Publication](https://img.shields.io/badge/Official_Publication-P.PORTO-DC3545?style=for-the-badge)](https://edicoes.ipp.pt/index.php/books/catalog/book/251)
 
 ### Report
 
